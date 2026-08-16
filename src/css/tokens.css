@@ -47,6 +47,7 @@
   --dialog-color: light-dark(#f6f6f7, #27272a);
   --focus-outline-color: var(--accent-color);
   --layout-color: light-dark(#f4f4f5, #18181b);
+  --popover-color: light-dark(#fafafa, #27272a);
   --scrollbar-color: color-mix(in srgb, currentColor 30%, transparent) transparent;
   --text-color: light-dark(black, rgb(255 255 255 / 90%));
 
@@ -75,6 +76,7 @@
     --focus-outline-color: currentColor;
     --layout-color: light-dark(#f5f5f5, #0d0d0d);
     --placeholder-color: color-mix(in srgb, currentColor 60%, transparent);
+    --popover-color: var(--background-color);
     --scrollbar-color: color-mix(in srgb, currentColor 60%, transparent) transparent;
     --text-color: light-dark(black, white);
   }
