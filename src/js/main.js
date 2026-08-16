@@ -16,6 +16,7 @@
  */
 
 import {
+  clearField,
   handleAction,
   handleShortcut,
   toggleSidebar,
@@ -36,6 +37,7 @@ const actions = {
   },
 
   click: {
+    clearField,
     toggleLabelsSidebar,
     toggleVariablesSidebar,
   },
