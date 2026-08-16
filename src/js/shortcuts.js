@@ -17,6 +17,13 @@
 
 export const KEYBOARD_SHORTCUTS = [
   {
+    name: "openSettings",
+    action: "openDialog",
+    target: "settings-dialog",
+    alt: true,
+    key: ",",
+  },
+  {
     name: "toggleLabelsSidebar",
     action: "toggleLabelsSidebar",
     alt: true,

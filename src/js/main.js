@@ -19,6 +19,8 @@ import '/src/components/smb-dialog/smb-dialog.js';
 
 import {
   clearField,
+  closeDialog,
+  openDialog,
   handleAction,
   handleShortcut,
   toggleSidebar,
@@ -40,6 +42,8 @@ const actions = {
 
   click: {
     clearField,
+    closeDialog: (target) => closeDialog(target?.dataset?.target ?? target),
+    openDialog: (target) => openDialog(target?.dataset?.target ?? target),
     toggleLabelsSidebar,
     toggleVariablesSidebar,
   },
