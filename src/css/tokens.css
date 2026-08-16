@@ -6,10 +6,13 @@
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-max: 9999px;
+  --spacing-2xs: 4px;
   --spacing-xs: 6px;
+  --spacing-2sm: 8px;
   --spacing-sm: 10px;
   --spacing-md: 16px;
   --spacing-lg: 22px;
+  --spacing-xl: 28px;
   --transition-fast: 0.15s ease;
   --transition-medium: 0.2s ease;
 

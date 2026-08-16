@@ -207,3 +207,89 @@
     }
   }
 }
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  height: 32px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-max);
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
+  padding: 0 var(--spacing-2xs) 0 var(--spacing-xs);
+  line-height: 1;
+  transition: border-color var(--transition-medium),
+              box-shadow var(--transition-medium);
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    margin-left: 0;
+    background-color: currentColor;
+    opacity: var(--dimmed-opacity);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='m777.65-143.89-247.89-248q-29.61 24.77-68.3 38.22-38.69 13.44-79.23 13.44-100.36 0-169.74-69.43-69.37-69.42-69.37-169.5 0-100.07 69.32-169.53 69.31-69.46 169.49-69.46t169.65 69.47q69.46 69.47 69.46 169.62 0 41.91-14.08 80.75-14.08 38.85-37.58 67.28l248 247.41-39.73 39.73Zm-395.57-252.3q76.8 0 129.9-53.02 53.1-53.03 53.1-130 0-76.98-53.1-129.98-53-53-130-53t-129.9 53.02-53 130q0 76.98 53.01 129.98 53.02 53.02 129.99 53Z'/%3E%3C/svg%3E");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 24px 24px;
+    pointer-events: none;
+  }
+
+  &:hover {
+    border-color: var(--accent-color);
+  }
+
+  &:focus-within {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 1px var(--accent-color);
+  }
+
+  &:has(input:disabled) {
+    opacity: var(--disabled-opacity);
+    pointer-events: none;
+  }
+
+  input[type="search"] {
+    flex: 1;
+    min-width: 0;
+    padding: var(--spacing-2sm) 0 var(--spacing-2sm) var(--spacing-xl);
+    background-color: transparent;
+    color: inherit;
+    outline: none;
+    border: none;
+
+    &:disabled {
+      opacity: 1;
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+
+    &:not(:placeholder-shown) + button {
+      opacity: 1;
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
+
+  button {
+    display: none;
+    opacity: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='white'%3E%3Cpath d='m330.38-290.27-40.11-40.11L440.39-480 290.27-629.12l40.11-40.11L480-519.11l149.12-150.12 40.11 40.11L519.11-480l150.12 149.62-40.11 40.11L480-440.39 330.38-290.27Z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px 24px;
+    width: 32px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  input[type="search"]:not(:placeholder-shown) + button {
+    display: revert;
+  }
+}
