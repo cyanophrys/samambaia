@@ -72,6 +72,51 @@
   transition: none !important;
 }
 
+a {
+  color: oklch(from var(--accent-color) calc(l - 0.1) c h);
+  text-decoration: none;
+  transition: color var(--transition-medium);
+
+  &:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+  }
+
+  &:active,
+  &:visited {
+    color: oklch(from var(--accent-color) calc(l - 0.1) c h);
+  }
+
+  [data-theme="dark"] & {
+    color: oklch(from var(--accent-color) calc(l + 0.25) c h);
+
+    &:hover {
+      color: oklch(from var(--accent-color) calc(l + 0.3) c h);
+    }
+
+    &:active,
+    &:visited {
+      color: oklch(from var(--accent-color) calc(l + 0.25) c h);
+    }
+  }
+
+  &[target="_blank"] {
+    &::after {
+      content: "";
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      margin-inline-start: var(--spacing-xs);
+      vertical-align: -4px;
+      background-color: currentColor;
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M212.31-140Q182-140 161-161q-21-21-21-51.31v-535.38Q140-778 161-799q21-21 51.31-21h252.3v60h-252.3q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v535.38q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85h535.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46v-252.3h60v252.3Q820-182 799-161q-21 21-51.31 21H212.31Zm176.46-206.62-42.15-42.15L717.85-760H560v-60h260v260h-60v-157.85L388.77-346.62Z'/%3E%3C/svg%3E");
+      mask-position: center;
+      mask-size: contain;
+      mask-repeat: no-repeat;
+    }
+  }
+}
+
 .scrollable-area {
   flex: 1;
   display: flex;
