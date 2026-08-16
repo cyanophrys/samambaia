@@ -404,6 +404,20 @@
   justify-content: center;
   flex-wrap: wrap;
 
+  &.accent-color {
+    input[value="blue"]     { --radio-color: var(--accent-blue); }
+    input[value="brown"]    { --radio-color: var(--accent-brown); }
+    input[value="green"]    { --radio-color: var(--accent-green); }
+    input[value="lavender"] { --radio-color: var(--accent-lavender); }
+    input[value="orange"]   { --radio-color: var(--accent-orange); }
+    input[value="pink"]     { --radio-color: var(--accent-pink); }
+    input[value="purple"]   { --radio-color: var(--accent-purple); }
+    input[value="red"]      { --radio-color: var(--accent-red); }
+    input[value="slate"]    { --radio-color: var(--accent-slate); }
+    input[value="teal"]     { --radio-color: var(--accent-teal); }
+    input[value="yellow"]   { --radio-color: var(--accent-yellow); }
+  }
+
   input[type="radio"] {
     appearance: none;
     width: 24px;

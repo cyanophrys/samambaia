@@ -18,7 +18,19 @@
   --transition-fast: 0.15s ease;
   --transition-medium: 0.2s ease;
 
-  --accent-color: #3b82f6;
+  --accent-color: var(--accent-blue);
+  --accent-blue: #3a78e8;
+  --accent-brown: #9c6a3a;
+  --accent-green: #20b857;
+  --accent-orange: #ea6b12;
+  --accent-lavender: #6b84e8;
+  --accent-pink: #df3f90;
+  --accent-purple: #9d4eea;
+  --accent-red: #e33f3f;
+  --accent-slate: #75839c;
+  --accent-teal: #13ac9b;
+  --accent-yellow: #c98a12;
+
   --background-color: light-dark(white, #27272a);
   --border-color: light-dark(rgb(0 0 0 / 18%), rgb(255 255 255 / 18%));
   --dark-border-color: light-dark(rgb(0 0 0 / 30%), rgb(0 0 0 / 45%));
@@ -34,6 +46,18 @@
   --dialog-color: light-dark(#f6f6f7, #27272a);
   --layout-color: light-dark(#f4f4f5, #18181b);
   --text-color: light-dark(black, rgb(255 255 255 / 90%));
+
+  &[data-accent-color="blue"] { --accent-color: var(--accent-blue); }
+  &[data-accent-color="brown"] { --accent-color: var(--accent-brown); }
+  &[data-accent-color="green"] { --accent-color: var(--accent-green); }
+  &[data-accent-color="lavender"] { --accent-color: var(--accent-lavender); }
+  &[data-accent-color="orange"] { --accent-color: var(--accent-orange); }
+  &[data-accent-color="pink"] { --accent-color: var(--accent-pink); }
+  &[data-accent-color="purple"] { --accent-color: var(--accent-purple); }
+  &[data-accent-color="red"] { --accent-color: var(--accent-red); }
+  &[data-accent-color="slate"] { --accent-color: var(--accent-slate); }
+  &[data-accent-color="teal"] { --accent-color: var(--accent-teal); }
+  &[data-accent-color="yellow"] { --accent-color: var(--accent-yellow); }
 
   &[data-theme="dark"] {
     color-scheme: dark;

@@ -15,7 +15,22 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+export const ACCENT_COLORS = [
+  'blue',
+  'teal',
+  'green',
+  'yellow',
+  'brown',
+  'orange',
+  'lavender',
+  'red',
+  'pink',
+  'purple',
+  'slate',
+];
+
 export const DEFAULT_PREFERENCES = {
+  accentColor: 'blue',
   sidebars: {
     labels: true,
     variables: false,

@@ -21,6 +21,7 @@ import {
 } from './store.js';
 
 import {
+  ACCENT_COLORS,
   DEFAULT_PREFERENCES,
 } from './config.js';
 
@@ -77,4 +78,15 @@ export function setTheme(value) {
       body.classList.remove('transitions-disabled');
     });
   });
+}
+
+export function setAccentColor(value, event) {
+  const rawColor = value ?? event?.target?.value ?? DEFAULT_PREFERENCES.accentColor;
+  const accentColor = ACCENT_COLORS.includes(rawColor)
+    ? rawColor
+    : DEFAULT_PREFERENCES.accentColor;
+
+  userPreferences.accentColor = accentColor;
+  document.documentElement.setAttribute('data-accent-color', accentColor);
+  syncFormControlState('accent-color', accentColor);
 }
