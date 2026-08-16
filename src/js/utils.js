@@ -113,3 +113,19 @@ export function handleShortcut(event, actions, shortcuts) {
 
   handler(targetElement, event, targetElement);
 }
+
+export function toggleSidebar(button, value) {
+  if (!(button instanceof HTMLElement)) return;
+
+  const sidebar = document.getElementById(button.getAttribute('aria-controls'));
+  if (!sidebar) return;
+
+  const isCollapsed = typeof value === 'boolean'
+    ? !value
+    : !sidebar.hasAttribute('data-collapsed');
+
+  sidebar.toggleAttribute('data-collapsed', isCollapsed);
+  button.setAttribute('aria-expanded', String(!isCollapsed));
+
+  return !isCollapsed;
+}
