@@ -3,14 +3,20 @@
   --disabled-opacity: 0.4;
   --font-size-base: 14px;
   --font-size-xs: 0.85em;
+  --radius-sm: 6px;
   --radius-md: 12px;
+  --radius-max: 9999px;
   --spacing-xs: 6px;
   --spacing-sm: 10px;
   --spacing-md: 16px;
   --spacing-lg: 22px;
+  --transition-medium: 0.2s ease;
 
   --accent-color: #3b82f6;
   --background-color: white;
+  --destructive-bg-color: oklch(from var(--destructive-color) 0.85 0.06 h);
+  --destructive-color: red;
+  --destructive-fg-color: oklch(from var(--destructive-color) 0.45 0.18 h);
   --layout-color: #f4f4f5;
   --text-color: black;
 }

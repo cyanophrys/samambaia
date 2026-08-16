@@ -101,3 +101,109 @@
 .dimmed {
   opacity: var(--dimmed-opacity);
 }
+
+.button {
+  display: grid;
+  place-items: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  border: none;
+  background-color: color-mix(in srgb, currentColor 15%, transparent);
+  height: 32px;
+  color: inherit;
+  font-weight: 600;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition:
+    opacity var(--transition-medium),
+    background-color var(--transition-medium),
+    display var(--transition-medium) allow-discrete;
+  user-select: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: color-mix(in srgb, currentColor 25%, transparent);
+  }
+
+  &:active {
+    background-color: color-mix(in srgb, currentColor 35%, transparent);
+  }
+
+  &.flat {
+    background-color: transparent;
+
+    &:hover {
+      background-color: color-mix(in srgb, currentColor 15%, transparent);
+    }
+
+    &:active {
+      background-color: color-mix(in srgb, currentColor 25%, transparent);
+    }
+  }
+
+  &[aria-expanded="true"] {
+    background-color: color-mix(in srgb, currentColor 20%, transparent);
+
+    &:hover {
+      background-color: color-mix(in srgb, currentColor 30%, transparent);
+    }
+
+    &:active {
+      background-color: color-mix(in srgb, currentColor 40%, transparent);
+    }
+  }
+
+  &.icon-button {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    padding: 0;
+
+    > svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &.pill {
+    border-radius: var(--radius-max);
+  }
+
+  &.big,
+  &.pill {
+    height: 40px;
+    padding: 0 var(--spacing-lg);
+  }
+
+  &.suggested-action {
+    background-color: var(--accent-color);
+    color: white;
+
+    &:hover {
+      background-color: color-mix(in oklab, var(--accent-color) 88%, white);
+    }
+
+    &:active {
+      background-color: color-mix(in oklab, var(--accent-color) 76%, white);
+    }
+  }
+
+  &.destructive-action {
+    background-color: var(--destructive-bg-color);
+    color: var(--destructive-fg-color);
+
+    &:hover {
+      background-color: color-mix(in oklab, currentColor 15%, var(--destructive-bg-color));
+    }
+
+    &:active {
+      background-color: color-mix(in oklab, currentColor 25%, var(--destructive-bg-color));
+    }
+
+    &:focus-visible {
+      outline-color: var(--destructive-fg-color);
+    }
+  }
+}
