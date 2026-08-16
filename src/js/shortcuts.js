@@ -17,6 +17,12 @@
 
 export const KEYBOARD_SHORTCUTS = [
   {
+    name: "addScript",
+    action: "addScript",
+    alt: true,
+    key: "n",
+  },
+  {
     name: "openSettings",
     action: "openDialog",
     target: "settings-dialog",

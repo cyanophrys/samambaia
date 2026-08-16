@@ -46,6 +46,14 @@ import {
 } from './db.js';
 
 import {
+  addScript,
+  deleteScript,
+  editScript,
+  renderScripts,
+  saveScript,
+} from './scripts.js';
+
+import {
   KEYBOARD_SHORTCUTS,
 } from './shortcuts.js';
 
@@ -59,8 +67,11 @@ const actions = {
   },
 
   click: {
+    addScript,
     clearField,
     closeDialog: (target) => closeDialog(target?.dataset?.target ?? target),
+    deleteScript,
+    editScript,
     openAboutDialog,
     openDialog: (target) => openDialog(target?.dataset?.target ?? target),
     toggleLabelsSidebar,
@@ -71,11 +82,13 @@ const actions = {
   },
 
   submit: {
+    saveScript,
   },
 };
 
 async function init() {
-  initDB();
+  await initDB();
+  await renderScripts();
 
   setAccentColor(userPreferences.accentColor);
   setHighContrast(userPreferences.highContrast);

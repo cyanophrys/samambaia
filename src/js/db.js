@@ -17,6 +17,7 @@
 
 const DB_NAME = 'SamambaiaDB';
 const DB_VERSION = 1;
+const SCRIPTS_STORE = 'scripts';
 
 let db;
 
@@ -38,6 +39,71 @@ export function initDB() {
     };
 
     request.onupgradeneeded = () => {
+      const database = request.result;
+
+      if (!database.objectStoreNames.contains(SCRIPTS_STORE)) {
+        database.createObjectStore(SCRIPTS_STORE, {
+          keyPath: 'id',
+          autoIncrement: true,
+        });
+      }
     };
+  });
+}
+
+export function getAllScripts() {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(SCRIPTS_STORE, 'readonly');
+    const store = transaction.objectStore(SCRIPTS_STORE);
+    const request = store.getAll();
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function getScript(id) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(SCRIPTS_STORE, 'readonly');
+    const store = transaction.objectStore(SCRIPTS_STORE);
+    const request = store.get(id);
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function saveScriptData(script) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(SCRIPTS_STORE, 'readwrite');
+    const store = transaction.objectStore(SCRIPTS_STORE);
+
+    const data = {
+      ...script,
+    };
+
+    if (data.id == null || data.id === '') {
+      delete data.id;
+    } else {
+      data.id = Number(data.id);
+    }
+
+    const request = data.id == null
+      ? store.add(data)
+      : store.put(data);
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function deleteScriptData(id) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(SCRIPTS_STORE, 'readwrite');
+    const store = transaction.objectStore(SCRIPTS_STORE);
+    const request = store.delete(id);
+
+    request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
   });
 }
