@@ -16,6 +16,7 @@
  */
 
 import '/src/components/smb-dialog/smb-dialog.js';
+import '/src/components/smb-stack/smb-stack.js';
 
 import {
   clearField,

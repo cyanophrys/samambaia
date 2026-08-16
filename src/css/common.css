@@ -599,3 +599,93 @@
     }
   }
 }
+
+.stack-switcher-group {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+
+  .stack-switcher {
+    display: grid;
+    place-items: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: inherit;
+    font-size: 0.95em;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: color var(--transition-medium);
+
+    > div:has(.icon, span) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-xs);
+    }
+
+    svg {
+      opacity: var(--dimmed-opacity);
+      transition: opacity var(--transition-medium);
+    }
+
+    span {
+      opacity: var(--dimmed-opacity);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .icon {
+      display: grid;
+      place-items: center;
+      padding: var(--spacing-xs) var(--spacing-md);
+      flex-shrink: 0;
+      border-radius: var(--radius-max);
+      transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
+                  opacity var(--transition-medium),
+                  background-color var(--transition-medium);
+      transform: scale(1);
+    }
+
+    &:hover .icon {
+      background-color: color-mix(in srgb, currentColor 12%, transparent);
+    }
+
+    &:active .icon {
+      transform: scale(1.12);
+    }
+
+    &:focus-visible .icon {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
+    }
+
+    &[aria-selected="true"] {
+      color: oklch(from var(--accent-color) calc(l - 0.20) calc(c + 0.05) h);
+
+      [data-theme="dark"] & {
+        color: oklch(from var(--accent-color) calc(l + 0.3) c h);
+      }
+
+      .icon {
+        background-color: color-mix(in srgb, var(--accent-color) 18%, transparent);
+        transform: scale(1);
+      }
+
+      svg,
+      span {
+        opacity: 1;
+      }
+
+      &:hover .icon {
+        background-color: color-mix(in srgb, var(--accent-color) 28%, transparent);
+      }
+
+      &:active .icon {
+        background-color: color-mix(in srgb, var(--accent-color) 38%, transparent);
+      }
+    }
+  }
+}
