@@ -1,0 +1,79 @@
+dialog {
+  position: fixed;
+  position-area: center;
+  place-self: center;
+  display: flex;
+  flex-direction: column;
+  width: var(--dialog-width, auto);
+  height: var(--dialog-height, auto);
+  min-width: 280px;
+  max-width: min(400px, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--dialog-color);
+  color: var(--text-color);
+  box-shadow: 0 10px 25px rgb(0 0 0 / 50%);
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity var(--transition-medium),
+              transform var(--transition-medium),
+              display var(--transition-medium) allow-discrete,
+              overlay var(--transition-medium) allow-discrete;
+  user-select: none;
+
+  &[open] {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @starting-style {
+    &[open] {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  &::backdrop {
+    background: rgb(0 0 0 / 50%);
+    opacity: 0;
+    transition: opacity var(--transition-medium),
+                display var(--transition-medium) allow-discrete,
+                overlay var(--transition-medium) allow-discrete;
+  }
+
+  &[open]::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    &[open]::backdrop {
+      opacity: 0;
+    }
+  }
+}
+
+.scrollable-area {
+  text-align: center;
+  padding: var(--spacing-lg);
+}
+
+p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+}
+
+slot[name="additional-content"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer {
+  > button {
+    flex: 1;
+  }
+}
