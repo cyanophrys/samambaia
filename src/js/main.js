@@ -42,6 +42,10 @@ import {
 } from './preferences.js';
 
 import {
+  initDB,
+} from './db.js';
+
+import {
   KEYBOARD_SHORTCUTS,
 } from './shortcuts.js';
 
@@ -71,6 +75,8 @@ const actions = {
 };
 
 async function init() {
+  initDB();
+
   setAccentColor(userPreferences.accentColor);
   setHighContrast(userPreferences.highContrast);
   setLargeText(userPreferences.largeText);
