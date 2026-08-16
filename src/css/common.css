@@ -181,6 +181,16 @@ a {
   opacity: var(--dimmed-opacity);
 }
 
+.button-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+
+  &.vertical {
+    flex-direction: column;
+  }
+}
+
 .button {
   display: grid;
   place-items: center;
