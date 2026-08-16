@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "samambaia",
+  "version": "1.0.0",
+  "author": "Raul Sousa",
+  "description": "Um simples gerenciador de scripts.",
+  "homepage_url": "https://github.com/cyanophrys/samambaia",
+  "action": {},
+  "background": {
+    "service_worker": "src/js/background.js"
+  },
+  "permissions": [
+    "storage"
+  ]
+}
