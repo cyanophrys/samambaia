@@ -13,6 +13,9 @@
   <div id="layout">
     <aside id="sidebar" aria-label="Main navigation">
       <header class="header vertical">
+        <button class="button icon-button suggested-action" type="button" popovertarget="add-item-menu" aria-haspopup="menu"  aria-label="Add item" style="anchor-name: --add-item-button">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M450-450H220v-60h230v-230h60v230h230v60H510v230h-60v-230Z"/></svg>
+        </button>
       </header>
       <footer class="footer vertical">
         <div class="button-group vertical">
@@ -51,6 +54,7 @@
         <section id="scripts-view" class="surface" style="anchor-name: --scripts-view-anchor;">
           <div id="main-toast" class="toast-container" style="position-anchor: --scripts-view-anchor;"></div>
           <div class="scrollable-area">
+            <div id="custom-scripts"></div>
           </div>
         </section>
         <aside id="variables-sidebar" class="surface collapsible" aria-label="Variables list">
@@ -65,6 +69,23 @@
       </div>
     </main>
   </div>
+  <smb-dialog id="script-dialog" style="--dialog-width: 420px;">
+    <div class="scrollable-area">
+      <form id="script-form" class="list-group rows-separated" data-action="saveScript">
+        <input type="hidden" id="script-id" name="id">
+        <div class="list-row field-row">
+          <input class="input" type="text" id="script-name" name="name" placeholder=" " autocomplete="off" maxlength="128" required autofocus>
+          <label class="label" for="script-name">Name</label>
+        </div>
+        <div class="list-row field-row multiline">
+          <textarea class="textarea" id="script-content" name="content" placeholder=" " rows="5" maxlength="5000" required></textarea>
+          <label class="label" for="script-content">Content</label>
+        </div>
+      </form>
+    </div>
+    <button slot="footer-left" class="button" type="button" data-action="closeDialog" data-target="script-dialog">Cancel</button>
+    <button slot="footer-right" class="button suggested-action" type="submit" form="script-form"></button>
+  </smb-dialog>
   <smb-dialog id="settings-dialog" dialog-title="Settings" style="--dialog-width: 420px;">
     <smb-stack id="settings-stack" transition homogeneous>
       <div data-page-name="appearance">
@@ -205,12 +226,41 @@
       </section>
     </div>
   </smb-dialog>
+  <div id="add-item-menu" class="menu" style="position-anchor: --add-item-button" role="menu" aria-label="Add item" popover>
+    <button class="menu-item" role="menuitem" data-action="addScript">
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M255.46-108.08q-28.36 0-48.27-19.91-19.92-19.92-19.92-48.27v-607.48q0-28.35 19.92-48.27 19.91-19.91 48.35-19.91H570l202.73 202.23v473.34q0 28.44-19.92 48.36-19.91 19.91-48.27 19.91H255.46Zm286.96-513.54v-174.34H255.54q-4.62 0-8.46 3.84-3.85 3.85-3.85 8.47v607.3q0 4.62 3.85 8.47 3.84 3.84 8.46 3.84h448.92q4.62 0 8.46-3.84 3.85-3.85 3.85-8.47v-445.27H542.42ZM243.23-795.96v174.34-174.34V-164.04v-631.92Z"/></svg>
+      <span>Add script…</span>
+    </button>
+  </div>
   <div id="more-actions-menu" class="menu" style="position-anchor: --more-actions-button" role="menu" aria-label="Mais ações" popover>
     <button class="menu-item" role="menuitem" data-action="openAboutDialog">
       <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M452.42-294.04h55.96v-225.15h-55.96v225.15Zm49.39-299.87q8.88-8.69 8.88-21.91t-8.68-22.01q-8.68-8.78-21.9-8.78-13.23 0-22.01 8.68-8.79 8.68-8.79 21.9 0 13.22 8.78 22.01 8.78 8.79 21.8 8.79 13.03 0 21.92-8.68Zm-21.72 485.83q-77.15 0-145.06-29.32-67.92-29.33-118.16-79.6-50.23-50.27-79.51-118.05-29.28-67.79-29.28-144.86 0-77.15 29.32-145.06 29.33-67.92 79.6-118.16 50.27-50.23 118.05-79.51 67.79-29.28 144.86-29.28 77.15 0 145.06 29.32 67.92 29.33 118.16 79.6 50.23 50.27 79.51 118.05 29.28 67.79 29.28 144.86 0 77.15-29.32 145.06-29.33 67.92-79.6 118.16-50.27 50.23-118.05 79.51-67.79 29.28-144.86 29.28Zm-.1-55.96q131.89 0 223.93-92.02 92.04-92.03 92.04-223.93 0-131.89-92.02-223.93-92.03-92.04-223.93-92.04-131.89 0-223.93 92.02-92.04 92.03-92.04 223.93 0 131.89 92.02 223.93 92.03 92.04 223.93 92.04ZM480-480Z"/></svg>
       <span>About</span>
     </button>
   </div>
+  <template id="script-item-template">
+    <section class="script-item" tabindex="0">
+      <header class="header">
+        <h4></h4>
+        <div class="button-group">
+          <button class="button flat icon-button" type="button" aria-label="More options" aria-haspopup="menu">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-181.16q-24.25 0-41.32-17.06-17.06-17.07-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.06 17.07 17.06 41.32t-17.06 41.32q-17.07 17.06-41.32 17.06Zm0-240.46q-24.25 0-41.32-17.06-17.06-17.07-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.06 17.07 17.06 41.32t-17.06 41.32q-17.07 17.06-41.32 17.06Zm0-240.46q-24.25 0-41.32-17.06-17.06-17.06-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.06 17.07 17.06 41.32t-17.06 41.32q-17.07 17.06-41.32 17.06Z"/></svg>
+          </button>
+        </div>
+      </header>
+      <div class="content"></div>
+      <div class="menu" role="menu" popover>
+        <button class="menu-item" role="menuitem" popovertargetaction="hide" data-action="editScript">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M204.04-204.04h47.23L661.54-614 614-661.54 204.04-250.96v46.92Zm-55.96 55.96v-126.5L669.23-796q8.25-7.61 18.22-11.77 9.97-4.15 21.24-4.15 11.2 0 21.7 4.11 10.49 4.12 19.19 12.43L796-748.65q8.31 8.19 12.11 18.54 3.81 10.35 3.81 21.03 0 11.39-3.86 21.58-3.85 10.19-12.1 18.42l-521.38 521h-126.5Zm608.27-560.96-47.31-47.31 47.31 47.31Zm-118.87 71.56L614-661.54 661.54-614l-24.06-23.48Z"/></svg>
+          <span>Edit…</span>
+        </button>
+        <button class="menu-item" role="menuitem" popovertargetaction="hide" data-action="deleteScript">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M294.73-148.08q-28.26 0-48.26-20-20.01-20.01-20.01-48.27v-501.23h-39.19v-55.89h174.35v-33.84h237.57v33.77h174.35v55.96h-39.2v501.32q0 28.35-19.91 48.27-19.92 19.91-48.35 19.91H294.73Zm383.65-569.5H282.42v501.23q0 5.39 3.46 8.85 3.47 3.46 8.85 3.46h371.35q4.61 0 8.46-3.84 3.84-3.85 3.84-8.47v-501.23ZM380.19-282.92h55.96v-355.96h-55.96v-355.96Zm144.46 0h55.96v-355.96h-55.96v355.96ZM282.42-717.58V-204.04v-513.54Z"/></svg>
+          <span>Delete…</span>
+        </button>
+      </div>
+    </section>
+  </template>
   <script type="module" src="src/js/main.js"></script>
 </body>
 </html>

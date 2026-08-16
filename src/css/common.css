@@ -951,3 +951,50 @@ a {
   padding-bottom: var(--spacing-md);
   pointer-events: none;
 }
+
+.script-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  user-select: none;
+  outline-width: 2px;
+  outline-color: transparent;
+  outline-offset: 4px;
+  border-radius: var(--radius-md);
+  transition:
+    background-color var(--transition-medium),
+    outline-color var(--transition-medium);
+
+  &:focus-visible {
+    outline-color: var(--focus-outline-color);
+    outline-style: solid;
+  }
+
+  .header {
+    padding: 0;
+  }
+
+  h4,
+  .content {
+    overflow-wrap: anywhere;
+  }
+
+  .content {
+    white-space: pre-wrap;
+    text-wrap: pretty;
+    border: 1px solid var(--border-hc-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    background-color: color-mix(in srgb, currentColor 10%, transparent);
+    transition: background-color var(--transition-medium);
+    cursor: pointer;
+
+    &:hover {
+      background-color: color-mix(in srgb, currentColor 15%, transparent);
+    }
+
+    &:active {
+      background-color: color-mix(in srgb, currentColor 20%, transparent);
+    }
+  }
+}
