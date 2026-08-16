@@ -22,6 +22,7 @@ import {
   clearField,
   closeDialog,
   openDialog,
+  getManifestInfo,
   handleAction,
   handleShortcut,
   toggleSidebar,
@@ -54,6 +55,7 @@ const actions = {
   click: {
     clearField,
     closeDialog: (target) => closeDialog(target?.dataset?.target ?? target),
+    openAboutDialog,
     openDialog: (target) => openDialog(target?.dataset?.target ?? target),
     toggleLabelsSidebar,
     toggleVariablesSidebar,
@@ -87,6 +89,28 @@ function bindEvents() {
   document.addEventListener('input', (e) => handleAction(e, actions));
   document.addEventListener('submit', (e) => handleAction(e, actions));
   document.addEventListener('keydown', (e) => handleShortcut(e, actions, KEYBOARD_SHORTCUTS));
+}
+
+async function openAboutDialog() {
+  const dialog = document.getElementById('about-dialog');
+  const name = dialog.querySelector('#about-name');
+  const version = dialog.querySelector('#about-version');
+  const author = dialog.querySelector('#about-author');
+  const homepage_url = dialog.querySelector('#about-homepage');
+
+  try {
+    const manifest = await getManifestInfo();
+
+    name.textContent = manifest.name;
+    version.textContent = manifest.version;
+    author.textContent = manifest.author;
+    homepage_url.href = manifest.homepage_url;
+    homepage_url.textContent = manifest.homepage_url;
+  } catch (error) {
+    console.error(error);
+  }
+
+  openDialog(dialog);
 }
 
 bindEvents();
