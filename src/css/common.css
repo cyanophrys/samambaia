@@ -390,3 +390,74 @@
     }
   }
 }
+
+.radio {
+  appearance: none;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background-color: transparent;
+  color: inherit;
+  border: 2px solid color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: var(--radius-max);
+  transition: border-color var(--transition-medium),
+              background-color var(--transition-medium);
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translate(-50%, -50%) scale(0);
+    background-color: var(--accent-color);
+    border-radius: var(--radius-max);
+    opacity: 0.08;
+    transition:
+      transform var(--transition-medium),
+      opacity var(--transition-medium);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: var(--radius-max);
+    transform: scale(0);
+    transition: transform var(--transition-medium);
+  }
+
+  &:hover {
+    border-color: color-mix(in srgb, currentColor 60%, transparent);
+  }
+
+  &:active {
+    border-color: color-mix(in srgb, currentColor 80%, transparent);
+  }
+
+  &:checked {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+
+    &::after {
+      transform: scale(1);
+    }
+
+    &:hover {
+      background-color: color-mix(in oklab, var(--accent-color) 85%, white);
+      border-color: color-mix(in oklab, var(--accent-color) 85%, white);
+    }
+
+    &:active {
+      background-color: color-mix(in oklab, var(--accent-color) 70%, white);
+      border-color: color-mix(in oklab, var(--accent-color) 70%, white);
+    }
+  }
+}
