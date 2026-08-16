@@ -90,3 +90,13 @@ export function setAccentColor(value, event) {
   document.documentElement.setAttribute('data-accent-color', accentColor);
   syncFormControlState('accent-color', accentColor);
 }
+
+export function setLargeText(value, event) {
+  const isLargeTextEnabled =
+    (typeof value === 'boolean' ? value : event?.target?.checked)
+    ?? DEFAULT_PREFERENCES.largeText;
+
+  userPreferences.largeText = isLargeTextEnabled;
+  document.documentElement.setAttribute('data-large-text', isLargeTextEnabled);
+  syncFormControlState('large-text', isLargeTextEnabled);
+}
