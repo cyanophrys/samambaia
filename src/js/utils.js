@@ -158,3 +158,15 @@ export function closeDialog(target) {
 
   if (dialog) dialog.close();
 }
+
+export function syncFormControlState(name, value) {
+  const element = document.querySelector(`input[name="${name}"]`);
+  if (!element) return;
+
+  if (element.type === 'checkbox') {
+    element.checked = Boolean(value);
+  } else if (element.type === 'radio') {
+    const targetElement = document.querySelector(`input[name="${name}"][value="${value}"]`);
+    if (targetElement) targetElement.checked = true;
+  }
+}
