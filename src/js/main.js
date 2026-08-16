@@ -47,6 +47,7 @@ import {
 
 import {
   addScript,
+  copyScript,
   deleteScript,
   editScript,
   renderScripts,
@@ -70,6 +71,7 @@ const actions = {
     addScript,
     clearField,
     closeDialog: (target) => closeDialog(target?.dataset?.target ?? target),
+    copyScript,
     deleteScript,
     editScript,
     openAboutDialog,

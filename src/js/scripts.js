@@ -22,6 +22,7 @@ export function createScriptElement(script) {
 
   const title = item.querySelector('h4');
   const moreButton = item.querySelector('[aria-haspopup]');
+  const copyButton = item.querySelector('[data-action="copyScript"]');
   const content = item.querySelector('.content');
   const menu = item.querySelector('.menu');
   const editButton = item.querySelector('[data-action="editScript"]');
@@ -40,6 +41,9 @@ export function createScriptElement(script) {
 
   moreButton.setAttribute('popovertarget', popoverId);
   moreButton.style.anchorName = anchorName;
+
+  copyButton.dataset.target = script.id;
+  content.dataset.target = script.id;
 
   content.textContent = script.content;
 
@@ -164,4 +168,24 @@ export async function deleteScript(element) {
   }, { once: true });
 
   dialog.showModal();
+}
+
+export async function copyScript(target) {
+  const id = Number(target?.dataset?.target);
+  if (Number.isNaN(id)) return;
+
+  try {
+    const script = await getScript(id);
+    if (!script) return;
+
+    await navigator.clipboard.writeText(script.content);
+
+    const message = `Copied to clipboard`;
+    const toast = document.createElement('smb-toast');
+
+    toast.message = message;
+    toast.show('main-toast');
+  } catch (error) {
+    console.error(error);
+  }
 }
