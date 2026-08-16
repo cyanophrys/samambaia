@@ -487,6 +487,85 @@ a {
   }
 }
 
+.list-row.field-row {
+  --field-label-scale: 0.85;
+  --field-label-top: 4px;
+  position: relative;
+  box-shadow: inset 0 0 0 2px transparent;
+  transition: box-shadow var(--transition-medium);
+
+  label {
+    pointer-events: none;
+    user-select: none;
+    color: currentColor;
+    opacity: var(--dimmed-opacity);
+    transition: font-weight var(--transition-medium);
+  }
+
+  input[type="text"],
+  textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+  }
+
+  &:focus-within {
+    box-shadow: inset 0 0 0 2px var(--accent-color);
+  }
+
+  &:not(.multiline) {
+    input[type="text"] {
+      padding: var(--spacing-sm) 0 0;
+    }
+
+    label {
+      position: absolute;
+      top: 50%;
+      left: var(--row-pad-x);
+      transform: translateY(-50%);
+      transform-origin: left center;
+      transition: top var(--transition-medium), transform var(--transition-medium);
+    }
+
+    &:has(input:not(:placeholder-shown)) label,
+    &:focus-within label {
+      top: var(--field-label-top);
+      transform: translateY(0) scale(var(--field-label-scale));
+      font-weight: 600;
+    }
+  }
+
+  &.multiline {
+    align-items: stretch;
+    padding-inline: 0;
+
+    textarea {
+      margin-top: calc(var(--spacing-xs) * 2);
+      min-height: 80px;
+      resize: vertical;
+      padding-inline: var(--row-pad-x);
+    }
+
+    label {
+      position: absolute;
+      top: var(--spacing-sm);
+      left: var(--row-pad-x);
+      transform: translateY(0);
+      transform-origin: left top;
+      transition: top var(--transition-medium), transform var(--transition-medium);
+    }
+
+    &:has(textarea:not(:placeholder-shown)) label,
+    &:focus-within label {
+      top: var(--field-label-top);
+      transform: scale(var(--field-label-scale));
+      font-weight: 600;
+    }
+  }
+}
+
 .list-row.color-picker {
   justify-content: center;
   flex-wrap: wrap;
