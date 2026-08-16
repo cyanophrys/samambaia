@@ -3,7 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="src/css/reset.css">
+  <link rel="stylesheet" href="src/css/tokens.css">
+  <link rel="stylesheet" href="src/css/common.css">
+  <link rel="stylesheet" href="src/css/main.css">
 </head>
 <body>
+  <div id="layout">
+    <aside id="sidebar" aria-label="Main navigation">
+      <header class="header vertical">
+      </header>
+      <footer class="footer vertical">
+      </footer>
+    </aside>
+    <main id="main-content">
+      <header class="header">
+        <input type="search" name="search" placeholder="Search scripts" autofocus>
+      </header>
+      <div id="workspace">
+        <aside class="surface" aria-label="Labels list">
+          <div class="scrollable-area">
+            <section class="section">
+              <header class="header">
+                <h4 class="dimmed">Labels</h4>
+              </header>
+            </section>
+          </div>
+        </aside>
+        <section id="scripts-view" class="surface">
+          <div class="scrollable-area">
+          </div>
+        </section>
+        <aside class="surface" aria-label="Variables list">
+          <div class="scrollable-area">
+            <section class="section">
+              <header class="header">
+                <h4 class="dimmed">Variables</h4>
+              </header>
+            </section>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
 </body>
 </html>

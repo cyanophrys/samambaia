@@ -1,0 +1,16 @@
+:where(*, *::before, *::after) {
+  box-sizing: border-box;
+}
+
+:where(*) {
+  margin: 0;
+  padding: 0;
+}
+
+:where(button, input, select, textarea) {
+  font: inherit;
+}
+
+[hidden] {
+  display: none !important;
+}
