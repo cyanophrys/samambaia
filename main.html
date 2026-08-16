@@ -60,46 +60,70 @@
     </main>
   </div>
   <smb-dialog id="settings-dialog" dialog-title="Settings" style="--dialog-width: 420px;">
-    <div class="scrollable-area">
-      <section class="section">
-        <header class="header">
-          <h4 id="theme-section-title">Theme</h4>
-        </header>
-        <div class="list-group" role="radiogroup" aria-labelledby="theme-section-title">
-          <label class="list-row activatable">
-            <input class="radio prefix" type="radio" name="theme" value="system" data-action="setTheme">
-            <span>System default</span>
-          </label>
-          <label class="list-row activatable">
-            <input class="radio prefix" type="radio" name="theme" value="light" data-action="setTheme">
-            <span>Light</span>
-          </label>
-          <label class="list-row activatable">
-            <input class="radio prefix" type="radio" name="theme" value="dark" data-action="setTheme">
-            <span>Dark</span>
-          </label>
+    <smb-stack id="settings-stack" transition homogeneous>
+      <div data-page-name="appearance">
+        <div class="scrollable-area">
+          <section class="section">
+            <header class="header">
+              <h4 id="theme-section-title">Theme</h4>
+            </header>
+            <div class="list-group" role="radiogroup" aria-labelledby="theme-section-title">
+              <label class="list-row activatable">
+                <input class="radio prefix" type="radio" name="theme" value="system" data-action="setTheme">
+                <span>System default</span>
+              </label>
+              <label class="list-row activatable">
+                <input class="radio prefix" type="radio" name="theme" value="light" data-action="setTheme">
+                <span>Light</span>
+              </label>
+              <label class="list-row activatable">
+                <input class="radio prefix" type="radio" name="theme" value="dark" data-action="setTheme">
+                <span>Dark</span>
+              </label>
+            </div>
+          </section>
+          <section class="section">
+            <header class="header">
+              <h4 id="accent-section-title">Accent colors</h4>
+            </header>
+            <div class="list-group rows-separated">
+              <div class="list-row color-picker accent-color" role="radiogroup" aria-labelledby="accent-section-title">
+                <input type="radio" name="accent-color" value="blue" data-action="setAccentColor" aria-label="Blue">
+                <input type="radio" name="accent-color" value="teal" data-action="setAccentColor" aria-label="Teal">
+                <input type="radio" name="accent-color" value="green" data-action="setAccentColor" aria-label="Green">
+                <input type="radio" name="accent-color" value="yellow" data-action="setAccentColor" aria-label="Yellow">
+                <input type="radio" name="accent-color" value="brown" data-action="setAccentColor" aria-label="Brown">
+                <input type="radio" name="accent-color" value="orange" data-action="setAccentColor" aria-label="Orange">
+                <input type="radio" name="accent-color" value="red" data-action="setAccentColor" aria-label="Red">
+                <input type="radio" name="accent-color" value="pink" data-action="setAccentColor" aria-label="Pink">
+                <input type="radio" name="accent-color" value="purple" data-action="setAccentColor" aria-label="Purple">
+                <input type="radio" name="accent-color" value="lavender" data-action="setAccentColor" aria-label="Lavender">
+                <input type="radio" name="accent-color" value="slate" data-action="setAccentColor" aria-label="Slate">
+              </div>
+            </div>
+          </section>
         </div>
-      </section>
-      <section class="section">
-        <header class="header">
-          <h4 id="accent-section-title">Accent colors</h4>
-        </header>
-        <div class="list-group">
-          <div class="list-row color-picker accent-color" role="radiogroup" aria-labelledby="accent-section-title">
-            <input type="radio" name="accent-color" value="blue" data-action="setAccentColor" aria-label="Blue">
-            <input type="radio" name="accent-color" value="teal" data-action="setAccentColor" aria-label="Teal">
-            <input type="radio" name="accent-color" value="green" data-action="setAccentColor" aria-label="Green">
-            <input type="radio" name="accent-color" value="yellow" data-action="setAccentColor" aria-label="Yellow">
-            <input type="radio" name="accent-color" value="brown" data-action="setAccentColor" aria-label="Brown">
-            <input type="radio" name="accent-color" value="orange" data-action="setAccentColor" aria-label="Orange">
-            <input type="radio" name="accent-color" value="red" data-action="setAccentColor" aria-label="Red">
-            <input type="radio" name="accent-color" value="pink" data-action="setAccentColor" aria-label="Pink">
-            <input type="radio" name="accent-color" value="purple" data-action="setAccentColor" aria-label="Purple">
-            <input type="radio" name="accent-color" value="lavender" data-action="setAccentColor" aria-label="Lavender">
-            <input type="radio" name="accent-color" value="slate" data-action="setAccentColor" aria-label="Slate">
+      </div>
+      <div data-page-name="accessibility">
+      </div>
+    </smb-stack>
+    <div slot="footer-center" class="stack-switcher-group">
+      <button class="stack-switcher" type="button" data-target="settings-stack" data-page-name="appearance">
+        <div>
+          <div class="icon">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M479.23-108.08q-76.46 0-144.09-29.31-67.64-29.3-118.04-79.8-50.41-50.5-79.71-118.23-29.31-67.73-29.31-144.58 0-77.85 29.98-145.58 29.98-67.73 81.65-118.08 51.68-50.34 121.1-79.3 69.42-28.96 147.96-28.96 73.08 0 138.77 25.17 65.69 25.17 115.49 69.44 49.8 44.26 79.35 104.92 29.54 60.66 29.54 131.35 0 101.48-59.96 158.43t-154.44 56.95h-70.79q-18.38 0-29.58 11.74-11.19 11.73-11.19 28.26 0 19.12 15 40.58 15 21.46 15 47.89 0 33.46-19.5 51.29-19.5 17.82-57.23 17.82ZM480-480Zm-183.75 13.87Q310-479.84 310-499.96q0-20.12-13.71-33.87-13.71-13.75-33.83-13.75-20.11 0-33.86 13.71t-13.75 33.83q0 20.12 13.71 33.87 13.71 13.75 33.82 13.75 20.12 0 33.87-13.71Zm119.19-158.39q13.75-13.71 13.75-33.82 0-20.12-13.71-33.87-13.71-13.75-33.82-13.75-20.12 0-33.87 13.71-13.75 13.71-13.75 33.83 0 20.11 13.71 33.86t33.83 13.75q20.11 0 33.86-13.71Zm197.58 0q13.75-13.71 13.75-33.82 0-20.12-13.71-33.87-13.71-13.75-33.83-13.75-20.11 0-33.86 13.71t-13.75 33.83q0 20.11 13.71 33.86t33.82 13.75q20.12 0 33.87-13.71ZM731.4-466.13q13.75-13.71 13.75-33.83 0-20.12-13.71-33.87-13.71-13.75-33.82-13.75-20.12 0-33.87 13.71Q650-520.16 650-500.04q0 20.12 13.71 33.87 13.71 13.75 33.83 13.75 20.11 0 33.86-13.71ZM479.16-164.04q9.8 0 15.32-4.81 5.52-4.8 5.52-13.19 0-14-14.6-31.86-14.59-17.87-14.59-54.29 0-42.27 28.38-67.85 28.38-25.58 70.07-25.58h68.32q70.61 0 114.5-40.82 43.88-40.83 43.88-118.64 0-119.46-92.02-197.17t-215.15-77.71q-135.25 0-230 91.78T164.04-480q0 131.08 92.44 223.52t222.68 92.44Z"/></svg>
           </div>
+          <span>Appearance</span>
         </div>
-      </section>
+      </button>
+      <button class="stack-switcher" type="button" data-target="settings-stack" data-page-name="accessibility">
+        <div>
+          <div class="icon">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M428.98-744.21q-21.21-21.21-21.21-51.02 0-29.81 21.21-51.02 21.21-21.21 51.02-21.21 29.81 0 51.02 21.21 21.21 21.21 21.21 51.02 0 29.81-21.21 51.02Q509.81-723 480-723q-29.81 0-51.02-21.21ZM380.19-96.46v-515.89H146.5v-55.96h667v55.96H579.81v515.89h-55.96v-225.96h-87.7v225.96h-55.96Z"/></svg>
+          </div>
+          <span>Accessibility</span>
+        </div>
+      </button>
     </div>
   </smb-dialog>
   <script type="module" src="src/js/main.js"></script>
