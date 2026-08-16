@@ -120,3 +120,26 @@ export function setHighContrast(value, event) {
     });
   });
 }
+
+export function setViewMode(value) {
+  const validValue = value === 'grid' || value === 'list' ? value : null;
+  const currentView = userPreferences.viewMode
+    ?? DEFAULT_PREFERENCES.viewMode
+    ?? 'grid';
+  const newView = validValue ?? (currentView === 'grid' ? 'list' : 'grid');
+
+  userPreferences.viewMode = newView;
+
+  const scriptsContent = document.getElementById('custom-scripts');
+  if (scriptsContent) scriptsContent.dataset.view = newView;
+
+  const button = document.getElementById('view-toggle-button');
+  if (!button) return;
+
+  const label = newView === 'grid'
+    ? 'List view'
+    : 'Grid view';
+
+  button.setAttribute('aria-label', label);
+  button.setAttribute('aria-pressed', newView === 'grid');
+}

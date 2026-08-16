@@ -30,6 +30,12 @@ export const KEYBOARD_SHORTCUTS = [
     key: ",",
   },
   {
+    name: "setViewMode",
+    action: "setViewMode",
+    alt: true,
+    key: "v",
+  },
+  {
     name: "toggleLabelsSidebar",
     action: "toggleLabelsSidebar",
     alt: true,

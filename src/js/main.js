@@ -36,6 +36,7 @@ import {
   setHighContrast,
   setTheme,
   setLargeText,
+  setViewMode,
   toggleLabelsSidebar,
   toggleVariablesSidebar,
   userPreferences,
@@ -76,6 +77,7 @@ const actions = {
     editScript,
     openAboutDialog,
     openDialog: (target) => openDialog(target?.dataset?.target ?? target),
+    setViewMode,
     toggleLabelsSidebar,
     toggleVariablesSidebar,
   },
@@ -96,6 +98,7 @@ async function init() {
   setHighContrast(userPreferences.highContrast);
   setLargeText(userPreferences.largeText);
   setTheme(userPreferences.theme);
+  setViewMode(userPreferences.viewMode);
   toggleLabelsSidebar(userPreferences.sidebars.labels);
   toggleVariablesSidebar(userPreferences.sidebars.variables);
 }

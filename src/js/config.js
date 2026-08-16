@@ -38,6 +38,7 @@ export const DEFAULT_PREFERENCES = {
     variables: false,
   },
   theme: 'system',
+  viewMode: 'grid',
 };
 
 export const LIMITS = {

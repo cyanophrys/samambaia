@@ -81,6 +81,16 @@ body {
   }
 }
 
+
+#view-toggle-button {
+  .list-icon { display: none; }
+
+  &[aria-pressed="true"] {
+    .grid-icon { display: none; }
+    .list-icon { display: block; }
+  }
+}
+
 #workspace {
   display: flex;
   flex: 1;
@@ -103,4 +113,18 @@ body {
 
 #script-dialog #script-content {
   min-height: 120px;
+}
+
+#custom-scripts {
+  justify-content: center;
+  grid-template-columns: minmax(0, 700px);
+  gap: var(--spacing-xl);
+
+  &[data-view="grid"] {
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  }
+
+  &[data-view="list"] {
+    grid-template-columns: minmax(0, 700px);
+  }
 }
