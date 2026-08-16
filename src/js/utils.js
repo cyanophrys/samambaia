@@ -142,3 +142,19 @@ export function clearField(target) {
   field.focus();
   field.dispatchEvent(new Event('input', { bubbles: true }));
 }
+
+export function openDialog(target) {
+  const dialog = typeof target === 'string'
+    ? document.getElementById(target)
+    : target;
+
+  if (dialog) dialog.showModal();
+}
+
+export function closeDialog(target) {
+  const dialog = typeof target === 'string'
+    ? document.getElementById(target)
+    : target;
+
+  if (dialog) dialog.close();
+}
