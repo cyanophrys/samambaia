@@ -16,4 +16,16 @@
  */
 
 export const KEYBOARD_SHORTCUTS = [
+  {
+    name: "toggleLabelsSidebar",
+    action: "toggleLabelsSidebar",
+    alt: true,
+    key: "ArrowLeft",
+  },
+  {
+    name: "toggleVariablesSidebar",
+    action: "toggleVariablesSidebar",
+    alt: true,
+    key: "ArrowRight",
+  },
 ];

@@ -10,6 +10,7 @@
   --spacing-sm: 10px;
   --spacing-md: 16px;
   --spacing-lg: 22px;
+  --transition-fast: 0.15s ease;
   --transition-medium: 0.2s ease;
 
   --accent-color: #3b82f6;

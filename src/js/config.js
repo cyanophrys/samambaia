@@ -16,4 +16,8 @@
  */
 
 export const DEFAULT_PREFERENCES = {
+  sidebars: {
+    labels: true,
+    variables: false,
+  },
 };

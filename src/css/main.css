@@ -13,6 +13,36 @@ body {
   background-color: var(--background-color);
   border-radius: var(--radius-md);
   box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+
+  &.collapsible {
+    --collapsible-width: clamp(200px, 20vw, 250px);
+    flex: 0 0 var(--collapsible-width);
+    overflow: hidden;
+    transition:
+      opacity var(--transition-fast),
+      flex-basis var(--transition-fast),
+      padding var(--transition-fast),
+      display var(--transition-fast) allow-discrete;
+
+    &[data-collapsed] {
+      display: none;
+      flex-basis: 0;
+      padding: 0;
+      opacity: 0;
+    }
+
+    @starting-style {
+      &:not([data-collapsed]) {
+        flex-basis: 0;
+        opacity: 0;
+      }
+    }
+
+    > * {
+      min-width: var(--collapsible-width);
+      flex-shrink: 0;
+    }
+  }
 }
 
 #layout {

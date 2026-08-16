@@ -18,7 +18,14 @@
 import {
   handleAction,
   handleShortcut,
+  toggleSidebar,
 } from './utils.js';
+
+import {
+  toggleLabelsSidebar,
+  toggleVariablesSidebar,
+  userPreferences,
+} from './preferences.js';
 
 import {
   KEYBOARD_SHORTCUTS,
@@ -29,6 +36,8 @@ const actions = {
   },
 
   click: {
+    toggleLabelsSidebar,
+    toggleVariablesSidebar,
   },
 
   input: {
@@ -37,6 +46,11 @@ const actions = {
   submit: {
   },
 };
+
+async function init() {
+  toggleLabelsSidebar(userPreferences.sidebars.labels);
+  toggleVariablesSidebar(userPreferences.sidebars.variables);
+}
 
 function bindEvents() {
   document.addEventListener('click', (e) => handleAction(e, actions));
@@ -47,3 +61,4 @@ function bindEvents() {
 }
 
 bindEvents();
+init();

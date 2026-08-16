@@ -24,9 +24,31 @@ import {
   DEFAULT_PREFERENCES,
 } from './config.js';
 
+import {
+  toggleSidebar,
+} from './utils.js';
+
 export const userPreferences = createStore(
   await loadState('userPreferences', DEFAULT_PREFERENCES),
   {
     storageKey: 'userPreferences'
   }
 );
+
+export function toggleLabelsSidebar(value) {
+  const button = document.querySelector('[data-action="toggleLabelsSidebar"]');
+  if (!button) return;
+
+  const isOpen = toggleSidebar(button, value);
+
+  userPreferences.sidebars.labels = isOpen;
+}
+
+export function toggleVariablesSidebar(value) {
+  const button = document.querySelector('[data-action="toggleVariablesSidebar"]');
+  if (!button) return;
+
+  const isOpen = toggleSidebar(button, value);
+
+  userPreferences.sidebars.variables = isOpen;
+}
