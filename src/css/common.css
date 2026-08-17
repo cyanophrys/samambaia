@@ -1159,3 +1159,82 @@ a {
     }
   }
 }
+
+.label-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+
+  .label-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    position: relative;
+    overflow: hidden;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    height: 44px;
+    border: 1px solid var(--border-hc-color);
+    border-radius: var(--radius-md);
+    background-color: transparent;
+    color: var(--text-fg-color);
+    transition: background-color var(--transition-medium),
+                color var(--transition-medium);
+    user-select: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: color-mix(in srgb, currentColor 8%, transparent);
+    }
+
+    &:active {
+      background-color: color-mix(in srgb, currentColor 12%, transparent);
+    }
+
+    &:has([aria-haspopup]) {
+      padding-inline-end: var(--spacing-xs);
+    }
+
+    > svg {
+      flex-shrink: 0;
+      opacity: var(--dimmed-opacity);
+      transition: opacity var(--transition-medium);
+    }
+
+    > span {
+      min-width: 0;
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    [aria-haspopup] {
+      margin-inline-start: auto;
+    }
+
+    &[aria-current] {
+      background-color: color-mix(in srgb, var(--accent-color) 18%, transparent);
+      color: oklch(from var(--accent-color) calc(l - 0.20) calc(c + 0.05) h);
+
+      [data-theme="dark"] & {
+        color: oklch(from var(--accent-color) calc(l + 0.3) c h);
+      }
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--accent-color) 28%, transparent);
+      }
+
+      &:active {
+        background-color: color-mix(in srgb, var(--accent-color) 38%, transparent);
+      }
+
+      > svg {
+        opacity: 1;
+      }
+    }
+  }
+
+  .contents {
+    display: contents;
+  }
+}
