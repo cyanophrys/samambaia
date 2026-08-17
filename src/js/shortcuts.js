@@ -49,6 +49,20 @@ export const KEYBOARD_SHORTCUTS = [
     key: "s",
   },
   {
+    name: "showAllScripts",
+    action: "filterByLabel",
+    target: "all",
+    alt: true,
+    key: "Backspace",
+  },
+  {
+    name: "showFavorites",
+    action: "filterByLabel",
+    target: "favorites",
+    alt: true,
+    key: "b",
+  },
+  {
     name: "toggleLabelsSidebar",
     action: "toggleLabelsSidebar",
     alt: true,

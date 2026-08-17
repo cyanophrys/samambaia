@@ -56,9 +56,11 @@ import {
   copyScript,
   deleteScript,
   editScript,
+  filterByLabel,
   filterScripts,
   renderScripts,
   saveScript,
+  searchAllScripts,
 } from './scripts.js';
 
 import {
@@ -96,9 +98,11 @@ const actions = {
     deleteScript,
     editLabel,
     editScript,
+    filterByLabel: (target) => filterByLabel(target),
     openAboutDialog,
     openDialog: (target) => openDialog(target?.dataset?.target ?? target),
     openLabelsSelectionDialog,
+    searchAllScripts,
     setViewMode,
     toggleLabelsSidebar,
     toggleVariablesSidebar,

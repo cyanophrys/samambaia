@@ -12,6 +12,7 @@ import {
 
 import {
   LIMITS,
+  PSEUDO_LABELS,
 } from './config.js';
 
 import {
@@ -19,11 +20,25 @@ import {
   setSelectedScriptLabels,
 } from './labels.js';
 
+let selectedLabel = 'all';
+
+function updateSelectedLabelItem() {
+  const labelItems = document.querySelectorAll('.label-item');
+
+  labelItems.forEach(item => {
+    item.toggleAttribute(
+      'aria-current',
+      item.dataset.target === String(selectedLabel)
+    );
+  });
+}
+
 export function createScriptElement(script) {
   const template = document.querySelector('#script-item-template');
   const item = template.content.firstElementChild.cloneNode(true);
 
   item.dataset.target = script.id;
+  item.dataset.labels = (script.labels?.length ? script.labels.map(String) : ['none']).join(' ');
 
   const title = item.querySelector('h4');
   const moreButton = item.querySelector('[aria-haspopup]');
@@ -81,7 +96,11 @@ export function addScript() {
 
   form.reset();
 
-  setSelectedScriptLabels([]);
+  setSelectedScriptLabels(
+    selectedLabel === 'all' || selectedLabel === 'none'
+      ? []
+      : [String(selectedLabel)]
+  );
 
   dialog.title = 'Add script';
   dialog.subtitle = '';
@@ -206,16 +225,36 @@ export async function copyScript(target) {
   }
 }
 
+function scriptMatchesLabel(script) {
+  return PSEUDO_LABELS.includes(selectedLabel)
+    ? true
+    : script.dataset.labels.split(' ').includes(String(selectedLabel));
+}
+
 export function filterScripts() {
   const searchInput = document.getElementById('scripts-search-input');
   const stack = document.getElementById('scripts-view-stack');
   const scriptItems = document.querySelectorAll('.script-item');
   const query = searchInput?.value.toLowerCase().trim() ?? '';
 
+  updateSelectedLabelItem();
+
+  let labelScriptsCount = 0;
   let visibleScriptsCount = 0;
 
   scriptItems.forEach(script => {
-    const isVisible = script.textContent.toLowerCase().includes(query);
+    if (scriptMatchesLabel(script))
+      labelScriptsCount++;
+  });
+
+  const searchAll = selectedLabel !== 'all'
+    && labelScriptsCount === 0
+    && query.length > 0;
+
+  scriptItems.forEach(script => {
+    const text = script.textContent.toLowerCase();
+    const matchesLabel = searchAll || scriptMatchesLabel(script);
+    const isVisible = matchesLabel && text.includes(query);
 
     script.hidden = !isVisible;
 
@@ -228,9 +267,50 @@ export function filterScripts() {
 
     if (scriptItems.length === 0)
       page = 'no-scripts';
+    else if (labelScriptsCount === 0 && !searchAll)
+      page = 'empty-label';
     else if (visibleScriptsCount === 0)
-      page = 'no-search-results';
+      page = selectedLabel === 'all'
+        ? 'no-search-results'
+        : 'no-label-search-results';
 
     stack.show(page);
   }
+}
+
+export function filterByLabel(target) {
+  const label = String(
+    typeof target === 'string'
+      ? target
+      : target.dataset.target
+  );
+  const searchInput = document.getElementById('scripts-search-input');
+  const element = document.getElementById('custom-scripts');
+
+  selectedLabel = label;
+
+  if (searchInput) {
+    searchInput.value = '';
+    searchInput.focus();
+  }
+
+  if (element)
+    element.scrollTo({
+      top: 0,
+      behavior: 'instant'
+    });
+
+  filterScripts();
+}
+
+export function searchAllScripts() {
+  if (selectedLabel === 'all') return;
+
+  const searchInput = document.getElementById('scripts-search-input');
+
+  selectedLabel = 'all';
+
+  filterScripts();
+
+  searchInput?.focus();
 }

@@ -46,3 +46,7 @@ export const LIMITS = {
   MAX_SCRIPT_NAME_LENGTH: 128,
   MAX_SCRIPT_CONTENT_LENGTH: 5000,
 };
+
+export const PSEUDO_LABELS = [
+  'all',
+];

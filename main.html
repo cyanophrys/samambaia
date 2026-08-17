@@ -54,7 +54,18 @@
               <header class="header">
                 <h4 class="dimmed">Labels</h4>
               </header>
-              <div id="custom-labels" class="label-group"></div>
+              <div class="label-group">
+                <button class="label-item" data-action="filterByLabel" data-target="all" data-active="true" aria-current="true">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M248.65-108.08q-42.03 0-71.46-29.02-29.42-29.02-29.42-70.78v-543.97q0-41.69 29.25-70.88 29.24-29.19 71.33-29.19h415.88v600.19H248.65q-18.53 0-31.57 12.59-13.04 12.58-13.04 31.19 0 18.6 13.04 31.26 13.04 12.65 31.57 12.65h507.31v-607.88h55.96v663.84H248.65Zm99.04-199.61h260.58v-488.77H347.69v488.77Zm-55.96.03v-488.8h-43.08q-18.96 0-31.78 13.04-12.83 13.04-12.83 31.6v456.05q9.88-5.23 20.97-8.56 11.09-3.33 23.64-3.33h43.08Zm-87.69-488.8v500.69-500.69Z"/></svg>
+                  <span>All scripts</span>
+                </button>
+                <div class="separator"></div>
+                <div id="custom-labels" class="contents"></div>
+                <button class="label-item" data-action="filterByLabel" data-target="none" data-active="false" aria-current="false">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m723.96-312.42-40.04-39.85L781.77-480 605.42-711.04q-1.92-2.31-4.52-3.46-2.59-1.15-5.48-1.15H323.04l-55.96-55.96h328.34q16.12 0 30.72 7.11 14.61 7.1 23.9 19.81L851.92-480 723.96-312.42Zm-547.61 68.38h428.42L164.04-684.77v428.42q0 5.39 3.46 8.85t8.85 3.46Zm640.11 211.5L642.77-206.23q-6.43 8.61-15.54 13.38-9.11 4.77-20 4.77H176.35q-28.26 0-48.27-20-20-20.01-20-48.27v-447q0-8.3 1.86-15.78 1.87-7.48 5.41-14.33l-81.2-81.39 39.23-39.23L855.69-71.77l-39.23 39.23ZM552.65-534.11ZM384.5-464.5Z"/></svg>
+                  <span>Unlabeled</span>
+                </button>
+              </div>
             </section>
           </div>
         </aside>
@@ -82,6 +93,28 @@
                   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="currentColor"><path d="M152.15-161.09q-49.99-50.01-49.99-120.54 0-70.52 50.01-120.52t120.54-50q70.52 0 120.52 50.01t50 120.54q0 70.52-50.01 120.52-50.02 50-120.54 50-70.53 0-120.53-50.01Zm676.04 20.9L571.27-397.12q-17.35 13.97-39.39 27.08-22.03 13.12-41.38 20.92-1.96-12.11-4.92-24-2.96-11.88-8.04-21.5 57.04-19.92 96.21-69.15 39.17-49.23 39.17-119.08 0-81.54-56.81-138.65-56.81-57.12-138.36-57.12-81.67 0-139.02 57.12-57.35 57.11-57.35 138.65 0 17.1 3.5 36.72 3.5 19.63 8.43 33.01-8.93 1.24-20.87 4.87-11.94 3.63-20.86 6.9-6.73-16.27-10.39-38.46-3.65-22.19-3.65-43.1 0-100.27 69.97-169.91t170.27-69.64q99.3 0 169.14 69.97 69.85 69.96 69.85 169.64 0 43-15.23 83.54-15.23 40.54-40.46 70.09L860.5-172.5l-32.31 32.31ZM204-190.54l68.88-68.88 67.89 68.07 21.15-20.67-68.57-69.12 70.3-70.36-21.18-20.58-69.28 68.81-69.69-69.31-21.27 21.27 69.89 69.19-69.7 69.7L204-190.54Z"/></svg>
                   <h1>No results found</h1>
                   <span>Try a different search</span>
+                </div>
+              </div>
+            </div>
+            <div data-page-name="no-label-search-results">
+              <div class="scrollable-area">
+                <div class="empty-state">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="currentColor"><path d="M152.15-161.09q-49.99-50.01-49.99-120.54 0-70.52 50.01-120.52t120.54-50q70.52 0 120.52 50.01t50 120.54q0 70.52-50.01 120.52-50.02 50-120.54 50-70.53 0-120.53-50.01Zm676.04 20.9L571.27-397.12q-17.35 13.97-39.39 27.08-22.03 13.12-41.38 20.92-1.96-12.11-4.92-24-2.96-11.88-8.04-21.5 57.04-19.92 96.21-69.15 39.17-49.23 39.17-119.08 0-81.54-56.81-138.65-56.81-57.12-138.36-57.12-81.67 0-139.02 57.12-57.35 57.11-57.35 138.65 0 17.1 3.5 36.72 3.5 19.63 8.43 33.01-8.93 1.24-20.87 4.87-11.94 3.63-20.86 6.9-6.73-16.27-10.39-38.46-3.65-22.19-3.65-43.1 0-100.27 69.97-169.91t170.27-69.64q99.3 0 169.14 69.97 69.85 69.96 69.85 169.64 0 43-15.23 83.54-15.23 40.54-40.46 70.09L860.5-172.5l-32.31 32.31ZM204-190.54l68.88-68.88 67.89 68.07 21.15-20.67-68.57-69.12 70.3-70.36-21.18-20.58-69.28 68.81-69.69-69.31-21.27 21.27 69.89 69.19-69.7 69.7L204-190.54Z"/></svg>
+                  <h1>No results found</h1>
+                  <span>Try a different search or search all scripts</span>
+                  <div>
+                    <button class="button suggested-action pill" type="button" data-action="searchAllScripts">Search all scripts</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div data-page-name="empty-label" class="scrollable-area">
+              <div class="empty-state">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="currentColor"><path d="M159.23-183.08q-22.86 0-39.51-16.64-16.64-16.65-16.64-39.51v-481.73q0-22.87 16.64-39.51 16.65-16.64 39.51-16.64h445.12q13.59 0 25.34 5.67 11.75 5.68 19.89 16.56L857.54-480 650.19-205.31q-8.13 10.88-19.69 16.56-11.56 5.67-25.15 5.67H159.23Zm0-43.84h445.12q2.88 0 5.67-1.16 2.79-1.15 4.33-3.46L802.85-480 614.46-728.65q-1.54-2.31-4.33-3.46-2.79-1.16-5.67-1.16H159.23q-5.38 0-8.84 3.56-3.47 3.56-3.47 8.75v481.73q0 5.38 3.47 8.84 3.46 3.47 8.84 3.47ZM382.39-480Z"/></svg>
+                <h1>Empty label</h1>
+                <span>This label doesn't have any scripts yet</span>
+                <div>
+                  <button class="button suggested-action pill" type="button" data-action="addScript">Add script…</button>
                 </div>
               </div>
             </div>
@@ -376,7 +409,7 @@
     </label>
   </template>
   <template id="label-item-template">
-    <div class="label-item" role="button" tabindex="0">
+    <div class="label-item" role="button" tabindex="0" data-action="filterByLabel">
       <span class="title"></span>
       <button class="button flat icon-button" type="button" data-action-ignore aria-label="More options" aria-haspopup="menu">
         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-181.16q-24.25 0-41.32-17.06-17.06-17.07-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.06 17.07 17.06 41.32t-17.06 41.32q-17.07 17.06-41.32 17.06Zm0-240.46q-24.25 0-41.32-17.06-17.06-17.07-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.06 17.07 17.06 41.32t-17.06 41.32q-17.07 17.06-41.32 17.06Zm0-240.46q-24.25 0-41.32-17.06-17.06-17.06-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.06 17.07 17.06 41.32t-17.06 41.32q-17.07 17.06-41.32 17.06Z"/></svg>
