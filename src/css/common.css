@@ -187,6 +187,21 @@ a {
   }
 }
 
+:where(.header) {
+  :is(h1, h4, span) {
+    user-select: none;
+  }
+
+  &:has(.description) {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  &:has(.description):not(.centered) {
+    align-items: flex-start;
+  }
+}
+
 .empty-state {
   display: grid;
   place-items: center;
