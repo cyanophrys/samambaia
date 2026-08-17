@@ -27,12 +27,30 @@ import {
 } from './utils.js';
 
 import {
+  state,
+} from './state.js';
+
+import {
   userPreferences,
 } from './preferences.js';
 
 import {
   BACKUP_SCHEMA_VERSION,
 } from './config.js';
+
+export function toggleBackupBanner(hasChanges) {
+  const banner = document.getElementById('backup-banner');
+  if (!banner) return;
+
+  banner.dataset.visible = String(hasChanges);
+}
+
+export function warnBeforeUnload(event) {
+  if (state.hasChanges) {
+    event.preventDefault();
+    event.returnValue = '';
+  }
+}
 
 function formatTimestamp(date) {
   const pad = (value) => String(value).padStart(2, '0');
@@ -135,6 +153,7 @@ export async function exportBackup() {
         await writable.write(blob);
         await writable.close();
 
+        state.hasChanges = false;
         document.dispatchEvent(new Event('backup:completed'));
 
         const toast = document.createElement('smb-toast');
@@ -159,6 +178,7 @@ export async function exportBackup() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
+    state.hasChanges = false;
     document.dispatchEvent(new Event('backup:completed'));
 
     const toast = document.createElement('smb-toast');
@@ -220,6 +240,8 @@ export async function restoreBackup() {
 
     if (data.preferences)
       Object.assign(userPreferences, data.preferences);
+
+    state.hasChanges = false;
 
     sessionStorage.setItem('pendingToast', 'Restore completed');
     window.location.reload();

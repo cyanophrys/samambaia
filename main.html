@@ -84,6 +84,10 @@
         </aside>
         <section id="scripts-view" class="surface" style="anchor-name: --scripts-view-anchor;">
           <div id="main-toast" class="toast-container" style="position-anchor: --scripts-view-anchor;"></div>
+          <div id="backup-banner" class="banner" data-visible="false" role="status" aria-live="polite">
+            <span>There are unsaved changes</span>
+            <button type="button" class="button suggested-action" data-action="exportBackup">Back up…</button>
+          </div>
           <smb-stack id="scripts-view-stack" transition>
             <div data-page-name="scripts">
               <div id="custom-scripts" class="scrollable-area grid"></div>

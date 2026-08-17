@@ -44,6 +44,7 @@ export const DEFAULT_PREFERENCES = {
 };
 
 export const DEFAULT_STATE = {
+  hasChanges: false,
 };
 
 export const LIMITS = {

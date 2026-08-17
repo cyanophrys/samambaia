@@ -23,6 +23,10 @@ const VARIABLES_STORE = 'variables';
 
 let db;
 
+function notifyDataChanged() {
+  document.dispatchEvent(new CustomEvent('data:changed'));
+}
+
 export function initDB() {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, DB_VERSION);
@@ -163,7 +167,10 @@ export function saveScriptData(script) {
       ? store.add(data)
       : store.put(data);
 
-    request.onsuccess = () => resolve(request.result);
+    request.onsuccess = () => {
+      notifyDataChanged();
+      resolve(request.result);
+    };
     request.onerror = () => reject(request.error);
   });
 }
@@ -174,7 +181,10 @@ export function deleteScriptData(id) {
     const store = transaction.objectStore(SCRIPTS_STORE);
     const request = store.delete(id);
 
-    request.onsuccess = () => resolve();
+    request.onsuccess = () => {
+      notifyDataChanged();
+      resolve();
+    };
     request.onerror = () => reject(request.error);
   });
 }
@@ -218,7 +228,10 @@ export function saveLabelData(label) {
       ? store.add(data)
       : store.put(data);
 
-    request.onsuccess = () => resolve(request.result);
+    request.onsuccess = () => {
+      notifyDataChanged();
+      resolve(request.result);
+    };
     request.onerror = () => reject(request.error);
   });
 }
@@ -229,7 +242,10 @@ export function deleteLabelData(id) {
     const store = transaction.objectStore(LABELS_STORE);
     const request = store.delete(id);
 
-    request.onsuccess = () => resolve();
+    request.onsuccess = () => {
+      notifyDataChanged();
+      resolve();
+    };
     request.onerror = () => reject(request.error);
   });
 }
@@ -274,6 +290,7 @@ export function saveVariableData(variable) {
       : store.put(data);
 
     request.onsuccess = () => {
+      notifyDataChanged();
       resolve(request.result);
     };
     request.onerror = () => reject(request.error);
@@ -287,6 +304,7 @@ export function deleteVariableData(id) {
     const request = store.delete(id);
 
     request.onsuccess = () => {
+      notifyDataChanged();
       resolve();
     };
     request.onerror = () => reject(request.error);

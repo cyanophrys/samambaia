@@ -36,6 +36,10 @@ import {
 } from './store.js';
 
 import {
+  state,
+} from './state.js';
+
+import {
   setAccentColor,
   setHighContrast,
   setTheme,
@@ -89,6 +93,8 @@ import {
 import {
   exportBackup,
   restoreBackup,
+  toggleBackupBanner,
+  warnBeforeUnload,
 } from './backup.js';
 
 import {
@@ -160,6 +166,8 @@ async function init() {
   setLargeText(userPreferences.largeText);
   setTheme(userPreferences.theme);
   setViewMode(userPreferences.viewMode);
+
+  toggleBackupBanner(state.hasChanges);
   toggleLabelsSidebar(userPreferences.sidebars.labels);
   toggleVariablesSidebar(userPreferences.sidebars.variables);
 
@@ -184,6 +192,8 @@ function bindEvents() {
     if (userPreferences.theme === 'system') setTheme('system');
   });
 
+  window.addEventListener('beforeunload', warnBeforeUnload);
+
   document.addEventListener('click', (e) => handleAction(e, actions));
   document.addEventListener('change', (e) => handleAction(e, actions));
   document.addEventListener('input', (e) => handleAction(e, actions));
@@ -191,6 +201,13 @@ function bindEvents() {
   document.addEventListener('keydown', (e) => handleShortcut(e, actions, KEYBOARD_SHORTCUTS));
 
   document.addEventListener('label:changed', renderScripts);
+
+  ['data:changed', 'backup:completed'].forEach((event) => {
+    document.addEventListener(event, () => {
+      state.hasChanges = event === 'data:changed';
+      toggleBackupBanner(state.hasChanges);
+    });
+  });
 }
 
 async function openAboutDialog() {
@@ -251,7 +268,7 @@ async function wipeData() {
       await wipeStoredData();
       await wipeDB();
 
-      backupState.hasChanges = false;
+      state.hasChanges = false;
 
       sessionStorage.setItem('pendingToast', 'Data deleted');
 
