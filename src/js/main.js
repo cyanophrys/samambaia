@@ -100,6 +100,7 @@ import {
 } from './backup.js';
 
 import {
+  applyShortcutDisplays,
   KEYBOARD_SHORTCUTS,
 } from './shortcuts.js';
 
@@ -164,6 +165,8 @@ async function init() {
   await renderScripts();
   await renderLabels();
   await renderVariables();
+
+  applyShortcutDisplays();
 
   setAccentColor(userPreferences.accentColor);
   setBackupReminder(userPreferences.backupReminder);

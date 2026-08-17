@@ -229,3 +229,8 @@ body {
     height: 32px;
   }
 }
+
+#shortcuts-dialog .scrollable-area {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-lg);
+}

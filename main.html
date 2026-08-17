@@ -440,6 +440,87 @@
       </section>
     </div>
   </smb-dialog>
+  <smb-dialog id="shortcuts-dialog" dialog-title="Keyboard shortcuts">
+    <div class="scrollable-area grid">
+      <section class="section">
+        <header class="header">
+          <h4>General</h4>
+        </header>
+        <div class="shortcut-item">
+          <div data-shortcut-display="addScript"></div>
+          <span>Add script</span>
+        </div>
+        <div class="shortcut-item">
+          <div data-shortcut-display="addLabel"></div>
+          <span>Add label</span>
+        </div>
+        <div class="shortcut-item">
+          <div data-shortcut-display="addVariable"></div>
+          <span>Add variable</span>
+        </div>
+        <div class="shortcut-item">
+          <div data-shortcut-display="importBackup"></div>
+          <span>Restore backup</span>
+        </div>
+        <div class="shortcut-item">
+          <div data-shortcut-display="exportBackup"></div>
+          <span>Back up</span>
+        </div>
+        <div class="shortcut-item">
+          <div data-shortcut-display="openSettings"></div>
+          <span>Open settings</span>
+        </div>
+        <div class="shortcut-item">
+          <div data-shortcut-display="setViewMode"></div>
+          <span>Toggle script view mode</span>
+        </div>
+        <div class="shortcut-item">
+          <div class="keys" data-shortcut-display="openShortcuts"></div>
+          <span>Show keyboard shortcuts</span>
+        </div>
+      </section>
+      <section class="section">
+        <header class="header">
+          <h4>Navigation</h4>
+        </header>
+        <div class="shortcut-item">
+          <div data-shortcut-display="showAllScripts"></div>
+          <span>Show all scripts</span>
+        </div>
+        <div class="shortcut-item">
+          <div data-shortcut-display="showFavorites"></div>
+          <span>Show favorite scripts</span>
+        </div>
+        <div class="shortcut-item">
+          <div data-shortcut-display="toggleLabelsSidebar"></div>
+          <span>Toggle labels sidebar</span>
+        </div>
+        <div class="shortcut-item">
+          <div data-shortcut-display="toggleVariablesSidebar"></div>
+          <span>Toggle variables sidebar</span>
+        </div>
+        <div class="shortcut-item">
+          <div data-shortcut-display="scrollScriptsView"></div>
+          <span>Back to top</span>
+        </div>
+      </section>
+      <section class="section">
+        <header>
+          <h4>Search</h4>
+        </header>
+        <div class="shortcut-item">
+          <div data-shortcut-display="searchScripts"></div>
+          <span>Search scripts</span>
+        </div>
+        <div class="shortcut-item">
+          <div>
+            <kbd>Esc</kbd>
+          </div>
+          <span>Cancel search</span>
+        </div>
+      </section>
+    </div>
+  </smb-dialog>
   <div id="add-item-menu" class="menu" style="position-anchor: --add-item-button" role="menu" aria-label="Add item" popover>
     <button class="menu-item" role="menuitem" data-action="addScript">
       <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M255.46-108.08q-28.36 0-48.27-19.91-19.92-19.92-19.92-48.27v-607.48q0-28.35 19.92-48.27 19.91-19.91 48.35-19.91H570l202.73 202.23v473.34q0 28.44-19.92 48.36-19.91 19.91-48.27 19.91H255.46Zm286.96-513.54v-174.34H255.54q-4.62 0-8.46 3.84-3.85 3.85-3.85 8.47v607.3q0 4.62 3.85 8.47 3.84 3.84 8.46 3.84h448.92q4.62 0 8.46-3.84 3.85-3.85 3.85-8.47v-445.27H542.42ZM243.23-795.96v174.34-174.34V-164.04v-631.92Z"/></svg>
@@ -455,6 +536,10 @@
     </button>
   </div>
   <div id="more-actions-menu" class="menu" style="position-anchor: --more-actions-button" role="menu" aria-label="Mais ações" popover>
+    <button class="menu-item" role="menuitem" data-action="openDialog" data-target="shortcuts-dialog">
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M170.69-224.04q-28.43 0-48.35-19.92-19.92-19.91-19.92-48.35v-379.42q0-28.44 19.92-48.35Q142.26-740 170.69-740h619.42q28.44 0 48.36 19.92 19.91 19.91 19.91 48.35v379.42q0 28.44-19.91 48.35-19.92 19.92-48.36 19.92H170.69Zm0-55.96h619.42q4.62 0 8.47-3.85 3.84-3.84 3.84-8.46v-379.42q0-4.62-3.84-8.46-3.85-3.85-8.47-3.85H170.69q-4.61 0-8.46 3.85-3.85 3.84-3.85 8.46v379.42q0 4.62 3.85 8.46 3.85 3.85 8.46 3.85Zm154.73-48.65h309.16v-66.73H325.42v66.73Zm-118.38-120h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm-480-120h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73ZM158.38-280v-404.04V-280Z"/></svg>
+      <span>Keyboard shortcuts</span>
+    </button>
     <button class="menu-item" role="menuitem" data-action="openAboutDialog">
       <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M452.42-294.04h55.96v-225.15h-55.96v225.15Zm49.39-299.87q8.88-8.69 8.88-21.91t-8.68-22.01q-8.68-8.78-21.9-8.78-13.23 0-22.01 8.68-8.79 8.68-8.79 21.9 0 13.22 8.78 22.01 8.78 8.79 21.8 8.79 13.03 0 21.92-8.68Zm-21.72 485.83q-77.15 0-145.06-29.32-67.92-29.33-118.16-79.6-50.23-50.27-79.51-118.05-29.28-67.79-29.28-144.86 0-77.15 29.32-145.06 29.33-67.92 79.6-118.16 50.27-50.23 118.05-79.51 67.79-29.28 144.86-29.28 77.15 0 145.06 29.32 67.92 29.33 118.16 79.6 50.23 50.27 79.51 118.05 29.28 67.79 29.28 144.86 0 77.15-29.32 145.06-29.33 67.92-79.6 118.16-50.27 50.23-118.05 79.51-67.79 29.28-144.86 29.28Zm-.1-55.96q131.89 0 223.93-92.02 92.04-92.03 92.04-223.93 0-131.89-92.02-223.93-92.03-92.04-223.93-92.04-131.89 0-223.93 92.02-92.04 92.03-92.04 223.93 0 131.89 92.02 223.93 92.03 92.04 223.93 92.04ZM480-480Z"/></svg>
       <span>About</span>
