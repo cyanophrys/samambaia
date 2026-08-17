@@ -101,6 +101,12 @@ export const KEYBOARD_SHORTCUTS = [
     key: "ArrowLeft",
   },
   {
+    name: "toggleScratchpadSidebar",
+    action: "toggleScratchpadSidebar",
+    alt: true,
+    key: "p",
+  },
+  {
     name: "toggleVariablesSidebar",
     action: "toggleVariablesSidebar",
     alt: true,

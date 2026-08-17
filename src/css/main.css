@@ -189,6 +189,16 @@ body {
   user-select: none;
 }
 
+#scratchpad-sidebar textarea {
+  flex: 1;
+  field-sizing: content;
+  min-height: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  resize: none;
+}
+
 #script-dialog #script-content {
   min-height: 120px;
 }
