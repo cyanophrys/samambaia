@@ -32,6 +32,10 @@ import {
 } from './utils.js';
 
 import {
+  wipeStoredData,
+} from './store.js';
+
+import {
   setAccentColor,
   setHighContrast,
   setTheme,
@@ -44,6 +48,7 @@ import {
 
 import {
   initDB,
+  wipeDB,
 } from './db.js';
 
 import {
@@ -81,6 +86,7 @@ const actions = {
     setViewMode,
     toggleLabelsSidebar,
     toggleVariablesSidebar,
+    wipeData,
   },
 
   input: {
@@ -93,6 +99,8 @@ const actions = {
 };
 
 async function init() {
+  const pendingToast = sessionStorage.getItem('pendingToast');
+
   await initDB();
   await renderScripts();
 
@@ -103,6 +111,19 @@ async function init() {
   setViewMode(userPreferences.viewMode);
   toggleLabelsSidebar(userPreferences.sidebars.labels);
   toggleVariablesSidebar(userPreferences.sidebars.variables);
+
+  if (pendingToast) {
+    sessionStorage.removeItem('pendingToast');
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const toast = document.createElement('smb-toast');
+
+        toast.message = pendingToast;
+        toast.show('main-toast');
+      });
+    });
+  }
 }
 
 function bindEvents() {
@@ -139,6 +160,61 @@ async function openAboutDialog() {
   }
 
   openDialog(dialog);
+}
+
+async function wipeData() {
+  const dialog = document.createElement('smb-alert-dialog');
+
+  dialog.title = 'Delete all data?';
+  dialog.message = 'This will permanently remove all local data. This action cannot be undone.';
+
+  const confirmation = document.createElement('label');
+  confirmation.className = "label";
+  confirmation.innerHTML = `
+    <input type="checkbox" class="checkbox" name="wipe-confirmation">
+    <span>I understand and want to continue</span>
+  `;
+  confirmation.slot = 'additional-content';
+
+  dialog.append(confirmation);
+
+  dialog.addResponses([
+    { id: 'cancel', label: 'Cancel', appearance: 'default' },
+    { id: 'wipe', label: 'Delete data', appearance: 'destructive' }
+  ]);
+
+  dialog.setResponseEnabled('wipe', false);
+
+  const checkbox = confirmation.querySelector('input');
+
+  checkbox.addEventListener('change', () => {
+    dialog.setResponseEnabled('wipe', checkbox.checked);
+  });
+
+  dialog.addEventListener('response', async (e) => {
+    if (e.detail.response !== 'wipe') return;
+
+    try {
+      await wipeStoredData();
+      await wipeDB();
+
+      backupState.hasChanges = false;
+
+      sessionStorage.setItem('pendingToast', 'Data deleted');
+
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+
+      const toast = document.createElement('smb-toast');
+
+      toast.type = 'error';
+      toast.message = 'Error deleting data';
+      toast.show('main-toast');
+    }
+  }, { once: true });
+
+  dialog.showModal();
 }
 
 bindEvents();
