@@ -18,6 +18,7 @@
 const DB_NAME = 'SamambaiaDB';
 const DB_VERSION = 1;
 const SCRIPTS_STORE = 'scripts';
+const LABELS_STORE = 'labels';
 
 let db;
 
@@ -43,6 +44,13 @@ export function initDB() {
 
       if (!database.objectStoreNames.contains(SCRIPTS_STORE)) {
         database.createObjectStore(SCRIPTS_STORE, {
+          keyPath: 'id',
+          autoIncrement: true,
+        });
+      }
+
+      if (!database.objectStoreNames.contains(LABELS_STORE)) {
+        database.createObjectStore(LABELS_STORE, {
           keyPath: 'id',
           autoIncrement: true,
         });
@@ -115,6 +123,61 @@ export function deleteScriptData(id) {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction(SCRIPTS_STORE, 'readwrite');
     const store = transaction.objectStore(SCRIPTS_STORE);
+    const request = store.delete(id);
+
+    request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function getAllLabels() {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(LABELS_STORE, 'readonly');
+    const store = transaction.objectStore(LABELS_STORE);
+    const request = store.getAll();
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function getLabel(id) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(LABELS_STORE, 'readonly');
+    const store = transaction.objectStore(LABELS_STORE);
+    const request = store.get(id);
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function saveLabelData(label) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(LABELS_STORE, 'readwrite');
+    const store = transaction.objectStore(LABELS_STORE);
+
+    const data = { ...label };
+
+    if (data.id == null || data.id === '') {
+      delete data.id;
+    } else {
+      data.id = Number(data.id);
+    }
+
+    const request = data.id == null
+      ? store.add(data)
+      : store.put(data);
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function deleteLabelData(id) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(LABELS_STORE, 'readwrite');
+    const store = transaction.objectStore(LABELS_STORE);
     const request = store.delete(id);
 
     request.onsuccess = () => resolve();

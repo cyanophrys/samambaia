@@ -62,6 +62,17 @@ import {
 } from './scripts.js';
 
 import {
+  addLabel,
+  deleteLabel,
+  editLabel,
+  filterScriptLabels,
+  openLabelsSelectionDialog,
+  renderLabels,
+  saveLabel,
+  toggleScriptLabel,
+} from './labels.js';
+
+import {
   KEYBOARD_SHORTCUTS,
 } from './shortcuts.js';
 
@@ -72,17 +83,22 @@ const actions = {
     setLargeText,
     setTheme,
     syncFormControlState,
+    toggleScriptLabel,
   },
 
   click: {
+    addLabel,
     addScript,
     clearField,
     closeDialog: (target) => closeDialog(target?.dataset?.target ?? target),
     copyScript,
+    deleteLabel,
     deleteScript,
+    editLabel,
     editScript,
     openAboutDialog,
     openDialog: (target) => openDialog(target?.dataset?.target ?? target),
+    openLabelsSelectionDialog,
     setViewMode,
     toggleLabelsSidebar,
     toggleVariablesSidebar,
@@ -91,9 +107,11 @@ const actions = {
 
   input: {
     filterScripts,
+    filterScriptLabels,
   },
 
   submit: {
+    saveLabel,
     saveScript,
   },
 };
@@ -103,6 +121,7 @@ async function init() {
 
   await initDB();
   await renderScripts();
+  await renderLabels();
 
   setAccentColor(userPreferences.accentColor);
   setHighContrast(userPreferences.highContrast);
@@ -138,6 +157,8 @@ function bindEvents() {
   document.addEventListener('input', (e) => handleAction(e, actions));
   document.addEventListener('submit', (e) => handleAction(e, actions));
   document.addEventListener('keydown', (e) => handleShortcut(e, actions, KEYBOARD_SHORTCUTS));
+
+  document.addEventListener('label:changed', renderScripts);
 }
 
 async function openAboutDialog() {

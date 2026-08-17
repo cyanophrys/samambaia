@@ -23,6 +23,12 @@ export const KEYBOARD_SHORTCUTS = [
     key: "n",
   },
   {
+    name: "addLabel",
+    action: "addLabel",
+    alt: true,
+    key: "l",
+  },
+  {
     name: "openSettings",
     action: "openDialog",
     target: "settings-dialog",

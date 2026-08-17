@@ -14,6 +14,11 @@ import {
   LIMITS,
 } from './config.js';
 
+import {
+  getSelectedScriptLabels,
+  setSelectedScriptLabels,
+} from './labels.js';
+
 export function createScriptElement(script) {
   const template = document.querySelector('#script-item-template');
   const item = template.content.firstElementChild.cloneNode(true);
@@ -76,6 +81,8 @@ export function addScript() {
 
   form.reset();
 
+  setSelectedScriptLabels([]);
+
   dialog.title = 'Add script';
   dialog.subtitle = '';
   if (saveButton) saveButton.textContent = 'Add';
@@ -93,6 +100,8 @@ export async function editScript(element) {
   const dialog = document.getElementById('script-dialog');
   const form = dialog.querySelector('form');
   const saveButton = dialog.querySelector('button[type="submit"]');
+
+  setSelectedScriptLabels(script.labels);
 
   form.elements['id'].value = script.id;
   form.elements['name'].value = script.name;
@@ -120,7 +129,12 @@ export async function saveScript() {
     return;
   }
 
-  const scriptData = { id, name, content };
+  const scriptData = {
+    id,
+    name,
+    labels: getSelectedScriptLabels(),
+    content
+  };
 
   await saveScriptData(scriptData);
   closeDialog('script-dialog');
