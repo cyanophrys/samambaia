@@ -1285,3 +1285,27 @@ a {
     }
   }
 }
+
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  user-select: none;
+
+  > div {
+    display: flex;
+    gap: var(--spacing-xs);
+
+    kbd {
+      display: grid;
+      place-items: center;
+      min-width: 28px;
+      padding: calc(var(--spacing-xs) - 4px) var(--spacing-xs);
+      border: 1px solid var(--border-hc-color);
+      border-radius: var(--radius-sm);
+      font: inherit;
+      background-color: color-mix(in oklab, currentColor 10%, transparent);
+      box-shadow: 0 2px 0 rgb(0 0 0 / 25%);
+    }
+  }
+}
