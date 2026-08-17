@@ -36,6 +36,18 @@ export const KEYBOARD_SHORTCUTS = [
     key: "v",
   },
   {
+    name: "exportBackup",
+    action: "exportBackup",
+    alt: true,
+    key: "x",
+  },
+  {
+    name: "importBackup",
+    action: "importBackup",
+    alt: true,
+    key: "i",
+  },
+  {
     name: "openSettings",
     action: "openDialog",
     target: "settings-dialog",

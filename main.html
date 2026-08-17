@@ -13,9 +13,17 @@
   <div id="layout">
     <aside id="sidebar" aria-label="Main navigation">
       <header class="header vertical">
-        <button class="button icon-button suggested-action" type="button" popovertarget="add-item-menu" aria-haspopup="menu"  aria-label="Add item" style="anchor-name: --add-item-button">
-          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M450-450H220v-60h230v-230h60v230h230v60H510v230h-60v-230Z"/></svg>
-        </button>
+        <div class="button-group vertical">
+          <button class="button icon-button suggested-action" type="button" popovertarget="add-item-menu" aria-haspopup="menu"  aria-label="Add item" style="anchor-name: --add-item-button">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M450-450H220v-60h230v-230h60v230h230v60H510v230h-60v-230Z"/></svg>
+          </button>
+          <button class="button flat icon-button" type="button" data-action="restoreBackup" aria-label="Restore backup">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M452.12-332.5v-333.27l-97 97-38.93-39.35L480-771.92l164 163.8-38.92 39.35-97-97v333.27h-55.96ZM256.29-188.08q-28.38 0-48.3-19.91-19.91-19.92-19.91-48.33v-106.56h55.96v106.53q0 4.62 3.84 8.47 3.85 3.84 8.47 3.84h447.3q4.62 0 8.47-3.84 3.84-3.85 3.84-8.47v-106.53h55.96v106.56q0 28.41-19.91 48.33-19.92 19.91-48.3 19.91H256.29Z"/></svg>
+          </button>
+          <button class="button flat icon-button" type="button" data-action="exportBackup" aria-label="Back up">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M812.73-667.5v452.03q0 28.37-19.92 48.28-19.91 19.92-48.26 19.92h-529.1q-28.35 0-48.26-19.92-19.92-19.91-19.92-48.26v-529.1q0-28.35 19.92-48.26 19.91-19.92 48.28-19.92H667.5L812.73-667.5Zm-55.96 23.04L644.46-756.77H215.54q-5.39 0-8.85 3.46t-3.46 8.85v528.92q0 5.39 3.46 8.85t8.85 3.46h528.92q5.39 0 8.85-3.46t3.46-8.85v-428.92Zm-209.39 341.8q27.77-27.76 27.77-67.38 0-39.61-27.77-67.38-27.77-27.77-67.38-27.77t-67.38 27.77q-27.77 27.77-27.77 67.38 0 39.62 27.77 67.38 27.77 27.77 67.38 27.77t67.38-27.77ZM259.42-565.42h321.19v-135.16H259.42v135.16Zm-56.19-79.04v441.23-553.54 112.31Z"/></svg>
+          </button>
+        </div>
       </header>
       <footer class="footer vertical">
         <div class="button-group vertical">
@@ -88,6 +96,7 @@
                   <span>Add your first script to get started</span>
                   <div>
                     <button class="button suggested-action pill" type="button" data-action="addScript">Add script…</button>
+                    <button class="button pill" type="button" data-action="restoreBackup">Restore backup…</button>
                   </div>
                 </div>
               </div>

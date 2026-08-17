@@ -29,6 +29,8 @@ export const ACCENT_COLORS = [
   'slate',
 ];
 
+export const BACKUP_SCHEMA_VERSION = 1;
+
 export const DEFAULT_PREFERENCES = {
   accentColor: 'blue',
   highContrast: false,

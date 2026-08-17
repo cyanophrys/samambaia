@@ -81,6 +81,47 @@ export async function wipeDB() {
   });
 }
 
+export function restoreBackupFromFile({ labels = [], scripts = [], variables = [] }) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(
+      [LABELS_STORE, SCRIPTS_STORE, VARIABLES_STORE],
+      "readwrite"
+    );
+    const labelsStore = transaction.objectStore(LABELS_STORE);
+    const scriptsStore = transaction.objectStore(SCRIPTS_STORE);
+    const variablesStore = transaction.objectStore(VARIABLES_STORE);
+
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = () => reject(transaction.error);
+    transaction.onabort = () => reject(transaction.error);
+
+    labelsStore.clear();
+    scriptsStore.clear();
+    variablesStore.clear();
+
+    for (const label of labels) {
+      const data = { ...label };
+      if (data.id == null || data.id === "") delete data.id;
+      else data.id = Number(data.id);
+      labelsStore.put(data);
+    }
+
+    for (const script of scripts) {
+      const data = { ...script };
+      if (data.id == null || data.id === "") delete data.id;
+      else data.id = Number(data.id);
+      scriptsStore.put(data);
+    }
+
+    for (const variable of variables) {
+      const data = { ...variable };
+      if (data.id == null || data.id === "") delete data.id;
+      else data.id = Number(data.id);
+      variablesStore.put(data);
+    }
+  });
+}
+
 export function getAllScripts() {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction(SCRIPTS_STORE, 'readonly');

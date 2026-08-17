@@ -87,6 +87,11 @@ import {
 } from './variables.js';
 
 import {
+  exportBackup,
+  restoreBackup,
+} from './backup.js';
+
+import {
   KEYBOARD_SHORTCUTS,
 } from './shortcuts.js';
 
@@ -113,10 +118,12 @@ const actions = {
     editLabel,
     editScript,
     editVariable,
+    exportBackup,
     filterByLabel: (target) => filterByLabel(target),
     openAboutDialog,
     openDialog: (target) => openDialog(target?.dataset?.target ?? target),
     openLabelsSelectionDialog,
+    restoreBackup,
     searchAllScripts,
     setViewMode,
     toggleFavoriteScript,
