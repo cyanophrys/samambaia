@@ -29,6 +29,13 @@ export const KEYBOARD_SHORTCUTS = [
     key: "l",
   },
   {
+    name: "addVariable",
+    action: "addVariable",
+    alt: true,
+    shift: true,
+    key: "v",
+  },
+  {
     name: "openSettings",
     action: "openDialog",
     target: "settings-dialog",

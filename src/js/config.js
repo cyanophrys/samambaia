@@ -45,8 +45,11 @@ export const LIMITS = {
   MAX_LABEL_NAME_LENGTH: 128,
   MAX_SCRIPT_NAME_LENGTH: 128,
   MAX_SCRIPT_CONTENT_LENGTH: 5000,
+  MAX_VARIABLE_NAME_LENGTH: 128,
 };
 
 export const PSEUDO_LABELS = [
   'all',
 ];
+
+export const VARIABLE_TOKEN_PATTERN = /\{\{\s*([a-zA-Z0-9_-]+)\s*\}\}/g;

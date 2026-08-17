@@ -75,6 +75,15 @@ import {
 } from './labels.js';
 
 import {
+  addVariable,
+  deleteVariable,
+  editVariable,
+  handleVariableValueInput,
+  renderVariables,
+  saveVariable,
+} from './variables.js';
+
+import {
   KEYBOARD_SHORTCUTS,
 } from './shortcuts.js';
 
@@ -91,13 +100,16 @@ const actions = {
   click: {
     addLabel,
     addScript,
+    addVariable,
     clearField,
     closeDialog: (target) => closeDialog(target?.dataset?.target ?? target),
     copyScript,
     deleteLabel,
     deleteScript,
+    deleteVariable,
     editLabel,
     editScript,
+    editVariable,
     filterByLabel: (target) => filterByLabel(target),
     openAboutDialog,
     openDialog: (target) => openDialog(target?.dataset?.target ?? target),
@@ -112,11 +124,13 @@ const actions = {
   input: {
     filterScripts,
     filterScriptLabels,
+    handleVariableValueInput,
   },
 
   submit: {
     saveLabel,
     saveScript,
+    saveVariable,
   },
 };
 
@@ -126,6 +140,7 @@ async function init() {
   await initDB();
   await renderScripts();
   await renderLabels();
+  await renderVariables();
 
   setAccentColor(userPreferences.accentColor);
   setHighContrast(userPreferences.highContrast);
