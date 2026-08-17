@@ -51,6 +51,7 @@ import {
   copyScript,
   deleteScript,
   editScript,
+  filterScripts,
   renderScripts,
   saveScript,
 } from './scripts.js';
@@ -83,6 +84,7 @@ const actions = {
   },
 
   input: {
+    filterScripts,
   },
 
   submit: {

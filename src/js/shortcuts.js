@@ -36,6 +36,13 @@ export const KEYBOARD_SHORTCUTS = [
     key: "v",
   },
   {
+    name: "searchScripts",
+    action: "activate",
+    target: "scripts-search-input",
+    alt: true,
+    key: "s",
+  },
+  {
     name: "toggleLabelsSidebar",
     action: "toggleLabelsSidebar",
     alt: true,

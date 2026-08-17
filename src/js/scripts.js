@@ -65,6 +65,8 @@ export async function renderScripts() {
   const container = document.getElementById('custom-scripts');
 
   container.replaceChildren(...scripts.map(createScriptElement));
+
+  filterScripts();
 }
 
 export function addScript() {
@@ -188,4 +190,18 @@ export async function copyScript(target) {
   } catch (error) {
     console.error(error);
   }
+}
+
+export function filterScripts() {
+  const searchInput = document.getElementById('scripts-search-input');
+  const scriptItems = document.querySelectorAll('.script-item');
+  const query = searchInput?.value.toLowerCase().trim() ?? '';
+
+  let visibleScriptsCount = 0;
+
+  scriptItems.forEach(script => {
+    const isVisible = script.textContent.toLowerCase().includes(query);
+    script.hidden = !isVisible;
+    if (isVisible) visibleScriptsCount++;
+  });
 }
