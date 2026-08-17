@@ -121,13 +121,30 @@
           </smb-stack>
         </section>
         <aside id="variables-sidebar" class="surface collapsible" aria-label="Variables list">
-          <div class="scrollable-area">
-            <section class="section">
-              <header class="header">
-                <h4 class="dimmed">Variables</h4>
-              </header>
-            </section>
-          </div>
+          <smb-stack id="variables-stack">
+            <div data-page-name="variables-list">
+              <div class="scrollable-area">
+                <section class="section">
+                  <header class="header">
+                    <h4 class="dimmed">Variables</h4>
+                  </header>
+                  <div id="custom-variables" class="list-group"></div>
+                </section>
+              </div>
+            </div>
+            <div data-page-name="empty-variables">
+              <div class="scrollable-area">
+                <div class="empty-state compact">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="64px" viewBox="0 -960 960 960" width="64px" fill="currentColor"><path d="M570-160v-60h120q21 0 35.5-14.38Q740-248.75 740-270v-100q0-37 22.5-66t57.5-40v-8q-35-10-57.5-39.5T740-590v-100q0-21.25-14.37-35.63Q711.25-740 690-740H570v-60h120q46 0 78 32.08 32 32.09 32 77.92v100q0 21.25 14.38 35.62Q828.75-540 850-540h30v120h-30q-21.25 0-35.62 14.37Q800-391.25 800-370v100q0 45.83-32.08 77.92Q735.83-160 690-160H570Zm-300 0q-46 0-78-32.08-32-32.09-32-77.92v-100q0-21.25-14.37-35.63Q131.25-420 110-420H80v-120h30q21.25 0 35.63-14.38Q160-568.75 160-590v-100q0-45.83 32.08-77.92Q224.17-800 270-800h120v60H270q-21 0-35.5 14.37Q220-711.25 220-690v100q0 37-22.5 66.5T140-484v8q35 11 57.5 40t22.5 66v100q0 21.25 14.38 35.62Q248.75-220 270-220h120v60H270Z"/></svg>
+                  <h1>No variables</h1>
+                  <span>Create variables to reuse in your scripts</span>
+                  <div>
+                    <button class="button suggested-action pill" type="button" data-action="addVariable">Add variable…</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </smb-stack>
         </aside>
       </div>
     </main>
@@ -202,6 +219,22 @@
         </div>
       </div>
     </smb-stack>
+  </smb-dialog>
+  <smb-dialog id="variable-dialog" style="anchor-name: --variable-dialog-toast; --dialog-width: 400px;">
+    <div id="variable-dialog-toast" class="toast-container" style="position-anchor: --variable-dialog-toast;"></div>
+    <div class="scrollable-area">
+      <section>
+        <form id="variable-form" class="list-group" data-action="saveVariable">
+          <input type="hidden" id="variable-id" name="id">
+          <div class="list-row field-row">
+            <input class="input" type="text" id="variable-name" name="name" placeholder=" " maxlength="64" autocomplete="off" required autofocus>
+            <label class="label" for="variable-name">Name</label>
+          </div>
+        </form>
+      </section>
+    </div>
+    <button slot="footer-left" class="button" type="button" data-action="closeDialog" data-target="variable-dialog">Cancel</button>
+    <button slot="footer-right" class="button suggested-action" type="submit" form="variable-form" data-action="saveVariable"></button>
   </smb-dialog>
   <smb-dialog id="settings-dialog" dialog-title="Settings" style="--dialog-width: 420px;">
     <smb-stack id="settings-stack" transition homogeneous>
@@ -371,6 +404,10 @@
       <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M176.35-188.08q-28.16 0-48.22-20.05-20.05-20.06-20.05-48.22v-447q0-28.16 20.05-48.21 20.06-20.05 48.22-20.05h419.07q16.22 0 30.72 7.15 14.51 7.15 23.9 19.77L851.92-480 650.04-215q-9.39 12.62-23.9 19.77-14.5 7.15-30.72 7.15H176.35Zm0-55.96h419.07q2.89 0 5.48-1.15 2.6-1.16 4.52-3.46L781.77-480 605.54-711.04q-1.93-2.31-4.52-3.46-2.6-1.15-5.48-1.15H176.35q-5.39 0-8.85 3.55-3.46 3.56-3.46 8.75v447q0 5.39 3.46 8.85t8.85 3.46ZM386.23-480Z"/></svg>
       <span>Add label…</span>
     </button>
+    <button class="menu-item" role="menuitem" data-action="addVariable">
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M570.77-180v-60h98.84q21.24 0 35.81-14.38Q720-268.77 720-289.23v-82.31q0-35.69 21.23-64 21.23-28.31 55.31-39.38v-10.16q-34.08-11.07-55.31-39.38-21.23-28.31-21.23-64v-82.31q0-20.46-14.58-34.85Q690.85-720 669.61-720h-98.84v-60h98.84q46.16 0 78.27 31.92Q780-716.15 780-670.77v82.31q0 21.23 14.96 35.62 14.96 14.38 36.58 14.38H860v116.92h-28.46q-21.62 0-36.58 14.38Q780-392.77 780-371.54v82.31q0 45.38-32.12 77.31Q715.77-180 669.61-180h-98.84Zm-280.38 0q-45.77 0-78.08-31.92Q180-243.85 180-289.23v-82.31q0-21.23-14.96-35.62-14.96-14.38-36.58-14.38H100v-116.92h28.46q21.62 0 36.58-14.38Q180-567.23 180-588.46v-82.31q0-45.38 32.31-77.31Q244.62-780 290.39-780h99.22v60h-99.22q-20.85 0-35.62 14.38Q240-691.23 240-670.77v82.31q0 35.69-21.04 64-21.04 28.31-55.5 39.38v10.16q34.46 11.07 55.5 39.38 21.04 28.31 21.04 64v82.31q0 20.46 14.77 34.85Q269.54-240 290.39-240h99.22v60h-99.22Z"/></svg>
+      <span>Add variable…</span>
+    </button>
   </div>
   <div id="more-actions-menu" class="menu" style="position-anchor: --more-actions-button" role="menu" aria-label="Mais ações" popover>
     <button class="menu-item" role="menuitem" data-action="openAboutDialog">
@@ -420,6 +457,25 @@
           <span>Edit…</span>
         </button>
         <button class="menu-item" role="menuitem" popovertargetaction="hide" data-action="deleteLabel">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M294.73-148.08q-28.26 0-48.26-20-20.01-20.01-20.01-48.27v-501.23h-39.19v-55.89h174.35v-33.84h237.57v33.77h174.35v55.96h-39.2v501.32q0 28.35-19.91 48.27-19.92 19.91-48.35 19.91H294.73Zm383.65-569.5H282.42v501.23q0 5.39 3.46 8.85 3.47 3.46 8.85 3.46h371.35q4.61 0 8.46-3.84 3.84-3.85 3.84-8.47v-501.23ZM380.19-282.92h55.96v-355.96h-55.96v-355.96Zm144.46 0h55.96v-355.96h-55.96v355.96ZM282.42-717.58V-204.04v-513.54Z"/></svg>
+          <span>Delete…</span>
+        </button>
+      </div>
+    </div>
+  </template>
+  <template id="variable-item-template">
+    <div class="variable-item list-row field-row">
+      <input type="text" placeholder=" " autocomplete="off" data-action="handleVariableValueInput" data-variable-value>
+      <label class="label"></label>
+      <button class="button flat icon-button suffix" type="button" data-action-ignore aria-label="More options" aria-haspopup="menu">
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-181.16q-24.25 0-41.32-17.06-17.06-17.07-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.06 17.06 17.06 41.32t-17.06 41.32q-17.07 17.06-41.32 17.06Zm0-240.46q-24.25 0-41.32-17.06-17.06-17.07-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.07 17.06 17.07 41.32t-17.06 41.32q-17.07 17.06-41.32 17.06Zm0-240.46q-24.25 0-41.32-17.06-17.06-17.06-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.06 17.06 17.06 41.32t-17.06 41.32q-17.06 17.06-41.32 17.06Z"/></svg>
+      </button>
+      <div class="menu" role="menu" popover>
+        <button class="menu-item" role="menuitem" popovertargetaction="hide" data-action="editVariable">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M204.04-204.04h47.23L661.54-614 614-661.54 204.04-250.96v46.92Zm-55.96 55.96v-126.5L669.23-796q8.25-7.61 18.22-11.77 9.97-4.15 21.24-4.15 11.2 0 21.7 4.11 10.49 4.12 19.19 12.43L796-748.65q8.31 8.19 12.11 18.54 3.81 10.35 3.81 21.03 0 11.39-3.86 21.58-3.85 10.19-12.1 18.42l-521.38 521h-126.5Zm608.27-560.96-47.31-47.31 47.31 47.31Zm-118.87 71.56L614-661.54 661.54-614l-24.06-23.48Z"/></svg>
+          <span>Edit…</span>
+        </button>
+        <button class="menu-item" role="menuitem" popovertargetaction="hide" data-action="deleteVariable">
           <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M294.73-148.08q-28.26 0-48.26-20-20.01-20.01-20.01-48.27v-501.23h-39.19v-55.89h174.35v-33.84h237.57v33.77h174.35v55.96h-39.2v501.32q0 28.35-19.91 48.27-19.92 19.91-48.35 19.91H294.73Zm383.65-569.5H282.42v501.23q0 5.39 3.46 8.85 3.47 3.46 8.85 3.46h371.35q4.61 0 8.46-3.84 3.84-3.85 3.84-8.47v-501.23ZM380.19-282.92h55.96v-355.96h-55.96v-355.96Zm144.46 0h55.96v-355.96h-55.96v355.96ZM282.42-717.58V-204.04v-513.54Z"/></svg>
           <span>Delete…</span>
         </button>
