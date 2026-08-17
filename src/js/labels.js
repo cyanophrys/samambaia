@@ -38,15 +38,17 @@ let selectedScriptLabels = [];
 
 export async function renderLabels() {
   const labels = await getAllLabels();
+  const pinnedContainer = document.getElementById('pinned-labels');
   const container = document.getElementById('custom-labels');
 
-  labels.sort((a, b) =>
-    a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
-  );
+  labels.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
 
-  container.replaceChildren(
-    ...labels.map(createLabelElement)
-  );
+  const pinned = labels.filter(l => l.pinned);
+  const unpinned = labels.filter(l => !l.pinned);
+
+  pinnedContainer.hidden = pinned.length === 0;
+  pinnedContainer.replaceChildren(...pinned.map(createLabelElement));
+  container.replaceChildren(...unpinned.map(createLabelElement));
 }
 
 export function createLabelElement(label) {
@@ -55,12 +57,15 @@ export function createLabelElement(label) {
 
   item.dataset.target = label.id;
   item.setAttribute('aria-label', label.name);
+  item.dataset.pinned = label.pinned ? 'true' : 'false';
 
   const title = item.querySelector('.title');
   const moreButton = item.querySelector('[aria-haspopup]');
   const menu = item.querySelector('.menu');
   const editButton = item.querySelector('[data-action="editLabel"]');
   const deleteButton = item.querySelector('[data-action="deleteLabel"]');
+  const pinButton = item.querySelector('[data-action="togglePinLabel"]');
+  const pinLabel = pinButton.querySelector('span');
 
   const actionsId = `label-menu-${label.id}`;
   const anchorName = `--label-menu-${label.id}`;
@@ -73,6 +78,11 @@ export function createLabelElement(label) {
   menu.id = actionsId;
   menu.style.positionAnchor = anchorName;
   menu.setAttribute('aria-label', `Options for ${label.name}`);
+
+  pinButton.setAttribute('popovertarget', actionsId);
+  pinButton.setAttribute('popovertargetaction', 'hide');
+  pinButton.dataset.target = label.id;
+  pinLabel.textContent = label.pinned ? 'Unpin' : 'Pin';
 
   editButton.setAttribute('popovertarget', actionsId);
   editButton.dataset.target = label.id;
@@ -171,7 +181,9 @@ export async function deleteLabel(element) {
 }
 
 export async function saveLabel() {
-  const normalizeName = value => value.trim().replace(/\s+/g, ' ').toLowerCase();
+  const normalizeName = value =>
+    value.trim().replace(/\s+/g, ' ').toLowerCase();
+
   const form = document.getElementById('label-form');
   const id = form.elements['id'].value ? Number(form.elements['id'].value) : undefined;
   const name = form.elements['name'].value.trim().replace(/\s+/g, ' ');
@@ -334,4 +346,34 @@ export function toggleScriptLabel(value, event, element) {
   }
 
   updateScriptLabelsSubtitle();
+}
+
+export async function togglePinLabel(target) {
+  const id = Number(target.dataset.target);
+  if (Number.isNaN(id)) return;
+
+  const label = await getLabel(id);
+  if (!label) return;
+
+  const isPinned = !label.pinned;
+
+  await saveLabelData({ ...label, pinned: isPinned });
+  await renderLabels();
+
+  const message = isPinned
+    ? `Label "${label.name}" pinned`
+    : `Label "${label.name}" unpinned`;
+  const toast = document.createElement('smb-toast');
+
+  toast.message = message;
+  toast.addAction('Undo', async () => {
+    try {
+      await saveLabelData({ ...label, pinned: !isPinned });
+      await renderLabels();
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  toast.show('main-toast');
 }

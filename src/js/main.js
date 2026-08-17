@@ -73,6 +73,7 @@ import {
   renderLabels,
   saveLabel,
   toggleScriptLabel,
+  togglePinLabel,
 } from './labels.js';
 
 import {
@@ -119,6 +120,7 @@ const actions = {
     setViewMode,
     toggleFavoriteScript,
     toggleLabelsSidebar,
+    togglePinLabel,
     toggleVariablesSidebar,
     wipeData,
   },

@@ -64,6 +64,7 @@
                   <span>All scripts</span>
                 </button>
                 <div class="separator"></div>
+                <div id="pinned-labels" class="contents"></div>
                 <div id="custom-labels" class="contents"></div>
                 <button class="label-item" data-action="filterByLabel" data-target="none" data-active="false" aria-current="false">
                   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m723.96-312.42-40.04-39.85L781.77-480 605.42-711.04q-1.92-2.31-4.52-3.46-2.59-1.15-5.48-1.15H323.04l-55.96-55.96h328.34q16.12 0 30.72 7.11 14.61 7.1 23.9 19.81L851.92-480 723.96-312.42Zm-547.61 68.38h428.42L164.04-684.77v428.42q0 5.39 3.46 8.85t8.85 3.46Zm640.11 211.5L642.77-206.23q-6.43 8.61-15.54 13.38-9.11 4.77-20 4.77H176.35q-28.26 0-48.27-20-20-20.01-20-48.27v-447q0-8.3 1.86-15.78 1.87-7.48 5.41-14.33l-81.2-81.39 39.23-39.23L855.69-71.77l-39.23 39.23ZM552.65-534.11ZM384.5-464.5Z"/></svg>
@@ -466,11 +467,18 @@
   </template>
   <template id="label-item-template">
     <div class="label-item" role="button" tabindex="0" data-action="filterByLabel">
+      <svg aria-hidden="true" class="pin-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Z"/></svg>
       <span class="title"></span>
       <button class="button flat icon-button" type="button" data-action-ignore aria-label="More options" aria-haspopup="menu">
         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-181.16q-24.25 0-41.32-17.06-17.06-17.07-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.06 17.07 17.06 41.32t-17.06 41.32q-17.07 17.06-41.32 17.06Zm0-240.46q-24.25 0-41.32-17.06-17.06-17.07-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.06 17.07 17.06 41.32t-17.06 41.32q-17.07 17.06-41.32 17.06Zm0-240.46q-24.25 0-41.32-17.06-17.06-17.06-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.06 17.07 17.06 41.32t-17.06 41.32q-17.07 17.06-41.32 17.06Z"/></svg>
       </button>
       <div class="menu" role="menu" popover>
+        <button class="menu-item" role="menuitem" popovertargetaction="hide" data-action="togglePinLabel">
+          <svg class="unpin-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M660-820v60h-40v307l-60-60v-247H400v87l-64.31-64.31-20.3-43H300V-820h360ZM480-90l-30-30v-220H268.46v-60L340-471.54v-62.92l-254.77-256 42.16-42.15 689.84 689.84-43.39 42.15L534.46-340H510v220l-30 30ZM354-400h121.23l-74-73.23L400-446l-46 46Zm126-193Zm-78.77 119.77Z"/></svg>
+          <svg class="pin-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M620-471.54 691.54-400v60H510v220l-30 30-30-30v-220H268.46v-60L340-471.54V-760h-40v-60h360v60h-40v288.46ZM354-400h252l-46-46v-314H400v314l-46 46Zm126 0Z"/></svg>
+          <span></span>
+        </button>
+        <div class="separator"></div>
         <button class="menu-item" role="menuitem" popovertargetaction="hide" data-action="editLabel">
           <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M204.04-204.04h47.23L661.54-614 614-661.54 204.04-250.96v46.92Zm-55.96 55.96v-126.5L669.23-796q8.25-7.61 18.22-11.77 9.97-4.15 21.24-4.15 11.2 0 21.7 4.11 10.49 4.12 19.19 12.43L796-748.65q8.31 8.19 12.11 18.54 3.81 10.35 3.81 21.03 0 11.39-3.86 21.58-3.85 10.19-12.1 18.42l-521.38 521h-126.5Zm608.27-560.96-47.31-47.31 47.31 47.31Zm-118.87 71.56L614-661.54 661.54-614l-24.06-23.48Z"/></svg>
           <span>Edit…</span>

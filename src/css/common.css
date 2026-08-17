@@ -1214,6 +1214,12 @@ a {
       transition: opacity var(--transition-medium);
     }
 
+    > .pin-icon {
+      display: none;
+      width: 18px;
+      height: 18px;
+    }
+
     > span {
       min-width: 0;
       font-weight: 600;
@@ -1224,6 +1230,10 @@ a {
 
     [aria-haspopup] {
       margin-inline-start: auto;
+    }
+
+    .menu .unpin-icon {
+      display: none;
     }
 
     &[aria-current] {
@@ -1244,6 +1254,20 @@ a {
 
       > svg {
         opacity: 1;
+      }
+    }
+
+    &[data-pinned="true"] {
+      > .pin-icon {
+        display: block;
+      }
+
+      .menu .pin-icon {
+        display: none;
+      }
+
+      .menu .unpin-icon {
+        display: block;
       }
     }
   }
