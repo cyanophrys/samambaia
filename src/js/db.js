@@ -20,6 +20,7 @@ const DB_VERSION = 1;
 const SCRIPTS_STORE = 'scripts';
 const LABELS_STORE = 'labels';
 const VARIABLES_STORE = 'variables';
+const SCRATCHPAD_STORE = 'scratchpad';
 
 let db;
 
@@ -67,6 +68,9 @@ export function initDB() {
           autoIncrement: true,
         });
       }
+
+      if (!database.objectStoreNames.contains(SCRATCHPAD_STORE))
+        database.createObjectStore(SCRATCHPAD_STORE, { keyPath: 'id' });
     };
   });
 }
@@ -99,15 +103,16 @@ export async function hasStoredData() {
   );
 }
 
-export function restoreBackupFromFile({ labels = [], scripts = [], variables = [] }) {
+export function restoreBackupFromFile({ labels = [], scripts = [], variables = [], scratchpad = "" }) {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction(
-      [LABELS_STORE, SCRIPTS_STORE, VARIABLES_STORE],
+      [LABELS_STORE, SCRIPTS_STORE, VARIABLES_STORE, SCRATCHPAD_STORE],
       "readwrite"
     );
     const labelsStore = transaction.objectStore(LABELS_STORE);
     const scriptsStore = transaction.objectStore(SCRIPTS_STORE);
     const variablesStore = transaction.objectStore(VARIABLES_STORE);
+    const scratchpadStore = transaction.objectStore(SCRATCHPAD_STORE);
 
     transaction.oncomplete = () => resolve();
     transaction.onerror = () => reject(transaction.error);
@@ -116,6 +121,7 @@ export function restoreBackupFromFile({ labels = [], scripts = [], variables = [
     labelsStore.clear();
     scriptsStore.clear();
     variablesStore.clear();
+    scratchpadStore.clear();
 
     for (const label of labels) {
       const data = { ...label };
@@ -137,6 +143,8 @@ export function restoreBackupFromFile({ labels = [], scripts = [], variables = [
       else data.id = Number(data.id);
       variablesStore.put(data);
     }
+
+    scratchpadStore.put({ id: 1, content: scratchpad });
   });
 }
 
@@ -321,6 +329,39 @@ export function deleteVariableData(id) {
       notifyDataChanged();
       resolve();
     };
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function getScratchpadData() {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(SCRATCHPAD_STORE, 'readonly');
+    const store = transaction.objectStore(SCRATCHPAD_STORE);
+    const request = store.get(1);
+
+    request.onsuccess = () => resolve(request.result ? request.result.content : '');
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function saveScratchpadData(content) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(SCRATCHPAD_STORE, 'readwrite');
+    const store = transaction.objectStore(SCRATCHPAD_STORE);
+    const request = store.put({ id: 1, content });
+
+    request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function clearScratchpadData() {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(SCRATCHPAD_STORE, 'readwrite');
+    const store = transaction.objectStore(SCRATCHPAD_STORE);
+    const request = store.put({ id: 1, content: '' });
+
+    request.onsuccess = () => resolve();
     request.onerror = () => reject(request.error);
   });
 }

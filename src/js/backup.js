@@ -20,6 +20,7 @@ import {
   getAllLabels,
   getAllScripts,
   getAllVariables,
+  getScratchpadData,
   restoreBackupFromFile,
 } from './db.js';
 
@@ -140,6 +141,9 @@ function validateBackup(data) {
       return false;
   }
 
+  if (data.scratchpad !== undefined && typeof data.scratchpad !== 'string')
+    return false;
+
   return true;
 }
 
@@ -148,6 +152,7 @@ export async function exportBackup() {
     const scripts = await getAllScripts();
     const labels = await getAllLabels();
     const variables = await getAllVariables();
+    const scratchpad = await getScratchpadData();
     const manifest = await getManifestInfo();
     const date = new Date();
     const timestamp = formatTimestamp(date);
@@ -159,6 +164,7 @@ export async function exportBackup() {
       labels,
       scripts,
       variables,
+      scratchpad,
       preferences: userPreferences,
     }, null, 2);
 
@@ -269,6 +275,7 @@ export async function restoreBackup() {
       labels: data.labels,
       scripts: data.scripts,
       variables: data.variables ?? [],
+      scratchpad: data.scratchpad,
     });
 
     if (data.preferences)

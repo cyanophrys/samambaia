@@ -38,6 +38,7 @@ export const DEFAULT_PREFERENCES = {
   largeText: false,
   sidebars: {
     labels: true,
+    scratchpad: false,
     variables: false,
   },
   theme: 'system',
@@ -50,6 +51,7 @@ export const DEFAULT_STATE = {
 
 export const LIMITS = {
   MAX_LABEL_NAME_LENGTH: 128,
+  MAX_SCRATCHPAD_LENGTH: 10000,
   MAX_SCRIPT_NAME_LENGTH: 128,
   MAX_SCRIPT_CONTENT_LENGTH: 5000,
   MAX_VARIABLE_NAME_LENGTH: 128,

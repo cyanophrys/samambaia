@@ -47,6 +47,7 @@ import {
   setLargeText,
   setViewMode,
   toggleLabelsSidebar,
+  toggleScratchpadSidebar,
   toggleVariablesSidebar,
   userPreferences,
 } from './preferences.js';
@@ -93,6 +94,13 @@ import {
 } from './variables.js';
 
 import {
+  copyScratchpad,
+  clearScratchpad,
+  handleScratchpadInput,
+  initScratchpad,
+} from './scratchpad.js';
+
+import {
   exportBackup,
   restoreBackup,
   toggleBackupBanner,
@@ -120,7 +128,9 @@ const actions = {
     addScript,
     addVariable,
     clearField,
+    clearScratchpad,
     closeDialog: (target) => closeDialog(target?.dataset?.target ?? target),
+    copyScratchpad,
     copyScript,
     deleteLabel,
     deleteScript,
@@ -141,6 +151,7 @@ const actions = {
     toggleLabelsSidebar,
     togglePinLabel,
     togglePinVariable,
+    toggleScratchpadSidebar,
     toggleVariablesSidebar,
     wipeData,
   },
@@ -149,6 +160,7 @@ const actions = {
     filterScripts,
     filterScriptLabels,
     handleVariableValueInput,
+    handleScratchpadInput,
   },
 
   submit: {
@@ -165,6 +177,7 @@ async function init() {
   await renderScripts();
   await renderLabels();
   await renderVariables();
+  await initScratchpad();
 
   applyShortcutDisplays();
 
@@ -177,6 +190,7 @@ async function init() {
 
   toggleBackupBanner(state.hasChanges);
   toggleLabelsSidebar(userPreferences.sidebars.labels);
+  toggleScratchpadSidebar(userPreferences.sidebars.scratchpad);
   toggleVariablesSidebar(userPreferences.sidebars.variables);
 
   if (pendingToast) {

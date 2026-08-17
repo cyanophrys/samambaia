@@ -1,0 +1,136 @@
+/**
+ * Copyright (C) 2026 Raul Sousa
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+import {
+  getScratchpadData,
+  saveScratchpadData,
+  clearScratchpadData,
+} from './db.js';
+
+import {
+  LIMITS,
+} from './config.js';
+
+let debounceTimeout = null;
+
+function updateScratchpadButtons() {
+  const textarea = document.querySelector('[data-action="handleScratchpadInput"]');
+  const copyButton = document.querySelector('[data-action="copyScratchpad"]');
+  const clearButton = document.querySelector('[data-action="clearScratchpad"]');
+  const disabled = !textarea?.value.trim();
+
+  if (copyButton)
+    copyButton.disabled = disabled;
+
+  if (clearButton)
+    clearButton.disabled = disabled;
+}
+
+export async function initScratchpad() {
+  const textarea = document.querySelector('[data-action="handleScratchpadInput"]');
+
+  if (!textarea) return;
+
+  try {
+    const content = await getScratchpadData();
+
+    if (typeof content !== 'string') {
+      textarea.value = '';
+      updateScratchpadButtons();
+      return;
+    }
+
+    textarea.value = content.slice(0, LIMITS.MAX_SCRATCHPAD_LENGTH);
+    updateScratchpadButtons();
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export function handleScratchpadInput(value, event) {
+  const textarea = event?.target;
+
+  if (!textarea) return;
+
+  if (textarea.value.length > LIMITS.MAX_SCRATCHPAD_LENGTH)
+    textarea.value = textarea.value.slice(0, LIMITS.MAX_SCRATCHPAD_LENGTH);
+
+  updateScratchpadButtons();
+
+  clearTimeout(debounceTimeout);
+
+  const textValue = textarea.value;
+
+  debounceTimeout = setTimeout(async () => {
+    try {
+      await saveScratchpadData(textValue);
+    } catch (error) {
+      console.error(error);
+    }
+  }, 500);
+}
+
+export async function copyScratchpad() {
+  const textarea = document.querySelector('[data-action="handleScratchpadInput"]');
+
+  if (!textarea || !textarea.value.trim()) return;
+
+  try {
+    await navigator.clipboard.writeText(textarea.value);
+
+    const toast = document.createElement('smb-toast');
+
+    toast.message = 'Copied to clipboard';
+    toast.show('main-toast');
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function clearScratchpad() {
+  const textarea = document.querySelector('[data-action="handleScratchpadInput"]');
+
+  if (!textarea || !textarea.value.trim()) return;
+
+  const previousContent = textarea.value;
+
+  try {
+    await clearScratchpadData();
+
+    textarea.value = '';
+    updateScratchpadButtons();
+
+    const toast = document.createElement('smb-toast');
+
+    toast.duration = 10000;
+    toast.message = 'Scratchpad cleared';
+    toast.addAction('Undo', async () => {
+      try {
+        await saveScratchpadData(previousContent);
+
+        textarea.value = previousContent;
+        updateScratchpadButtons();
+      } catch (error) {
+        console.error(error);
+      }
+    });
+
+    toast.show('main-toast');
+  } catch (error) {
+    console.error(error);
+  }
+}

@@ -55,6 +55,15 @@ export function toggleVariablesSidebar(value) {
   userPreferences.sidebars.variables = isOpen;
 }
 
+export function toggleScratchpadSidebar(value) {
+  const button = document.querySelector('[data-action="toggleScratchpadSidebar"]');
+  if (!button) return;
+
+  const isOpen = toggleSidebar(button, value);
+
+  userPreferences.sidebars.scratchpad = isOpen;
+}
+
 export function setTheme(value) {
   const root = document.documentElement;
   const body = document.body;
