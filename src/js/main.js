@@ -61,6 +61,7 @@ import {
   renderScripts,
   saveScript,
   searchAllScripts,
+  toggleFavoriteScript,
 } from './scripts.js';
 
 import {
@@ -116,6 +117,7 @@ const actions = {
     openLabelsSelectionDialog,
     searchAllScripts,
     setViewMode,
+    toggleFavoriteScript,
     toggleLabelsSidebar,
     toggleVariablesSidebar,
     wipeData,

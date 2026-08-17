@@ -43,12 +43,15 @@ export function createScriptElement(script) {
 
   item.dataset.target = script.id;
   item.dataset.labels = (script.labels?.length ? script.labels.map(String) : ['none']).join(' ');
+  item.dataset.favorite = script.favorite ? 'true' : 'false';
 
   const title = item.querySelector('h4');
   const moreButton = item.querySelector('[aria-haspopup]');
   const copyButton = item.querySelector('[data-action="copyScript"]');
   const content = item.querySelector('.content');
   const menu = item.querySelector('.menu');
+  const favoriteButton = item.querySelector('[data-action="toggleFavoriteScript"]');
+  const favoriteLabel = favoriteButton.querySelector('span');
   const editButton = item.querySelector('[data-action="editScript"]');
   const deleteButton = item.querySelector('[data-action="deleteScript"]');
 
@@ -74,6 +77,13 @@ export function createScriptElement(script) {
   menu.id = popoverId;
   menu.style.positionAnchor = anchorName;
   menu.setAttribute('aria-label', `Options for ${script.name}`);
+
+  favoriteLabel.textContent = script.favorite
+    ? 'Remove from favorites'
+    : 'Add to favorites';
+
+  favoriteButton.setAttribute('popovertarget', popoverId);
+  favoriteButton.dataset.target = script.id;
 
   editButton.setAttribute('popovertarget', popoverId);
   editButton.dataset.target = script.id;
@@ -101,7 +111,7 @@ export function addScript() {
   form.reset();
 
   setSelectedScriptLabels(
-    selectedLabel === 'all' || selectedLabel === 'none'
+    PSEUDO_LABELS.includes(selectedLabel) || selectedLabel === 'none'
       ? []
       : [String(selectedLabel)]
   );
@@ -230,9 +240,11 @@ export async function copyScript(target) {
 }
 
 function scriptMatchesLabel(script) {
-  return PSEUDO_LABELS.includes(selectedLabel)
-    ? true
-    : script.dataset.labels.split(' ').includes(String(selectedLabel));
+  return selectedLabel === 'favorites'
+    ? script.dataset.favorite === 'true'
+    : PSEUDO_LABELS.includes(selectedLabel)
+      ? true
+      : script.dataset.labels.split(' ').includes(String(selectedLabel));
 }
 
 export function filterScripts() {
@@ -271,6 +283,8 @@ export function filterScripts() {
 
     if (scriptItems.length === 0)
       page = 'no-scripts';
+    else if (selectedLabel === 'favorites' && labelScriptsCount === 0 && !query)
+      page = 'no-favorites';
     else if (labelScriptsCount === 0 && !searchAll)
       page = 'empty-label';
     else if (visibleScriptsCount === 0)
@@ -317,4 +331,34 @@ export function searchAllScripts() {
   filterScripts();
 
   searchInput?.focus();
+}
+
+export async function toggleFavoriteScript(target) {
+  const id = Number(target.dataset.target);
+  if (Number.isNaN(id)) return;
+
+  const script = await getScript(id);
+  if (!script) return;
+
+  const isFavorite = !script.favorite;
+
+  await saveScriptData({ ...script, favorite: isFavorite });
+  await renderScripts();
+
+  const message = isFavorite
+    ? `Script "${script.name}" added to favorites`
+    : `Script "${script.name}" removed from favorites`;
+  const toast = document.createElement('smb-toast');
+
+  toast.message = message;
+  toast.addAction('Undo', async () => {
+    try {
+      await saveScriptData({ ...script, favorite: !isFavorite });
+      await renderScripts();
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  toast.show('main-toast');
 }
