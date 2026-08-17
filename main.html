@@ -88,6 +88,9 @@
             <span>There are unsaved changes</span>
             <button type="button" class="button suggested-action" data-action="exportBackup">Back up…</button>
           </div>
+          <button id="scroll-top-button" class="button suggested-action icon-button" type="button" data-action="scrollScriptsView" aria-label="Back to top" style="position-anchor: --scripts-view-anchor;">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="currentColor"><path d="M455.95-255.74v-397.54L289.23-488.05l-35.38-35.8 226.56-226.56 226.82 226.56-35.38 35.39L506.2-654.1v398.36h-50.25Z"/></svg>
+          </button>
           <smb-stack id="scripts-view-stack" transition>
             <div data-page-name="scripts">
               <div id="custom-scripts" class="scrollable-area grid"></div>

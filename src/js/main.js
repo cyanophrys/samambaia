@@ -65,6 +65,7 @@ import {
   filterScripts,
   renderScripts,
   saveScript,
+  scrollScriptsView,
   searchAllScripts,
   toggleFavoriteScript,
 } from './scripts.js';
@@ -132,6 +133,7 @@ const actions = {
     openDialog: (target) => openDialog(target?.dataset?.target ?? target),
     openLabelsSelectionDialog,
     restoreBackup,
+    scrollScriptsView,
     searchAllScripts,
     setViewMode,
     toggleFavoriteScript,

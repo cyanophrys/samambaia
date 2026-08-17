@@ -37,6 +37,32 @@ function updateSelectedLabelItem() {
   });
 }
 
+export function scrollScriptsView() {
+  const element = document.getElementById('custom-scripts');
+
+  if (!element) return;
+
+  if (element.scrollTop <= 800) {
+    element.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    return;
+  }
+
+  element.scrollTo({
+    top: 500,
+    behavior: 'instant'
+  });
+
+  requestAnimationFrame(() => {
+    element.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
+
 export function createScriptElement(script) {
   const template = document.querySelector('#script-item-template');
   const item = template.content.firstElementChild.cloneNode(true);

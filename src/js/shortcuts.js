@@ -55,6 +55,12 @@ export const KEYBOARD_SHORTCUTS = [
     key: ",",
   },
   {
+    name: "scrollScriptsView",
+    action: "scrollScriptsView",
+    alt: true,
+    key: "ArrowUp",
+  },
+  {
     name: "setViewMode",
     action: "setViewMode",
     alt: true,
