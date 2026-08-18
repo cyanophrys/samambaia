@@ -15,35 +15,5 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-  handleAction,
-  handleShortcut,
-} from './utils.js';
-
-import {
-  KEYBOARD_SHORTCUTS,
-} from './shortcuts.js';
-
-const actions = {
-  change: {
-  },
-
-  click: {
-  },
-
-  input: {
-  },
-
-  submit: {
-  },
-};
-
-function bindEvents() {
-  document.addEventListener('click', (e) => handleAction(e, actions));
-  document.addEventListener('change', (e) => handleAction(e, actions));
-  document.addEventListener('input', (e) => handleAction(e, actions));
-  document.addEventListener('submit', (e) => handleAction(e, actions));
-  document.addEventListener('keydown', (e) => handleShortcut(e, actions, KEYBOARD_SHORTCUTS));
-}
-
-bindEvents();
+export const KEYBOARD_SHORTCUTS = [
+];
