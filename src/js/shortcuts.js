@@ -100,3 +100,40 @@ export const KEYBOARD_SHORTCUTS = [
     key: "ArrowRight",
   },
 ];
+
+export function applyShortcutDisplays() {
+  const keyLabels = {
+    ArrowLeft: "←",
+    ArrowRight: "→",
+    ArrowUp: "↑",
+    Backspace: "⌫",
+  };
+
+  const formatKey = (key) => keyLabels[key] ??
+    (key.length === 1 ? key.toUpperCase() : key);
+  const shortcutDisplays = document.querySelectorAll('[data-shortcut-display]');
+
+  shortcutDisplays.forEach((container) => {
+    const shortcut = KEYBOARD_SHORTCUTS.find(
+      (shortcut) => shortcut.name === container.dataset.shortcutDisplay
+    );
+
+    if (!shortcut) return;
+
+    const keys = [
+      shortcut.ctrl && 'Ctrl',
+      shortcut.shift && 'Shift',
+      shortcut.alt && 'Alt',
+      shortcut.meta && 'Meta',
+      formatKey(shortcut.key),
+    ].filter(Boolean);
+
+    container.replaceChildren(
+      ...keys.map((key) => {
+        const kbd = document.createElement('kbd');
+        kbd.textContent = key;
+        return kbd;
+      })
+    );
+  });
+}
