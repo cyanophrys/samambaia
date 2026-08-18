@@ -400,6 +400,45 @@
   }
 }
 
+.list-row.color-picker {
+  justify-content: center;
+  flex-wrap: wrap;
+
+  input[type="radio"] {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border: 1px solid var(--border-hc-color);
+    border-radius: var(--radius-max);
+    background-color: var(--radio-color);
+    outline: 3px solid transparent;
+    outline-offset: 2px;
+    transition: background-color var(--transition-medium),
+                outline-color var(--transition-medium),
+                outline-offset var(--transition-medium),
+                box-shadow var(--transition-medium);
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      content: none;
+    }
+
+    &:hover {
+      background-color: color-mix(in oklab, var(--radio-color) 85%, white);
+    }
+
+    &:active {
+      background-color: color-mix(in oklab, var(--radio-color) 70%, white);
+    }
+
+    &:checked {
+      outline-color: var(--accent-color);
+    }
+  }
+}
+
 .radio {
   appearance: none;
   position: relative;
