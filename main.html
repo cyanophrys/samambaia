@@ -220,6 +220,10 @@
           <textarea class="textarea" id="script-content" name="content" placeholder=" " rows="5" maxlength="5000" required></textarea>
           <label class="label" for="script-content">Content</label>
         </div>
+        <div class="list-row field-row multiline">
+          <textarea class="textarea" id="script-notes" name="notes" placeholder=" " rows="2" maxlength="1000"></textarea>
+          <label class="label" for="script-notes">Notes</label>
+        </div>
       </form>
     </div>
     <button slot="footer-left" class="button" type="button" data-action="closeDialog" data-target="script-dialog">Cancel</button>
@@ -581,6 +585,10 @@
           <button class="button suggested-action" type="button" data-action="copyScript">Copy</button>
         </div>
       </header>
+      <div class="notes" hidden>
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M200-200h360v-200h200v-360H200v560Zm-60 60v-680h680v445.77L585.77-140H140Zm157.69-270.77v-60H480v60H297.69Zm0-159.23v-60h364.62v60H297.69ZM200-200v-560 560Z"/></svg>
+        <span></span>
+      </div>
       <div class="content" data-action="copyScript"></div>
       <div class="menu" role="menu" popover>
         <button class="menu-item" role="menuitem" popovertargetaction="hide" data-action="toggleFavoriteScript">

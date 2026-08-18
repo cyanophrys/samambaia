@@ -76,6 +76,7 @@ export function createScriptElement(script) {
   const copyButton = item.querySelector('[data-action="copyScript"]');
   const content = item.querySelector('.content');
   const menu = item.querySelector('.menu');
+  const notes = item.querySelector('.notes');
   const favoriteButton = item.querySelector('[data-action="toggleFavoriteScript"]');
   const favoriteLabel = favoriteButton.querySelector('span');
   const editButton = item.querySelector('[data-action="editScript"]');
@@ -103,6 +104,19 @@ export function createScriptElement(script) {
   menu.id = popoverId;
   menu.style.positionAnchor = anchorName;
   menu.setAttribute('aria-label', `Options for ${script.name}`);
+
+  if (script.notes) {
+    notes.id = `script-notes-${script.id}`;
+    notes.hidden = false;
+    notes.querySelector('span').textContent = script.notes;
+
+    item.setAttribute(
+      'aria-describedby',
+      `${content.id} ${notes.id}`
+    );
+  } else {
+    notes.remove();
+  }
 
   favoriteLabel.textContent = script.favorite
     ? 'Remove from favorites'
@@ -165,6 +179,7 @@ export async function editScript(element) {
   form.elements['id'].value = script.id;
   form.elements['name'].value = script.name;
   form.elements['content'].value = script.content;
+  form.elements['notes'].value = script.notes ?? '';
 
   dialog.title = 'Edit script';
   dialog.subtitle = script.name;
@@ -178,12 +193,14 @@ export async function saveScript() {
   const id = form.elements['id'].value || undefined;
   const name = form.elements['name'].value.trim();
   const content = form.elements['content'].value;
+  const notes = form.elements['notes'].value;
 
   if (
     !name ||
     !content ||
     name.length > LIMITS.MAX_SCRIPT_NAME_LENGTH ||
-    content.length > LIMITS.MAX_SCRIPT_CONTENT_LENGTH
+    content.length > LIMITS.MAX_SCRIPT_CONTENT_LENGTH ||
+    notes.length > LIMITS.MAX_SCRIPT_NOTES_LENGTH
   ) {
     return;
   }
@@ -192,7 +209,8 @@ export async function saveScript() {
     id,
     name,
     labels: getSelectedScriptLabels(),
-    content
+    content,
+    notes,
   };
 
   await saveScriptData(scriptData);
