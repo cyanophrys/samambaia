@@ -1136,13 +1136,18 @@ a {
   }
 
   h4,
-  .content {
+  .content,
+  .notes span {
     overflow-wrap: anywhere;
   }
 
-  .content {
+  .content,
+  .notes span {
     white-space: pre-wrap;
     text-wrap: pretty;
+  }
+
+  .content {
     border: 1px solid var(--border-hc-color);
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
@@ -1156,6 +1161,25 @@ a {
 
     &:active {
       background-color: color-mix(in srgb, currentColor 20%, transparent);
+    }
+  }
+
+  .notes {
+    display: flex;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm);
+    border: 1px solid var(--border-hc-color);
+    border-radius: var(--radius-md);
+    background-color: color-mix(in srgb, currentColor 8%, transparent);
+
+    svg,
+    span {
+      opacity: var(--dimmed-opacity);
+      transition: opacity var(--transition-medium);
+    }
+
+    &:hover :is(svg, span) {
+      opacity: 1;
     }
   }
 
