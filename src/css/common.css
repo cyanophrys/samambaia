@@ -1169,7 +1169,9 @@ a {
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
     background-color: color-mix(in srgb, currentColor 10%, transparent);
-    transition: background-color var(--transition-medium);
+    transition: background-color var(--transition-medium),
+                color var(--transition-medium),
+                border-color var(--transition-medium);
     cursor: pointer;
 
     &:hover {
@@ -1178,6 +1180,45 @@ a {
 
     &:active {
       background-color: color-mix(in srgb, currentColor 20%, transparent);
+    }
+
+    &[data-color="blue"]     { --script-color: var(--palette-blue); }
+    &[data-color="brown"]    { --script-color: var(--palette-brown); }
+    &[data-color="green"]    { --script-color: var(--palette-green); }
+    &[data-color="lavender"] { --script-color: var(--palette-lavender); }
+    &[data-color="orange"]   { --script-color: var(--palette-orange); }
+    &[data-color="pink"]     { --script-color: var(--palette-pink); }
+    &[data-color="purple"]   { --script-color: var(--palette-purple); }
+    &[data-color="red"]      { --script-color: var(--palette-red); }
+    &[data-color="teal"]     { --script-color: var(--palette-teal); }
+    &[data-color="yellow"]   { --script-color: var(--palette-yellow); }
+
+    &[data-color]:not([data-color="none"]) {
+      background-color: var(--script-color);
+      color: black;
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--script-color) 85%, black 15%);
+      }
+
+      &:active {
+        background-color: color-mix(in srgb, var(--script-color) 80%, black 20%);
+      }
+
+      :root[data-high-contrast="true"] & {
+        background-color: color-mix(in srgb, currentColor 10%, transparent);
+        color: inherit;
+        border-color: var(--script-color);
+        box-shadow: inset 0 0 0 2px var(--script-color);
+
+        &:hover {
+          background-color: color-mix(in srgb, currentColor 15%, transparent);
+        }
+
+        &:active {
+          background-color: color-mix(in srgb, currentColor 20%, transparent);
+        }
+      }
     }
   }
 
