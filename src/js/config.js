@@ -33,6 +33,7 @@ export const BACKUP_SCHEMA_VERSION = 1;
 
 export const DEFAULT_PREFERENCES = {
   accentColor: 'blue',
+  backupReminder: true,
   highContrast: false,
   largeText: false,
   sidebars: {

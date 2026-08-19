@@ -42,11 +42,15 @@ export function toggleBackupBanner(hasChanges) {
   const banner = document.getElementById('backup-banner');
   if (!banner) return;
 
-  banner.dataset.visible = String(hasChanges);
+  const isEnabled = userPreferences.backupReminder ?? true;
+
+  banner.dataset.visible = String(hasChanges && isEnabled);
 }
 
 export function warnBeforeUnload(event) {
-  if (state.hasChanges) {
+  const isEnabled = userPreferences.backupReminder ?? true;
+
+  if (state.hasChanges && isEnabled) {
     event.preventDefault();
     event.returnValue = '';
   }

@@ -143,3 +143,14 @@ export function setViewMode(value) {
   button.setAttribute('aria-label', label);
   button.setAttribute('aria-pressed', newView === 'grid');
 }
+
+export function setBackupReminder(value, event) {
+  const isEnabled =
+    (typeof value === 'boolean' ? value : event?.target?.checked)
+    ?? DEFAULT_PREFERENCES.backupReminder ?? true;
+
+  userPreferences.backupReminder = isEnabled;
+  syncFormControlState('backup-reminder', isEnabled);
+
+  document.dispatchEvent(new Event('backupReminder:changed'));
+}

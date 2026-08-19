@@ -41,6 +41,7 @@ import {
 
 import {
   setAccentColor,
+  setBackupReminder,
   setHighContrast,
   setTheme,
   setLargeText,
@@ -104,6 +105,7 @@ import {
 const actions = {
   change: {
     setAccentColor,
+    setBackupReminder,
     setHighContrast,
     setLargeText,
     setTheme,
@@ -162,6 +164,7 @@ async function init() {
   await renderVariables();
 
   setAccentColor(userPreferences.accentColor);
+  setBackupReminder(userPreferences.backupReminder);
   setHighContrast(userPreferences.highContrast);
   setLargeText(userPreferences.largeText);
   setTheme(userPreferences.theme);
@@ -207,6 +210,10 @@ function bindEvents() {
       state.hasChanges = event === 'data:changed';
       toggleBackupBanner(state.hasChanges);
     });
+  });
+
+  document.addEventListener('backupReminder:changed', () => {
+    toggleBackupBanner(state.hasChanges);
   });
 }
 
