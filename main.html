@@ -244,11 +244,24 @@
   </smb-dialog>
   <smb-dialog id="label-dialog" style="--dialog-width: 420px;">
     <div class="scrollable-area">
-      <form id="label-form" class="list-group" data-action="saveLabel">
+      <form id="label-form" class="list-group rows-separated" data-action="saveLabel">
         <input type="hidden" id="label-id" name="id">
         <div class="list-row field-row">
           <input class="input" type="text" id="label-name" name="name" placeholder=" " autocomplete="off" maxlength="128" required autofocus>
           <label class="label" for="label-name">Name</label>
+        </div>
+        <div class="list-row color-picker palette" role="radiogroup" aria-label="Label color">
+          <input type="radio" name="label-color" value="none" aria-label="No color" checked>
+          <input type="radio" name="label-color" value="blue" aria-label="Blue">
+          <input type="radio" name="label-color" value="teal" aria-label="Teal">
+          <input type="radio" name="label-color" value="green" aria-label="Green">
+          <input type="radio" name="label-color" value="yellow" aria-label="Yellow">
+          <input type="radio" name="label-color" value="brown" aria-label="Brown">
+          <input type="radio" name="label-color" value="orange" aria-label="Orange">
+          <input type="radio" name="label-color" value="red" aria-label="Red">
+          <input type="radio" name="label-color" value="pink" aria-label="Pink">
+          <input type="radio" name="label-color" value="purple" aria-label="Purple">
+          <input type="radio" name="label-color" value="lavender" aria-label="Lavender">
         </div>
       </form>
       <div id="label-dialog-toast" class="toast-container"></div>
@@ -630,6 +643,7 @@
   <template id="label-item-template">
     <div class="label-item" role="button" tabindex="0" data-action="filterByLabel">
       <svg aria-hidden="true" class="pin-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Z"/></svg>
+      <svg class="color-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M172.31-180q-29.83 0-51.07-21.24Q100-222.48 100-252.31v-455.38q0-29.83 21.24-51.07Q142.48-780 172.31-780h424.23q17.17 0 32.54 7.58 15.36 7.58 25.3 20.96L860-480 654.38-208.54q-9.94 13.38-25.3 20.96-15.37 7.58-32.54 7.58H172.31Z"/></svg>
       <span class="title"></span>
       <button class="button flat icon-button" type="button" data-action-ignore aria-label="More options" aria-haspopup="menu">
         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-181.16q-24.25 0-41.32-17.06-17.06-17.07-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.06 17.07 17.06 41.32t-17.06 41.32q-17.07 17.06-41.32 17.06Zm0-240.46q-24.25 0-41.32-17.06-17.06-17.07-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.06 17.07 17.06 41.32t-17.06 41.32q-17.07 17.06-41.32 17.06Zm0-240.46q-24.25 0-41.32-17.06-17.06-17.06-17.06-41.32t17.06-41.32q17.07-17.06 41.32-17.06t41.32 17.06q17.06 17.07 17.06 41.32t-17.06 41.32q-17.07 17.06-41.32 17.06Z"/></svg>
