@@ -30,11 +30,18 @@ import {
 } from './utils.js';
 
 import {
+  PALETTE_COLORS,
   LIMITS,
 } from './config.js';
 
 let cachedLabels = [];
 let selectedScriptLabels = [];
+
+function getLabelColor(color) {
+  return PALETTE_COLORS.includes(color)
+    ? color
+    : 'none';
+}
 
 export async function renderLabels() {
   const labels = await getAllLabels();
@@ -58,6 +65,7 @@ export function createLabelElement(label) {
   item.dataset.target = label.id;
   item.setAttribute('aria-label', label.name);
   item.dataset.pinned = label.pinned ? 'true' : 'false';
+  item.dataset.color = getLabelColor(label.color);
 
   const title = item.querySelector('.title');
   const moreButton = item.querySelector('[aria-haspopup]');
@@ -117,9 +125,14 @@ export async function editLabel(element) {
   const dialog = document.getElementById('label-dialog');
   const form = dialog.querySelector('form');
   const saveButton = dialog.querySelector('button[type="submit"]');
+  const savedColor = getLabelColor(label.color);
+  const colorInput = form.elements['label-color'];
 
   form.elements['id'].value = label.id;
   form.elements['name'].value = label.name;
+
+  for (const input of colorInput)
+    input.checked = input.value === savedColor;
 
   dialog.title = 'Edit label';
   dialog.subtitle = label.name;
@@ -187,6 +200,7 @@ export async function saveLabel() {
   const form = document.getElementById('label-form');
   const id = form.elements['id'].value ? Number(form.elements['id'].value) : undefined;
   const name = form.elements['name'].value.trim().replace(/\s+/g, ' ');
+  const color = getLabelColor(form.elements['label-color']?.value);
 
   if (!name) return;
 
@@ -215,8 +229,8 @@ export async function saveLabel() {
 
   const existingLabel = labels.find(label => label.id === id);
   const labelData = existingLabel
-    ? { ...existingLabel, name }
-    : { id, name };
+    ? { ...existingLabel, name, color }
+    : { id, name, color };
 
   await saveLabelData(labelData);
   closeDialog('label-dialog');

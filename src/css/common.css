@@ -1290,7 +1290,7 @@ a {
       padding-inline-end: var(--spacing-xs);
     }
 
-    > svg {
+    > svg:not(.color-icon) {
       flex-shrink: 0;
       opacity: var(--dimmed-opacity);
       transition: opacity var(--transition-medium);
@@ -1302,6 +1302,10 @@ a {
       height: 18px;
     }
 
+    > .color-icon {
+      fill: var(--label-color);
+    }
+
     > span {
       min-width: 0;
       font-weight: 600;
@@ -1309,6 +1313,17 @@ a {
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+
+    &[data-color="blue"]     { --label-color: var(--palette-blue); }
+    &[data-color="brown"]    { --label-color: var(--palette-brown); }
+    &[data-color="green"]    { --label-color: var(--palette-green); }
+    &[data-color="lavender"] { --label-color: var(--palette-lavender); }
+    &[data-color="orange"]   { --label-color: var(--palette-orange); }
+    &[data-color="pink"]     { --label-color: var(--palette-pink); }
+    &[data-color="purple"]   { --label-color: var(--palette-purple); }
+    &[data-color="red"]      { --label-color: var(--palette-red); }
+    &[data-color="teal"]     { --label-color: var(--palette-teal); }
+    &[data-color="yellow"]   { --label-color: var(--palette-yellow); }
 
     [aria-haspopup] {
       margin-inline-start: auto;
@@ -1334,7 +1349,7 @@ a {
         background-color: color-mix(in srgb, var(--accent-color) 38%, transparent);
       }
 
-      > svg {
+      > svg:not(.color-icon) {
         opacity: 1;
       }
     }
@@ -1342,6 +1357,12 @@ a {
     &[data-pinned="true"] {
       > .pin-icon {
         display: block;
+      }
+    }
+
+    &[data-color="none"] {
+      > .color-icon {
+        display: none;
       }
     }
   }
