@@ -51,6 +51,20 @@ export function initDB() {
   });
 }
 
+export async function wipeDB() {
+  if (db) {
+    db.close();
+    db = undefined;
+  }
+
+  await new Promise((resolve, reject) => {
+    const request = indexedDB.deleteDatabase('SamambaiaDB');
+    request.onsuccess = resolve;
+    request.onerror = () => reject(request.error);
+    request.onblocked = resolve;
+  });
+}
+
 export function getAllScripts() {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction(SCRIPTS_STORE, 'readonly');
