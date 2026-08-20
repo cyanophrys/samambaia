@@ -43,6 +43,9 @@ export const DEFAULT_PREFERENCES = {
   viewMode: 'grid',
 };
 
+export const DEFAULT_STATE = {
+};
+
 export const LIMITS = {
   MAX_LABEL_NAME_LENGTH: 128,
   MAX_SCRIPT_NAME_LENGTH: 128,
