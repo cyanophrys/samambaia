@@ -5,6 +5,7 @@
   --disabled-opacity: 0.4;
   --font-size-base: 14px;
   --font-size-xs: 0.85em;
+  --palette-hc-boost: 1;
   --radius-sm: 6px;
   --radius-2md: 9px;
   --radius-md: 12px;
@@ -31,6 +32,17 @@
   --accent-slate: #75839c;
   --accent-teal: #13ac9b;
   --accent-yellow: #c98a12;
+
+  --palette-blue: oklch(from #7fa8e0 l calc(c * var(--palette-hc-boost)) h);
+  --palette-brown: oklch(from #c08a5c l calc(c * var(--palette-hc-boost)) h);
+  --palette-green: oklch(from #8ebb84 l calc(c * var(--palette-hc-boost)) h);
+  --palette-lavender: oklch(from #a3add9 l calc(c * var(--palette-hc-boost)) h);
+  --palette-orange: oklch(from #e58a54 l calc(c * var(--palette-hc-boost)) h);
+  --palette-pink: oklch(from #e096b5 l calc(c * var(--palette-hc-boost)) h);
+  --palette-purple: oklch(from #b995dd l calc(c * var(--palette-hc-boost)) h);
+  --palette-red: oklch(from #e08a8a l calc(c * var(--palette-hc-boost)) h);
+  --palette-teal: oklch(from #6fbcae l calc(c * var(--palette-hc-boost)) h);
+  --palette-yellow: oklch(from #e0bc63 l calc(c * var(--palette-hc-boost)) h);
 
   --background-color: light-dark(white, #27272a);
   --border-color: light-dark(rgb(0 0 0 / 18%), rgb(255 255 255 / 18%));
@@ -67,6 +79,7 @@
   &[data-high-contrast="true"] {
     --disabled-opacity: 0.65;
     --dimmed-opacity: 0.85;
+    --palette-hc-boost: 1.6;
 
     --background-color: light-dark(#fff, #222);
     --border-color: var(--border-hc-color);

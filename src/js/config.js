@@ -58,6 +58,19 @@ export const LIMITS = {
   MAX_VARIABLE_NAME_LENGTH: 128,
 };
 
+export const PALETTE_COLORS = [
+  'blue',
+  'brown',
+  'green',
+  'lavender',
+  'orange',
+  'pink',
+  'purple',
+  'red',
+  'teal',
+  'yellow',
+];
+
 export const PSEUDO_LABELS = [
   'all',
   'favorites',

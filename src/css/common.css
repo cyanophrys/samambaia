@@ -676,6 +676,23 @@ a {
     input[value="yellow"]   { --radio-color: var(--accent-yellow); }
   }
 
+  &.palette {
+    input[value="blue"] { --radio-color: var(--palette-blue); }
+    input[value="brown"] { --radio-color: var(--palette-brown); }
+    input[value="green"] { --radio-color: var(--palette-green); }
+    input[value="lavender"] { --radio-color: var(--palette-lavender); }
+    input[value="orange"] { --radio-color: var(--palette-orange); }
+    input[value="pink"] { --radio-color: var(--palette-pink); }
+    input[value="purple"] { --radio-color: var(--palette-purple); }
+    input[value="red"] { --radio-color: var(--palette-red); }
+    input[value="teal"] { --radio-color: var(--palette-teal); }
+    input[value="yellow"] { --radio-color: var(--palette-yellow); }
+
+    input[value="none"] {
+      border: 2px solid color-mix(in srgb, currentColor 30%, transparent);
+    }
+  }
+
   input[type="radio"] {
     appearance: none;
     width: 24px;
