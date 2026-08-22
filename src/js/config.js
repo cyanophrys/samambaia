@@ -20,4 +20,5 @@ export const DEFAULT_PREFERENCES = {
     labels: true,
     variables: false,
   },
+  theme: 'system',
 };

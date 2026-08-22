@@ -26,6 +26,7 @@ import {
 
 import {
   toggleSidebar,
+  syncFormControlState,
 } from './utils.js';
 
 export const userPreferences = createStore(
@@ -51,4 +52,29 @@ export function toggleVariablesSidebar(value) {
   const isOpen = toggleSidebar(button, value);
 
   userPreferences.sidebars.variables = isOpen;
+}
+
+export function setTheme(value) {
+  const root = document.documentElement;
+  const body = document.body;
+  const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+  const theme = value ?? DEFAULT_PREFERENCES.theme;
+
+  userPreferences.theme = theme;
+
+  if (theme === 'system') {
+    root.dataset.theme = prefersDarkMode.matches ? 'dark' : 'light';
+  } else {
+    root.dataset.theme = theme;
+  }
+
+  syncFormControlState('theme', theme);
+
+  body.classList.add('transitions-disabled');
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      body.classList.remove('transitions-disabled');
+    });
+  });
 }

@@ -24,9 +24,11 @@ import {
   handleAction,
   handleShortcut,
   toggleSidebar,
+  syncFormControlState,
 } from './utils.js';
 
 import {
+  setTheme,
   toggleLabelsSidebar,
   toggleVariablesSidebar,
   userPreferences,
@@ -38,6 +40,8 @@ import {
 
 const actions = {
   change: {
+    setTheme,
+    syncFormControlState,
   },
 
   click: {
@@ -56,11 +60,18 @@ const actions = {
 };
 
 async function init() {
+  setTheme(userPreferences.theme);
   toggleLabelsSidebar(userPreferences.sidebars.labels);
   toggleVariablesSidebar(userPreferences.sidebars.variables);
 }
 
 function bindEvents() {
+  const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+
+  prefersDarkMode.addEventListener('change', () => {
+    if (userPreferences.theme === 'system') setTheme('system');
+  });
+
   document.addEventListener('click', (e) => handleAction(e, actions));
   document.addEventListener('change', (e) => handleAction(e, actions));
   document.addEventListener('input', (e) => handleAction(e, actions));

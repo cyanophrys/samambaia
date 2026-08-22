@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <link rel="stylesheet" href="src/css/reset.css">
   <link rel="stylesheet" href="src/css/tokens.css">
   <link rel="stylesheet" href="src/css/common.css">
@@ -60,6 +61,25 @@
   </div>
   <smb-dialog id="settings-dialog" dialog-title="Settings" style="--dialog-width: 420px;">
     <div class="scrollable-area">
+      <section class="section">
+        <header class="header">
+          <h4 id="theme-section-title">Theme</h4>
+        </header>
+        <div class="list-group" role="radiogroup" aria-labelledby="theme-section-title">
+          <label class="list-row activatable">
+            <input class="radio prefix" type="radio" name="theme" value="system" data-action="setTheme">
+            <span>System default</span>
+          </label>
+          <label class="list-row activatable">
+            <input class="radio prefix" type="radio" name="theme" value="light" data-action="setTheme">
+            <span>Light</span>
+          </label>
+          <label class="list-row activatable">
+            <input class="radio prefix" type="radio" name="theme" value="dark" data-action="setTheme">
+            <span>Dark</span>
+          </label>
+        </div>
+      </section>
     </div>
   </smb-dialog>
   <script type="module" src="src/js/main.js"></script>
