@@ -31,6 +31,7 @@ export const ACCENT_COLORS = [
 
 export const DEFAULT_PREFERENCES = {
   accentColor: 'blue',
+  highContrast: false,
   largeText: false,
   sidebars: {
     labels: true,

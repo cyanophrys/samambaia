@@ -100,3 +100,23 @@ export function setLargeText(value, event) {
   document.documentElement.setAttribute('data-large-text', isLargeTextEnabled);
   syncFormControlState('large-text', isLargeTextEnabled);
 }
+
+export function setHighContrast(value, event) {
+  const root = document.documentElement;
+  const body = document.body;
+  const isHighContrastEnabled =
+    (typeof value === 'boolean' ? value : event?.target?.checked)
+    ?? DEFAULT_PREFERENCES.highContrast;
+
+  userPreferences.highContrast = isHighContrastEnabled;
+  root.setAttribute('data-high-contrast', isHighContrastEnabled);
+  syncFormControlState('high-contrast', isHighContrastEnabled);
+
+  body.classList.add('transitions-disabled');
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      body.classList.remove('transitions-disabled');
+    });
+  });
+}

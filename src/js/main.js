@@ -30,6 +30,7 @@ import {
 
 import {
   setAccentColor,
+  setHighContrast,
   setTheme,
   setLargeText,
   toggleLabelsSidebar,
@@ -44,6 +45,7 @@ import {
 const actions = {
   change: {
     setAccentColor,
+    setHighContrast,
     setLargeText,
     setTheme,
     syncFormControlState,
@@ -66,6 +68,7 @@ const actions = {
 
 async function init() {
   setAccentColor(userPreferences.accentColor);
+  setHighContrast(userPreferences.highContrast);
   setLargeText(userPreferences.largeText);
   setTheme(userPreferences.theme);
   toggleLabelsSidebar(userPreferences.sidebars.labels);
