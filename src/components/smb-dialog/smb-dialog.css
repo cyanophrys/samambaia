@@ -22,10 +22,6 @@ dialog {
               display var(--transition-medium) allow-discrete,
               overlay var(--transition-medium) allow-discrete;
 
-  :host-context([data-theme="dark"]) & {
-    border-color: var(--border-color);
-  }
-
   &[open] {
     display: flex;
     opacity: 1;
