@@ -94,6 +94,13 @@ export const KEYBOARD_SHORTCUTS = [
     key: "b",
   },
   {
+    name: "showRecent",
+    action: "filterByLabel",
+    target: "recent",
+    alt: true,
+    key: "r",
+  },
+  {
     name: "toggleLabelsSidebar",
     action: "toggleLabelsSidebar",
     alt: true,

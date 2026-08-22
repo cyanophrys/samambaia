@@ -163,3 +163,14 @@ export function setBackupReminder(value, event) {
 
   document.dispatchEvent(new Event('backupReminder:changed'));
 }
+
+export function setRecentScripts(value, event) {
+  const isEnabled =
+    (typeof value === 'boolean' ? value : event?.target?.checked)
+    ?? DEFAULT_PREFERENCES.recentScripts;
+
+  userPreferences.recentScripts = isEnabled;
+  syncFormControlState('recent-scripts', isEnabled);
+
+  document.dispatchEvent(new Event('recentScripts:changed'));
+}
