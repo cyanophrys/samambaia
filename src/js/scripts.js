@@ -25,6 +25,14 @@ import {
   applyVariables
 } from './variables.js';
 
+import {
+  userPreferences,
+} from './preferences.js';
+
+import {
+  state,
+} from './state.js';
+
 let selectedLabel = 'all';
 
 export function getScriptColor(color) {
@@ -42,6 +50,13 @@ function updateSelectedLabelItem() {
       item.dataset.target === String(selectedLabel)
     );
   });
+}
+
+function updateClearRecentScriptsButton() {
+  const button = document.querySelector('[data-action="clearRecentScripts"]');
+  if (!button) return;
+
+  button.disabled = !state.recentScripts.length;
 }
 
 export function scrollScriptsView() {
@@ -148,6 +163,7 @@ export async function renderScripts() {
 
   container.replaceChildren(...scripts.map(createScriptElement));
 
+  updateClearRecentScriptsButton();
   filterScripts();
 }
 
@@ -277,6 +293,49 @@ export async function deleteScript(element) {
   dialog.showModal();
 }
 
+function addRecentScript(id) {
+  if (!userPreferences.recentScripts) return;
+
+  const ids = state.recentScripts.filter(recentId => recentId !== id);
+
+  ids.unshift(id);
+  state.recentScripts = ids.slice(0, LIMITS.MAX_RECENT_SCRIPTS);
+
+  updateClearRecentScriptsButton();
+}
+
+export function clearRecentScripts() {
+  if (!state.recentScripts.length)
+    return;
+
+  const dialog = document.createElement('smb-alert-dialog');
+
+  dialog.title = 'Clear recent history?';
+  dialog.message = 'The history of recently copied scripts will be cleared. This action cannot be undone.';
+
+  dialog.addResponses([
+    { id: 'cancel', label: 'Cancel', appearance: 'default' },
+    { id: 'clear', label: 'Clear history', appearance: 'destructive' }
+  ]);
+
+  dialog.addEventListener('response', e => {
+    if (e.detail.response !== 'clear')
+      return;
+
+    state.recentScripts = [];
+
+    updateClearRecentScriptsButton();
+    filterScripts();
+
+    const toast = document.createElement('smb-toast');
+
+    toast.message = 'Recent history cleared';
+    toast.show('settings-dialog-toast');
+  }, { once: true });
+
+  dialog.showModal();
+}
+
 export async function copyScript(target) {
   const id = Number(target?.dataset?.target);
   if (Number.isNaN(id)) return;
@@ -286,6 +345,7 @@ export async function copyScript(target) {
     if (!script) return;
 
     await navigator.clipboard.writeText(applyVariables(script.content));
+    addRecentScript(id);
 
     const message = `Copied to clipboard`;
     const toast = document.createElement('smb-toast');
@@ -300,9 +360,11 @@ export async function copyScript(target) {
 function scriptMatchesLabel(script) {
   return selectedLabel === 'favorites'
     ? script.dataset.favorite === 'true'
-    : PSEUDO_LABELS.includes(selectedLabel)
-      ? true
-      : script.dataset.labels.split(' ').includes(String(selectedLabel));
+    : selectedLabel === 'recent'
+      ? state.recentScripts.includes(Number(script.dataset.target))
+      : PSEUDO_LABELS.includes(selectedLabel)
+        ? true
+        : script.dataset.labels.split(' ').includes(String(selectedLabel));
 }
 
 export function filterScripts() {
@@ -313,10 +375,18 @@ export function filterScripts() {
 
   updateSelectedLabelItem();
 
+  const recentOrder = selectedLabel === 'recent'
+    ? new Map(state.recentScripts.map((id, index) => [id, index]))
+    : null;
+
   let labelScriptsCount = 0;
   let visibleScriptsCount = 0;
 
   scriptItems.forEach(script => {
+    script.style.order = recentOrder
+      ? recentOrder.get(Number(script.dataset.target)) ?? recentOrder.size
+      : '';
+
     if (scriptMatchesLabel(script))
       labelScriptsCount++;
   });
@@ -341,8 +411,12 @@ export function filterScripts() {
 
     if (scriptItems.length === 0)
       page = 'no-scripts';
+    else if (selectedLabel === 'recent' && !userPreferences.recentScripts && !query)
+      page = 'recent-disabled';
     else if (selectedLabel === 'favorites' && labelScriptsCount === 0 && !query)
       page = 'no-favorites';
+    else if (selectedLabel === 'recent' && labelScriptsCount === 0 && !query)
+      page = 'no-recent';
     else if (labelScriptsCount === 0 && !searchAll)
       page = 'empty-label';
     else if (visibleScriptsCount === 0)

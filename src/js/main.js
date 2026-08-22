@@ -45,6 +45,7 @@ import {
   setHighContrast,
   setTheme,
   setLargeText,
+  setRecentScripts,
   setViewMode,
   toggleLabelsSidebar,
   toggleScratchpadSidebar,
@@ -59,6 +60,7 @@ import {
 
 import {
   addScript,
+  clearRecentScripts,
   copyScript,
   deleteScript,
   editScript,
@@ -118,6 +120,7 @@ const actions = {
     setBackupReminder,
     setHighContrast,
     setLargeText,
+    setRecentScripts,
     setTheme,
     syncFormControlState,
     toggleScriptLabel,
@@ -128,6 +131,7 @@ const actions = {
     addScript,
     addVariable,
     clearField,
+    clearRecentScripts,
     clearScratchpad,
     closeDialog: (target) => closeDialog(target?.dataset?.target ?? target),
     copyScratchpad,
@@ -186,6 +190,7 @@ async function init() {
   setBackupReminder(userPreferences.backupReminder);
   setHighContrast(userPreferences.highContrast);
   setLargeText(userPreferences.largeText);
+  setRecentScripts(userPreferences.recentScripts);
   setTheme(userPreferences.theme);
   setViewMode(userPreferences.viewMode);
 
@@ -224,6 +229,7 @@ function bindEvents() {
   document.addEventListener('keydown', (e) => handleShortcut(e, actions, KEYBOARD_SHORTCUTS));
 
   document.addEventListener('label:changed', renderScripts);
+  document.addEventListener('recentScripts:changed', filterScripts);
 
   ['data:changed', 'backup:completed'].forEach((event) => {
     document.addEventListener(event, () => {

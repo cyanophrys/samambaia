@@ -207,6 +207,7 @@ body {
   justify-content: center;
   grid-template-columns: minmax(0, 700px);
   gap: var(--spacing-xl);
+  reading-flow: grid-order;
   scroll-timeline-name: --scripts-scroll-timeline;
   scroll-timeline-axis: block;
 
