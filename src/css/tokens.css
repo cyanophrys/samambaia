@@ -33,6 +33,7 @@
 
   --background-color: light-dark(white, #27272a);
   --border-color: light-dark(rgb(0 0 0 / 18%), rgb(255 255 255 / 18%));
+  --border-hc-color: transparent;
   --dark-border-color: light-dark(rgb(0 0 0 / 30%), rgb(0 0 0 / 45%));
   --destructive-bg-color: light-dark(
     oklch(from var(--destructive-color) 0.85 0.06 h),
@@ -44,7 +45,9 @@
     oklch(from var(--destructive-color) 0.76 0.12 h)
   );
   --dialog-color: light-dark(#f6f6f7, #27272a);
+  --focus-outline-color: var(--accent-color);
   --layout-color: light-dark(#f4f4f5, #18181b);
+  --scrollbar-color: color-mix(in srgb, currentColor 30%, transparent) transparent;
   --text-color: light-dark(black, rgb(255 255 255 / 90%));
 
   &[data-accent-color="blue"] { --accent-color: var(--accent-blue); }
@@ -58,6 +61,23 @@
   &[data-accent-color="slate"] { --accent-color: var(--accent-slate); }
   &[data-accent-color="teal"] { --accent-color: var(--accent-teal); }
   &[data-accent-color="yellow"] { --accent-color: var(--accent-yellow); }
+
+  &[data-high-contrast="true"] {
+    --disabled-opacity: 0.65;
+    --dimmed-opacity: 0.85;
+
+    --background-color: light-dark(#fff, #222);
+    --border-color: var(--border-hc-color);
+    --border-hc-color: color-mix(in srgb, currentColor 45%, transparent);
+    --dark-border-color: var(--border-hc-color);
+    --destructive-fg-color: var(--text-color);
+    --dialog-color: var(--background-color);
+    --focus-outline-color: currentColor;
+    --layout-color: light-dark(#f5f5f5, #0d0d0d);
+    --placeholder-color: color-mix(in srgb, currentColor 60%, transparent);
+    --scrollbar-color: color-mix(in srgb, currentColor 60%, transparent) transparent;
+    --text-color: light-dark(black, white);
+  }
 
   &[data-theme="dark"] {
     color-scheme: dark;
