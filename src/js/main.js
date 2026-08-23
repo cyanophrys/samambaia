@@ -177,6 +177,9 @@ const actions = {
 
 async function init() {
   const pendingToast = sessionStorage.getItem('pendingToast');
+  const manifest = await getManifestInfo();
+
+  document.title = manifest.name;
 
   await initDB();
   await renderScripts();
