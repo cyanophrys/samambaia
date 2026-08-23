@@ -367,6 +367,37 @@ function scriptMatchesLabel(script) {
         : script.dataset.labels.split(' ').includes(String(selectedLabel));
 }
 
+export function highlightQuery(roots, query) {
+  const name = 'query';
+  let highlight = CSS.highlights.get(name);
+
+  if (!highlight) {
+    highlight = new Highlight();
+    CSS.highlights.set(name, highlight);
+  }
+
+  highlight.clear();
+  if (!query) return;
+
+  for (const root of roots) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    let node;
+
+    while ((node = walker.nextNode())) {
+      const text = node.textContent.toLowerCase();
+      let index = text.indexOf(query);
+
+      while (index !== -1) {
+        const range = new Range();
+        range.setStart(node, index);
+        range.setEnd(node, index + query.length);
+        highlight.add(range);
+        index = text.indexOf(query, index + query.length);
+      }
+    }
+  }
+}
+
 export function filterScripts() {
   const searchInput = document.getElementById('scripts-search-input');
   const stack = document.getElementById('scripts-view-stack');
@@ -405,6 +436,11 @@ export function filterScripts() {
     if (isVisible)
       visibleScriptsCount++;
   });
+
+  const highlightTargets = document.querySelectorAll(
+    '.script-item:not([hidden]) :is(h4, .content, .notes)'
+  );
+  highlightQuery(highlightTargets, query.length >= 2 ? query : '');
 
   if (stack) {
     let page = 'scripts';
