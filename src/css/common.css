@@ -136,6 +136,11 @@ a {
   > *:only-child {
     flex: 1;
   }
+
+  &:has(.empty-state) {
+    display: grid;
+    place-items: center;
+  }
 }
 
 :where(.section) {
@@ -178,6 +183,50 @@ a {
     }
     > :nth-child(3) {
       justify-self: end;
+    }
+  }
+}
+
+.empty-state {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: var(--spacing-lg);
+  user-select: none;
+
+  > svg,
+  > span {
+    opacity: var(--dimmed-opacity);
+  }
+
+  > svg {
+    width: 128px;
+    height: 128px;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+  }
+
+  &.compact {
+    padding: var(--spacing-md);
+
+    > svg {
+      width: 96px;
+      height: 96px;
+      margin-bottom: 12px;
+    }
+
+    > h1 {
+      font-size: clamp(1.1em, 3vw, 1.5em);
+    }
+
+    > div {
+      margin-top: var(--spacing-md);
     }
   }
 }
