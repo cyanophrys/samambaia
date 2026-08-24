@@ -1263,6 +1263,10 @@ svg {
   flex-direction: column;
   gap: var(--spacing-xs);
 
+  &.compact {
+    gap: var(--spacing-sm);
+  }
+
   .label-item {
     display: flex;
     align-items: center;
@@ -1326,6 +1330,13 @@ svg {
     &[data-color="red"]      { --label-color: var(--palette-red); }
     &[data-color="teal"]     { --label-color: var(--palette-teal); }
     &[data-color="yellow"]   { --label-color: var(--palette-yellow); }
+
+    &.compact {
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+    }
 
     [aria-haspopup] {
       margin-inline-start: auto;
