@@ -88,6 +88,22 @@ body {
   }
 }
 
+#collapsed-labels {
+  display: none;
+  opacity: 0;
+  transition: opacity var(--transition-medium),
+              display var(--transition-medium) allow-discrete;
+
+  #layout:has(#labels-sidebar[data-collapsed]) & {
+    display: flex;
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+}
+
 #main-content {
   flex: 1;
 
