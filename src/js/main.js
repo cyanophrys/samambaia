@@ -123,6 +123,10 @@ import {
   bindTooltipEvents,
 } from './tooltip.js';
 
+import {
+  applyTranslations,
+} from './i18n.js';
+
 const actions = {
   change: {
     setAccentColor,
@@ -191,6 +195,9 @@ async function init() {
   const manifest = await getManifestInfo();
 
   document.title = manifest.name;
+  document.documentElement.lang = chrome.i18n.getUILanguage();
+
+  applyTranslations();
 
   await initDB();
   await renderScripts();

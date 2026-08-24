@@ -1,9 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "samambaia",
+  "name": "__MSG_extName__",
   "version": "1.0.0",
   "author": "Raul Sousa",
-  "description": "Um simples gerenciador de scripts.",
+  "description": "__MSG_extDesc__",
+  "default_locale": "en",
   "homepage_url": "https://github.com/cyanophrys/samambaia",
   "action": {},
   "background": {
