@@ -128,6 +128,11 @@ a {
   overflow-x: hidden;
   overflow-y: auto;
 
+  &.grid {
+    display: grid;
+    align-content: start;
+  }
+
   > *:only-child {
     flex: 1;
   }
