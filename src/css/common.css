@@ -202,6 +202,13 @@ a {
   }
 }
 
+:where(.label) {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+}
+
 .empty-state {
   display: grid;
   place-items: center;
@@ -854,6 +861,75 @@ a {
 
     :root[data-high-contrast="true"] &::after {
       background-color: color-mix(in srgb, var(--accent-color) 50%, black);
+    }
+  }
+}
+
+.checkbox {
+  appearance: none;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background-color: transparent;
+  color: inherit;
+  border: 2px solid color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: var(--radius-sm);
+  transition:
+    border-color var(--transition-medium),
+    background-color var(--transition-medium);
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 17px;
+    height: 17px;
+    background-color: #fff;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='white'%3E%3Cpath d='M382-200 113-469l97-97 172 173 369-369 97 96-466 466Z'/%3E%3C/svg%3E");
+    mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    transform: scale(0);
+    transition: transform var(--transition-medium);
+  }
+
+  &:hover {
+    border-color: color-mix(in srgb, currentColor 60%, transparent);
+  }
+
+  &:active {
+    border-color: color-mix(in srgb, currentColor 80%, transparent);
+  }
+
+  &:checked {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+
+    &::after {
+      transform: scale(1);
+    }
+
+    &:hover {
+      background-color: color-mix(in oklab, var(--accent-color) 85%, white);
+      border-color: color-mix(in oklab, var(--accent-color) 85%, white);
+    }
+
+    &:active {
+      background-color: color-mix(in oklab, var(--accent-color) 70%, white);
+      border-color: color-mix(in oklab, var(--accent-color) 70%, white);
+    }
+  }
+
+  :root[data-high-contrast="true"] & {
+    border-color: var(--border-hc-color);
+
+    &:hover {
+      border-color: color-mix(in srgb, currentColor 70%, transparent);
     }
   }
 }
