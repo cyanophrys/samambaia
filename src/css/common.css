@@ -1343,8 +1343,15 @@ svg {
       padding: 0;
     }
 
-    [aria-haspopup] {
+    [aria-haspopup],
+    > .count {
       margin-inline-start: auto;
+    }
+
+    > .count {
+      font-size: var(--font-size-xs);
+      opacity: var(--dimmed-opacity);
+      align-self: center;
     }
 
     .menu .unpin-icon {
