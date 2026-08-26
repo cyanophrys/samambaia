@@ -197,6 +197,29 @@ export function saveScriptData(script) {
   });
 }
 
+export function saveScriptsOrderData(orderedIds) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(SCRIPTS_STORE, 'readwrite');
+    const store = transaction.objectStore(SCRIPTS_STORE);
+
+    transaction.oncomplete = () => {
+      notifyDataChanged();
+      resolve();
+    };
+
+    transaction.onerror = () => reject(transaction.error);
+
+    orderedIds.forEach((id, order) => {
+      const request = store.get(Number(id));
+
+      request.onsuccess = () => {
+        const script = request.result;
+        if (script) store.put({ ...script, order });
+      };
+    });
+  });
+}
+
 export function deleteScriptData(id) {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction(SCRIPTS_STORE, 'readwrite');
