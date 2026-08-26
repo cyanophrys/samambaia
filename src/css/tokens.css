@@ -58,6 +58,7 @@
     oklch(from var(--destructive-color) 0.76 0.12 h)
   );
   --dialog-color: light-dark(#f6f6f7, #27272a);
+  --dragging-outline-color: var(--focus-outline-color);
   --focus-outline-color: var(--accent-color);
   --layout-color: light-dark(#f4f4f5, #18181b);
   --popover-color: light-dark(#fafafa, #27272a);
