@@ -234,6 +234,12 @@ body {
   &[data-view="list"] {
     grid-template-columns: minmax(0, 700px);
   }
+
+  &[data-reorder-locked] {
+    [data-drag-handle] {
+      pointer-events: none;
+    }
+  }
 }
 
 #scroll-top-button {

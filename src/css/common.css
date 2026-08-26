@@ -1156,7 +1156,23 @@ svg {
   }
 
   .header {
+    grid-template-columns: auto 1fr auto;
     padding: 0;
+
+    [data-drag-handle] {
+      display: grid;
+      place-items: center;
+      opacity: var(--dimmed-opacity);
+      cursor: grab;
+    }
+
+    h4 {
+      justify-self: start;
+    }
+
+    .button-group {
+      justify-self: end;
+    }
   }
 
   h4,
@@ -1259,6 +1275,20 @@ svg {
 
     .favorite-remove-icon {
       display: block;
+    }
+  }
+
+  &[data-dragging="true"] {
+    outline-color: var(--dragging-outline-color);
+    outline-style: dashed;
+    cursor: grabbing;
+
+    > * {
+      pointer-events: none;
+    }
+
+    button:not(.drag-handle) {
+      opacity: var(--disabled-opacity);
     }
   }
 }
