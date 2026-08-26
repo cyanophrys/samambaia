@@ -3,6 +3,7 @@ import {
   getAllScripts,
   getScript,
   saveScriptData,
+  saveScriptsOrderData,
 } from './db.js';
 
 import {
@@ -33,12 +34,20 @@ import {
   state,
 } from './state.js';
 
+import {
+  makeSortable,
+} from './dnd.js';
+
 let selectedLabel = 'all';
 
 export function getScriptColor(color) {
   return PALETTE_COLORS.includes(color)
     ? color
     : 'none';
+}
+
+function getVisibleScripts() {
+  return [...document.querySelectorAll('.script-item:not([hidden])')];
 }
 
 function updateSelectedLabelItem() {
@@ -64,6 +73,15 @@ function updateScriptsCount(scriptCount) {
 
   if (scriptsCount)
     scriptsCount.textContent = scriptCount;
+}
+
+function updateDragHandles() {
+  const isRecent = selectedLabel === 'recent';
+  const dragHandles = '[data-drag-handle]';
+
+  getVisibleScripts().forEach(item => {
+    item.querySelector(dragHandles)?.toggleAttribute('hidden', isRecent);
+  });
 }
 
 export function scrollScriptsView() {
@@ -166,9 +184,20 @@ export function createScriptElement(script) {
 
 export async function renderScripts() {
   const scripts = await getAllScripts();
+
+  scripts.sort((a, b) =>
+    (a.order ?? Infinity) - (b.order ?? Infinity) || a.id - b.id
+  );
+
   const container = document.getElementById('custom-scripts');
 
-  container.replaceChildren(...scripts.map(createScriptElement));
+  container.replaceChildren(
+    ...scripts.map((script, index) => {
+      const item = createScriptElement(script);
+      item.dataset.index = index;
+      return item;
+    })
+  );
 
   updateClearRecentScriptsButton();
   updateScriptsCount(scripts.length);
@@ -243,6 +272,9 @@ export async function saveScript() {
     return;
   }
 
+  const script = id ? await getScript(Number(id)) : null;
+  const order = script?.order;
+
   const scriptData = {
     id,
     name,
@@ -250,6 +282,7 @@ export async function saveScript() {
     content,
     notes,
     color,
+    order,
   };
 
   await saveScriptData(scriptData);
@@ -446,6 +479,8 @@ export function filterScripts() {
       visibleScriptsCount++;
   });
 
+  updateDragHandles();
+
   const highlightTargets = document.querySelectorAll(
     '.script-item:not([hidden]) :is(h4, .content, .notes)'
   );
@@ -538,4 +573,48 @@ export async function toggleFavoriteScript(target) {
   });
 
   toast.show('main-toast');
+}
+
+export function initScriptsSortable() {
+  const container = document.getElementById('custom-scripts');
+  if (!container) return;
+
+  const canDrag = () => selectedLabel !== 'recent';
+
+  makeSortable(container, {
+    itemSelector: '.script-item:not([hidden])',
+    handleSelector: '[data-drag-handle]',
+    scrollContainer: container,
+    canDrag,
+  });
+}
+
+export async function saveScriptsOrder() {
+  try {
+    const visibleElements = getVisibleScripts();
+    const visibleIdsInNewOrder = visibleElements.map(item => Number(item.dataset.target));
+    const visibleIdSet = new Set(visibleIdsInNewOrder);
+
+    const allScripts = await getAllScripts();
+
+    allScripts.sort((a, b) =>
+      (a.order ?? Infinity) - (b.order ?? Infinity) || a.id - b.id
+    );
+
+    const newOrderedIds = [];
+    let visibleIndex = 0;
+
+    for (const script of allScripts) {
+      if (visibleIdSet.has(script.id)) {
+        newOrderedIds.push(visibleIdsInNewOrder[visibleIndex]);
+        visibleIndex++;
+      } else {
+        newOrderedIds.push(script.id);
+      }
+    }
+
+    await saveScriptsOrderData(newOrderedIds);
+  } catch (error) {
+    console.error(error);
+  }
 }
