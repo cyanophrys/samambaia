@@ -66,8 +66,10 @@ import {
   editScript,
   filterByLabel,
   filterScripts,
+  initScriptsSortable,
   renderScripts,
   saveScript,
+  saveScriptsOrder,
   scrollScriptsView,
   searchAllScripts,
   toggleFavoriteScript,
@@ -186,6 +188,7 @@ async function init() {
   await renderLabels();
   await renderVariables();
   await initScratchpad();
+  initScriptsSortable();
 
   applyShortcutDisplays();
 
@@ -243,6 +246,10 @@ function bindEvents() {
 
   document.addEventListener('backupReminder:changed', () => {
     toggleBackupBanner(state.hasChanges);
+  });
+
+  document.addEventListener('sort:changed', () => {
+    saveScriptsOrder();
   });
 }
 
