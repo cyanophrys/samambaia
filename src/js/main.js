@@ -143,6 +143,7 @@ const actions = {
     openAboutDialog,
     openDialog: (target) => openDialog(target?.dataset?.target ?? target),
     openLabelsSelectionDialog,
+    openSettingsDialog: (target) => openSettingsDialog(target?.dataset?.page),
     restoreBackup,
     scrollScriptsView,
     searchAllScripts,
@@ -234,6 +235,14 @@ function bindEvents() {
   document.addEventListener('backupReminder:changed', () => {
     toggleBackupBanner(state.hasChanges);
   });
+}
+
+function openSettingsDialog(page = 'appearance') {
+  const dialog = document.getElementById('settings-dialog');
+  const stack = dialog.querySelector('smb-stack');
+
+  stack.show(page);
+  openDialog(dialog);
 }
 
 async function openAboutDialog() {
