@@ -67,12 +67,15 @@ import {
   filterByLabel,
   filterScripts,
   initScriptsSortable,
+  moveScriptNext,
+  moveScriptPrevious,
   renderScripts,
   saveScript,
   saveScriptsOrder,
   scrollScriptsView,
   searchAllScripts,
   toggleFavoriteScript,
+  updateScriptMoveButtons,
 } from './scripts.js';
 
 import {
@@ -146,6 +149,8 @@ const actions = {
     editVariable,
     exportBackup,
     filterByLabel: (target) => filterByLabel(target),
+    moveScriptNext,
+    moveScriptPrevious,
     openAboutDialog,
     openDialog: (target) => openDialog(target?.dataset?.target ?? target),
     openLabelsSelectionDialog,
@@ -249,6 +254,7 @@ function bindEvents() {
   });
 
   document.addEventListener('sort:changed', () => {
+    updateScriptMoveButtons();
     saveScriptsOrder();
   });
 }
