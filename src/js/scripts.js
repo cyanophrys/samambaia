@@ -75,6 +75,22 @@ function updateScriptsCount(scriptCount) {
     scriptsCount.textContent = scriptCount;
 }
 
+export function updateScriptMoveButtons() {
+  const items = getVisibleScripts();
+  const isRecent = selectedLabel === 'recent';
+
+  items.forEach((item, index) => {
+    const previousButton = item.querySelector('[data-action="moveScriptPrevious"]');
+    const nextButton = item.querySelector('[data-action="moveScriptNext"]');
+
+    if (previousButton)
+      previousButton.disabled = isRecent || index === 0;
+
+    if (nextButton)
+      nextButton.disabled = isRecent || index === items.length - 1;
+  });
+}
+
 function updateDragHandles() {
   const isRecent = selectedLabel === 'recent';
   const dragHandles = '[data-drag-handle]';
@@ -506,6 +522,8 @@ export function filterScripts() {
 
     stack.show(page);
   }
+
+  updateScriptMoveButtons();
 }
 
 export function filterByLabel(target) {
@@ -587,6 +605,62 @@ export function initScriptsSortable() {
     scrollContainer: container,
     canDrag,
   });
+}
+
+export async function moveScriptPrevious(target) {
+  if (selectedLabel === 'recent') return;
+
+  const item = target?.closest('.script-item');
+  if (!item) return;
+
+  const items = getVisibleScripts();
+  const index = items.indexOf(item);
+
+  if (index <= 0) return;
+
+  const menu = item.querySelector('.menu');
+  const focused = document.activeElement;
+  const wasOpen = menu?.matches(':popover-open');
+
+  items[index - 1].before(item);
+  updateScriptMoveButtons();
+
+  if (wasOpen) {
+    menu.showPopover();
+
+    if (menu.contains(focused))
+      focused.focus();
+  }
+
+  await saveScriptsOrder(item.parentElement);
+}
+
+export async function moveScriptNext(target) {
+  if (selectedLabel === 'recent') return;
+
+  const item = target?.closest('.script-item');
+  if (!item) return;
+
+  const items = getVisibleScripts();
+  const index = items.indexOf(item);
+
+  if (index === -1 || index === items.length - 1) return;
+
+  const menu = item.querySelector('.menu');
+  const focused = document.activeElement;
+  const wasOpen = menu?.matches(':popover-open');
+
+  items[index + 1].after(item);
+  updateScriptMoveButtons();
+
+  if (wasOpen) {
+    menu.showPopover();
+
+    if (menu.contains(focused))
+      focused.focus();
+  }
+
+  await saveScriptsOrder(item.parentElement);
 }
 
 export async function saveScriptsOrder() {
