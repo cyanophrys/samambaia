@@ -1261,18 +1261,27 @@ a {
       > .pin-icon {
         display: block;
       }
-
-      .menu .pin-icon {
-        display: none;
-      }
-
-      .menu .unpin-icon {
-        display: block;
-      }
     }
   }
 
   .contents {
     display: contents;
+  }
+}
+
+.label-item,
+.variable-item {
+  .menu .unpin-icon {
+    display: none;
+  }
+
+  &[data-pinned="true"] {
+    .menu .pin-icon {
+      display: none;
+    }
+
+    .menu .unpin-icon {
+      display: block;
+    }
   }
 }

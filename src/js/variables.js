@@ -36,8 +36,10 @@ let cachedVariables = [];
 let debounceTimeout = null;
 
 export async function renderVariables() {
+  const pinnedContainer = document.getElementById('pinned-variables');
   const container = document.getElementById('custom-variables');
-  if (!container) return;
+
+  if (!pinnedContainer || !container) return;
 
   const stack = document.getElementById('variables-stack');
   const variables = await getAllVariables();
@@ -48,8 +50,17 @@ export async function renderVariables() {
     a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
   );
 
+  const pinned = variables.filter(variable => variable.pinned);
+  const unpinned = variables.filter(variable => !variable.pinned);
+
+  pinnedContainer.hidden = pinned.length === 0;
+
+  pinnedContainer.replaceChildren(
+    ...pinned.map(createVariableElement)
+  );
+
   container.replaceChildren(
-    ...variables.map(createVariableElement)
+    ...unpinned.map(createVariableElement)
   );
 
   stack?.show(
@@ -62,6 +73,7 @@ export function createVariableElement(variable) {
   const item = template.content.firstElementChild.cloneNode(true);
 
   item.dataset.target = variable.id;
+  item.dataset.pinned = variable.pinned ? 'true' : 'false';
 
   const input = item.querySelector('input');
   const label = item.querySelector('label');
@@ -69,6 +81,8 @@ export function createVariableElement(variable) {
   const menu = item.querySelector('.menu');
   const editButton = item.querySelector('[data-action="editVariable"]');
   const deleteButton = item.querySelector('[data-action="deleteVariable"]');
+  const pinButton = item.querySelector('[data-action="togglePinVariable"]');
+  const pinLabel = pinButton.querySelector('span');
 
   const inputId = `var-input-${variable.id}`;
   const menuId = `variable-menu-${variable.id}`;
@@ -88,6 +102,10 @@ export function createVariableElement(variable) {
   menu.id = menuId;
   menu.style.positionAnchor = anchorName;
   menu.setAttribute('aria-label', `Options for ${variable.name}`);
+
+  pinButton.setAttribute('popovertarget', menuId);
+  pinButton.dataset.target = variable.id;
+  pinLabel.textContent = variable.pinned ? 'Unpin' : 'Pin';
 
   editButton.setAttribute('popovertarget', menuId);
   editButton.dataset.target = variable.id;
@@ -259,4 +277,34 @@ export function applyVariables(content) {
   return content.replace(VARIABLE_TOKEN_PATTERN, (match, name) =>
     values.has(name) ? values.get(name) : match
   );
+}
+
+export async function togglePinVariable(target) {
+  const id = Number(target.dataset.target);
+  if (Number.isNaN(id)) return;
+
+  const variable = await getVariable(id);
+  if (!variable) return;
+
+  const isPinned = !variable.pinned;
+
+  await saveVariableData({ ...variable, pinned: isPinned });
+  await renderVariables();
+
+  const message = isPinned
+    ? `Variable "${variable.name}" pinned`
+    : `Variable "${variable.name}" unpinned`;
+  const toast = document.createElement('smb-toast');
+
+  toast.message = message;
+  toast.addAction('Undo', async () => {
+    try {
+      await saveVariableData({ ...variable, pinned: !isPinned });
+      await renderVariables();
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  toast.show('main-toast');
 }

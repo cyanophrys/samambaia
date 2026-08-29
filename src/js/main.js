@@ -83,6 +83,7 @@ import {
   handleVariableValueInput,
   renderVariables,
   saveVariable,
+  togglePinVariable,
 } from './variables.js';
 
 import {
@@ -121,6 +122,7 @@ const actions = {
     toggleFavoriteScript,
     toggleLabelsSidebar,
     togglePinLabel,
+    togglePinVariable,
     toggleVariablesSidebar,
     wipeData,
   },
