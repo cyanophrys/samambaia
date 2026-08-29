@@ -1467,3 +1467,46 @@ svg {
     }
   }
 }
+
+.tooltip {
+  display: none;
+  position: fixed;
+  position-anchor: --tooltip-anchor;
+  inset-block-start: anchor(bottom);
+  inset-inline-start: anchor(center);
+  position-try-fallbacks:
+    --position-top,
+    --position-bottom-right,
+    --position-top-right,
+    --position-left,
+    --position-top-left,
+    --position-right;
+  position-visibility: anchors-visible;
+  margin: var(--spacing-2xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: var(--popover-color);
+  color: inherit;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-max);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
+  font-size: 0.95em;
+  line-height: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  user-select: none;
+  opacity: 0;
+  transition:
+    opacity var(--transition-fast),
+    overlay var(--transition-fast) allow-discrete,
+    display var(--transition-fast) allow-discrete;
+
+  &:popover-open {
+    display: flex;
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+}

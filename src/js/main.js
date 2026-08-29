@@ -119,6 +119,10 @@ import {
   KEYBOARD_SHORTCUTS,
 } from './shortcuts.js';
 
+import {
+  bindTooltipEvents,
+} from './tooltip.js';
+
 const actions = {
   change: {
     setAccentColor,
@@ -238,6 +242,8 @@ function bindEvents() {
   document.addEventListener('input', (e) => handleAction(e, actions));
   document.addEventListener('submit', (e) => handleAction(e, actions));
   document.addEventListener('keydown', (e) => handleShortcut(e, actions, KEYBOARD_SHORTCUTS));
+
+  bindTooltipEvents();
 
   document.addEventListener('label:changed', renderScripts);
   document.addEventListener('recentScripts:changed', filterScripts);
