@@ -14,6 +14,35 @@
   font-display: swap;
 }
 
+@position-try --position-top {
+  inset-block-end: anchor(top);
+}
+
+@position-try --position-top-left {
+  inset-block-start: auto;
+  inset-block-end: anchor(top);
+}
+
+@position-try --position-top-right {
+  inset-block-start: auto;
+  inset-block-end: anchor(top);
+  inset-inline-start: auto;
+  inset-inline-end: anchor(right);
+}
+
+@position-try --position-right {
+  inset-inline-start: anchor(right);
+}
+
+@position-try --position-left {
+  inset-inline-end: anchor(left);
+}
+
+@position-try --position-bottom-right {
+  inset-inline-start: auto;
+  inset-inline-end: anchor(right);
+}
+
 :disabled {
   opacity: var(--disabled-opacity);
   pointer-events: none;
