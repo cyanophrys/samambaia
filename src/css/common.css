@@ -1121,6 +1121,23 @@ svg {
     width: 24px;
     height: 24px;
   }
+
+  [data-shortcut-display] {
+    display: flex;
+    align-items: center;
+    padding-inline-start: var(--spacing-xs);
+    margin-inline-start: auto;
+    opacity: var(--dimmed-opacity);
+
+    > kbd {
+      font: inherit;
+    }
+
+    > kbd + kbd::before {
+      content: "+";
+      margin-inline: var(--spacing-2xs);
+    }
+  }
 }
 
 .toast-container {
