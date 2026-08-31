@@ -115,6 +115,7 @@ import {
 } from './backup.js';
 
 import {
+  applyAriaKeyshortcuts,
   applyShortcutDisplays,
   KEYBOARD_SHORTCUTS,
 } from './shortcuts.js';
@@ -208,6 +209,7 @@ async function init() {
   initScriptsSortable();
 
   applyShortcutDisplays();
+  applyAriaKeyshortcuts();
 
   setAccentColor(userPreferences.accentColor);
   setBackupReminder(userPreferences.backupReminder);

@@ -156,3 +156,36 @@ export function applyShortcutDisplays() {
     );
   });
 }
+
+export function applyAriaKeyshortcuts() {
+  for (const shortcut of KEYBOARD_SHORTCUTS) {
+    const modifiers = [];
+
+    if (shortcut.ctrl) modifiers.push('Control');
+    if (shortcut.alt) modifiers.push('Alt');
+    if (shortcut.shift) modifiers.push('Shift');
+    if (shortcut.meta) modifiers.push('Meta');
+
+    let key = shortcut.key;
+
+    if (key === '?') {
+      if (!shortcut.shift) modifiers.push('Shift');
+      key = '/';
+    }
+
+    const ariaShortcut = [
+      ...modifiers,
+      key.length === 1 ? key.toUpperCase() : key,
+    ].join('+');
+
+    const elements = shortcut.target
+      ? [document.getElementById(shortcut.target)].filter(Boolean)
+      : document.querySelectorAll(
+          `[data-action="${CSS.escape(shortcut.action)}"]`
+        );
+
+    elements.forEach((element) => {
+      element.setAttribute('aria-keyshortcuts', ariaShortcut);
+    });
+  }
+}
