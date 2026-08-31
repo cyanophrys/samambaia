@@ -125,6 +125,10 @@ import {
 } from './tooltip.js';
 
 import {
+  bindMenuBehaviors,
+} from './menu.js';
+
+import {
   applyTranslations,
   t,
 } from './i18n.js';
@@ -254,6 +258,7 @@ function bindEvents() {
   document.addEventListener('keydown', (e) => handleShortcut(e, actions, KEYBOARD_SHORTCUTS));
 
   bindTooltipEvents();
+  bindMenuBehaviors();
 
   document.addEventListener('label:changed', renderScripts);
   document.addEventListener('recentScripts:changed', filterScripts);
