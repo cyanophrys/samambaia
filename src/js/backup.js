@@ -16,6 +16,7 @@
  */
 
 import {
+  hasStoredData,
   getAllLabels,
   getAllScripts,
   getAllVariables,
@@ -28,6 +29,7 @@ import {
 
 import {
   state,
+  resetState,
 } from './state.js';
 
 import {
@@ -54,6 +56,26 @@ export function warnBeforeUnload(event) {
     event.preventDefault();
     event.returnValue = '';
   }
+}
+
+function confirmRestore() {
+  const dialog = document.createElement('smb-alert-dialog');
+
+  dialog.title = 'Replace existing data?';
+  dialog.message = 'This will replace your existing data. This action cannot be undone.';
+
+  dialog.addResponses([
+    { id: 'cancel', label: 'Cancel', appearance: 'default' },
+    { id: 'restore', label: 'Replace data', appearance: 'destructive' },
+  ]);
+
+  return new Promise((resolve) => {
+    dialog.addEventListener('response', (event) => {
+      resolve(event.detail.response === 'restore');
+    }, { once: true });
+
+    dialog.showModal();
+  });
 }
 
 function formatTimestamp(date) {
@@ -236,6 +258,13 @@ export async function restoreBackup() {
     if (!validateBackup(data))
       throw new Error('Invalid file format');
 
+    if (await hasStoredData()) {
+      const confirmed = await confirmRestore();
+
+      if (!confirmed)
+        return;
+    }
+
     await restoreBackupFromFile({
       labels: data.labels,
       scripts: data.scripts,
@@ -245,7 +274,7 @@ export async function restoreBackup() {
     if (data.preferences)
       Object.assign(userPreferences, data.preferences);
 
-    state.hasChanges = false;
+    resetState();
 
     sessionStorage.setItem('pendingToast', 'Restore completed');
     window.location.reload();
