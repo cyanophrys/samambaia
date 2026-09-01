@@ -2,6 +2,10 @@
   "extName": { "message": "samambaia" },
   "extDesc": { "message": "A simple script manager." },
 
+  "add": {
+    "message": "Add",
+    "description": "Action used to add"
+  },
   "cancel": {
     "message": "Cancel",
     "description": "Action used to cancel"
@@ -15,6 +19,7 @@
     "message": "Clear",
     "description": "Action used to clear content"
   },
+  "copiedToClipboard": { "message": "Copied to clipboard" },
   "close": {
     "message": "Close",
     "description": "Action used to close or dismissing an item"
@@ -25,9 +30,17 @@
     "description": "Action used to edit an item"
   },
   "editEllipsis": { "message": "Edit…" },
+  "pin": {
+    "message": "Pin",
+    "description": "Action used to pin an item to the top of a list"
+  },
   "undo": {
     "message": "Undo",
     "description": "Action used to revert a change"
+  },
+  "unpin": {
+    "message": "Unpin",
+    "description": "Action used to unpin an item"
   },
   "moreOptions": { "message": "More options" },
   "name": { "message": "Name" },
@@ -76,29 +89,76 @@
   "tryDifferentSearch": { "message": "Try a different search" },
   "tryDifferentSearchOrAll": { "message": "Try a different search or search all scripts" },
 
+  "addFavorite": { "message": "Add to favorites" },
   "addScript": { "message": "Add script" },
   "addScriptEllipsis": { "message": "Add script…" },
+  "deleteScript": { "message": "Delete script" },
+  "deleteScriptMessage": {
+    "message": "Are you sure you want to delete \"$1\"? This action cannot be undone."
+  },
+  "deleteScriptTitle": { "message": "Delete script?" },
+  "editScript": { "message": "Edit script" },
+  "recentHistoryCleared": { "message": "Recent history cleared" },
+  "removeFavorite": { "message": "Remove from favorites" },
+  "scriptAdded": { "message": "Script \"$1\" added" },
+  "scriptAddedToFavorites": { "message": "Script \"$1\" added to favorites" },
   "scriptColor": { "message": "Script color" },
   "scriptContent": { "message": "Content" },
   "scriptNotes": { "message": "Notes" },
+  "scriptDeleted": { "message": "Script \"$1\" deleted" },
+  "scriptEdited": { "message": "Script \"$1\" edited" },
+  "scriptMenuOptions": { "message": "Options for $1" },
+  "scriptRemovedFromFavorites": { "message": "Script \"$1\" removed from favorites" },
 
   "addLabel": { "message": "Add label" },
   "addLabelEllipsis": { "message": "Add label…" },
+  "availableLabels": { "message": "Available labels" },
+  "deleteLabel": { "message": "Delete label" },
+  "deleteLabelMessage": {
+    "message": "Are you sure you want to delete the label \"$1\"? It will be removed from associated scripts."
+  },
+  "deleteLabelTitle": { "message": "Delete label?" },
+  "editLabel": { "message": "Edit label" },
   "emptyLabel": { "message": "Empty label" },
   "emptyLabelDescription": { "message": "This label doesn't have any scripts yet" },
-  "noLabelsAvailable": { "message": "No labels available" },
-  "noLabelsSelected": { "message": "No labels selected" },
+  "labelAdded": { "message": "Label \"$1\" added" },
+  "labelColor": { "message": "Label color" },
+  "labelDeleted": { "message": "Label \"$1\" deleted" },
+  "labelEdited": { "message": "Label \"$1\" edited" },
+  "labelMenuOptions": { "message": "Options for $1" },
+  "labelNameDuplicate": { "message": "A label with this name already exists" },
+  "labelNameTooLong": { "message": "Label name cannot exceed $1 characters" },
+  "labelPinned": { "message": "Label \"$1\" pinned" },
   "labels": { "message": "Labels" },
   "labelsAppearHere": { "message": "The labels you add will appear here" },
-  "labelColor": { "message": "Label color" },
   "labelsList": { "message": "Labels list" },
-  "availableLabels": { "message": "Available labels" },
+  "labelsSelectedCount": { "message": "$1 labels selected" },
+  "labelUnpinned": { "message": "Label \"$1\" unpinned" },
+  "noLabelsAvailable": { "message": "No labels available" },
+  "noLabelsSelected": { "message": "No labels selected" },
+  "oneLabelSelected": { "message": "1 label selected" },
+  "selectLabels": { "message": "Select labels" },
   "selectedLabels": { "message": "Selected labels" },
 
   "addVariable": { "message": "Add variable" },
   "addVariableEllipsis": { "message": "Add variable…" },
   "createVariablesDescription": { "message": "Create variables to reuse in your scripts" },
+  "deleteVariable": { "message": "Delete variable" },
+  "deleteVariableMessage": {
+    "message": "Are you sure you want to delete the variable \"$1\"? Scripts using \"{{$1}}\" will no longer replace it."
+  },
+  "deleteVariableTitle": { "message": "Delete variable?" },
+  "editVariable": { "message": "Edit variable" },
   "noVariables": { "message": "No variables" },
+  "variableAdded": { "message": "Variable \"$1\" added" },
+  "variableDeleted": { "message": "Variable \"$1\" deleted" },
+  "variableDuplicate": { "message": "A variable with this name already exists" },
+  "variableEdited": { "message": "Variable \"$1\" edited" },
+  "variableMenuOptions": { "message": "Options for $1" },
+  "variableNameInvalid": { "message": "The name can only contain letters, numbers, \"_\" and \"-\"" },
+  "variableNameTooLong": { "message": "Variable name cannot exceed $1 characters" },
+  "variablePinned": { "message": "Variable \"$1\" pinned" },
+  "variableUnpinned": { "message": "Variable \"$1\" unpinned" },
   "variables": { "message": "Variables" },
 
   "backup": { "message": "Backup" },
@@ -107,11 +167,22 @@
     "description": "Verb indicating an action that exports a backup file"
   },
   "backUpEllipsis": { "message": "Back up…" },
+  "replaceData": { "message": "Replace data" },
+  "replaceExistingDataMessage": {
+    "message": "This will replace your existing data. This action cannot be undone."
+  },
+  "replaceExistingDataTitle": { "message": "Replace existing data?" },
   "restoreBackup": { "message": "Restore backup" },
   "restoreBackupEllipsis": { "message": "Restore backup…" },
   "unsavedChanges": { "message": "There are unsaved changes" },
+  "jsonFiles": { "message": "JSON Files" },
+  "backupCompleted": { "message": "Backup completed" },
+  "backupFailed": { "message": "Backup failed" },
+  "restoreCompleted": { "message": "Restore completed" },
+  "restoreFailed": { "message": "Restore failed. Check that the file is valid." },
 
   "scratchpad": { "message": "Scratchpad" },
+  "scratchpadCleared": { "message": "Scratchpad cleared" },
   "typeSomethingHere": { "message": "Type something here" },
 
   "settings": { "message": "Settings" },
@@ -135,14 +206,24 @@
   "backupReminder": { "message": "Backup reminder" },
   "backupReminderDescription": { "message": "Get a reminder to back up your data after making changes" },
 
+  "clearHistory": { "message": "Clear history" },
+  "clearRecentHistoryEllipsis": { "message": "Clear recent history…" },
+  "clearRecentHistoryMessage": {
+    "message": "This will remove all recently copied scripts from your history. This action cannot be undone."
+  },
+  "clearRecentHistoryTitle": { "message": "Clear recent history?" },
   "history": { "message": "History" },
   "recentScripts": { "message": "Recent scripts" },
   "recentScriptsDescription": { "message": "Show scripts that were recently copied" },
-  "clearRecentHistoryEllipsis": { "message": "Clear recent history…" },
 
+  "dataDeleted": { "message": "Data deleted" },
   "deleteData": { "message": "Delete data" },
   "deleteDataDescription": { "message": "Use the button below to permanently remove all local data." },
   "deleteAllDataEllipsis": { "message": "Delete all data…" },
+  "deleteAllDataTitle": { "message": "Delete all data?" },
+  "deleteAllDataMessage": { "message": "This will permanently remove all local data. This action cannot be undone." },
+  "errorDeletingData": { "message": "Error deleting data" },
+  "wipeConfirmationLabel": { "message": "I understand and want to continue" },
 
   "general": { "message": "General" },
   "keyboardShortcuts": { "message": "Keyboard shortcuts" },
@@ -157,6 +238,8 @@
   "toggleVariablesSidebar": { "message": "Toggle variables sidebar" },
 
   "addItem": { "message": "Add item" },
+  "gridView": { "message": "Grid view" },
+  "listView": { "message": "List view" },
 
   "about": { "message": "About" },
   "credits": { "message": "Credits" },

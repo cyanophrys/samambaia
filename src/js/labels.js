@@ -34,6 +34,11 @@ import {
   LIMITS,
 } from './config.js';
 
+import {
+  applyTranslations,
+  t,
+} from './i18n.js';
+
 let cachedLabels = [];
 let selectedScriptLabels = [];
 
@@ -62,6 +67,8 @@ export function createLabelElement(label) {
   const template = document.querySelector('#label-item-template');
   const item = template.content.firstElementChild.cloneNode(true);
 
+  applyTranslations(item);
+
   item.dataset.target = label.id;
   item.setAttribute('aria-label', label.name);
   item.dataset.pinned = label.pinned ? 'true' : 'false';
@@ -85,12 +92,12 @@ export function createLabelElement(label) {
 
   menu.id = actionsId;
   menu.style.positionAnchor = anchorName;
-  menu.setAttribute('aria-label', `Options for ${label.name}`);
+  menu.setAttribute('aria-label', t('labelMenuOptions', label.name));
 
   pinButton.setAttribute('popovertarget', actionsId);
   pinButton.setAttribute('popovertargetaction', 'hide');
   pinButton.dataset.target = label.id;
-  pinLabel.textContent = label.pinned ? 'Unpin' : 'Pin';
+  pinLabel.textContent = label.pinned ? t('unpin') : t('pin');
 
   editButton.setAttribute('popovertarget', actionsId);
   editButton.dataset.target = label.id;
@@ -108,9 +115,9 @@ export function addLabel() {
 
   form.reset();
 
-  dialog.title = 'Add label';
+  dialog.title = t('addLabel');
   dialog.subtitle = '';
-  if (saveButton) saveButton.textContent = 'Add';
+  if (saveButton) saveButton.textContent = t('add');
 
   openDialog('label-dialog');
 }
@@ -134,9 +141,9 @@ export async function editLabel(element) {
   for (const input of colorInput)
     input.checked = input.value === savedColor;
 
-  dialog.title = 'Edit label';
+  dialog.title = t('editLabel');
   dialog.subtitle = label.name;
-  if (saveButton) saveButton.textContent = 'Edit';
+  if (saveButton) saveButton.textContent = t('edit');
 
   openDialog('label-dialog');
 }
@@ -151,12 +158,12 @@ export async function deleteLabel(element) {
 
   const dialog = document.createElement('smb-alert-dialog');
 
-  dialog.title = 'Delete label?';
-  dialog.message = `Are you sure you want to delete the label "${label.name}"? It will be removed from associated scripts.`;
+  dialog.title = t('deleteLabelTitle');
+  dialog.message = t('deleteLabelMessage', label.name);
 
   dialog.addResponses([
-    { id: 'cancel', label: 'Cancel', appearance: 'default' },
-    { id: 'delete', label: 'Delete label', appearance: 'destructive' }
+    { id: 'cancel', label: t('cancel'), appearance: 'default' },
+    { id: 'delete', label: t('deleteLabel'), appearance: 'destructive' }
   ]);
 
   dialog.addEventListener('response', async (e) => {
@@ -181,7 +188,7 @@ export async function deleteLabel(element) {
 
       const toast = document.createElement('smb-toast');
 
-      toast.message = `Label "${label.name}" deleted`;
+      toast.message = t('labelDeleted', label.name);
       toast.show('main-toast');
 
       document.dispatchEvent(new CustomEvent('label:changed'));
@@ -207,7 +214,10 @@ export async function saveLabel() {
   if (name.length > LIMITS.MAX_LABEL_NAME_LENGTH) {
     const toast = document.createElement('smb-toast');
 
-    toast.message = `Label name cannot exceed ${LIMITS.MAX_LABEL_NAME_LENGTH} characters`;
+    toast.message = t(
+      'labelNameTooLong',
+      String(LIMITS.MAX_LABEL_NAME_LENGTH)
+    );
     toast.show('label-dialog-toast');
     return;
   }
@@ -222,7 +232,7 @@ export async function saveLabel() {
 
   if (isDuplicate) {
     const toast = document.createElement('smb-toast');
-    toast.message = 'A label with this name already exists';
+    toast.message = t('labelNameDuplicate');
     toast.show('label-dialog-toast');
     return;
   }
@@ -237,8 +247,8 @@ export async function saveLabel() {
   await renderLabels();
 
   const message = id
-    ? `Label "${name}" edited`
-    : `Label "${name}" added`;
+    ? t('labelEdited', name)
+    : t('labelAdded', name);
 
   const toast = document.createElement('smb-toast');
   toast.message = message;
@@ -263,10 +273,10 @@ function updateScriptLabelsSubtitle() {
   const count = selectedScriptLabels.length;
 
   subtitle.textContent = count === 0
-    ? 'No labels selected'
+    ? t('noLabelsSelected')
     : count === 1
-      ? '1 label selected'
-      : `${count} labels selected`;
+      ? t('oneLabelSelected')
+      : t('labelsSelectedCount', String(count));
 }
 
 export async function openLabelsSelectionDialog() {
@@ -375,12 +385,12 @@ export async function togglePinLabel(target) {
   await renderLabels();
 
   const message = isPinned
-    ? `Label "${label.name}" pinned`
-    : `Label "${label.name}" unpinned`;
+    ? t('labelPinned', label.name)
+    : t('labelUnpinned', label.name);
   const toast = document.createElement('smb-toast');
 
   toast.message = message;
-  toast.addAction('Undo', async () => {
+  toast.addAction(t('undo'), async () => {
     try {
       await saveLabelData({ ...label, pinned: !isPinned });
       await renderLabels();

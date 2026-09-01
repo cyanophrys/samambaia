@@ -28,6 +28,11 @@ import {
 } from './utils.js';
 
 import {
+  applyTranslations,
+  t,
+} from './i18n.js';
+
+import {
   LIMITS,
   VARIABLE_TOKEN_PATTERN,
 } from './config.js';
@@ -72,6 +77,8 @@ export function createVariableElement(variable) {
   const template = document.querySelector('#variable-item-template');
   const item = template.content.firstElementChild.cloneNode(true);
 
+  applyTranslations(item);
+
   item.dataset.target = variable.id;
   item.dataset.pinned = variable.pinned ? 'true' : 'false';
 
@@ -101,11 +108,13 @@ export function createVariableElement(variable) {
 
   menu.id = menuId;
   menu.style.positionAnchor = anchorName;
-  menu.setAttribute('aria-label', `Options for ${variable.name}`);
+  menu.setAttribute('aria-label', t('variableMenuOptions', variable.name));
 
   pinButton.setAttribute('popovertarget', menuId);
   pinButton.dataset.target = variable.id;
-  pinLabel.textContent = variable.pinned ? 'Unpin' : 'Pin';
+  pinLabel.textContent = variable.pinned
+    ? t('unpin')
+    : t('pin');
 
   editButton.setAttribute('popovertarget', menuId);
   editButton.dataset.target = variable.id;
@@ -123,9 +132,9 @@ export function addVariable() {
 
   form.reset();
 
-  dialog.title = 'Add variable';
+  dialog.title = t('addVariable');
   dialog.subtitle = '';
-  if (saveButton) saveButton.textContent = 'Add';
+  if (saveButton) saveButton.textContent = t('add');
 
   openDialog('variable-dialog');
 }
@@ -144,9 +153,9 @@ export async function editVariable(element) {
   form.elements['id'].value = variable.id;
   form.elements['name'].value = variable.name;
 
-  dialog.title = 'Edit variable';
+  dialog.title = t('editVariable');
   dialog.subtitle = variable.name;
-  if (saveButton) saveButton.textContent = 'Edit';
+  if (saveButton) saveButton.textContent = t('edit');
 
   openDialog('variable-dialog');
 }
@@ -162,7 +171,7 @@ export async function saveVariable() {
   if (rawName !== name) {
     const toast = document.createElement('smb-toast');
 
-    toast.message = 'The name can only contain letters, numbers, "_" and "-"';
+    toast.message = t('variableNameInvalid');
     toast.show('variable-dialog-toast');
     return;
   }
@@ -170,7 +179,7 @@ export async function saveVariable() {
   if (name.length > LIMITS.MAX_VARIABLE_NAME_LENGTH) {
     const toast = document.createElement('smb-toast');
 
-    toast.message = `Variable name cannot exceed ${LIMITS.MAX_VARIABLE_NAME_LENGTH} characters`;
+    toast.message = t('variableNameTooLong', String(LIMITS.MAX_VARIABLE_NAME_LENGTH));
     toast.show('variable-dialog-toast');
     return;
   }
@@ -183,7 +192,7 @@ export async function saveVariable() {
   if (isDuplicate) {
     const toast = document.createElement('smb-toast');
 
-    toast.message = 'A variable with this name already exists';
+    toast.message = t('variableDuplicate');
     toast.show('variable-dialog-toast');
     return;
   }
@@ -198,8 +207,8 @@ export async function saveVariable() {
   await renderVariables();
 
   const message = id
-    ? `Variable "${name}" edited`
-    : `Variable "${name}" added`;
+    ? t('variableEdited', name)
+    : t('variableAdded', name);
   const toast = document.createElement('smb-toast');
 
   toast.message = message;
@@ -215,12 +224,15 @@ export async function deleteVariable(element) {
 
   const dialog = document.createElement('smb-alert-dialog');
 
-  dialog.title = 'Delete variable?';
-  dialog.message = `Are you sure you want to delete the variable "${variable.name}"? Scripts using "{{${variable.name}}}" will no longer replace it.`;
+  dialog.title = t('deleteVariableTitle');
+  dialog.message = t(
+    'deleteVariableMessage',
+    variable.name
+  );
 
   dialog.addResponses([
-    { id: 'cancel', label: 'Cancel', appearance: 'default' },
-    { id: 'delete', label: 'Delete variable', appearance: 'destructive' }
+    { id: 'cancel', label: t('cancel'), appearance: 'default' },
+    { id: 'delete', label: t('deleteVariable'), appearance: 'destructive' }
   ]);
 
   dialog.addEventListener('response', async (e) => {
@@ -231,7 +243,7 @@ export async function deleteVariable(element) {
 
     const toast = document.createElement('smb-toast');
 
-    toast.message = `Variable "${variable.name}" deleted`;
+    toast.message = t('variableDeleted', variable.name);
     toast.show('main-toast');
   }, { once: true });
 
@@ -292,12 +304,12 @@ export async function togglePinVariable(target) {
   await renderVariables();
 
   const message = isPinned
-    ? `Variable "${variable.name}" pinned`
-    : `Variable "${variable.name}" unpinned`;
+    ? t('variablePinned', variable.name)
+    : t('variableUnpinned', variable.name);
   const toast = document.createElement('smb-toast');
 
   toast.message = message;
-  toast.addAction('Undo', async () => {
+  toast.addAction(t('undo'), async () => {
     try {
       await saveVariableData({ ...variable, pinned: !isPinned });
       await renderVariables();

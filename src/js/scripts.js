@@ -38,6 +38,11 @@ import {
   makeSortable,
 } from './dnd.js';
 
+import {
+  applyTranslations,
+  t,
+} from './i18n.js';
+
 let selectedLabel = 'all';
 
 export function getScriptColor(color) {
@@ -130,6 +135,8 @@ export function createScriptElement(script) {
   const template = document.querySelector('#script-item-template');
   const item = template.content.firstElementChild.cloneNode(true);
 
+  applyTranslations(item);
+
   item.dataset.target = script.id;
   item.dataset.labels = (script.labels?.length ? script.labels.map(String) : ['none']).join(' ');
   item.dataset.favorite = script.favorite ? 'true' : 'false';
@@ -167,7 +174,7 @@ export function createScriptElement(script) {
 
   menu.id = popoverId;
   menu.style.positionAnchor = anchorName;
-  menu.setAttribute('aria-label', `Options for ${script.name}`);
+  menu.setAttribute('aria-label', t('scriptMenuOptions', [script.name]));
 
   if (script.notes) {
     notes.id = `script-notes-${script.id}`;
@@ -183,8 +190,8 @@ export function createScriptElement(script) {
   }
 
   favoriteLabel.textContent = script.favorite
-    ? 'Remove from favorites'
-    : 'Add to favorites';
+    ? t('removeFavorite')
+    : t('addFavorite');
 
   favoriteButton.setAttribute('popovertarget', popoverId);
   favoriteButton.dataset.target = script.id;
@@ -234,9 +241,9 @@ export function addScript() {
       : [String(selectedLabel)]
   );
 
-  dialog.title = 'Add script';
+  dialog.title = t('addScript');
   dialog.subtitle = '';
-  if (saveButton) saveButton.textContent = 'Add';
+  if (saveButton) saveButton.textContent = t('add');
 
   openDialog('script-dialog');
 }
@@ -263,9 +270,9 @@ export async function editScript(element) {
   for (const input of colorInput)
     input.checked = input.value === getScriptColor(script.color);
 
-  dialog.title = 'Edit script';
+  dialog.title = t('editScript');
   dialog.subtitle = script.name;
-  if (saveButton) saveButton.textContent = 'Edit';
+  if (saveButton) saveButton.textContent = t('edit');
 
   openDialog('script-dialog');
 }
@@ -306,8 +313,8 @@ export async function saveScript() {
   await renderScripts();
 
   const message = id
-    ? `Script "${name}" edited`
-    : `Script "${name}" added`;
+    ? t('scriptEdited', [name])
+    : t('scriptAdded', [name]);
   const toast = document.createElement('smb-toast');
 
   toast.message = message;
@@ -318,7 +325,7 @@ export async function deleteScript(element) {
   const id = Number(element.dataset.target);
 
   if (Number.isNaN(id)) {
-    console.error("Invalid script ID for deletion:", element);
+    console.error('Invalid script ID for deletion:', element);
     return;
   }
 
@@ -327,12 +334,12 @@ export async function deleteScript(element) {
 
   const dialog = document.createElement('smb-alert-dialog');
 
-  dialog.title = 'Delete script?';
-  dialog.message = `Are you sure you want to delete "${script.name}"? This action cannot be undone.`;
+  dialog.title = t('deleteScriptTitle');
+  dialog.message = t('deleteScriptMessage', [script.name]);
 
   dialog.addResponses([
-    { id: 'cancel', label: 'Cancel', appearance: 'default' },
-    { id: 'delete', label: 'Delete script', appearance: 'destructive' }
+    { id: 'cancel', label: t('cancel'), appearance: 'default' },
+    { id: 'delete', label: t('deleteScript'), appearance: 'destructive' }
   ]);
 
   dialog.addEventListener('response', async (e) => {
@@ -340,7 +347,7 @@ export async function deleteScript(element) {
       await deleteScriptData(id);
       await renderScripts();
 
-      const message = `Script "${script.name}" deleted`;
+      const message = t('scriptDeleted', [script.name]);
       const toast = document.createElement('smb-toast');
 
       toast.message = message;
@@ -368,12 +375,12 @@ export function clearRecentScripts() {
 
   const dialog = document.createElement('smb-alert-dialog');
 
-  dialog.title = 'Clear recent history?';
-  dialog.message = 'The history of recently copied scripts will be cleared. This action cannot be undone.';
+  dialog.title = t('clearRecentHistoryTitle');
+  dialog.message = t('clearRecentHistoryMessage');
 
   dialog.addResponses([
-    { id: 'cancel', label: 'Cancel', appearance: 'default' },
-    { id: 'clear', label: 'Clear history', appearance: 'destructive' }
+    { id: 'cancel', label: t('cancel'), appearance: 'default' },
+    { id: 'clear', label: t('clearHistory'), appearance: 'destructive' }
   ]);
 
   dialog.addEventListener('response', e => {
@@ -387,7 +394,7 @@ export function clearRecentScripts() {
 
     const toast = document.createElement('smb-toast');
 
-    toast.message = 'Recent history cleared';
+    toast.message = t('recentHistoryCleared');
     toast.show('settings-dialog-toast');
   }, { once: true });
 
@@ -405,7 +412,7 @@ export async function copyScript(target) {
     await navigator.clipboard.writeText(applyVariables(script.content));
     addRecentScript(id);
 
-    const message = `Copied to clipboard`;
+    const message = t('copiedToClipboard');
     const toast = document.createElement('smb-toast');
 
     toast.message = message;
@@ -576,12 +583,12 @@ export async function toggleFavoriteScript(target) {
   await renderScripts();
 
   const message = isFavorite
-    ? `Script "${script.name}" added to favorites`
-    : `Script "${script.name}" removed from favorites`;
+    ? t('scriptAddedToFavorites', [script.name])
+    : t('scriptRemovedFromFavorites', [script.name]);
   const toast = document.createElement('smb-toast');
 
   toast.message = message;
-  toast.addAction('Undo', async () => {
+  toast.addAction(t('undo'), async () => {
     try {
       await saveScriptData({ ...script, favorite: !isFavorite });
       await renderScripts();
