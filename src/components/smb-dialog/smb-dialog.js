@@ -19,6 +19,10 @@ import reset from '../../css/reset.css' with { type: 'css' };
 import common from '../../css/common.css' with { type: 'css' };
 import dialog from './smb-dialog.css' with { type: 'css' };
 
+import {
+  applyTranslations,
+} from '../../js/i18n.js';
+
 const template = document.createElement('template');
 template.innerHTML = `
   <dialog id="dialog" aria-labelledby="dialog-title">
@@ -29,7 +33,7 @@ template.innerHTML = `
         <span id="dialog-subtitle"></span>
       </div>
       <slot name="header-right"></slot>
-      <button id="close-button" type="button" class="button close-button" aria-label="Close">
+      <button id="close-button" type="button" class="button close-button" data-i18n-attr="aria-label:close">
         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="m330.38-290.27-40.11-40.11L440.39-480 290.27-629.12l40.11-40.11L480-519.11l149.12-150.12 40.11 40.11L519.11-480l150.12 149.62-40.11 40.11L480-440.39 330.38-290.27Z"/></svg>
       </button>
       <slot name="subheader"></slot>
@@ -54,6 +58,8 @@ export class SmbDialog extends HTMLElement {
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.adoptedStyleSheets = [reset, common, dialog];
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+    applyTranslations(this.shadowRoot);
 
     this.#dialog = this.shadowRoot.getElementById('dialog');
     this.#title = this.shadowRoot.getElementById('dialog-title');

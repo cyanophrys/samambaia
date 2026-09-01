@@ -19,6 +19,10 @@ import reset from '../../css/reset.css' with { type: 'css' };
 import common from '../../css/common.css' with { type: 'css' };
 import toast from './smb-toast.css' with { type: 'css' };
 
+import {
+  applyTranslations,
+} from '../../js/i18n.js';
+
 const DEFAULT_DURATION = 5000;
 const DEFAULT_MAX_TOASTS = 3;
 
@@ -26,7 +30,7 @@ const template = document.createElement('template');
 template.innerHTML = `
   <div role="status" aria-live="polite">
     <span class="message"></span>
-    <button type="button" class="button close-button" aria-label="Close">
+    <button type="button" class="button close-button" data-i18n-attr="aria-label:close">
       <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="m330.38-290.27-40.11-40.11L440.39-480 290.27-629.12l40.11-40.11L480-519.11l149.12-150.12 40.11 40.11L519.11-480l150.12 149.62-40.11 40.11L480-440.39 330.38-290.27Z"/></svg>
     </button>
   </div>
@@ -56,6 +60,8 @@ export class SmbToast extends HTMLElement {
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.adoptedStyleSheets = [reset, common, toast];
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+    applyTranslations(this.shadowRoot);
 
     this.#toast = this.shadowRoot.querySelector('div');
     this.#message = this.shadowRoot.querySelector('.message');

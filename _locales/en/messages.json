@@ -1,4 +1,168 @@
 {
   "extName": { "message": "samambaia" },
-  "extDesc": { "message": "A simple script manager." }
+  "extDesc": { "message": "A simple script manager." },
+
+  "cancel": {
+    "message": "Cancel",
+    "description": "Action used to cancel"
+  },
+  "cancelSearch": { "message": "Cancel search" },
+  "copy": {
+    "message": "Copy",
+    "description": "Action used to copy content"
+  },
+  "clear": {
+    "message": "Clear",
+    "description": "Action used to clear content"
+  },
+  "close": {
+    "message": "Close",
+    "description": "Action used to close or dismissing an item"
+  },
+  "deleteEllipsis": { "message": "Delete…" },
+  "edit": {
+    "message": "Edit",
+    "description": "Action used to edit an item"
+  },
+  "editEllipsis": { "message": "Edit…" },
+  "undo": {
+    "message": "Undo",
+    "description": "Action used to revert a change"
+  },
+  "moreOptions": { "message": "More options" },
+  "name": { "message": "Name" },
+
+  "backToTop": { "message": "Back to top" },
+  "mainNavigation": { "message": "Main navigation" },
+  "moveToNext": { "message": "Move to next" },
+  "moveToPrevious": { "message": "Move to previous" },
+  "viewMore": { "message": "View more" },
+
+  "search": {
+    "message": "Search",
+    "description": "Noun indicating something related to search"
+  },
+  "searchScripts": { "message": "Search scripts" },
+  "searchLabels": { "message": "Search labels" },
+  "searchAllScripts": { "message": "Search all scripts" },
+
+  "allScripts": { "message": "All scripts" },
+  "favorites": { "message": "Favorites" },
+  "recent": { "message": "Recent" },
+  "unlabeled": { "message": "Unlabeled" },
+
+  "blue": { "message": "Blue" },
+  "brown": { "message": "Brown" },
+  "green": { "message": "Green" },
+  "lavender": { "message": "Lavender" },
+  "orange": { "message": "Orange" },
+  "pink": { "message": "Pink" },
+  "purple": { "message": "Purple" },
+  "red": { "message": "Red" },
+  "slate": { "message": "Slate" },
+  "teal": { "message": "Teal" },
+  "yellow": { "message": "Yellow" },
+  "noColor": { "message": "No color" },
+
+  "addFirstScript": { "message": "Add your first script to get started" },
+  "noFavorites": { "message": "No favorites" },
+  "noFavoritesDescription": { "message": "Favorite scripts will appear here" },
+  "noRecentHistory": { "message": "No history" },
+  "noRecentHistoryDescription": { "message": "Recently copied scripts will appear here" },
+  "noResultsFound": { "message": "No results found" },
+  "noScriptsAdded": { "message": "No scripts added" },
+  "recentScriptsOff": { "message": "History is off" },
+  "recentScriptsOffDescription": { "message": "Turn it on in Settings to see recently copied scripts" },
+  "tryDifferentSearch": { "message": "Try a different search" },
+  "tryDifferentSearchOrAll": { "message": "Try a different search or search all scripts" },
+
+  "addScript": { "message": "Add script" },
+  "addScriptEllipsis": { "message": "Add script…" },
+  "scriptColor": { "message": "Script color" },
+  "scriptContent": { "message": "Content" },
+  "scriptNotes": { "message": "Notes" },
+
+  "addLabel": { "message": "Add label" },
+  "addLabelEllipsis": { "message": "Add label…" },
+  "emptyLabel": { "message": "Empty label" },
+  "emptyLabelDescription": { "message": "This label doesn't have any scripts yet" },
+  "noLabelsAvailable": { "message": "No labels available" },
+  "noLabelsSelected": { "message": "No labels selected" },
+  "labels": { "message": "Labels" },
+  "labelsAppearHere": { "message": "The labels you add will appear here" },
+  "labelColor": { "message": "Label color" },
+  "labelsList": { "message": "Labels list" },
+  "availableLabels": { "message": "Available labels" },
+  "selectedLabels": { "message": "Selected labels" },
+
+  "addVariable": { "message": "Add variable" },
+  "addVariableEllipsis": { "message": "Add variable…" },
+  "createVariablesDescription": { "message": "Create variables to reuse in your scripts" },
+  "noVariables": { "message": "No variables" },
+  "variables": { "message": "Variables" },
+
+  "backup": { "message": "Backup" },
+  "backUpAction": {
+    "message": "Back up",
+    "description": "Verb indicating an action that exports a backup file"
+  },
+  "backUpEllipsis": { "message": "Back up…" },
+  "restoreBackup": { "message": "Restore backup" },
+  "restoreBackupEllipsis": { "message": "Restore backup…" },
+  "unsavedChanges": { "message": "There are unsaved changes" },
+
+  "scratchpad": { "message": "Scratchpad" },
+  "typeSomethingHere": { "message": "Type something here" },
+
+  "settings": { "message": "Settings" },
+  "openSettings": { "message": "Open settings" },
+  "appearance": { "message": "Appearance" },
+  "accessibility": { "message": "Accessibility" },
+  "storage": { "message": "Storage" },
+
+  "theme": { "message": "Theme" },
+  "systemDefault": { "message": "System default" },
+  "light": { "message": "Light" },
+  "dark": { "message": "Dark" },
+
+  "accentColors": { "message": "Accent colors" },
+
+  "highContrast": { "message": "High contrast" },
+  "highContrastDescription": { "message": "Increases color contrast to make the interface easier to see" },
+  "largeText": { "message": "Large text" },
+  "largeTextDescription": { "message": "Increases the text size throughout the interface" },
+
+  "backupReminder": { "message": "Backup reminder" },
+  "backupReminderDescription": { "message": "Get a reminder to back up your data after making changes" },
+
+  "history": { "message": "History" },
+  "recentScripts": { "message": "Recent scripts" },
+  "recentScriptsDescription": { "message": "Show scripts that were recently copied" },
+  "clearRecentHistoryEllipsis": { "message": "Clear recent history…" },
+
+  "deleteData": { "message": "Delete data" },
+  "deleteDataDescription": { "message": "Use the button below to permanently remove all local data." },
+  "deleteAllDataEllipsis": { "message": "Delete all data…" },
+
+  "general": { "message": "General" },
+  "keyboardShortcuts": { "message": "Keyboard shortcuts" },
+  "navigation": { "message": "Navigation" },
+  "showAllScripts": { "message": "Show all scripts" },
+  "showFavoriteScripts": { "message": "Show favorite scripts" },
+  "showRecentScripts": { "message": "Show recent scripts" },
+  "showKeyboardShortcuts": { "message": "Show keyboard shortcuts" },
+  "toggleLabelsSidebar": { "message": "Toggle labels sidebar" },
+  "toggleScratchpadSidebar": { "message": "Toggle scratchpad sidebar" },
+  "toggleScriptViewMode": { "message": "Toggle script view mode" },
+  "toggleVariablesSidebar": { "message": "Toggle variables sidebar" },
+
+  "addItem": { "message": "Add item" },
+
+  "about": { "message": "About" },
+  "credits": { "message": "Credits" },
+  "font": { "message": "Font" },
+  "icons": { "message": "Icons" },
+  "license": { "message": "License" },
+  "version": { "message": "Version" },
+  "website": { "message": "Website" }
 }
