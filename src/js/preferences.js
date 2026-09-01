@@ -30,6 +30,10 @@ import {
   syncFormControlState,
 } from './utils.js';
 
+import {
+  t,
+} from './i18n.js';
+
 export const userPreferences = createStore(
   await loadState('userPreferences', DEFAULT_PREFERENCES),
   {
@@ -146,8 +150,8 @@ export function setViewMode(value) {
   if (!button) return;
 
   const label = newView === 'grid'
-    ? 'List view'
-    : 'Grid view';
+    ? t('listView')
+    : t('gridView');
 
   button.setAttribute('aria-label', label);
   button.setAttribute('aria-pressed', newView === 'grid');

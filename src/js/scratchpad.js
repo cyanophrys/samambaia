@@ -25,6 +25,10 @@ import {
   LIMITS,
 } from './config.js';
 
+import {
+  t,
+} from './i18n.js';
+
 let debounceTimeout = null;
 
 function updateScratchpadButtons() {
@@ -94,7 +98,7 @@ export async function copyScratchpad() {
 
     const toast = document.createElement('smb-toast');
 
-    toast.message = 'Copied to clipboard';
+    toast.message = t('copiedToClipboard');
     toast.show('main-toast');
   } catch (error) {
     console.error(error);
@@ -117,8 +121,8 @@ export async function clearScratchpad() {
     const toast = document.createElement('smb-toast');
 
     toast.duration = 10000;
-    toast.message = 'Scratchpad cleared';
-    toast.addAction('Undo', async () => {
+    toast.message = t('scratchpadCleared');
+    toast.addAction(t('undo'), async () => {
       try {
         await saveScratchpadData(previousContent);
 

@@ -41,6 +41,10 @@ import {
   BACKUP_SCHEMA_VERSION,
 } from './config.js';
 
+import {
+  t,
+} from './i18n.js';
+
 export function toggleBackupBanner(hasChanges) {
   const banner = document.getElementById('backup-banner');
   if (!banner) return;
@@ -62,12 +66,12 @@ export function warnBeforeUnload(event) {
 function confirmRestore() {
   const dialog = document.createElement('smb-alert-dialog');
 
-  dialog.title = 'Replace existing data?';
-  dialog.message = 'This will replace your existing data. This action cannot be undone.';
+  dialog.title = t('replaceExistingDataTitle');
+  dialog.message = t('replaceExistingDataMessage');
 
   dialog.addResponses([
-    { id: 'cancel', label: 'Cancel', appearance: 'default' },
-    { id: 'restore', label: 'Replace data', appearance: 'destructive' },
+    { id: 'cancel', label: t('cancel'), appearance: 'default' },
+    { id: 'restore', label: t('replaceData'), appearance: 'destructive' },
   ]);
 
   return new Promise((resolve) => {
@@ -176,7 +180,7 @@ export async function exportBackup() {
         const handle = await window.showSaveFilePicker({
           suggestedName: fileName,
           types: [{
-            description: 'JSON Files',
+            description: t('jsonFiles'),
             accept: { 'application/json': ['.json'] },
           }],
         });
@@ -190,7 +194,7 @@ export async function exportBackup() {
 
         const toast = document.createElement('smb-toast');
 
-        toast.message = 'Backup completed';
+        toast.message = t('backupCompleted');
         toast.show('main-toast');
         return;
       } catch (err) {
@@ -215,14 +219,14 @@ export async function exportBackup() {
 
     const toast = document.createElement('smb-toast');
 
-    toast.message = 'Backup completed';
+    toast.message = t('backupCompleted');
     toast.show('main-toast');
   } catch (error) {
     console.error(error);
 
     const toast = document.createElement('smb-toast');
 
-    toast.message = 'Backup failed';
+    toast.message = t('backupFailed');
     toast.show('main-toast');
   }
 }
@@ -235,7 +239,7 @@ export async function restoreBackup() {
       try {
         const [handle] = await window.showOpenFilePicker({
           types: [{
-            description: 'JSON Files',
+            description: t('jsonFiles'),
             accept: { 'application/json': ['.json'] },
           }],
         });
@@ -283,13 +287,13 @@ export async function restoreBackup() {
 
     resetState();
 
-    sessionStorage.setItem('pendingToast', 'Restore completed');
+    sessionStorage.setItem('pendingToast', t('restoreCompleted'));
     window.location.reload();
   } catch (error) {
     console.error(error);
     const toast = document.createElement('smb-toast');
 
-    toast.message = 'Restore failed. Check that the file is valid.';
+    toast.message = t('restoreFailed');
     toast.show('main-toast');
   }
 }

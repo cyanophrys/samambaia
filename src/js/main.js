@@ -125,6 +125,7 @@ import {
 
 import {
   applyTranslations,
+  t,
 } from './i18n.js';
 
 const actions = {
@@ -305,22 +306,22 @@ async function openAboutDialog() {
 async function wipeData() {
   const dialog = document.createElement('smb-alert-dialog');
 
-  dialog.title = 'Delete all data?';
-  dialog.message = 'This will permanently remove all local data. This action cannot be undone.';
+  dialog.title = t('deleteAllDataTitle');
+  dialog.message = t('deleteAllDataMessage');
 
   const confirmation = document.createElement('label');
   confirmation.className = "label";
   confirmation.innerHTML = `
     <input type="checkbox" class="checkbox" name="wipe-confirmation">
-    <span>I understand and want to continue</span>
+    <span>${t('wipeConfirmationLabel')}</span>
   `;
   confirmation.slot = 'additional-content';
 
   dialog.append(confirmation);
 
   dialog.addResponses([
-    { id: 'cancel', label: 'Cancel', appearance: 'default' },
-    { id: 'wipe', label: 'Delete data', appearance: 'destructive' }
+    { id: 'cancel', label: t('cancel'), appearance: 'default' },
+    { id: 'wipe', label: t('deleteData'), appearance: 'destructive' }
   ]);
 
   dialog.setResponseEnabled('wipe', false);
@@ -340,7 +341,7 @@ async function wipeData() {
 
       state.hasChanges = false;
 
-      sessionStorage.setItem('pendingToast', 'Data deleted');
+      sessionStorage.setItem('pendingToast', t('dataDeleted'));
 
       window.location.reload();
     } catch (error) {
@@ -349,7 +350,7 @@ async function wipeData() {
       const toast = document.createElement('smb-toast');
 
       toast.type = 'error';
-      toast.message = 'Error deleting data';
+      toast.message = t('errorDeletingData');
       toast.show('main-toast');
     }
   }, { once: true });
