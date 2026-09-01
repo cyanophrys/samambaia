@@ -85,6 +85,20 @@ export async function wipeDB() {
   });
 }
 
+export async function hasStoredData() {
+  const scripts = await getAllScripts();
+  const labels = await getAllLabels();
+  const variables = await getAllVariables();
+  const scratchpad = await getScratchpadData();
+
+  return (
+    scripts.length > 0 ||
+    labels.length > 0 ||
+    variables.length > 0 ||
+    scratchpad.length > 0
+  );
+}
+
 export function restoreBackupFromFile({ labels = [], scripts = [], variables = [] }) {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction(
