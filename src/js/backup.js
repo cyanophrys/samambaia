@@ -38,12 +38,10 @@ import {
 } from './preferences.js';
 
 import {
-  BACKUP_SCHEMA_VERSION,
-} from './config.js';
-
-import {
   t,
 } from './i18n.js';
+
+const BACKUP_SCHEMA_VERSION = 1;
 
 export function toggleBackupBanner(hasChanges) {
   const banner = document.getElementById('backup-banner');

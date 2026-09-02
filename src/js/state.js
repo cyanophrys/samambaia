@@ -20,9 +20,10 @@ import {
   loadState,
 } from './store.js';
 
-import {
-  DEFAULT_STATE,
-} from './config.js';
+const DEFAULT_STATE = {
+  hasChanges: false,
+  recentScripts: [],
+};
 
 export const state = createStore(
   await loadState('state', DEFAULT_STATE),
