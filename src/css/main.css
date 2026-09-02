@@ -203,6 +203,10 @@ body {
   flex-direction: column;
   align-items: center;
   user-select: none;
+
+  > img {
+    margin-block-end: var(--spacing-sm);
+  }
 }
 
 #scratchpad-sidebar textarea {
