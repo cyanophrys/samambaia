@@ -21,11 +21,6 @@ import {
 } from './store.js';
 
 import {
-  ACCENT_COLORS,
-  DEFAULT_PREFERENCES,
-} from './config.js';
-
-import {
   toggleSidebar,
   syncFormControlState,
 } from './utils.js';
@@ -33,6 +28,35 @@ import {
 import {
   t,
 } from './i18n.js';
+
+const ACCENT_COLORS = [
+  'blue',
+  'teal',
+  'green',
+  'yellow',
+  'brown',
+  'orange',
+  'lavender',
+  'red',
+  'pink',
+  'purple',
+  'slate',
+];
+
+const DEFAULT_PREFERENCES = {
+  accentColor: 'blue',
+  backupReminder: true,
+  highContrast: false,
+  largeText: false,
+  recentScripts: true,
+  sidebars: {
+    labels: true,
+    scratchpad: false,
+    variables: false,
+  },
+  theme: 'system',
+  viewMode: 'grid',
+};
 
 export const userPreferences = createStore(
   await loadState('userPreferences', DEFAULT_PREFERENCES),

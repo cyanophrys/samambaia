@@ -31,13 +31,14 @@ import {
 
 import {
   PALETTE_COLORS,
-  LIMITS,
 } from './config.js';
 
 import {
   applyTranslations,
   t,
 } from './i18n.js';
+
+const MAX_LABEL_NAME_LENGTH = 128;
 
 let cachedLabels = [];
 let selectedScriptLabels = [];
@@ -211,12 +212,12 @@ export async function saveLabel() {
 
   if (!name) return;
 
-  if (name.length > LIMITS.MAX_LABEL_NAME_LENGTH) {
+  if (name.length > MAX_LABEL_NAME_LENGTH) {
     const toast = document.createElement('smb-toast');
 
     toast.message = t(
       'labelNameTooLong',
-      String(LIMITS.MAX_LABEL_NAME_LENGTH)
+      String(MAX_LABEL_NAME_LENGTH)
     );
     toast.show('label-dialog-toast');
     return;
