@@ -272,7 +272,7 @@ export function getVariable(id) {
   });
 }
 
-export function saveVariableData(variable) {
+export function saveVariableData(variable, notify = true) {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction(VARIABLES_STORE, 'readwrite');
     const store = transaction.objectStore(VARIABLES_STORE);
@@ -290,7 +290,7 @@ export function saveVariableData(variable) {
       : store.put(data);
 
     request.onsuccess = () => {
-      notifyDataChanged();
+      if (notify) notifyDataChanged();
       resolve(request.result);
     };
     request.onerror = () => reject(request.error);

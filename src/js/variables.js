@@ -258,7 +258,7 @@ export function handleVariableValueInput(value, event) {
 
   debounceTimeout = setTimeout(async () => {
     try {
-      await saveVariableData(variableData);
+      await saveVariableData(variableData, false);
     } catch (error) {
       console.error(error);
     }
