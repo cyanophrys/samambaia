@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1254"
+   height="1254"
+   viewBox="0 0 1254 1254"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs3">
+    <linearGradient
+       id="g"
+       x1="290"
+       y1="935"
+       x2="880"
+       y2="290"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#6A46FB"
+         id="stop1" />
+      <stop
+         offset="0.5"
+         stop-color="#168AF0"
+         id="stop2" />
+      <stop
+         offset="1"
+         stop-color="#0FC7C1"
+         id="stop3" />
+    </linearGradient>
+  </defs>
+  <g
+     id="g8"
+     transform="matrix(1.5196629,0,0,1.5196629,-325.82864,-387.51403)">
+    <path
+       fill="url(#g)"
+       d="m 452,255 h 354 c 132,0 229,97 229,229 v 251 c 0,100 -49,164 -131,189 l 40,128 c 6,20 -6,35 -24,25 -6,-3 -11,-7 -16,-11 L 738,960 H 450 C 311,960 219,872 219,753 V 482 c 0,-131 96,-227 233,-227 z"
+       id="path3"
+       style="fill:url(#g)" />
+    <g
+       fill="none"
+       stroke="#ffffff"
+       stroke-width="58"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       id="g5">
+      <path
+         d="m 540,430 h -34 c -36,0 -54,22 -54,60 v 45 c 0,33 -15,56 -49,72 l -13,6 13,6 c 34,16 49,39 49,72 v 45 c 0,38 18,60 54,60 h 34"
+         id="path4" />
+      <path
+         d="m 714,430 h 34 c 36,0 54,22 54,60 v 45 c 0,33 15,56 49,72 l 13,6 -13,6 c -34,16 -49,39 -49,72 v 45 c 0,38 -18,60 -54,60 h -34"
+         id="path5" />
+    </g>
+  </g>
+</svg>
