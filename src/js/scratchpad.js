@@ -22,12 +22,10 @@ import {
 } from './db.js';
 
 import {
-  LIMITS,
-} from './config.js';
-
-import {
   t,
 } from './i18n.js';
+
+const MAX_SCRATCHPAD_LENGTH = 10000;
 
 let debounceTimeout = null;
 
@@ -58,7 +56,7 @@ export async function initScratchpad() {
       return;
     }
 
-    textarea.value = content.slice(0, LIMITS.MAX_SCRATCHPAD_LENGTH);
+    textarea.value = content.slice(0, MAX_SCRATCHPAD_LENGTH);
     updateScratchpadButtons();
   } catch (error) {
     console.error(error);
@@ -70,8 +68,8 @@ export function handleScratchpadInput(value, event) {
 
   if (!textarea) return;
 
-  if (textarea.value.length > LIMITS.MAX_SCRATCHPAD_LENGTH)
-    textarea.value = textarea.value.slice(0, LIMITS.MAX_SCRATCHPAD_LENGTH);
+  if (textarea.value.length > MAX_SCRATCHPAD_LENGTH)
+    textarea.value = textarea.value.slice(0, MAX_SCRATCHPAD_LENGTH);
 
   updateScratchpadButtons();
 

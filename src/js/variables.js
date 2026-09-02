@@ -32,10 +32,8 @@ import {
   t,
 } from './i18n.js';
 
-import {
-  LIMITS,
-  VARIABLE_TOKEN_PATTERN,
-} from './config.js';
+const MAX_VARIABLE_NAME_LENGTH = 128;
+const VARIABLE_TOKEN_PATTERN = /\{\{\s*([a-zA-Z0-9_-]+)\s*\}\}/g;
 
 let cachedVariables = [];
 let debounceTimeout = null;
@@ -176,10 +174,10 @@ export async function saveVariable() {
     return;
   }
 
-  if (name.length > LIMITS.MAX_VARIABLE_NAME_LENGTH) {
+  if (name.length > MAX_VARIABLE_NAME_LENGTH) {
     const toast = document.createElement('smb-toast');
 
-    toast.message = t('variableNameTooLong', String(LIMITS.MAX_VARIABLE_NAME_LENGTH));
+    toast.message = t('variableNameTooLong', String(MAX_VARIABLE_NAME_LENGTH));
     toast.show('variable-dialog-toast');
     return;
   }

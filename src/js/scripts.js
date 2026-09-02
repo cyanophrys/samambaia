@@ -12,9 +12,7 @@ import {
 } from './utils.js';
 
 import {
-  LIMITS,
   PALETTE_COLORS,
-  PSEUDO_LABELS,
 } from './config.js';
 
 import {
@@ -42,6 +40,17 @@ import {
   applyTranslations,
   t,
 } from './i18n.js';
+
+const MAX_RECENT_SCRIPTS = 30;
+const MAX_SCRIPT_NAME_LENGTH = 128;
+const MAX_SCRIPT_CONTENT_LENGTH = 5000;
+const MAX_SCRIPT_NOTES_LENGTH = 1000;
+
+const PSEUDO_LABELS = [
+  'all',
+  'favorites',
+  'recent',
+];
 
 let selectedLabel = 'all';
 
@@ -288,9 +297,9 @@ export async function saveScript() {
   if (
     !name ||
     !content ||
-    name.length > LIMITS.MAX_SCRIPT_NAME_LENGTH ||
-    content.length > LIMITS.MAX_SCRIPT_CONTENT_LENGTH ||
-    notes.length > LIMITS.MAX_SCRIPT_NOTES_LENGTH
+    name.length > MAX_SCRIPT_NAME_LENGTH ||
+    content.length > MAX_SCRIPT_CONTENT_LENGTH ||
+    notes.length > MAX_SCRIPT_NOTES_LENGTH
   ) {
     return;
   }
@@ -364,7 +373,7 @@ function addRecentScript(id) {
   const ids = state.recentScripts.filter(recentId => recentId !== id);
 
   ids.unshift(id);
-  state.recentScripts = ids.slice(0, LIMITS.MAX_RECENT_SCRIPTS);
+  state.recentScripts = ids.slice(0, MAX_RECENT_SCRIPTS);
 
   updateClearRecentScriptsButton();
 }
