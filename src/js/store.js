@@ -21,15 +21,40 @@ if (!storage?.local) {
   throw new Error('Extension storage API is unavailable.');
 }
 
+function mergeDefaults(defaults, stored) {
+  if (
+    !stored ||
+    typeof stored !== 'object' ||
+    Array.isArray(stored)
+  ) {
+    return structuredClone(defaults);
+  }
+
+  const result = structuredClone(defaults);
+
+  for (const key of Object.keys(defaults)) {
+    if (stored[key] === undefined) continue;
+
+    if (
+      defaults[key] &&
+      typeof defaults[key] === 'object' &&
+      !Array.isArray(defaults[key])
+    ) {
+      result[key] = mergeDefaults(defaults[key], stored[key]);
+    } else {
+      result[key] = stored[key];
+    }
+  }
+
+  return result;
+}
+
 export async function loadState(storageKey, defaultState) {
   if (!storageKey) return structuredClone(defaultState);
 
   try {
     const result = await storage.local.get(storageKey);
-    return {
-      ...structuredClone(defaultState),
-      ...(result[storageKey] ?? {})
-    };
+    return mergeDefaults(defaultState, result[storageKey]);
   } catch (error) {
     console.error(`Failed to load state for key "${storageKey}":`, error);
     return structuredClone(defaultState);
