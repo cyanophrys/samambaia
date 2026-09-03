@@ -1,0 +1,17 @@
+{
+  "name": "samambaia",
+  "version": "1.0.0",
+  "description": "A simple script manager.",
+  "author": "Raul Sousa",
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyanophrys/samambaia.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cyanophrys/samambaia/issues"
+  },
+  "homepage": "https://github.com/cyanophrys/samambaia#readme",
+  "scripts": {}
+}
