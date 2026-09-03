@@ -15,10 +15,10 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import '/src/components/smb-alert-dialog/smb-alert-dialog.js';
-import '/src/components/smb-dialog/smb-dialog.js';
-import '/src/components/smb-stack/smb-stack.js';
-import '/src/components/smb-toast/smb-toast.js';
+import '../components/smb-alert-dialog/smb-alert-dialog.js';
+import '../components/smb-dialog/smb-dialog.js';
+import '../components/smb-stack/smb-stack.js';
+import '../components/smb-toast/smb-toast.js';
 
 import {
   clearField,
