@@ -45,6 +45,7 @@ const MAX_RECENT_SCRIPTS = 30;
 const MAX_SCRIPT_NAME_LENGTH = 128;
 const MAX_SCRIPT_CONTENT_LENGTH = 5000;
 const MAX_SCRIPT_NOTES_LENGTH = 1000;
+const RENDER_CHUNK_SIZE = 250;
 
 const PSEUDO_LABELS = [
   'all',
@@ -222,14 +223,23 @@ export async function renderScripts() {
   );
 
   const container = document.getElementById('custom-scripts');
+  container.replaceChildren();
 
-  container.replaceChildren(
-    ...scripts.map((script, index) => {
-      const item = createScriptElement(script);
-      item.dataset.index = index;
-      return item;
-    })
-  );
+  for (let i = 0; i < scripts.length; i += RENDER_CHUNK_SIZE) {
+    const fragment = document.createDocumentFragment();
+    const end = Math.min(i + RENDER_CHUNK_SIZE, scripts.length);
+
+    for (let j = i; j < end; j++) {
+      const item = createScriptElement(scripts[j]);
+      item.dataset.index = j;
+      fragment.appendChild(item);
+    }
+
+    container.appendChild(fragment);
+
+    if (end < scripts.length)
+      await new Promise(requestAnimationFrame);
+  }
 
   updateClearRecentScriptsButton();
   updateScriptsCount(scripts.length);
