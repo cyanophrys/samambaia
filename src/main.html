@@ -284,7 +284,7 @@
         </div>
       </form>
     </div>
-    <button slot="footer-left" class="button" type="button" data-action="closeDialog" data-target="script-dialog" data-i18n="cancel"></button>
+    <button slot="footer-left" class="button" type="button" data-target="script-dialog" data-i18n="cancel" data-dialog-close></button>
     <button slot="footer-right" class="button suggested-action" type="submit" form="script-form"></button>
   </smb-dialog>
   <smb-dialog id="label-dialog" style="--dialog-width: 420px;">
@@ -311,7 +311,7 @@
       </form>
       <div id="label-dialog-toast" class="toast-container"></div>
     </div>
-    <button slot="footer-left" class="button" type="button" data-action="closeDialog" data-target="label-dialog" data-i18n="cancel"></button>
+    <button slot="footer-left" class="button" type="button" data-target="label-dialog" data-i18n="cancel" data-dialog-close></button>
     <button id="label-save-button" slot="footer-right" class="button suggested-action" type="submit" form="label-form"></button>
   </smb-dialog>
   <smb-dialog id="labels-selection-dialog" data-i18n-attr="dialog-title:selectLabels" style="--dialog-width: 400px;">
@@ -360,7 +360,7 @@
         </form>
       </section>
     </div>
-    <button slot="footer-left" class="button" type="button" data-action="closeDialog" data-target="variable-dialog" data-i18n="cancel"></button>
+    <button slot="footer-left" class="button" type="button" data-target="variable-dialog" data-i18n="cancel" data-dialog-close></button>
     <button slot="footer-right" class="button suggested-action" type="submit" form="variable-form" data-action="saveVariable"></button>
   </smb-dialog>
   <smb-dialog id="settings-dialog" data-i18n-attr="dialog-title:settings" style="--dialog-width: 420px; anchor-name: --settings-dialog-toast;">
@@ -660,7 +660,7 @@
     </button>
   </div>
   <div id="more-actions-menu" class="menu" style="position-anchor: --more-actions-button" role="menu" data-i18n-attr="aria-label:viewMore" popover>
-    <button class="menu-item" role="menuitem" data-action="openDialog" data-target="shortcuts-dialog">
+    <button class="menu-item" role="menuitem" data-action="openShortcutsDialog">
       <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M170.69-224.04q-28.43 0-48.35-19.92-19.92-19.91-19.92-48.35v-379.42q0-28.44 19.92-48.35Q142.26-740 170.69-740h619.42q28.44 0 48.36 19.92 19.91 19.91 19.91 48.35v379.42q0 28.44-19.91 48.35-19.92 19.92-48.36 19.92H170.69Zm0-55.96h619.42q4.62 0 8.47-3.85 3.84-3.84 3.84-8.46v-379.42q0-4.62-3.84-8.46-3.85-3.85-8.47-3.85H170.69q-4.61 0-8.46 3.85-3.85 3.84-3.85 8.46v379.42q0 4.62 3.85 8.46 3.85 3.85 8.46 3.85Zm154.73-48.65h309.16v-66.73H325.42v66.73Zm-118.38-120h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm-480-120h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73ZM158.38-280v-404.04V-280Z"/></svg>
       <span data-i18n="keyboardShortcuts"></span>
       <div data-shortcut-display="openShortcuts"></div>

@@ -25,11 +25,6 @@ import {
 } from './db.js';
 
 import {
-  closeDialog,
-  openDialog,
-} from './utils.js';
-
-import {
   PALETTE_COLORS,
 } from './config.js';
 
@@ -120,7 +115,7 @@ export function addLabel() {
   dialog.subtitle = '';
   if (saveButton) saveButton.textContent = t('add');
 
-  openDialog('label-dialog');
+  dialog.showModal();
 }
 
 export async function editLabel(element) {
@@ -146,7 +141,7 @@ export async function editLabel(element) {
   dialog.subtitle = label.name;
   if (saveButton) saveButton.textContent = t('edit');
 
-  openDialog('label-dialog');
+  dialog.showModal();
 }
 
 export async function deleteLabel(element) {
@@ -205,7 +200,8 @@ export async function saveLabel() {
   const normalizeName = value =>
     value.trim().replace(/\s+/g, ' ').toLowerCase();
 
-  const form = document.getElementById('label-form');
+  const dialog = document.getElementById('label-dialog');
+  const form = dialog.querySelector('form');
   const id = form.elements['id'].value ? Number(form.elements['id'].value) : undefined;
   const name = form.elements['name'].value.trim().replace(/\s+/g, ' ');
   const color = getLabelColor(form.elements['label-color']?.value);
@@ -244,7 +240,7 @@ export async function saveLabel() {
     : { id, name, color };
 
   await saveLabelData(labelData);
-  closeDialog('label-dialog');
+  dialog.close();
   await renderLabels();
 
   const message = id
@@ -288,7 +284,7 @@ export async function openLabelsSelectionDialog() {
 
   await renderScriptLabelsList();
 
-  openDialog(dialog);
+  dialog.showModal();
 }
 
 function createScriptLabelRow(label) {
