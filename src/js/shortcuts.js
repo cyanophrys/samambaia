@@ -55,8 +55,7 @@ export const KEYBOARD_SHORTCUTS = [
   },
   {
     name: "openShortcuts",
-    action: "openDialog",
-    target: "shortcuts-dialog",
+    action: "openShortcutsDialog",
     alt: true,
     key: "?",
   },

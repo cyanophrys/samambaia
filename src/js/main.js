@@ -22,8 +22,6 @@ import '../components/smb-toast/smb-toast.js';
 
 import {
   clearField,
-  closeDialog,
-  openDialog,
   getManifestInfo,
   handleAction,
   toggleSidebar,
@@ -153,7 +151,6 @@ const actions = {
     clearField,
     clearRecentScripts,
     clearScratchpad,
-    closeDialog: (target) => closeDialog(target?.dataset?.target ?? target),
     copyScratchpad,
     copyScript,
     deleteLabel,
@@ -168,9 +165,9 @@ const actions = {
     moveScriptNext,
     moveScriptPrevious,
     openAboutDialog,
-    openDialog: (target) => openDialog(target?.dataset?.target ?? target),
     openLabelsSelectionDialog,
     openSettingsDialog: (target) => openSettingsDialog(target?.dataset?.page),
+    openShortcutsDialog,
     restoreBackup,
     scrollScriptsView,
     searchAllScripts,
@@ -287,7 +284,7 @@ function openSettingsDialog(page = 'appearance') {
   const stack = dialog.querySelector('smb-stack');
 
   stack.show(page);
-  openDialog(dialog);
+  dialog.showModal();
 }
 
 async function openAboutDialog() {
@@ -309,7 +306,13 @@ async function openAboutDialog() {
     console.error(error);
   }
 
-  openDialog(dialog);
+  dialog.showModal();
+}
+
+function openShortcutsDialog() {
+  const dialog = document.getElementById('shortcuts-dialog');
+
+  dialog.showModal();
 }
 
 async function wipeData() {

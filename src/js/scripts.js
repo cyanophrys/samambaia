@@ -7,11 +7,6 @@ import {
 } from './db.js';
 
 import {
-  closeDialog,
-  openDialog,
-} from './utils.js';
-
-import {
   PALETTE_COLORS,
 } from './config.js';
 
@@ -270,7 +265,7 @@ export function addScript() {
   dialog.subtitle = '';
   if (saveButton) saveButton.textContent = t('add');
 
-  openDialog('script-dialog');
+  dialog.showModal();
 }
 
 export async function editScript(element) {
@@ -299,11 +294,12 @@ export async function editScript(element) {
   dialog.subtitle = script.name;
   if (saveButton) saveButton.textContent = t('edit');
 
-  openDialog('script-dialog');
+  dialog.showModal();
 }
 
 export async function saveScript() {
-  const form = document.getElementById('script-form');
+  const dialog = document.getElementById('script-dialog');
+  const form = dialog.querySelector('form');
   const id = form.elements['id'].value || undefined;
   const name = form.elements['name'].value.trim();
   const content = form.elements['content'].value;
@@ -334,7 +330,7 @@ export async function saveScript() {
   };
 
   await saveScriptData(scriptData);
-  closeDialog('script-dialog');
+  dialog.close();
   await renderScripts();
 
   const message = id

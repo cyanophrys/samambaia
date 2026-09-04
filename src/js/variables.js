@@ -23,11 +23,6 @@ import {
 } from './db.js';
 
 import {
-  closeDialog,
-  openDialog,
-} from './utils.js';
-
-import {
   applyTranslations,
   t,
 } from './i18n.js';
@@ -134,7 +129,7 @@ export function addVariable() {
   dialog.subtitle = '';
   if (saveButton) saveButton.textContent = t('add');
 
-  openDialog('variable-dialog');
+  dialog.showModal();
 }
 
 export async function editVariable(element) {
@@ -155,11 +150,12 @@ export async function editVariable(element) {
   dialog.subtitle = variable.name;
   if (saveButton) saveButton.textContent = t('edit');
 
-  openDialog('variable-dialog');
+  dialog.showModal();
 }
 
 export async function saveVariable() {
-  const form = document.getElementById('variable-form');
+  const dialog = document.getElementById('variable-dialog');
+  const form = dialog.querySelector('form');
   const id = form.elements['id'].value ? Number(form.elements['id'].value) : undefined;
   const rawName = form.elements['name'].value.trim();
   const name = rawName.replace(/[^a-zA-Z0-9_-]/g, '');
@@ -201,7 +197,7 @@ export async function saveVariable() {
     : { id, name, value: '' };
 
   await saveVariableData(variableData);
-  closeDialog('variable-dialog');
+  dialog.close();
   await renderVariables();
 
   const message = id
