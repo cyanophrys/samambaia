@@ -119,6 +119,75 @@ export const KEYBOARD_SHORTCUTS = [
   },
 ];
 
+export function handleShortcut(event, actions, shortcuts) {
+  const target = event.target;
+
+  if (
+    !event.ctrlKey &&
+    !event.metaKey &&
+    !event.altKey &&
+    (
+      target instanceof HTMLInputElement ||
+      target instanceof HTMLTextAreaElement ||
+      target instanceof HTMLSelectElement ||
+      target.isContentEditable
+    )
+  ) return;
+
+  const shortcutString = [
+    (event.ctrlKey || event.metaKey) && "ctrl",
+    event.shiftKey && "shift",
+    event.altKey && "alt",
+    event.key.toLowerCase(),
+  ].filter(Boolean).join("+");
+
+  const element = document.querySelector(`[data-keyboard-shortcut="${shortcutString}"]`);
+
+  if (element) {
+    event.preventDefault();
+
+    if (
+      element instanceof HTMLInputElement ||
+      element instanceof HTMLTextAreaElement ||
+      element instanceof HTMLSelectElement
+    ) {
+      element.focus();
+    } else if (
+      element instanceof HTMLButtonElement ||
+      element instanceof HTMLAnchorElement ||
+      element.dataset.action
+    ) {
+      element.click();
+    } else {
+      element.focus();
+    }
+
+    return;
+  }
+
+  const shortcut = shortcuts.find((shortcut) => {
+    return (
+      shortcut.key.toLowerCase() === event.key.toLowerCase() &&
+      !!shortcut.ctrl === (event.ctrlKey || event.metaKey) &&
+      !!shortcut.alt === event.altKey &&
+      (shortcut.shift ? event.shiftKey : true)
+    );
+  });
+
+  if (!shortcut) return;
+
+  const handler = actions.click?.[shortcut.action];
+  if (!handler) return;
+
+  event.preventDefault();
+
+  const targetElement = shortcut.target
+    ? document.getElementById(shortcut.target) ?? document.querySelector(shortcut.target) ?? shortcut.target
+    : null;
+
+  handler(targetElement, event, targetElement);
+}
+
 export function applyShortcutDisplays() {
   const keyLabels = {
     ArrowLeft: "←",
