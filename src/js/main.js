@@ -128,6 +128,10 @@ import {
 } from './menu.js';
 
 import {
+  bindDialogEvents,
+} from './dialog.js';
+
+import {
   applyTranslations,
   t,
 } from './i18n.js';
@@ -258,6 +262,7 @@ function bindEvents() {
 
   bindTooltipEvents();
   bindMenuBehaviors();
+  bindDialogEvents();
 
   document.addEventListener('label:changed', renderScripts);
   document.addEventListener('recentScripts:changed', filterScripts);
