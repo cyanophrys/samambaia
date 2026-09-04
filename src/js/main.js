@@ -26,7 +26,6 @@ import {
   openDialog,
   getManifestInfo,
   handleAction,
-  handleShortcut,
   toggleSidebar,
   syncFormControlState,
 } from './utils.js';
@@ -118,6 +117,7 @@ import {
 import {
   applyAriaKeyshortcuts,
   applyShortcutDisplays,
+  handleShortcut,
   KEYBOARD_SHORTCUTS,
 } from './shortcuts.js';
 
