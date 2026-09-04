@@ -67,22 +67,6 @@ export function clearField(target) {
   field.dispatchEvent(new Event('input', { bubbles: true }));
 }
 
-export function openDialog(target) {
-  const dialog = typeof target === 'string'
-    ? document.getElementById(target)
-    : target;
-
-  if (dialog) dialog.showModal();
-}
-
-export function closeDialog(target) {
-  const dialog = typeof target === 'string'
-    ? document.getElementById(target)
-    : target;
-
-  if (dialog) dialog.close();
-}
-
 export function syncFormControlState(name, value) {
   const element = document.querySelector(`input[name="${name}"]`);
   if (!element) return;
