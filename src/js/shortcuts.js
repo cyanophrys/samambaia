@@ -74,8 +74,7 @@ export const KEYBOARD_SHORTCUTS = [
   },
   {
     name: "searchScripts",
-    action: "activate",
-    target: "scripts-search-input",
+    action: "focusScriptsSearch",
     alt: true,
     key: "s",
   },
