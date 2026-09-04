@@ -65,7 +65,13 @@ export class SmbDialog extends HTMLElement {
     this.#title = this.shadowRoot.getElementById('dialog-title');
     this.#subtitle = this.shadowRoot.getElementById('dialog-subtitle');
 
-    this.shadowRoot.getElementById('close-button').addEventListener('click', () => this.close());
+    const closeButton = this.shadowRoot.getElementById('close-button');
+    closeButton.addEventListener('click', () => this.close());
+
+    this.addEventListener('click', (event) => {
+      if (event.target.closest('[data-dialog-close]'))
+        this.close();
+    });
 
     const footer = this.shadowRoot.querySelector('footer');
     const slots = this.shadowRoot.querySelectorAll('slot[name]');
