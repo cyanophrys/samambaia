@@ -22,6 +22,7 @@ import '../components/smb-toast/smb-toast.js';
 
 import {
   clearField,
+  debounce,
   getManifestInfo,
   handleAction,
   toggleSidebar,
@@ -186,8 +187,8 @@ const actions = {
   },
 
   input: {
-    filterScripts,
-    filterScriptLabels,
+    filterScripts: debounce(filterScripts, 150),
+    filterScriptLabels: debounce(filterScriptLabels, 150),
     handleVariableValueInput,
     handleScratchpadInput,
   },
