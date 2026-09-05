@@ -1166,6 +1166,8 @@ svg {
   transition:
     background-color var(--transition-medium),
     outline-color var(--transition-medium);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 100px;
 
   &:focus-visible {
     outline-color: var(--focus-outline-color);
@@ -1446,6 +1448,9 @@ svg {
 
 .label-item,
 .variable-item {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 44px;
+
   .menu .unpin-icon {
     display: none;
   }
