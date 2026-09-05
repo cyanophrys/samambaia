@@ -513,9 +513,9 @@ export function filterScripts() {
     && query.length > 0;
 
   scriptItems.forEach(script => {
-    const text = script.textContent.toLowerCase();
     const matchesLabel = searchAll || scriptMatchesLabel(script);
-    const isVisible = matchesLabel && text.includes(query);
+    const isVisible = matchesLabel
+      && (!query || script.textContent.toLowerCase().includes(query));
 
     script.hidden = !isVisible;
 
@@ -525,10 +525,14 @@ export function filterScripts() {
 
   updateDragHandles();
 
-  const highlightTargets = document.querySelectorAll(
-    '.script-item:not([hidden]) :is(h4, .content, .notes)'
-  );
-  highlightQuery(highlightTargets, query.length >= 2 ? query : '');
+  if (query.length >= 2) {
+    const highlightTargets = document.querySelectorAll(
+      '.script-item:not([hidden]) :is(h4, .content, .notes)'
+    );
+    highlightQuery(highlightTargets, query);
+  } else {
+    highlightQuery([], '');
+  }
 
   if (stack) {
     let page = 'scripts';
