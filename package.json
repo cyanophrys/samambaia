@@ -13,5 +13,10 @@
     "url": "https://github.com/cyanophrys/samambaia/issues"
   },
   "homepage": "https://github.com/cyanophrys/samambaia#readme",
-  "scripts": {}
+  "scripts": {
+    "build": "node build.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
 }
