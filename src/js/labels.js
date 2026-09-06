@@ -36,7 +36,22 @@ import {
 const MAX_LABEL_NAME_LENGTH = 128;
 
 let cachedLabels = [];
+let labelItemTemplate;
 let selectedScriptLabels = [];
+let scriptLabelRowTemplate;
+
+function getLabelItemTemplate() {
+  if (!labelItemTemplate) {
+    labelItemTemplate = document.getElementById('label-item-template');
+    applyTranslations(labelItemTemplate.content);
+  }
+
+  return labelItemTemplate;
+}
+
+function getScriptLabelRowTemplate() {
+  return scriptLabelRowTemplate ??= document.getElementById('script-label-row-template');
+}
 
 function getLabelColor(color) {
   return PALETTE_COLORS.includes(color)
@@ -60,10 +75,8 @@ export async function renderLabels() {
 }
 
 export function createLabelElement(label) {
-  const template = document.querySelector('#label-item-template');
+  const template = getLabelItemTemplate();
   const item = template.content.firstElementChild.cloneNode(true);
-
-  applyTranslations(item);
 
   item.dataset.target = label.id;
   item.setAttribute('aria-label', label.name);
@@ -288,7 +301,7 @@ export async function openLabelsSelectionDialog() {
 }
 
 function createScriptLabelRow(label) {
-  const template = document.querySelector('#script-label-row-template');
+  const template = getScriptLabelRowTemplate();
   const row = template.content.firstElementChild.cloneNode(true);
 
   const input = row.querySelector('input');

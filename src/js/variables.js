@@ -32,6 +32,16 @@ const VARIABLE_TOKEN_PATTERN = /\{\{\s*([a-zA-Z0-9_-]+)\s*\}\}/g;
 
 let cachedVariables = [];
 let debounceTimeout = null;
+let variableItemTemplate = null;
+
+function getVariableItemTemplate() {
+  if (!variableItemTemplate) {
+    variableItemTemplate = document.getElementById('variable-item-template');
+    applyTranslations(variableItemTemplate.content);
+  }
+
+  return variableItemTemplate;
+}
 
 export async function renderVariables() {
   const pinnedContainer = document.getElementById('pinned-variables');
@@ -67,10 +77,8 @@ export async function renderVariables() {
 }
 
 export function createVariableElement(variable) {
-  const template = document.querySelector('#variable-item-template');
+  const template = getVariableItemTemplate();
   const item = template.content.firstElementChild.cloneNode(true);
-
-  applyTranslations(item);
 
   item.dataset.target = variable.id;
   item.dataset.pinned = variable.pinned ? 'true' : 'false';
