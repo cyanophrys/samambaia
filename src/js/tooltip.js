@@ -52,11 +52,20 @@ export function bindTooltipEvents() {
     inputModality = 'pointer';
 
     const element = findTooltipTarget(event);
-    if (element) show(element);
+    if (!element) return;
+
+    if (element.contains(event.relatedTarget)) return;
+
+    show(element);
   });
 
   document.addEventListener('pointerout', (event) => {
-    if (findTooltipTarget(event)) hide();
+    const element = findTooltipTarget(event);
+    if (!element) return;
+
+    if (element.contains(event.relatedTarget)) return;
+
+    hide();
   });
 
   document.addEventListener('pointerdown', () => {
