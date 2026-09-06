@@ -49,7 +49,17 @@ const PSEUDO_LABELS = [
 ];
 
 let scriptsContainer;
+let scriptItemTemplate = null;
 let selectedLabel = 'all';
+
+function getScriptItemTemplate() {
+  if (!scriptItemTemplate) {
+    scriptItemTemplate = document.getElementById('script-item-template');
+    applyTranslations(scriptItemTemplate.content);
+  }
+
+  return scriptItemTemplate;
+}
 
 export function getScriptColor(color) {
   return PALETTE_COLORS.includes(color)
@@ -152,10 +162,8 @@ export function searchScripts() {
 }
 
 export function createScriptElement(script) {
-  const template = document.querySelector('#script-item-template');
+  const template = getScriptItemTemplate();
   const item = template.content.firstElementChild.cloneNode(true);
-
-  applyTranslations(item);
 
   item.dataset.target = script.id;
   item.dataset.labels = (script.labels?.length ? script.labels.map(String) : ['none']).join(' ');
