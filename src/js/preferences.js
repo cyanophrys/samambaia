@@ -52,7 +52,7 @@ const DEFAULT_PREFERENCES = {
   sidebars: {
     labels: true,
     scratchpad: false,
-    variables: false,
+    variables: true,
   },
   theme: 'system',
   viewMode: 'grid',
