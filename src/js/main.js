@@ -203,6 +203,7 @@ const actions = {
 async function init() {
   const pendingToast = sessionStorage.getItem('pendingToast');
   const manifest = await getManifestInfo();
+  const loading = document.querySelector('.loading');
 
   document.title = manifest.name;
   document.documentElement.lang = chrome.i18n.getUILanguage();
@@ -231,6 +232,12 @@ async function init() {
   toggleLabelsSidebar(userPreferences.sidebars.labels);
   toggleScratchpadSidebar(userPreferences.sidebars.scratchpad);
   toggleVariablesSidebar(userPreferences.sidebars.variables);
+
+  loading?.setAttribute('hidden', '');
+
+  requestAnimationFrame(() => {
+    document.body.classList.remove('hidden');
+  });
 
   if (pendingToast) {
     sessionStorage.removeItem('pendingToast');
