@@ -584,7 +584,6 @@ export function filterByLabel(target) {
       ? target
       : target.dataset.target
   );
-  const searchInput = document.getElementById('scripts-search-input');
   const element = getScriptsContainer();
 
   selectedLabel = label;
