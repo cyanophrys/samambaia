@@ -77,7 +77,7 @@
   "yellow": { "message": "Yellow" },
   "noColor": { "message": "No color" },
 
-  "addFirstScript": { "message": "Add your first script to get started" },
+  "addFirstScript": { "message": "Add your first script to get started or restore an existing backup" },
   "noFavorites": { "message": "No favorites" },
   "noFavoritesDescription": { "message": "Favorite scripts will appear here" },
   "noRecentHistory": { "message": "No history" },
