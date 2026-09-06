@@ -259,7 +259,8 @@ body {
   transform: translateY(20px);
   animation: show-scroll-button linear both;
   animation-timeline: --scripts-scroll-timeline;
-  animation-range: 10% 20%;
+  animation-range: 50px 150px;
+  z-index: 999;
 
   > svg {
     width: 32px;
