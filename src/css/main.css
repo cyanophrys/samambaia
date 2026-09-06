@@ -251,7 +251,7 @@ body {
   bottom: anchor(bottom);
   right: anchor(right);
   margin: 0 var(--spacing-lg) var(--spacing-sm) 0;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 20%);
+  box-shadow: 0 2px 15px rgb(0 0 0 / 50%);
   width: 48px;
   height: 48px;
   opacity: 0;
@@ -259,7 +259,8 @@ body {
   transform: translateY(20px);
   animation: show-scroll-button linear both;
   animation-timeline: --scripts-scroll-timeline;
-  animation-range: 10% 20%;
+  animation-range: 50px 150px;
+  z-index: 1;
 
   > svg {
     width: 32px;
