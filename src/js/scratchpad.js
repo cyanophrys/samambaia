@@ -22,12 +22,22 @@ import {
 } from './db.js';
 
 import {
+  debounce,
+} from './utils.js';
+
+import {
   t,
 } from './i18n.js';
 
 const MAX_SCRATCHPAD_LENGTH = 10000;
 
-let debounceTimeout = null;
+const debouncedSaveScratchpad = debounce(async text => {
+  try {
+    await saveScratchpadData(text);
+  } catch (error) {
+    console.error(error);
+  }
+}, 500);
 
 function updateScratchpadButtons() {
   const textarea = document.querySelector('[data-action="handleScratchpadInput"]');
@@ -73,17 +83,7 @@ export function handleScratchpadInput(value, event) {
 
   updateScratchpadButtons();
 
-  clearTimeout(debounceTimeout);
-
-  const textValue = textarea.value;
-
-  debounceTimeout = setTimeout(async () => {
-    try {
-      await saveScratchpadData(textValue);
-    } catch (error) {
-      console.error(error);
-    }
-  }, 500);
+  debouncedSaveScratchpad(textarea.value);
 }
 
 export async function copyScratchpad() {
