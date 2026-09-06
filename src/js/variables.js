@@ -23,6 +23,10 @@ import {
 } from './db.js';
 
 import {
+  debounce,
+} from './utils.js';
+
+import {
   applyTranslations,
   t,
 } from './i18n.js';
@@ -30,8 +34,15 @@ import {
 const MAX_VARIABLE_NAME_LENGTH = 128;
 const VARIABLE_TOKEN_PATTERN = /\{\{\s*([a-zA-Z0-9_-]+)\s*\}\}/g;
 
+const debouncedSaveVariable = debounce(async variableData => {
+  try {
+    await saveVariableData(variableData, false);
+  } catch (error) {
+    console.error(error);
+  }
+}, 500);
+
 let cachedVariables = [];
-let debounceTimeout = null;
 let variableItemTemplate = null;
 
 function getVariableItemTemplate() {
@@ -264,19 +275,7 @@ export function handleVariableValueInput(value, event) {
 
   variable.value = input.value;
 
-  clearTimeout(debounceTimeout);
-
-  const variableData = {
-    ...variable,
-  };
-
-  debounceTimeout = setTimeout(async () => {
-    try {
-      await saveVariableData(variableData, false);
-    } catch (error) {
-      console.error(error);
-    }
-  }, 500);
+  debouncedSaveVariable({ ...variable });
 }
 
 export function applyVariables(content) {
