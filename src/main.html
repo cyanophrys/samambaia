@@ -6,8 +6,17 @@
   <meta name="color-scheme" content="light dark">
   <script src="js/appearance.js"></script>
   <style>
-    :not(:defined) {
-      visibility: hidden;
+    :not(:defined),
+    body.hidden #layout,
+    body.hidden #layout * {
+      visibility: hidden !important;
+    }
+
+    .loading {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
     }
   </style>
   <link rel="stylesheet" href="css/reset.css">
@@ -15,8 +24,11 @@
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body class="hidden">
   <div class="tooltip" popover="manual" role="tooltip"></div>
+  <div class="loading">
+    <div class="spinner"></div>
+  </div>
   <div id="layout">
     <aside id="sidebar" data-i18n-attr="aria-label:mainNavigation">
       <header class="header vertical">
