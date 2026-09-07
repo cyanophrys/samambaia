@@ -60,7 +60,7 @@ export const userPreferences = createStore(
   }
 );
 
-export function syncFormControlState(name, value) {
+export function updatePreferenceControl(name, value) {
   const element = document.querySelector(`input[name="${name}"]`);
   if (!element) return;
 
@@ -129,7 +129,7 @@ export function setTheme(value) {
     root.dataset.theme = theme;
   }
 
-  syncFormControlState('theme', theme);
+  updatePreferenceControl('theme', theme);
 
   body.classList.add('transitions-disabled');
 
@@ -148,7 +148,7 @@ export function setAccentColor(value, event) {
 
   userPreferences.accentColor = accentColor;
   document.documentElement.setAttribute('data-accent-color', accentColor);
-  syncFormControlState('accent-color', accentColor);
+  updatePreferenceControl('accent-color', accentColor);
 }
 
 export function setLargeText(value, event) {
@@ -158,7 +158,7 @@ export function setLargeText(value, event) {
 
   userPreferences.largeText = isLargeTextEnabled;
   document.documentElement.setAttribute('data-large-text', isLargeTextEnabled);
-  syncFormControlState('large-text', isLargeTextEnabled);
+  updatePreferenceControl('large-text', isLargeTextEnabled);
 }
 
 export function setHighContrast(value, event) {
@@ -170,7 +170,7 @@ export function setHighContrast(value, event) {
 
   userPreferences.highContrast = isHighContrastEnabled;
   root.setAttribute('data-high-contrast', isHighContrastEnabled);
-  syncFormControlState('high-contrast', isHighContrastEnabled);
+  updatePreferenceControl('high-contrast', isHighContrastEnabled);
 
   body.classList.add('transitions-disabled');
 
@@ -210,7 +210,7 @@ export function setBackupReminder(value, event) {
     ?? DEFAULT_PREFERENCES.backupReminder ?? true;
 
   userPreferences.backupReminder = isEnabled;
-  syncFormControlState('backup-reminder', isEnabled);
+  updatePreferenceControl('backup-reminder', isEnabled);
 
   document.dispatchEvent(new Event('backupReminder:changed'));
 }
@@ -221,7 +221,7 @@ export function setRecentScripts(value, event) {
     ?? DEFAULT_PREFERENCES.recentScripts;
 
   userPreferences.recentScripts = isEnabled;
-  syncFormControlState('recent-scripts', isEnabled);
+  updatePreferenceControl('recent-scripts', isEnabled);
 
   document.dispatchEvent(new Event('recentScripts:changed'));
 }
