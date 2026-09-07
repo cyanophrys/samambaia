@@ -38,22 +38,6 @@ export function handleAction(event, actions) {
   handler(param, event, element);
 }
 
-export function toggleSidebar(button, value) {
-  if (!(button instanceof HTMLElement)) return;
-
-  const sidebar = document.getElementById(button.getAttribute('aria-controls'));
-  if (!sidebar) return;
-
-  const isCollapsed = typeof value === 'boolean'
-    ? !value
-    : !sidebar.hasAttribute('data-collapsed');
-
-  sidebar.toggleAttribute('data-collapsed', isCollapsed);
-  button.setAttribute('aria-expanded', String(!isCollapsed));
-
-  return !isCollapsed;
-}
-
 export function clearField(target) {
   const field = target.dataset.target
     ? document.getElementById(target.dataset.target)
@@ -65,18 +49,6 @@ export function clearField(target) {
   field.value = '';
   field.focus();
   field.dispatchEvent(new Event('input', { bubbles: true }));
-}
-
-export function syncFormControlState(name, value) {
-  const element = document.querySelector(`input[name="${name}"]`);
-  if (!element) return;
-
-  if (element.type === 'checkbox') {
-    element.checked = Boolean(value);
-  } else if (element.type === 'radio') {
-    const targetElement = document.querySelector(`input[name="${name}"][value="${value}"]`);
-    if (targetElement) targetElement.checked = true;
-  }
 }
 
 export function announce(message) {
