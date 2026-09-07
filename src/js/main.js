@@ -25,8 +25,6 @@ import {
   debounce,
   getManifestInfo,
   handleAction,
-  toggleSidebar,
-  syncFormControlState,
 } from './utils.js';
 
 import {
@@ -145,7 +143,6 @@ const actions = {
     setLargeText,
     setRecentScripts,
     setTheme,
-    syncFormControlState,
     toggleScriptLabel,
   },
 
