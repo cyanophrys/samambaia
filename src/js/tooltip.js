@@ -1,6 +1,6 @@
 const tooltip = document.querySelector('.tooltip');
 
-const SHOW_DELAY = 100;
+const SHOW_DELAY = 500;
 
 let showTimer = 0;
 let anchorId = 0;
