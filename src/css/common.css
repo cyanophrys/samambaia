@@ -1290,6 +1290,7 @@ svg {
     border: 1px solid var(--border-hc-color);
     border-radius: var(--radius-md);
     background-color: color-mix(in srgb, currentColor 8%, transparent);
+    user-select: text;
 
     svg,
     span {
