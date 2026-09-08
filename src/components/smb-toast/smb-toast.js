@@ -30,7 +30,7 @@ const template = document.createElement('template');
 template.innerHTML = `
   <div role="status" aria-live="polite">
     <span class="message"></span>
-    <button type="button" class="button close-button" data-i18n-attr="aria-label:close">
+    <button id="close-button" class="button small" type="button" data-i18n-attr="aria-label:close">
       <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="m330.38-290.27-40.11-40.11L440.39-480 290.27-629.12l40.11-40.11L480-519.11l149.12-150.12 40.11 40.11L519.11-480l150.12 149.62-40.11 40.11L480-440.39 330.38-290.27Z"/></svg>
     </button>
   </div>
@@ -65,7 +65,7 @@ export class SmbToast extends HTMLElement {
 
     this.#toast = this.shadowRoot.querySelector('div');
     this.#message = this.shadowRoot.querySelector('.message');
-    this.#closeButton = this.shadowRoot.querySelector('.close-button');
+    this.#closeButton = this.shadowRoot.getElementById('close-button');
 
     this.#closeButton.addEventListener('click', () => this.close());
 
