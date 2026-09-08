@@ -360,7 +360,7 @@ svg {
     }
   }
 
-  &.icon-button {
+  &:has(> svg):not(:has(> :not(svg))) {
     width: 32px;
     height: 32px;
     flex-shrink: 0;
