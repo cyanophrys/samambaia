@@ -139,7 +139,7 @@ svg {
   flex-shrink: 0;
 }
 
-.scrollable-area {
+:where(.scrollable-area) {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -258,7 +258,7 @@ svg {
   }
 }
 
-.button {
+:where(.button) {
   display: grid;
   place-items: center;
   padding: var(--spacing-xs) var(--spacing-sm);
