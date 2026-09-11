@@ -15,25 +15,6 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-export function handleAction(event, actions) {
-  const ignored = event.target.closest('[data-action-ignore]');
-  if (ignored) return;
-
-  const element = event.target.closest('[data-action]');
-  if (!element) return;
-
-  const { action, target } = element.dataset;
-  const eventType = event.type;
-
-  const handler = actions[eventType]?.[action];
-  if (!handler) return;
-
-  if (event.type === 'submit') event.preventDefault();
-
-  const param = eventType === 'change' ? event.target.value : element;
-  handler(param, event, element);
-}
-
 export function debounce(fn, delay) {
   let timeout = null;
 
