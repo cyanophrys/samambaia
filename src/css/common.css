@@ -991,6 +991,7 @@ svg {
     white-space: nowrap;
     transition: background-color var(--transition-medium);
     cursor: pointer;
+    user-select: none;
 
     &:hover {
       background-color: color-mix(in srgb, currentColor 10%, transparent);
