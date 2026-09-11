@@ -256,3 +256,9 @@ export function applyAriaKeyshortcuts() {
     });
   }
 }
+
+export function openShortcutsDialog() {
+  const dialog = document.getElementById('shortcuts-dialog');
+
+  dialog.showModal();
+}

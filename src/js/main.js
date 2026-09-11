@@ -116,6 +116,7 @@ import {
   applyShortcutDisplays,
   handleShortcut,
   KEYBOARD_SHORTCUTS,
+  openShortcutsDialog,
 } from './shortcuts.js';
 
 import {
@@ -316,12 +317,6 @@ async function openAboutDialog() {
   } catch (error) {
     console.error(error);
   }
-
-  dialog.showModal();
-}
-
-function openShortcutsDialog() {
-  const dialog = document.getElementById('shortcuts-dialog');
 
   dialog.showModal();
 }
