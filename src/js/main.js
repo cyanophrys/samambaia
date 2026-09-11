@@ -24,7 +24,6 @@ import '../components/smb-toast/smb-toast.js';
 
 import {
   debounce,
-  getManifestInfo,
   handleAction,
 } from './utils.js';
 
@@ -120,6 +119,11 @@ import {
   KEYBOARD_SHORTCUTS,
   openShortcutsDialog,
 } from './shortcuts.js';
+
+import {
+  getManifestInfo,
+  openAboutDialog,
+} from './about.js';
 
 import {
   bindTooltipEvents,
@@ -291,28 +295,6 @@ function bindEvents() {
     updateScriptMoveButtons();
     saveScriptsOrder();
   });
-}
-
-async function openAboutDialog() {
-  const dialog = document.getElementById('about-dialog');
-  const name = dialog.querySelector('#about-name');
-  const version = dialog.querySelector('#about-version');
-  const author = dialog.querySelector('#about-author');
-  const homepage_url = dialog.querySelector('#about-homepage');
-
-  try {
-    const manifest = await getManifestInfo();
-
-    name.textContent = manifest.name;
-    version.textContent = manifest.version;
-    author.textContent = manifest.author;
-    homepage_url.href = manifest.homepage_url;
-    homepage_url.textContent = manifest.homepage_url;
-  } catch (error) {
-    console.error(error);
-  }
-
-  dialog.showModal();
 }
 
 async function wipeData() {

@@ -15,10 +15,6 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-export function getManifestInfo() {
-  return chrome.runtime.getManifest();
-}
-
 export function handleAction(event, actions) {
   const ignored = event.target.closest('[data-action-ignore]');
   if (ignored) return;
