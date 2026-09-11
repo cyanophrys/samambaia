@@ -26,7 +26,7 @@ import {
 
 import {
   getManifestInfo,
-} from './utils.js';
+} from './about.js';
 
 import {
   state,
