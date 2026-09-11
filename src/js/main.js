@@ -37,6 +37,7 @@ import {
 } from './state.js';
 
 import {
+  openPreferencesDialog,
   setAccentColor,
   setBackupReminder,
   setHighContrast,
@@ -169,7 +170,7 @@ const actions = {
     moveScriptPrevious,
     openAboutDialog,
     openLabelsSelectionDialog,
-    openSettingsDialog: (target) => openSettingsDialog(target?.dataset?.page),
+    openPreferencesDialog: (target) => openPreferencesDialog(target?.dataset?.page),
     openShortcutsDialog,
     restoreBackup,
     scrollScriptsView,
@@ -290,13 +291,6 @@ function bindEvents() {
     updateScriptMoveButtons();
     saveScriptsOrder();
   });
-}
-function openSettingsDialog(page = 'appearance') {
-  const dialog = document.getElementById('settings-dialog');
-  const stack = dialog.querySelector('smb-stack');
-
-  stack.show(page);
-  dialog.showModal();
 }
 
 async function openAboutDialog() {
