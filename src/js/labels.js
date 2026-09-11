@@ -291,7 +291,7 @@ function updateScriptLabelsSubtitle() {
 
 export async function openLabelsSelectionDialog() {
   const dialog = document.getElementById('labels-selection-dialog');
-  const input = dialog.querySelector('input[type="search"]');
+  const input = dialog.querySelector('smb-search');
 
   input.value = '';
 
