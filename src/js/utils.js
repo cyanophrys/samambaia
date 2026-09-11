@@ -38,19 +38,6 @@ export function handleAction(event, actions) {
   handler(param, event, element);
 }
 
-export function clearField(target) {
-  const field = target.dataset.target
-    ? document.getElementById(target.dataset.target)
-    : target.previousElementSibling;
-
-  if (!(field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement))
-    return;
-
-  field.value = '';
-  field.focus();
-  field.dispatchEvent(new Event('input', { bubbles: true }));
-}
-
 export function debounce(fn, delay) {
   let timeout = null;
 

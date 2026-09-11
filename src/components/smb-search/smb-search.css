@@ -1,0 +1,71 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+div {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2xs);
+  width: 100%;
+  height: 32px;
+  border: 1px solid var(--border-hc-color);
+  border-radius: var(--radius-max);
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
+  padding: 0 var(--spacing-2xs) 0 var(--spacing-xs);
+  line-height: 1;
+  transition: border-color var(--transition-medium),
+              box-shadow var(--transition-medium);
+
+  &:hover {
+    border-color: var(--accent-color);
+  }
+
+  &:focus-within {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 1px var(--accent-color);
+  }
+
+  &:has(input:disabled) {
+    opacity: var(--disabled-opacity);
+    pointer-events: none;
+  }
+
+  > svg {
+    opacity: var(--dimmed-opacity);
+    width: 24px;
+    height: 24px;
+  }
+
+  input[type="search"] {
+    flex: 1;
+    min-width: 0;
+    padding: var(--spacing-2sm) 0;
+    background-color: transparent;
+    color: inherit;
+    outline: none;
+    border: none;
+
+    &:disabled {
+      opacity: 1;
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+
+  button {
+    display: none;
+    opacity: 0;
+
+    &[data-visible="true"] {
+      display: grid;
+      opacity: 1;
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
+}
