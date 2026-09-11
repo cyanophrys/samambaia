@@ -24,7 +24,6 @@ import '../components/smb-toast/smb-toast.js';
 
 import {
   debounce,
-  handleAction,
 } from './utils.js';
 
 import {
@@ -202,6 +201,25 @@ const actions = {
     saveVariable,
   },
 };
+
+function handleAction(event, actions) {
+  const ignored = event.target.closest('[data-action-ignore]');
+  if (ignored) return;
+
+  const element = event.target.closest('[data-action]');
+  if (!element) return;
+
+  const { action, target } = element.dataset;
+  const eventType = event.type;
+
+  const handler = actions[eventType]?.[action];
+  if (!handler) return;
+
+  if (event.type === 'submit') event.preventDefault();
+
+  const param = eventType === 'change' ? event.target.value : element;
+  handler(param, event, element);
+}
 
 async function init() {
   const pendingToast = sessionStorage.getItem('pendingToast');
