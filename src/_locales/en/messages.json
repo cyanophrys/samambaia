@@ -85,7 +85,7 @@
   "noResultsFound": { "message": "No results found" },
   "noScriptsAdded": { "message": "No scripts added" },
   "recentScriptsOff": { "message": "History is off" },
-  "recentScriptsOffDescription": { "message": "Turn it on in Settings to see recently copied scripts" },
+  "recentScriptsOffDescription": { "message": "Turn it on in Preferences to see recently copied scripts" },
   "tryDifferentSearch": { "message": "Try a different search" },
   "tryDifferentSearchOrAll": { "message": "Try a different search or search all scripts" },
 
@@ -185,10 +185,10 @@
   "scratchpadCleared": { "message": "Scratchpad cleared" },
   "typeSomethingHere": { "message": "Type something here" },
 
-  "settings": { "message": "Settings" },
-  "openSettings": { "message": "Open settings" },
   "appearance": { "message": "Appearance" },
   "accessibility": { "message": "Accessibility" },
+  "openPreferences": { "message": "Open preferences" },
+  "preferences": { "message": "Preferences" },
   "storage": { "message": "Storage" },
 
   "theme": { "message": "Theme" },

@@ -48,8 +48,8 @@ export const KEYBOARD_SHORTCUTS = [
     key: "i",
   },
   {
-    name: "openSettings",
-    action: "openSettingsDialog",
+    name: "openPreferences",
+    action: "openPreferencesDialog",
     alt: true,
     key: ",",
   },

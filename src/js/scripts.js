@@ -432,7 +432,7 @@ export function clearRecentScripts() {
     const toast = document.createElement('smb-toast');
 
     toast.message = t('recentHistoryCleared');
-    toast.show('settings-dialog-toast');
+    toast.show('preferences-dialog-toast');
   }, { once: true });
 
   dialog.showModal();

@@ -60,6 +60,14 @@ export const userPreferences = createStore(
   }
 );
 
+export function openPreferencesDialog(page = 'appearance') {
+  const dialog = document.getElementById('preferences-dialog');
+  const stack = dialog.querySelector('smb-stack');
+
+  stack.show(page);
+  dialog.showModal();
+}
+
 export function updatePreferenceControl(name, value) {
   const element = document.querySelector(`input[name="${name}"]`);
   if (!element) return;
