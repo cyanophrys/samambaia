@@ -37,10 +37,10 @@ div {
     opacity: 0;
     transform: scale(0.9);
   }
-}
 
-span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

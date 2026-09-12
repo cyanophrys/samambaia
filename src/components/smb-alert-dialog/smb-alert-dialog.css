@@ -53,27 +53,27 @@ dialog {
       opacity: 0;
     }
   }
-}
 
-.scrollable-area {
-  text-align: center;
-  padding: var(--spacing-lg);
-}
+  .scrollable-area {
+    text-align: center;
+    padding: var(--spacing-lg);
 
-p {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  text-wrap: pretty;
-}
+    p {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      text-wrap: pretty;
+    }
+  }
 
-slot[name="additional-content"] {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  slot[name="additional-content"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-footer {
-  > button {
-    flex: 1;
+  footer {
+    button {
+      flex: 1;
+    }
   }
 }
