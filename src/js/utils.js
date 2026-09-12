@@ -23,3 +23,17 @@ export function debounce(fn, delay) {
     timeout = setTimeout(() => fn(...args), delay);
   };
 }
+
+export function suppressTransitions(apply) {
+  const body = document.body;
+
+  body.classList.add('transitions-disabled');
+
+  apply();
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      body.classList.remove('transitions-disabled');
+    });
+  });
+}
