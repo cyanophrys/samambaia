@@ -39,35 +39,65 @@ const debouncedSaveScratchpad = debounce(async text => {
   }
 }, 500);
 
-function updateScratchpadButtons() {
-  const textarea = document.querySelector('[data-action="handleScratchpadInput"]');
-  const copyButton = document.querySelector('[data-action="copyScratchpad"]');
-  const clearButton = document.querySelector('[data-action="clearScratchpad"]');
-  const disabled = !textarea?.value.trim();
-
-  if (copyButton)
-    copyButton.disabled = disabled;
-
-  if (clearButton)
-    clearButton.disabled = disabled;
+function getTextareas() {
+  return document.querySelectorAll('[data-action="handleScratchpadInput"]');
 }
 
-export async function initScratchpad() {
-  const textarea = document.querySelector('[data-action="handleScratchpadInput"]');
+function getPrimaryTextarea() {
+  return getTextareas()[0];
+}
 
-  if (!textarea) return;
+function getToastTarget() {
+  const dialog = document.getElementById('scratchpad-dialog');
+
+  return dialog?.open
+    ? 'scratchpad-dialog-toast'
+    : 'main-toast';
+}
+
+function updateScratchpadButtons() {
+  const disabled = !getPrimaryTextarea()?.value.trim();
+
+  document.querySelectorAll(
+    '[data-action="copyScratchpad"], [data-action="clearScratchpad"]'
+  ).forEach(button => {
+    button.disabled = disabled;
+  });
+}
+
+function broadcastScratchpad(text) {
+  document.dispatchEvent(new CustomEvent('scratchpad:changed', {
+    detail: text,
+  }));
+}
+
+function updateScratchpadTextareas(text) {
+  getTextareas().forEach(textarea => {
+    if (textarea.value !== text)
+      textarea.value = text;
+  });
+
+  updateScratchpadButtons();
+}
+
+document.addEventListener('scratchpad:changed', event => {
+  updateScratchpadTextareas(event.detail);
+});
+
+export async function initScratchpad() {
+  const textareas = getTextareas();
+
+  if (!textareas.length) return;
 
   try {
     const content = await getScratchpadData();
 
     if (typeof content !== 'string') {
-      textarea.value = '';
-      updateScratchpadButtons();
+      updateScratchpadTextareas('');
       return;
     }
 
-    textarea.value = content.slice(0, MAX_SCRATCHPAD_LENGTH);
-    updateScratchpadButtons();
+    updateScratchpadTextareas(content.slice(0, MAX_SCRATCHPAD_LENGTH));
   } catch (error) {
     console.error(error);
   }
@@ -81,13 +111,12 @@ export function handleScratchpadInput(value, event) {
   if (textarea.value.length > MAX_SCRATCHPAD_LENGTH)
     textarea.value = textarea.value.slice(0, MAX_SCRATCHPAD_LENGTH);
 
-  updateScratchpadButtons();
-
+  broadcastScratchpad(textarea.value);
   debouncedSaveScratchpad(textarea.value);
 }
 
 export async function copyScratchpad() {
-  const textarea = document.querySelector('[data-action="handleScratchpadInput"]');
+  const textarea = getPrimaryTextarea();
 
   if (!textarea || !textarea.value.trim()) return;
 
@@ -97,24 +126,24 @@ export async function copyScratchpad() {
     const toast = document.createElement('smb-toast');
 
     toast.message = t('copiedToClipboard');
-    toast.show('main-toast');
+    toast.show(getToastTarget());
   } catch (error) {
     console.error(error);
   }
 }
 
 export async function clearScratchpad() {
-  const textarea = document.querySelector('[data-action="handleScratchpadInput"]');
+  const textarea = getPrimaryTextarea();
 
   if (!textarea || !textarea.value.trim()) return;
 
   const previousContent = textarea.value;
+  const toastTarget = getToastTarget();
 
   try {
     await clearScratchpadData();
 
-    textarea.value = '';
-    updateScratchpadButtons();
+    broadcastScratchpad('');
 
     const toast = document.createElement('smb-toast');
 
@@ -124,15 +153,22 @@ export async function clearScratchpad() {
       try {
         await saveScratchpadData(previousContent);
 
-        textarea.value = previousContent;
-        updateScratchpadButtons();
+        broadcastScratchpad(previousContent);
       } catch (error) {
         console.error(error);
       }
     });
 
-    toast.show('main-toast');
+    toast.show(toastTarget);
   } catch (error) {
     console.error(error);
   }
+}
+
+export function expandScratchpad() {
+  const dialog = document.getElementById('scratchpad-dialog');
+
+  if (!dialog) return;
+
+  dialog.showModal();
 }
