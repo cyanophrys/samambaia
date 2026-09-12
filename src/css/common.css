@@ -555,6 +555,16 @@ svg {
   }
 }
 
+.growable-textarea {
+  flex: 1;
+  field-sizing: content;
+  min-height: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  resize: none;
+}
+
 .list-row.color-picker {
   justify-content: center;
   flex-wrap: wrap;
