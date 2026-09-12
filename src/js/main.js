@@ -100,6 +100,7 @@ import {
 import {
   copyScratchpad,
   clearScratchpad,
+  expandScratchpad,
   handleScratchpadInput,
   initScratchpad,
 } from './scratchpad.js';
@@ -166,6 +167,7 @@ const actions = {
     editLabel,
     editScript,
     editVariable,
+    expandScratchpad,
     exportBackup,
     filterByLabel: (target) => filterByLabel(target),
     focusScriptsSearch,
