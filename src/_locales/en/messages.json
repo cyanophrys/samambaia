@@ -30,6 +30,10 @@
     "description": "Action used to edit an item"
   },
   "editEllipsis": { "message": "Edit…" },
+  "expand": {
+    "message": "Expand",
+    "description": "Action used to expand content"
+  },
   "pin": {
     "message": "Pin",
     "description": "Action used to pin an item to the top of a list"
@@ -181,6 +185,7 @@
   "restoreCompleted": { "message": "Restore completed" },
   "restoreFailed": { "message": "Restore failed. Check that the file is valid." },
 
+  "expandScratchpad": { "message": "Expand scratchpad" },
   "scratchpad": { "message": "Scratchpad" },
   "scratchpadCleared": { "message": "Scratchpad cleared" },
   "typeSomethingHere": { "message": "Type something here" },
