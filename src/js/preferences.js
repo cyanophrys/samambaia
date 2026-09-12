@@ -21,6 +21,10 @@ import {
 } from './store.js';
 
 import {
+  suppressTransitions,
+} from './utils.js';
+
+import {
   t,
 } from './i18n.js';
 
@@ -125,27 +129,18 @@ export function toggleScratchpadSidebar(value) {
 
 export function setTheme(value) {
   const root = document.documentElement;
-  const body = document.body;
   const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
   const theme = value ?? DEFAULT_PREFERENCES.theme;
 
   userPreferences.theme = theme;
 
-  if (theme === 'system') {
-    root.dataset.theme = prefersDarkMode.matches ? 'dark' : 'light';
-  } else {
-    root.dataset.theme = theme;
-  }
+  suppressTransitions(() => {
+    root.dataset.theme = theme === 'system'
+      ? (prefersDarkMode.matches ? 'dark' : 'light')
+      : theme;
+  });
 
   updatePreferenceControl('theme', theme);
-
-  body.classList.add('transitions-disabled');
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      body.classList.remove('transitions-disabled');
-    });
-  });
 }
 
 export function setAccentColor(value, event) {
@@ -171,22 +166,17 @@ export function setLargeText(value, event) {
 
 export function setHighContrast(value, event) {
   const root = document.documentElement;
-  const body = document.body;
   const isHighContrastEnabled =
     (typeof value === 'boolean' ? value : event?.target?.checked)
     ?? DEFAULT_PREFERENCES.highContrast;
 
   userPreferences.highContrast = isHighContrastEnabled;
-  root.setAttribute('data-high-contrast', isHighContrastEnabled);
-  updatePreferenceControl('high-contrast', isHighContrastEnabled);
 
-  body.classList.add('transitions-disabled');
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      body.classList.remove('transitions-disabled');
-    });
+  suppressTransitions(() => {
+    root.setAttribute('data-high-contrast', isHighContrastEnabled);
   });
+
+  updatePreferenceControl('high-contrast', isHighContrastEnabled);
 }
 
 export function setViewMode(value) {

@@ -24,6 +24,7 @@ import '../components/smb-toast/smb-toast.js';
 
 import {
   debounce,
+  suppressTransitions,
 } from './utils.js';
 
 import {
@@ -244,18 +245,20 @@ async function init() {
   applyShortcutDisplays();
   applyAriaKeyshortcuts();
 
-  setAccentColor(userPreferences.accentColor);
-  setBackupReminder(userPreferences.backupReminder);
-  setHighContrast(userPreferences.highContrast);
-  setLargeText(userPreferences.largeText);
-  setRecentScripts(userPreferences.recentScripts);
-  setTheme(userPreferences.theme);
-  setViewMode(userPreferences.viewMode);
+  suppressTransitions(() => {
+    setAccentColor(userPreferences.accentColor);
+    setBackupReminder(userPreferences.backupReminder);
+    setHighContrast(userPreferences.highContrast);
+    setLargeText(userPreferences.largeText);
+    setRecentScripts(userPreferences.recentScripts);
+    setTheme(userPreferences.theme);
+    setViewMode(userPreferences.viewMode);
 
-  toggleBackupBanner(state.hasChanges);
-  toggleLabelsSidebar(userPreferences.sidebars.labels);
-  toggleScratchpadSidebar(userPreferences.sidebars.scratchpad);
-  toggleVariablesSidebar(userPreferences.sidebars.variables);
+    toggleBackupBanner(state.hasChanges);
+    toggleLabelsSidebar(userPreferences.sidebars.labels);
+    toggleScratchpadSidebar(userPreferences.sidebars.scratchpad);
+    toggleVariablesSidebar(userPreferences.sidebars.variables);
+  });
 
   loading?.setAttribute('hidden', '');
 
