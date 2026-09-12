@@ -227,6 +227,7 @@ async function init() {
   const pendingToast = sessionStorage.getItem('pendingToast');
   const manifest = await getManifestInfo();
   const loading = document.querySelector('.loading');
+  const searchInput = document.getElementById('scripts-search-input');
 
   document.title = manifest.name;
   document.documentElement.lang = chrome.i18n.getUILanguage();
@@ -260,6 +261,7 @@ async function init() {
 
   requestAnimationFrame(() => {
     document.body.classList.remove('hidden');
+    searchInput?.focus();
   });
 
   if (pendingToast) {
