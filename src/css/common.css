@@ -1050,6 +1050,7 @@ svg {
   flex-direction: column;
   gap: var(--spacing-sm);
   user-select: none;
+  padding: 4px;
   outline-width: 2px;
   outline-color: transparent;
   outline-offset: 4px;
@@ -1074,6 +1075,12 @@ svg {
       place-items: center;
       opacity: var(--dimmed-opacity);
       cursor: grab;
+
+      &[data-disabled] {
+        opacity: var(--disabled-opacity);
+        cursor: default;
+        pointer-events: none;
+      }
     }
 
     h4 {
