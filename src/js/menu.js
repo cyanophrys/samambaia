@@ -35,9 +35,11 @@ function handlePopoverToggle(event) {
     return;
 
   if (popover.getAttribute('role') === 'menu' && event.newState === 'open') {
+    const item = popover.querySelector('[role="menuitem"]:not(:disabled)');
+
     requestAnimationFrame(() => {
       if (popover.contains(document.activeElement)) return;
-      popover.querySelector('[role="menuitem"]:not(:disabled)')?.focus();
+      item?.focus();
     });
   }
 
