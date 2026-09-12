@@ -42,6 +42,13 @@ export const KEYBOARD_SHORTCUTS = [
     key: "x",
   },
   {
+    name: "expandScratchpad",
+    action: "expandScratchpad",
+    alt: true,
+    shift: true,
+    key: "p",
+  },
+  {
     name: "importBackup",
     action: "importBackup",
     alt: true,
