@@ -277,7 +277,7 @@ export function addScript() {
       : [String(selectedLabel)]
   );
 
-  dialog.title = t('addScript');
+  dialog.heading = t('addScript');
   dialog.subtitle = '';
   if (saveButton) saveButton.textContent = t('add');
 
@@ -306,7 +306,7 @@ export async function editScript(element) {
   for (const input of colorInput)
     input.checked = input.value === getScriptColor(script.color);
 
-  dialog.title = t('editScript');
+  dialog.heading = t('editScript');
   dialog.subtitle = script.name;
   if (saveButton) saveButton.textContent = t('edit');
 

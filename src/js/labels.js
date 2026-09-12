@@ -124,7 +124,7 @@ export function addLabel() {
 
   form.reset();
 
-  dialog.title = t('addLabel');
+  dialog.heading = t('addLabel');
   dialog.subtitle = '';
   if (saveButton) saveButton.textContent = t('add');
 
@@ -150,7 +150,7 @@ export async function editLabel(element) {
   for (const input of colorInput)
     input.checked = input.value === savedColor;
 
-  dialog.title = t('editLabel');
+  dialog.heading = t('editLabel');
   dialog.subtitle = label.name;
   if (saveButton) saveButton.textContent = t('edit');
 
