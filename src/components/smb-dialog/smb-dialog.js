@@ -25,12 +25,12 @@ import {
 
 const template = document.createElement('template');
 template.innerHTML = `
-  <dialog id="dialog" aria-labelledby="dialog-title">
+  <dialog id="dialog" aria-labelledby="heading">
     <header class="header">
       <slot name="header-left"></slot>
       <div class="heading">
-        <h4 id="dialog-title"></h4>
-        <span id="dialog-subtitle"></span>
+        <h4 id="heading"></h4>
+        <span id="subtitle"></span>
       </div>
       <slot name="header-right"></slot>
       <button id="close-button" class="button small" type="button" data-i18n-attr="aria-label:close">
@@ -49,7 +49,7 @@ template.innerHTML = `
 
 export class SmbDialog extends HTMLElement {
   #dialog;
-  #title;
+  #heading;
   #subtitle;
 
   constructor() {
@@ -62,8 +62,8 @@ export class SmbDialog extends HTMLElement {
     applyTranslations(this.shadowRoot);
 
     this.#dialog = this.shadowRoot.getElementById('dialog');
-    this.#title = this.shadowRoot.getElementById('dialog-title');
-    this.#subtitle = this.shadowRoot.getElementById('dialog-subtitle');
+    this.#heading = this.shadowRoot.getElementById('heading');
+    this.#subtitle = this.shadowRoot.getElementById('subtitle');
 
     const closeButton = this.shadowRoot.getElementById('close-button');
     closeButton.addEventListener('click', () => this.close());
@@ -111,38 +111,38 @@ export class SmbDialog extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['dialog-title', 'dialog-subtitle'];
+    return ['heading', 'subtitle'];
   }
 
   attributeChangedCallback(name, _, newValue) {
-    if (name === 'dialog-title') {
-      this.#title.textContent = newValue ?? '';
+    if (name === 'heading') {
+      this.#heading.textContent = newValue ?? '';
     }
 
-    if (name === 'dialog-subtitle') {
+    if (name === 'subtitle') {
       this.#subtitle.textContent = newValue ?? '';
 
       if (newValue)
-        this.#dialog.setAttribute('aria-describedby', 'dialog-subtitle');
+        this.#dialog.setAttribute('aria-describedby', 'subtitle');
       else
         this.#dialog.removeAttribute('aria-describedby');
     }
   }
 
-  get title() {
-    return this.getAttribute('dialog-title') ?? '';
+  get heading() {
+    return this.getAttribute('heading') ?? '';
   }
 
-  set title(value) {
-    this.setAttribute('dialog-title', value ?? '');
+  set heading(value) {
+    this.setAttribute('heading', value ?? '');
   }
 
   get subtitle() {
-    return this.getAttribute('dialog-subtitle') ?? '';
+    return this.getAttribute('subtitle') ?? '';
   }
 
   set subtitle(value) {
-    this.setAttribute('dialog-subtitle', value ?? '');
+    this.setAttribute('subtitle', value ?? '');
   }
 
   get open() {
