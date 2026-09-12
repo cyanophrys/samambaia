@@ -124,7 +124,7 @@ function updateDragHandles(items) {
   const dragHandles = '[data-drag-handle]';
 
   items.forEach(item => {
-    item.querySelector(dragHandles)?.toggleAttribute('hidden', isRecent);
+    item.querySelector(dragHandles)?.toggleAttribute('data-disabled', isRecent);
   });
 }
 
