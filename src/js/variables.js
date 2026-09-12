@@ -144,7 +144,7 @@ export function addVariable() {
 
   form.reset();
 
-  dialog.title = t('addVariable');
+  dialog.heading = t('addVariable');
   dialog.subtitle = '';
   if (saveButton) saveButton.textContent = t('add');
 
@@ -165,7 +165,7 @@ export async function editVariable(element) {
   form.elements['id'].value = variable.id;
   form.elements['name'].value = variable.name;
 
-  dialog.title = t('editVariable');
+  dialog.heading = t('editVariable');
   dialog.subtitle = variable.name;
   if (saveButton) saveButton.textContent = t('edit');
 
