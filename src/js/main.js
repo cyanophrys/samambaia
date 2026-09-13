@@ -106,6 +106,7 @@ import {
 } from './scratchpad.js';
 
 import {
+  dismissBackupBanner,
   exportBackup,
   restoreBackup,
   toggleBackupBanner,
@@ -164,6 +165,7 @@ const actions = {
     deleteLabel,
     deleteScript,
     deleteVariable,
+    dismissBackupBanner,
     editLabel,
     editScript,
     editVariable,
@@ -308,6 +310,10 @@ function bindEvents() {
   ['data:changed', 'backup:completed'].forEach((event) => {
     document.addEventListener(event, () => {
       state.hasChanges = event === 'data:changed';
+
+      if (event === 'data:changed')
+        state.backupBannerDismissed = false;
+
       debouncedToggleBackupBanner();
     });
   });

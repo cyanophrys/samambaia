@@ -21,6 +21,7 @@ import {
 } from './store.js';
 
 const DEFAULT_STATE = {
+  backupBannerDismissed: false,
   hasChanges: false,
   recentScripts: [],
 };

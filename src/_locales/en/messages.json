@@ -25,6 +25,10 @@
     "description": "Action used to close or dismissing an item"
   },
   "deleteEllipsis": { "message": "Delete…" },
+  "dismiss": {
+    "message": "Dismiss",
+    "description": "Action used to dismiss an item"
+  },
   "edit": {
     "message": "Edit",
     "description": "Action used to edit an item"
