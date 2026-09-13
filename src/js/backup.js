@@ -64,8 +64,8 @@ export function warnBeforeUnload(event) {
 function confirmRestore() {
   const dialog = document.createElement('smb-alert-dialog');
 
-  dialog.title = t('replaceExistingDataTitle');
-  dialog.message = t('replaceExistingDataMessage');
+  dialog.heading = t('replaceExistingDataHeading');
+  dialog.body = t('replaceExistingDataBody');
 
   dialog.addResponses([
     { id: 'cancel', label: t('cancel'), appearance: 'default' },

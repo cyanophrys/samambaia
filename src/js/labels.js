@@ -167,8 +167,8 @@ export async function deleteLabel(element) {
 
   const dialog = document.createElement('smb-alert-dialog');
 
-  dialog.title = t('deleteLabelTitle');
-  dialog.message = t('deleteLabelMessage', label.name);
+  dialog.heading = t('deleteLabelHeading');
+  dialog.body = t('deleteLabelBody', label.name);
 
   dialog.addResponses([
     { id: 'cancel', label: t('cancel'), appearance: 'default' },

@@ -371,8 +371,8 @@ export async function deleteScript(element) {
 
   const dialog = document.createElement('smb-alert-dialog');
 
-  dialog.title = t('deleteScriptTitle');
-  dialog.message = t('deleteScriptMessage', [script.name]);
+  dialog.heading = t('deleteScriptHeading');
+  dialog.body = t('deleteScriptBody', [script.name]);
 
   dialog.addResponses([
     { id: 'cancel', label: t('cancel'), appearance: 'default' },
@@ -412,8 +412,8 @@ export function clearRecentScripts() {
 
   const dialog = document.createElement('smb-alert-dialog');
 
-  dialog.title = t('clearRecentHistoryTitle');
-  dialog.message = t('clearRecentHistoryMessage');
+  dialog.heading = t('clearRecentHistoryHeading');
+  dialog.body = t('clearRecentHistoryBody');
 
   dialog.addResponses([
     { id: 'cancel', label: t('cancel'), appearance: 'default' },
