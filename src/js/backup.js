@@ -49,7 +49,16 @@ export function toggleBackupBanner(hasChanges) {
 
   const isEnabled = userPreferences.backupReminder ?? true;
 
-  banner.dataset.visible = String(hasChanges && isEnabled);
+  banner.dataset.visible = String(
+    hasChanges &&
+    isEnabled &&
+    !state.backupBannerDismissed
+  );
+}
+
+export function dismissBackupBanner() {
+  state.backupBannerDismissed = true;
+  toggleBackupBanner(state.hasChanges);
 }
 
 export function warnBeforeUnload(event) {
