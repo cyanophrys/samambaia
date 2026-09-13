@@ -121,7 +121,12 @@
           <div id="main-toast" class="toast-container" style="position-anchor: --scripts-view-anchor;"></div>
           <div id="backup-banner" class="banner" data-visible="false" role="status" aria-live="polite">
             <span data-i18n="unsavedChanges"></span>
-            <button type="button" class="button suggested-action" data-action="exportBackup" data-i18n="backUpEllipsis"></button>
+            <div class="button-group">
+              <button type="button" class="button suggested-action" data-action="exportBackup" data-i18n="backUpEllipsis"></button>
+               <button class="button small" type="button" data-action="dismissBackupBanner" data-i18n-attr="aria-label:dismiss" data-tooltip>
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="m330.38-290.27-40.11-40.11L440.39-480 290.27-629.12l40.11-40.11L480-519.11l149.12-150.12 40.11 40.11L519.11-480l150.12 149.62-40.11 40.11L480-440.39 330.38-290.27Z"/></svg>
+              </button>
+            </div>
           </div>
           <button id="scroll-top-button" class="button suggested-action" type="button" data-action="scrollScriptsView" data-i18n-attr="aria-label:backToTop" style="position-anchor: --scripts-view-anchor;" data-tooltip>
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="currentColor"><path d="M455.95-255.74v-397.54L289.23-488.05l-35.38-35.8 226.56-226.56 226.82 226.56-35.38 35.39L506.2-654.1v398.36h-50.25Z"/></svg>
