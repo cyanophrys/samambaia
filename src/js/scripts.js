@@ -128,6 +128,15 @@ function updateDragHandles(items) {
   });
 }
 
+function updateScriptsToolbar(scriptCount) {
+  const searchInput = document.getElementById('scripts-search-input');
+  const button = document.getElementById('view-toggle-button');
+  const hasScripts = scriptCount > 0;
+
+  if (searchInput) searchInput.disabled = !hasScripts;
+  if (button) button.disabled = !hasScripts;
+}
+
 export function scrollScriptsView() {
   const element = getScriptsContainer();
 
@@ -260,6 +269,7 @@ export async function renderScripts() {
 
   updateClearRecentScriptsButton();
   updateScriptsCount(scripts.length);
+  updateScriptsToolbar(scripts.length);
 
   filterScripts();
 }
