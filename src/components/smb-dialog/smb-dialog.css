@@ -138,3 +138,24 @@ dialog {
     }
   }
 }
+
+:host([action-dialog]) dialog {
+  #close-button {
+    visibility: hidden;
+  }
+
+  footer {
+    display: flex;
+  }
+
+  footer slot[name="footer-left"],
+  footer slot[name="footer-right"] {
+    flex: 1;
+    width: 100%;
+  }
+
+  footer ::slotted(button) {
+    flex: 1;
+    width: 100%;
+  }
+}
