@@ -62,6 +62,7 @@
   opacity: var(--disabled-opacity);
   pointer-events: none;
   cursor: default;
+  user-select: none;
 }
 
 :focus-visible {
