@@ -237,11 +237,8 @@ export async function deleteVariable(element) {
 
   const dialog = document.createElement('smb-alert-dialog');
 
-  dialog.title = t('deleteVariableTitle');
-  dialog.message = t(
-    'deleteVariableMessage',
-    variable.name
-  );
+  dialog.heading = t('deleteVariableHeading');
+  dialog.body = t('deleteVariableBody', variable.name);
 
   dialog.addResponses([
     { id: 'cancel', label: t('cancel'), appearance: 'default' },
