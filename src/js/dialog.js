@@ -31,6 +31,14 @@ function resetToasts(dialog) {
   toasts.forEach(toast => toast.close());
 }
 
+function resetTextareas(dialog) {
+  const textareas = dialog.querySelectorAll('textarea');
+
+  textareas.forEach(textarea => {
+    textarea.style.height = '';
+  });
+}
+
 export function bindDialogEvents() {
   document.addEventListener('toggle', (event) => {
     if (event.target?.localName !== 'smb-dialog') return;
@@ -38,5 +46,6 @@ export function bindDialogEvents() {
 
     resetScroll(event.target);
     resetToasts(event.target);
+    resetTextareas(event.target);
   });
 }
