@@ -21,11 +21,11 @@ import dialog from './smb-alert-dialog.css' with { type: 'css' };
 
 const template = document.createElement('template');
 template.innerHTML = `
-  <dialog id="dialog" role="alertdialog" aria-labelledby="dialog-title" aria-describedby="dialog-message">
+  <dialog id="dialog" role="alertdialog" aria-labelledby="heading" aria-describedby="body">
     <div class="scrollable-area">
       <section class="section">
-        <h2 id="dialog-title"></h2>
-        <p id="dialog-message"></p>
+        <h2 id="heading"></h2>
+        <p id="body"></p>
       </section>
       <section class="section">
         <slot name="additional-content" id="additional-content"></slot>
@@ -37,8 +37,8 @@ template.innerHTML = `
 
 export class SmbAlertDialog extends HTMLElement {
   #dialog;
-  #title;
-  #message;
+  #heading;
+  #body;
   #actionsContainer;
   #additionalSlot;
   #slotObserver;
@@ -56,8 +56,8 @@ export class SmbAlertDialog extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     this.#dialog = this.shadowRoot.getElementById('dialog');
-    this.#title = this.shadowRoot.getElementById('dialog-title');
-    this.#message = this.shadowRoot.getElementById('dialog-message');
+    this.#heading = this.shadowRoot.getElementById('heading');
+    this.#body = this.shadowRoot.getElementById('body');
     this.#actionsContainer = this.shadowRoot.getElementById('actions');
     this.#additionalSlot = this.shadowRoot.getElementById('additional-content');
 
@@ -115,31 +115,31 @@ export class SmbAlertDialog extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['dialog-title', 'dialog-message'];
+    return ['heading', 'body'];
   }
 
   attributeChangedCallback(name, _, newValue) {
-    if (name === 'dialog-title')
-      this.#title.textContent = newValue ?? '';
+    if (name === 'heading')
+      this.#heading.textContent = newValue ?? '';
 
-    if (name === 'dialog-message')
-      this.#message.textContent = newValue ?? '';
+    if (name === 'body')
+      this.#body.textContent = newValue ?? '';
   }
 
-  get title() {
-    return this.getAttribute('dialog-title') ?? '';
+  get heading() {
+    return this.getAttribute('heading') ?? '';
   }
 
-  set title(value) {
-    this.setAttribute('dialog-title', value ?? '');
+  set heading(value) {
+    this.setAttribute('heading', value ?? '');
   }
 
-  get message() {
-    return this.getAttribute('dialog-message') ?? '';
+  get body() {
+    return this.getAttribute('body') ?? '';
   }
 
-  set message(value) {
-    this.setAttribute('dialog-message', value ?? '');
+  set body(value) {
+    this.setAttribute('body', value ?? '');
   }
 
   addResponses(responses) {
