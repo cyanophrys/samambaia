@@ -175,6 +175,10 @@
     "description": "Verb indicating an action that exports a backup file"
   },
   "backUpEllipsis": { "message": "Back up…" },
+  "backupCompleted": { "message": "Backup completed" },
+  "backupFailed": { "message": "Backup failed" },
+  "backupRestored": { "message": "Backup restored" },
+  "jsonFiles": { "message": "JSON Files" },
   "replaceData": { "message": "Replace data" },
   "replaceExistingDataBody": {
     "message": "This will replace your existing data. This action cannot be undone."
@@ -182,12 +186,8 @@
   "replaceExistingDataHeading": { "message": "Replace existing data?" },
   "restoreBackup": { "message": "Restore backup" },
   "restoreBackupEllipsis": { "message": "Restore backup…" },
-  "unsavedChanges": { "message": "There are unsaved changes" },
-  "jsonFiles": { "message": "JSON Files" },
-  "backupCompleted": { "message": "Backup completed" },
-  "backupFailed": { "message": "Backup failed" },
-  "restoreCompleted": { "message": "Restore completed" },
   "restoreFailed": { "message": "Restore failed. Check that the file is valid." },
+  "unsavedChanges": { "message": "There are unsaved changes" },
 
   "expandScratchpad": { "message": "Expand scratchpad" },
   "scratchpad": { "message": "Scratchpad" },

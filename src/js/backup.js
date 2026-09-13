@@ -294,7 +294,7 @@ export async function restoreBackup() {
 
     resetState();
 
-    sessionStorage.setItem('pendingToast', t('restoreCompleted'));
+    sessionStorage.setItem('pendingToast', t('backupRestored'));
     window.location.reload();
   } catch (error) {
     console.error(error);
