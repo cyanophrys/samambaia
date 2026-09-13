@@ -15,7 +15,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-export function resetScroll(dialog) {
+function resetScroll(dialog) {
   const scrollableAreas = dialog.querySelectorAll('.scrollable-area');
 
   scrollableAreas.forEach(element => {
@@ -26,7 +26,7 @@ export function resetScroll(dialog) {
   });
 }
 
-export function resetToasts(dialog) {
+function resetToasts(dialog) {
   const toasts = dialog.querySelectorAll('smb-toast');
   toasts.forEach(toast => toast.close());
 }
