@@ -325,8 +325,8 @@ function bindEvents() {
 async function wipeData() {
   const dialog = document.createElement('smb-alert-dialog');
 
-  dialog.title = t('deleteAllDataTitle');
-  dialog.message = t('deleteAllDataMessage');
+  dialog.heading = t('deleteAllDataHeading');
+  dialog.body = t('deleteAllDataBody');
 
   const confirmation = document.createElement('label');
   confirmation.className = "label";
