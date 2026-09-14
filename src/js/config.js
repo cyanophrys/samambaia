@@ -15,6 +15,9 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+export const NAME_TOKEN_PATTERN = /\{\{\s*([a-zA-Z0-9_-]+)\s*\}\}/g;
+export const TOKEN_CHARS_PATTERN = /[^a-zA-Z0-9_-]/g;
+
 export const PALETTE_COLORS = [
   'blue',
   'brown',
