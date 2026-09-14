@@ -27,12 +27,16 @@ import {
 } from './utils.js';
 
 import {
+  NAME_TOKEN_PATTERN,
+  TOKEN_CHARS_PATTERN,
+} from './config.js';
+
+import {
   applyTranslations,
   t,
 } from './i18n.js';
 
 const MAX_VARIABLE_NAME_LENGTH = 128;
-const VARIABLE_TOKEN_PATTERN = /\{\{\s*([a-zA-Z0-9_-]+)\s*\}\}/g;
 
 const debouncedSaveVariable = debounce(async variableData => {
   try {
@@ -177,7 +181,7 @@ export async function saveVariable() {
   const form = dialog.querySelector('form');
   const id = form.elements['id'].value ? Number(form.elements['id'].value) : undefined;
   const rawName = form.elements['name'].value.trim();
-  const name = rawName.replace(/[^a-zA-Z0-9_-]/g, '');
+  const name = rawName.replace(TOKEN_CHARS_PATTERN, '');
 
   if (!rawName) return;
 
@@ -284,7 +288,7 @@ export function applyVariables(content) {
     if (name && input.value) values.set(name, input.value);
   });
 
-  return content.replace(VARIABLE_TOKEN_PATTERN, (match, name) =>
+  return content.replace(NAME_TOKEN_PATTERN, (match, name) =>
     values.has(name) ? values.get(name) : match
   );
 }
