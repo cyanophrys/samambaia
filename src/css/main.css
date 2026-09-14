@@ -209,8 +209,23 @@ body {
   }
 }
 
-#script-dialog #script-content {
-  min-height: 120px;
+#script-dialog {
+  #script-content {
+    min-height: 120px;
+  }
+
+  .field-row:has(#script-shortcut:not(:placeholder-shown)) {
+    &::before {
+      content: "/";
+      position: absolute;
+      left: var(--row-pad-x);
+      bottom: var(--spacing-sm);
+    }
+
+    #script-shortcut {
+      padding-inline-start: var(--spacing-xs);
+    }
+  }
 }
 
 #custom-scripts {

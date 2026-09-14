@@ -224,7 +224,8 @@
       </div>
     </main>
   </div>
-  <smb-dialog id="script-dialog" style="--dialog-width: 420px;" action-dialog>
+  <smb-dialog id="script-dialog" style="anchor-name: --script-dialog-toast; --dialog-width: 420px;" action-dialog>
+    <div id="script-dialog-toast" class="toast-container" style="position-anchor: --script-dialog-toast;"></div>
     <div class="scrollable-area">
       <form id="script-form" class="list-group rows-separated" data-action="saveScript">
         <input type="hidden" id="script-id" name="id">
@@ -259,6 +260,10 @@
         <div class="list-row field-row multiline">
           <textarea class="textarea" id="script-notes" name="notes" placeholder=" " rows="2" maxlength="1000"></textarea>
           <label class="label" for="script-notes" data-i18n="scriptNotes"></label>
+        </div>
+        <div class="list-row field-row">
+          <input class="input" type="text" id="script-shortcut" name="shortcut" placeholder=" " autocomplete="off" maxlength="32">
+          <label class="label" for="script-shortcut" data-i18n="scriptShortcut"></label>
         </div>
       </form>
     </div>
