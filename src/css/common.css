@@ -633,6 +633,10 @@ svg {
 
     &:checked {
       outline-color: var(--accent-color);
+
+      :root[data-high-contrast="true"] & {
+        outline-color: currentColor;
+      }
     }
   }
 }
