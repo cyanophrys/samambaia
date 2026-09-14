@@ -1078,7 +1078,8 @@ svg {
   }
 
   .header {
-    grid-template-columns: auto 1fr auto;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     padding: 0;
 
     [data-drag-handle] {
@@ -1086,6 +1087,7 @@ svg {
       place-items: center;
       opacity: var(--dimmed-opacity);
       cursor: grab;
+      justify-self: start;
 
       &[data-disabled] {
         opacity: var(--disabled-opacity);
@@ -1094,8 +1096,16 @@ svg {
       }
     }
 
-    h4 {
+    .title-group {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
       justify-self: start;
+    }
+
+    .shortcut {
+      opacity: var(--dimmed-opacity);
+      font-size: var(--font-size-xs);
     }
 
     .button-group {
