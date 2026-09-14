@@ -184,6 +184,7 @@ export function createScriptElement(script) {
   item.dataset.favorite = script.favorite ? 'true' : 'false';
 
   const title = item.querySelector('h4');
+  const shortcut = item.querySelector('.shortcut');
   const moreButton = item.querySelector('[aria-haspopup]');
   const copyButton = item.querySelector('[data-action="copyScript"]');
   const content = item.querySelector('.content');
@@ -199,6 +200,13 @@ export function createScriptElement(script) {
 
   title.id = `script-title-${script.id}`;
   title.textContent = script.name;
+
+  if (script.shortcut) {
+    shortcut.hidden = false;
+    shortcut.textContent = `/${script.shortcut}`;
+  } else {
+    shortcut.remove();
+  }
 
   content.id = `script-content-${script.id}`;
 
