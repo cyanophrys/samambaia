@@ -708,7 +708,7 @@ svg {
     }
   }
 
-  :root[data-high-contrast="true"] & {
+  :root[data-high-contrast="true"] &:not(:checked) {
     border-color: var(--border-hc-color);
 
     &:hover {
