@@ -14,16 +14,18 @@ div {
   background-color: color-mix(in srgb, currentColor 10%, transparent);
   padding: 0 var(--spacing-2xs) 0 var(--spacing-xs);
   line-height: 1;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
   transition: border-color var(--transition-medium),
-              box-shadow var(--transition-medium);
+              outline-color var(--transition-medium);
 
   &:hover {
     border-color: var(--accent-color);
   }
 
   &:focus-within {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 1px var(--accent-color);
+    border-color: transparent;
+    outline-color: var(--focus-outline-color);
   }
 
   &:has(input:disabled) {
