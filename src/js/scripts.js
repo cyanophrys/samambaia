@@ -8,6 +8,7 @@ import {
 
 import {
   PALETTE_COLORS,
+  TOKEN_CHARS_PATTERN,
 } from './config.js';
 
 import {
@@ -40,6 +41,7 @@ const MAX_RECENT_SCRIPTS = 30;
 const MAX_SCRIPT_NAME_LENGTH = 128;
 const MAX_SCRIPT_CONTENT_LENGTH = 5000;
 const MAX_SCRIPT_NOTES_LENGTH = 1000;
+const MAX_SCRIPT_SHORTCUT_LENGTH = 32;
 const RENDER_CHUNK_SIZE = 250;
 
 const PSEUDO_LABELS = [
@@ -135,6 +137,19 @@ function updateScriptsToolbar(scriptCount) {
 
   if (searchInput) searchInput.disabled = !hasScripts;
   if (button) button.disabled = !hasScripts;
+}
+
+export function updateScriptShortcuts(scripts) {
+  const scriptShortcuts = {};
+
+  for (const script of scripts) {
+    if (!script.shortcut) continue;
+    scriptShortcuts[script.shortcut.toLowerCase()] = script.content;
+  }
+
+  chrome.storage.local.set({ scriptShortcuts }).catch((error) => {
+    console.error(error);
+  });
 }
 
 export function scrollScriptsView() {
@@ -248,6 +263,8 @@ export async function renderScripts() {
     (a.order ?? Infinity) - (b.order ?? Infinity) || a.id - b.id
   );
 
+  updateScriptShortcuts(scripts);
+
   const container = getScriptsContainer();
   container.replaceChildren();
 
@@ -312,6 +329,7 @@ export async function editScript(element) {
   form.elements['name'].value = script.name;
   form.elements['content'].value = script.content;
   form.elements['notes'].value = script.notes ?? '';
+  form.elements['shortcut'].value = script.shortcut ?? '';
 
   for (const input of colorInput)
     input.checked = input.value === getScriptColor(script.color);
@@ -331,6 +349,8 @@ export async function saveScript() {
   const content = form.elements['content'].value;
   const notes = form.elements['notes'].value;
   const color = getScriptColor(form.elements['script-color']?.value);
+  const rawShortcut = form.elements['shortcut'].value.trim();
+  const shortcut = rawShortcut.replace(TOKEN_CHARS_PATTERN, '');
 
   if (
     !name ||
@@ -342,7 +362,32 @@ export async function saveScript() {
     return;
   }
 
-  const script = id ? await getScript(Number(id)) : null;
+  if (rawShortcut !== shortcut || shortcut.length > MAX_SCRIPT_SHORTCUT_LENGTH) {
+    const toast = document.createElement('smb-toast');
+
+    toast.message = t('scriptShortcutInvalid');
+    toast.show('script-dialog-toast');
+    return;
+  }
+
+  const scripts = await getAllScripts();
+
+  if (shortcut) {
+    const isDuplicate = scripts.some(existing =>
+      existing.shortcut?.toLowerCase() === shortcut.toLowerCase() &&
+      existing.id !== Number(id)
+    );
+
+    if (isDuplicate) {
+      const toast = document.createElement('smb-toast');
+
+      toast.message = t('scriptShortcutDuplicate');
+      toast.show('script-dialog-toast');
+      return;
+    }
+  }
+
+  const script = id ? scripts.find(existing => existing.id === Number(id)) : null;
   const order = script?.order;
 
   const scriptData = {
@@ -351,6 +396,7 @@ export async function saveScript() {
     labels: getSelectedScriptLabels(),
     content,
     notes,
+    shortcut,
     color,
     order,
   };
