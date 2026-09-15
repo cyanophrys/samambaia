@@ -1226,7 +1226,7 @@ svg {
       pointer-events: none;
     }
 
-    button:not(.drag-handle) {
+    button {
       opacity: var(--disabled-opacity);
     }
   }
