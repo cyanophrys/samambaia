@@ -385,6 +385,24 @@
           </section>
         </div>
       </div>
+      <div data-page-name="general">
+        <div class="scrollable-area">
+          <section class="section">
+            <header class="header">
+              <h4 data-i18n="backup"></h4>
+            </header>
+            <div class="list-group">
+              <label class="list-row activatable">
+                <input class="switch prefix" type="checkbox" role="switch" name="backup-reminder" data-action="setBackupReminder">
+                <div>
+                  <span class="title" data-i18n="backupReminder"></span>
+                  <span class="subtitle" data-i18n="backupReminderDescription"></span>
+                </div>
+              </label>
+            </div>
+          </section>
+        </div>
+      </div>
       <div data-page-name="accessibility">
         <div class="scrollable-area">
           <section>
@@ -409,20 +427,6 @@
       </div>
       <div data-page-name="storage">
         <div class="scrollable-area">
-          <section class="section">
-            <header class="header">
-              <h4 data-i18n="backup"></h4>
-            </header>
-            <div class="list-group">
-              <label class="list-row activatable">
-                <input class="switch prefix" type="checkbox" role="switch" name="backup-reminder" data-action="setBackupReminder">
-                <div>
-                  <span class="title" data-i18n="backupReminder"></span>
-                  <span class="subtitle" data-i18n="backupReminderDescription"></span>
-                </div>
-              </label>
-            </div>
-          </section>
           <section class="section">
             <header class="header">
               <h4 data-i18n="history"></h4>
@@ -455,6 +459,14 @@
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M479.23-108.08q-76.46 0-144.09-29.31-67.64-29.3-118.04-79.8-50.41-50.5-79.71-118.23-29.31-67.73-29.31-144.58 0-77.85 29.98-145.58 29.98-67.73 81.65-118.08 51.68-50.34 121.1-79.3 69.42-28.96 147.96-28.96 73.08 0 138.77 25.17 65.69 25.17 115.49 69.44 49.8 44.26 79.35 104.92 29.54 60.66 29.54 131.35 0 101.48-59.96 158.43t-154.44 56.95h-70.79q-18.38 0-29.58 11.74-11.19 11.73-11.19 28.26 0 19.12 15 40.58 15 21.46 15 47.89 0 33.46-19.5 51.29-19.5 17.82-57.23 17.82ZM480-480Zm-183.75 13.87Q310-479.84 310-499.96q0-20.12-13.71-33.87-13.71-13.75-33.83-13.75-20.11 0-33.86 13.71t-13.75 33.83q0 20.12 13.71 33.87 13.71 13.75 33.82 13.75 20.12 0 33.87-13.71Zm119.19-158.39q13.75-13.71 13.75-33.82 0-20.12-13.71-33.87-13.71-13.75-33.82-13.75-20.12 0-33.87 13.71-13.75 13.71-13.75 33.83 0 20.11 13.71 33.86t33.83 13.75q20.11 0 33.86-13.71Zm197.58 0q13.75-13.71 13.75-33.82 0-20.12-13.71-33.87-13.71-13.75-33.83-13.75-20.11 0-33.86 13.71t-13.75 33.83q0 20.11 13.71 33.86t33.82 13.75q20.12 0 33.87-13.71ZM731.4-466.13q13.75-13.71 13.75-33.83 0-20.12-13.71-33.87-13.71-13.75-33.82-13.75-20.12 0-33.87 13.71Q650-520.16 650-500.04q0 20.12 13.71 33.87 13.71 13.75 33.83 13.75 20.11 0 33.86-13.71ZM479.16-164.04q9.8 0 15.32-4.81 5.52-4.8 5.52-13.19 0-14-14.6-31.86-14.59-17.87-14.59-54.29 0-42.27 28.38-67.85 28.38-25.58 70.07-25.58h68.32q70.61 0 114.5-40.82 43.88-40.83 43.88-118.64 0-119.46-92.02-197.17t-215.15-77.71q-135.25 0-230 91.78T164.04-480q0 131.08 92.44 223.52t222.68 92.44Z"/></svg>
           </div>
           <span data-i18n="appearance"></span>
+        </div>
+      </button>
+      <button class="stack-switcher" type="button" data-target="preferences-stack" data-page-name="general">
+        <div>
+          <div class="icon">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M392.23-108.08 377-227.48q-16.58-5.41-34.67-15.35-18.1-9.94-31.46-21.02L201-217.77l-88.27-153.54 96-72.46q-1.57-8.59-2.06-17.1-.48-8.51-.48-18.75 0-7.73.73-16.94.74-9.21 2.12-21.29l-96.31-71.84L201-741.65l110.85 46.5q13.65-11.27 30.23-20.87 16.57-9.59 34.54-16.17l15.61-120.54h175.73l15.23 119.81q18.62 6.84 33.44 15.83 14.83 8.98 29.68 21.94l112.88-46.5 88.27 151.96-99.96 74.65q1.96 9.65 2.25 17.42.29 7.77.29 17.52 0 9.37-.39 17.53-.38 8.16-2.46 18.72l98.39 72.54-88.27 153.54-111-47.27q-13.73 11.54-28.54 20.35-14.81 8.8-34.58 16.8l-15.23 119.81H392.23Zm48.02-55.96h77.6l14.93-107.65q29.72-8 53.85-22.08 24.14-14.08 47.18-37.23l99.88 42.58 38.89-67.1L685-421q4.5-15.54 6.4-29.99 1.91-14.46 1.91-29.11 0-15.21-1.66-28.78-1.65-13.58-6.65-29.35l88.35-66.96-38.08-67.19-102.15 43.19q-18.16-19.85-46.2-36.31-28.04-16.46-54.61-23l-12.57-108.27h-79.12l-12.74 107.59q-31.61 7.72-55.51 21.18-23.91 13.46-48.56 37.81l-98.89-42.19-39.07 67.19 86.07 63.88q-5 15.04-7 30.05-2 15.01-2 31.11 0 15.03 1.75 29.53 1.75 14.5 6.37 30.43l-85.19 64.57 39.07 67.2 98.2-42q23.88 23.88 48.84 38 24.96 14.11 55.45 21.61l12.84 106.77Zm38.43-200q48.17 0 81.99-33.87 33.83-33.86 33.83-82.13 0-48.27-33.86-82.09-33.85-33.83-82.1-33.83-48.62 0-82.29 33.87-33.67 33.86-33.67 82.13 0 48.27 33.67 82.09 33.67 33.83 82.43 33.83Zm1.01-116.46Z"/></svg>
+          </div>
+          <span data-i18n="general"></span>
         </div>
       </button>
       <button class="stack-switcher" type="button" data-target="preferences-stack" data-page-name="accessibility">

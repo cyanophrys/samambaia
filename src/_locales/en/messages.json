@@ -38,6 +38,7 @@
     "message": "Expand",
     "description": "Action used to expand content"
   },
+  "general": { "message": "General" },
   "pin": {
     "message": "Pin",
     "description": "Action used to pin an item to the top of a list"
@@ -237,7 +238,6 @@
   "errorDeletingData": { "message": "Error deleting data" },
   "wipeConfirmationLabel": { "message": "I understand and want to continue" },
 
-  "general": { "message": "General" },
   "keyboardShortcuts": { "message": "Keyboard shortcuts" },
   "navigation": { "message": "Navigation" },
   "showAllScripts": { "message": "Show all scripts" },
