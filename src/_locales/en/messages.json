@@ -218,6 +218,9 @@
   "backupReminder": { "message": "Backup reminder" },
   "backupReminderDescription": { "message": "Get a reminder to back up your data after making changes" },
 
+  "textExpansion": { "message": "Text expansion" },
+  "textExpansionDescription": { "message": "Quickly insert a script as you type using a shortcut" },
+
   "clearHistory": { "message": "Clear history" },
   "clearRecentHistoryEllipsis": { "message": "Clear recent history…" },
   "clearRecentHistoryBody": {
