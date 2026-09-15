@@ -21,6 +21,10 @@ import {
 } from './store.js';
 
 import {
+  TEXT_EXPANSION_PREFIXES,
+} from './config.js';
+
+import {
   suppressTransitions,
 } from './utils.js';
 
@@ -54,6 +58,7 @@ const DEFAULT_PREFERENCES = {
     variables: true,
   },
   textExpansion: true,
+  textExpansionPrefix: TEXT_EXPANSION_PREFIXES.default,
   theme: 'system',
   viewMode: 'grid',
 };
@@ -229,7 +234,25 @@ export function setTextExpansion(value, event) {
   const isEnabled =
     (typeof value === 'boolean' ? value : event?.target?.checked)
     ?? DEFAULT_PREFERENCES.textExpansion;
+  const textExpansionPrefixes = document.querySelectorAll(
+    '[name="text-expansion-prefix"]'
+  );
 
   userPreferences.textExpansion = isEnabled;
   updatePreferenceControl('text-expansion', isEnabled);
+
+  textExpansionPrefixes.forEach((prefix) => {
+    prefix.disabled = !isEnabled;
+  });
+}
+
+export function setTextExpansionPrefix(value) {
+  const prefix = TEXT_EXPANSION_PREFIXES.options.includes(value)
+    ? value
+    : TEXT_EXPANSION_PREFIXES.default;
+
+  userPreferences.textExpansionPrefix = prefix;
+  updatePreferenceControl('text-expansion-prefix', prefix);
+
+  document.dispatchEvent(new Event('textExpansionPrefix:changed'));
 }

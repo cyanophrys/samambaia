@@ -203,7 +203,7 @@ export function createScriptElement(script) {
 
   if (script.shortcut) {
     shortcut.hidden = false;
-    shortcut.textContent = `/${script.shortcut}`;
+    shortcut.textContent = `${userPreferences.textExpansionPrefix}${script.shortcut}`;
   } else {
     shortcut.remove();
   }

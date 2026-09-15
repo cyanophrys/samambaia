@@ -220,6 +220,11 @@
 
   "textExpansion": { "message": "Text expansion" },
   "textExpansionDescription": { "message": "Quickly insert a script as you type using a shortcut" },
+  "textExpansionPrefix": { "message": "Text expansion prefix" },
+  "textExpansionPrefixColon": { "message": "Colon (:)" },
+  "textExpansionPrefixDescription": { "message": "Choose the character used as the prefix" },
+  "textExpansionPrefixSemicolon": { "message": "Semicolon (;)" },
+  "textExpansionPrefixSlash": { "message": "Slash (/)" },
 
   "clearHistory": { "message": "Clear history" },
   "clearRecentHistoryEllipsis": { "message": "Clear recent history…" },

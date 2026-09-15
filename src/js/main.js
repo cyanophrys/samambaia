@@ -44,6 +44,7 @@ import {
   setLargeText,
   setRecentScripts,
   setTextExpansion,
+  setTextExpansionPrefix,
   setViewMode,
   toggleLabelsSidebar,
   toggleScratchpadSidebar,
@@ -152,6 +153,8 @@ const actions = {
     setHighContrast,
     setLargeText,
     setRecentScripts,
+    setTextExpansion,
+    setTextExpansionPrefix,
     setTheme,
     toggleScriptLabel,
   },
@@ -255,6 +258,7 @@ async function init() {
     setLargeText(userPreferences.largeText);
     setRecentScripts(userPreferences.recentScripts);
     setTextExpansion(userPreferences.textExpansion);
+    setTextExpansionPrefix(userPreferences.textExpansionPrefix);
     setTheme(userPreferences.theme);
     setViewMode(userPreferences.viewMode);
 
@@ -308,8 +312,11 @@ function bindEvents() {
   bindMenuBehaviors();
   bindDialogEvents();
 
-  document.addEventListener('label:changed', renderScripts);
   document.addEventListener('recentScripts:changed', filterScripts);
+
+  ['label:changed', 'textExpansionPrefix:changed'].forEach((event) => {
+    document.addEventListener(event, renderScripts);
+  });
 
   ['data:changed', 'backup:completed'].forEach((event) => {
     document.addEventListener(event, () => {
