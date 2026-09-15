@@ -42,6 +42,7 @@ import {
   setTheme,
   setLargeText,
   setRecentScripts,
+  setTextExpansion,
   setViewMode,
   toggleLabelsSidebar,
   toggleScratchpadSidebar,
@@ -251,6 +252,7 @@ async function init() {
   setHighContrast(userPreferences.highContrast);
   setLargeText(userPreferences.largeText);
   setRecentScripts(userPreferences.recentScripts);
+  setTextExpansion(userPreferences.textExpansion);
   setTheme(userPreferences.theme);
   setViewMode(userPreferences.viewMode);
 
