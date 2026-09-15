@@ -16,15 +16,16 @@
  */
 
 (() => {
-  const TRIGGER_PATTERN = /(?:^|\s)\/([a-zA-Z0-9_-]{1,32})$/;
   const LOOKBEHIND_CHARS = 64;
 
   let shortcuts = {};
   let textExpansion = true;
+  let prefix = '';
 
   chrome.storage.local.get(['textExpansionShortcuts', 'userPreferences'], (result) => {
     shortcuts = result.textExpansionShortcuts ?? {};
     textExpansion = result.userPreferences?.textExpansion ?? true;
+    prefix = result.userPreferences?.textExpansionPrefix ?? '';
   });
 
   chrome.storage.onChanged.addListener((changes, area) => {
@@ -36,6 +37,7 @@
 
     if (changes.userPreferences) {
       textExpansion = changes.userPreferences.newValue?.textExpansion ?? true;
+      prefix = changes.userPreferences.newValue?.textExpansionPrefix ?? '';
     }
   });
 
@@ -64,9 +66,9 @@
     return range.toString();
   }
 
-  function selectTrigger(field, isNative, triggerLength) {
+  function selectPrefix(field, isNative, prefixLength) {
     if (isNative) {
-      field.setSelectionRange(field.selectionStart - triggerLength, field.selectionStart);
+      field.setSelectionRange(field.selectionStart - prefixLength, field.selectionStart);
       return true;
     }
 
@@ -76,7 +78,7 @@
     const range = selection.getRangeAt(0).cloneRange();
     if (!range.collapsed) return false;
 
-    range.setStart(range.startContainer, Math.max(0, range.startOffset - triggerLength));
+    range.setStart(range.startContainer, Math.max(0, range.startOffset - prefixLength));
     selection.removeAllRanges();
     selection.addRange(range);
 
@@ -86,20 +88,24 @@
   document.addEventListener(
     'input',
     (event) => {
-      if (!textExpansion || !Object.keys(shortcuts).length) return;
+      if (!textExpansion || !prefix || !Object.keys(shortcuts).length) return;
 
       const field = event.target;
       if (!isEditableField(field)) return;
 
       const isNative = isNativeField(field);
       const textBeforeCaret = getTextBeforeCaret(field, isNative).slice(-LOOKBEHIND_CHARS);
-      const match = textBeforeCaret.match(TRIGGER_PATTERN);
+      const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const prefixPattern = new RegExp(
+        `(?:^|\\s)${escapedPrefix}([a-zA-Z0-9_-]{1,32})$`
+      );
+      const match = textBeforeCaret.match(prefixPattern);
       if (!match) return;
 
       const replacement = shortcuts[match[1].toLowerCase()];
       if (replacement === undefined) return;
 
-      if (!selectTrigger(field, isNative, match[1].length + 1)) return;
+      if (!selectPrefix(field, isNative, match[1].length + prefix.length)) return;
 
       document.execCommand('insertText', false, replacement);
     },
