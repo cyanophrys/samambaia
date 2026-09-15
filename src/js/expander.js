@@ -16,15 +16,16 @@
  */
 
 (() => {
-  const TRIGGER_PATTERN = /(?:^|\s)\/([a-zA-Z0-9_-]{1,32})$/;
   const LOOKBEHIND_CHARS = 64;
 
   let shortcuts = {};
   let textExpansion = true;
+  let trigger = '';
 
   chrome.storage.local.get(['scriptShortcuts', 'userPreferences'], (result) => {
     shortcuts = result.scriptShortcuts ?? {};
     textExpansion = result.userPreferences?.textExpansion ?? true;
+    trigger = result.userPreferences?.textExpansionTrigger ?? '';
   });
 
   chrome.storage.onChanged.addListener((changes, area) => {
@@ -36,6 +37,7 @@
 
     if (changes.userPreferences) {
       textExpansion = changes.userPreferences.newValue?.textExpansion ?? true;
+      trigger = changes.userPreferences.newValue?.textExpansionTrigger ?? '';
     }
   });
 
@@ -86,20 +88,24 @@
   document.addEventListener(
     'input',
     (event) => {
-      if (!textExpansion || !Object.keys(shortcuts).length) return;
+      if (!textExpansion || !trigger || !Object.keys(shortcuts).length) return;
 
       const field = event.target;
       if (!isEditableField(field)) return;
 
       const isNative = isNativeField(field);
       const textBeforeCaret = getTextBeforeCaret(field, isNative).slice(-LOOKBEHIND_CHARS);
-      const match = textBeforeCaret.match(TRIGGER_PATTERN);
+      const escapedTrigger = trigger.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const triggerPattern = new RegExp(
+        `(?:^|\\s)${escapedTrigger}([a-zA-Z0-9_-]{1,32})$`
+      );
+      const match = textBeforeCaret.match(triggerPattern);
       if (!match) return;
 
       const replacement = shortcuts[match[1].toLowerCase()];
       if (replacement === undefined) return;
 
-      if (!selectTrigger(field, isNative, match[1].length + 1)) return;
+      if (!selectTrigger(field, isNative, match[1].length + trigger.length)) return;
 
       document.execCommand('insertText', false, replacement);
     },

@@ -21,6 +21,10 @@ import {
 } from './store.js';
 
 import {
+  TEXT_EXPANSION_TRIGGERS,
+} from './config.js';
+
+import {
   suppressTransitions,
 } from './utils.js';
 
@@ -54,6 +58,7 @@ const DEFAULT_PREFERENCES = {
     variables: true,
   },
   textExpansion: true,
+  textExpansionTrigger: TEXT_EXPANSION_TRIGGERS.default,
   theme: 'system',
   viewMode: 'grid',
 };
@@ -229,7 +234,31 @@ export function setTextExpansion(value, event) {
   const isEnabled =
     (typeof value === 'boolean' ? value : event?.target?.checked)
     ?? DEFAULT_PREFERENCES.textExpansion;
+  const textExpansionTrigger = document.querySelector(
+    '[name="text-expansion-trigger"]'
+  );
 
   userPreferences.textExpansion = isEnabled;
   updatePreferenceControl('text-expansion', isEnabled);
+
+  if (textExpansionTrigger)
+    textExpansionTrigger.disabled = !isEnabled;
+}
+
+export function setTextExpansionTrigger(value) {
+  if (!userPreferences.textExpansion) return;
+
+  const trigger = TEXT_EXPANSION_TRIGGERS.options.includes(value)
+    ? value
+    : TEXT_EXPANSION_TRIGGERS.default;
+
+  userPreferences.textExpansionTrigger = trigger;
+  document.querySelector('select[name="text-expansion-trigger"]').value = trigger;
+
+  document.documentElement.style.setProperty(
+    '--text-expansion-trigger',
+    trigger
+  );
+
+  document.dispatchEvent(new Event('textExpansionTrigger:changed'));
 }

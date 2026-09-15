@@ -30,3 +30,12 @@ export const PALETTE_COLORS = [
   'teal',
   'yellow',
 ];
+
+export const TEXT_EXPANSION_TRIGGERS = {
+  default: '/',
+  options: [
+    '/',
+    ';',
+    ':',
+  ],
+};

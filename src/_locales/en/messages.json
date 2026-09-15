@@ -221,6 +221,7 @@
 
   "textExpansion": { "message": "Script shortcuts" },
   "textExpansionDescription": { "message": "Quickly paste a script as you type using a shortcut" },
+  "textExpansionTrigger": { "message": "Shortcut trigger" },
 
   "clearHistory": { "message": "Clear history" },
   "clearRecentHistoryEllipsis": { "message": "Clear recent history…" },

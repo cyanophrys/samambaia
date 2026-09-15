@@ -216,7 +216,7 @@ body {
 
   .field-row:has(#script-shortcut:not(:placeholder-shown)) {
     &::before {
-      content: "/";
+      content: var(--text-expansion-trigger);
       position: absolute;
       left: var(--row-pad-x);
       bottom: var(--spacing-sm);
