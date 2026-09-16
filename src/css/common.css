@@ -899,7 +899,9 @@ svg {
     svg,
     span {
       opacity: var(--dimmed-opacity);
-      transition: opacity var(--transition-medium);
+      transition:
+        opacity var(--transition-medium),
+        color var(--transition-medium);
     }
 
     span {
@@ -930,19 +932,8 @@ svg {
     }
 
     &[aria-selected="true"] {
-      color: oklch(from var(--accent-color) calc(l - 0.20) calc(c + 0.05) h);
-
-      [data-theme="dark"] & {
-        color: oklch(from var(--accent-color) calc(l + 0.3) c h);
-      }
-
       .icon {
         background-color: color-mix(in srgb, var(--accent-color) 18%, transparent);
-      }
-
-      svg,
-      span {
-        opacity: 1;
       }
 
       &:hover .icon {
@@ -951,6 +942,38 @@ svg {
 
       &:active .icon {
         background-color: color-mix(in srgb, var(--accent-color) 38%, transparent);
+      }
+
+      svg,
+      span {
+        color: oklch(from var(--accent-color) calc(l - 0.20) calc(c + 0.05) h);
+        opacity: 1;
+      }
+
+      [data-theme="dark"] & {
+        svg,
+        span {
+          color: oklch(from var(--accent-color) calc(l + 0.3) c h);
+        }
+      }
+
+      :root[data-high-contrast="true"] & {
+        .icon {
+        background-color: color-mix(in srgb, currentColor 18%, transparent);
+      }
+
+        &:hover .icon {
+          background-color: color-mix(in srgb, currentColor 28%, transparent);
+        }
+
+        &:active .icon {
+          background-color: color-mix(in srgb, currentColor 38%, transparent);
+        }
+
+        svg,
+        span {
+          color: currentColor;
+        }
       }
     }
   }
