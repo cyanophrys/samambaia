@@ -1271,12 +1271,32 @@ svg {
     user-select: none;
     cursor: pointer;
 
+    &::before {
+      content: "";
+      position: absolute;
+      inset-block: 50%;
+      inset-inline-start: 0;
+      width: 4px;
+      height: 0;
+      transform: translateY(-50%);
+      background-color: var(--accent-color);
+      border-radius: var(--radius-max);
+      opacity: 0;
+      transition:
+        height var(--transition-medium),
+        opacity var(--transition-medium);
+    }
+
     &:hover {
       background-color: color-mix(in srgb, currentColor 8%, transparent);
     }
 
     &:active {
       background-color: color-mix(in srgb, currentColor 12%, transparent);
+    }
+
+    :root[data-high-contrast="true"] &::before {
+      background-color: currentColor;
     }
 
     &:has([aria-haspopup]) {
@@ -1286,7 +1306,9 @@ svg {
     > svg:not(.color-icon) {
       flex-shrink: 0;
       opacity: var(--dimmed-opacity);
-      transition: opacity var(--transition-medium);
+      transition:
+        opacity var(--transition-medium),
+        color var(--transition-medium);
     }
 
     > .pin-icon {
@@ -1301,10 +1323,12 @@ svg {
 
     > span {
       min-width: 0;
-      font-weight: 600;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      transition:
+        color var(--transition-medium),
+        font-weight var(--transition-medium);
     }
 
     &[data-color="blue"]     { --label-color: var(--palette-blue); }
@@ -1342,10 +1366,32 @@ svg {
 
     &[aria-current] {
       background-color: color-mix(in srgb, var(--accent-color) 18%, transparent);
-      color: oklch(from var(--accent-color) calc(l - 0.20) calc(c + 0.05) h);
+
+      &::before {
+        height: 24px;
+        opacity: 1;
+
+        @starting-style {
+          height: 0;
+          opacity: 0;
+        }
+      }
+
+      > svg:not(.color-icon),
+      > span {
+        color: oklch(from var(--accent-color) calc(l - 0.20) calc(c + 0.05) h);
+        font-weight: 600;
+      }
+
+      > span {
+        font-weight: 600;
+      }
 
       [data-theme="dark"] & {
-        color: oklch(from var(--accent-color) calc(l + 0.3) c h);
+        > svg:not(.color-icon),
+        > span {
+          color: oklch(from var(--accent-color) calc(l + 0.3) c h);
+        }
       }
 
       &:hover {
@@ -1354,6 +1400,23 @@ svg {
 
       &:active {
         background-color: color-mix(in srgb, var(--accent-color) 38%, transparent);
+      }
+
+      :root[data-high-contrast="true"] & {
+        background-color: color-mix(in srgb, currentColor 18%, transparent);
+
+        &:hover {
+          background-color: color-mix(in srgb, currentColor 28%, transparent);
+        }
+
+        &:active {
+          background-color: color-mix(in srgb, currentColor 38%, transparent);
+        }
+
+        > span,
+        > svg:not(.color-icon) {
+          color: currentColor;
+        }
       }
 
       > svg:not(.color-icon) {
