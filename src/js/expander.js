@@ -153,6 +153,13 @@
         return;
       }
 
+      const textBeforeCaret = getTextBeforeCaret(field, isNative);
+
+      if (textBeforeCaret.slice(-prefixLength) !== `${prefix}${shortcut}`) {
+        pendingShortcut = null;
+        return;
+      }
+
       const replacement = shortcuts[shortcut];
       if (replacement === undefined) {
         pendingShortcut = null;
