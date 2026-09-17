@@ -398,15 +398,15 @@ svg {
     transition: background-color var(--transition-medium);
     user-select: none;
 
-    &:first-of-type {
+    &:first-child {
       border-radius: var(--radius-md) var(--radius-md) 0 0;
     }
 
-    &:last-of-type {
+    &:not(:has(~ .list-row)) {
       border-radius: 0 0 var(--radius-md) var(--radius-md);
     }
 
-    &:first-of-type:last-of-type {
+    &:first-child:not(:has(~ .list-row)) {
       border-radius: var(--radius-md);
     }
 
@@ -451,7 +451,7 @@ svg {
       margin-left: auto;
     }
 
-    &:not(:last-of-type) {
+    &:has(~ .list-row) {
       border-bottom: 1px solid var(--border-color);
 
       :root[data-theme="dark"] & {
@@ -467,7 +467,7 @@ svg {
       border: 1px solid var(--border-hc-color);
       border-radius: var(--radius-md);
 
-      &:not(:last-of-type) {
+      &:has(~ .list-row) {
         border-bottom: 1px solid var(--border-hc-color);
 
         [data-theme="dark"] & {
