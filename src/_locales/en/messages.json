@@ -225,6 +225,11 @@
   "textExpansionPrefixDescription": { "message": "Choose the character used as the prefix" },
   "textExpansionPrefixSemicolon": { "message": "Semicolon (;)" },
   "textExpansionPrefixSlash": { "message": "Slash (/)" },
+  "textExpansionTrigger": { "message": "Text expansion trigger" },
+  "textExpansionTriggerDescription": { "message": "Choose the key used to trigger text expansion" },
+  "textExpansionTriggerSpace": { "message": "Space" },
+  "textExpansionTriggerTab": { "message": "Tab" },
+  "textExpansionTriggerEnter": { "message": "Enter" },
 
   "clearHistory": { "message": "Clear history" },
   "clearRecentHistoryEllipsis": { "message": "Clear recent history…" },
