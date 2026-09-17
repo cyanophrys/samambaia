@@ -31,6 +31,15 @@ export const PALETTE_COLORS = [
   'yellow',
 ];
 
+export const TEXT_EXPANSION_TRIGGERS = {
+  default: 'space',
+  options: [
+    'space',
+    'tab',
+    'enter',
+  ],
+};
+
 export const TEXT_EXPANSION_PREFIXES = {
   default: ';',
   options: [

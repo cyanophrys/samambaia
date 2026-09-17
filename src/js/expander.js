@@ -21,11 +21,14 @@
   let shortcuts = {};
   let textExpansion = true;
   let prefix = '';
+  let trigger = '';
+  let pendingShortcut = null;
 
   chrome.storage.local.get(['textExpansionShortcuts', 'userPreferences'], (result) => {
     shortcuts = result.textExpansionShortcuts ?? {};
     textExpansion = result.userPreferences?.textExpansion ?? true;
     prefix = result.userPreferences?.textExpansionPrefix ?? '';
+    trigger = result.userPreferences?.textExpansionTrigger ?? '';
   });
 
   chrome.storage.onChanged.addListener((changes, area) => {
@@ -38,6 +41,7 @@
     if (changes.userPreferences) {
       textExpansion = changes.userPreferences.newValue?.textExpansion ?? true;
       prefix = changes.userPreferences.newValue?.textExpansionPrefix ?? '';
+      trigger = changes.userPreferences.newValue?.textExpansionTrigger ?? '';
     }
   });
 
@@ -68,7 +72,10 @@
 
   function selectPrefix(field, isNative, prefixLength) {
     if (isNative) {
-      field.setSelectionRange(field.selectionStart - prefixLength, field.selectionStart);
+      field.setSelectionRange(
+        field.selectionStart - prefixLength,
+        field.selectionStart
+      );
       return true;
     }
 
@@ -78,16 +85,29 @@
     const range = selection.getRangeAt(0).cloneRange();
     if (!range.collapsed) return false;
 
-    range.setStart(range.startContainer, Math.max(0, range.startOffset - prefixLength));
+    range.setStart(
+      range.startContainer,
+      Math.max(0, range.startOffset - prefixLength)
+    );
     selection.removeAllRanges();
     selection.addRange(range);
 
     return true;
   }
 
+  function getTriggerKey() {
+    if (trigger === 'space') return ' ';
+    if (trigger === 'tab') return 'Tab';
+    if (trigger === 'enter') return 'Enter';
+
+    return null;
+  }
+
   document.addEventListener(
     'input',
     (event) => {
+      pendingShortcut = null;
+
       if (!textExpansion || !prefix || !Object.keys(shortcuts).length) return;
 
       const field = event.target;
@@ -102,11 +122,51 @@
       const match = textBeforeCaret.match(prefixPattern);
       if (!match) return;
 
-      const replacement = shortcuts[match[1].toLowerCase()];
-      if (replacement === undefined) return;
+      const shortcut = match[1].toLowerCase();
+      if (shortcuts[shortcut] === undefined) return;
 
-      if (!selectPrefix(field, isNative, match[1].length + prefix.length)) return;
+      pendingShortcut = {
+        field,
+        shortcut,
+        isNative,
+        prefixLength: match[1].length + prefix.length,
+      };
+    },
+    true
+  );
 
+  document.addEventListener(
+    'keydown',
+    (event) => {
+      if (!pendingShortcut) return;
+      if (event.key !== getTriggerKey()) return;
+
+      const {
+        field,
+        shortcut,
+        isNative,
+        prefixLength,
+      } = pendingShortcut;
+
+      if (event.target !== field) {
+        pendingShortcut = null;
+        return;
+      }
+
+      const replacement = shortcuts[shortcut];
+      if (replacement === undefined) {
+        pendingShortcut = null;
+        return;
+      }
+
+      if (!selectPrefix(field, isNative, prefixLength)) {
+        pendingShortcut = null;
+        return;
+      }
+
+      pendingShortcut = null;
+
+      event.preventDefault();
       document.execCommand('insertText', false, replacement);
     },
     true
