@@ -41,6 +41,7 @@ const MAX_VARIABLE_NAME_LENGTH = 128;
 const debouncedSaveVariable = debounce(async variableData => {
   try {
     await saveVariableData(variableData, false);
+    document.dispatchEvent(new Event('variable:changed'));
   } catch (error) {
     console.error(error);
   }
@@ -253,6 +254,7 @@ export async function deleteVariable(element) {
     if (e.detail.response !== 'delete') return;
 
     await deleteVariableData(id);
+    document.dispatchEvent(new Event('variable:changed'));
     await renderVariables();
 
     const toast = document.createElement('smb-toast');

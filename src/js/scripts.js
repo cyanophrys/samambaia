@@ -130,12 +130,14 @@ function updateDragHandles(items) {
   });
 }
 
-function updateTextExpansionShortcuts(scripts) {
+export async function updateTextExpansionShortcuts() {
+  const scripts = await getAllScripts();
   const textExpansionShortcuts = {};
 
   for (const script of scripts) {
     if (!script.shortcut) continue;
-    textExpansionShortcuts[script.shortcut.toLowerCase()] = script.content;
+    textExpansionShortcuts[script.shortcut.toLowerCase()] =
+      applyVariables(script.content);
   }
 
   chrome.storage.local.set({ textExpansionShortcuts }).catch((error) => {
@@ -262,7 +264,7 @@ export async function renderScripts() {
     (a.order ?? Infinity) - (b.order ?? Infinity) || a.id - b.id
   );
 
-  updateTextExpansionShortcuts(scripts);
+  updateTextExpansionShortcuts();
 
   const container = getScriptsContainer();
   container.replaceChildren();
