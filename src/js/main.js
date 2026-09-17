@@ -76,6 +76,7 @@ import {
   searchAllScripts,
   toggleFavoriteScript,
   updateScriptMoveButtons,
+  updateTextExpansionShortcuts,
 } from './scripts.js';
 
 import {
@@ -243,9 +244,9 @@ async function init() {
   applyTranslations();
 
   await initDB();
-  await renderScripts();
   await renderLabels();
   await renderVariables();
+  await renderScripts();
   await initScratchpad();
   initScriptsSortable();
 
@@ -314,6 +315,7 @@ function bindEvents() {
   bindDialogEvents();
 
   document.addEventListener('recentScripts:changed', filterScripts);
+  document.addEventListener('variable:changed', updateTextExpansionShortcuts);
 
   ['label:changed', 'textExpansionPrefix:changed'].forEach((event) => {
     document.addEventListener(event, renderScripts);
