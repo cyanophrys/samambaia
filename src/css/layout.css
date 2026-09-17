@@ -1,17 +1,3 @@
-@keyframes show-scroll-button {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-    visibility: hidden;
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    visibility: visible;
-  }
-}
-
 html {
   color: var(--text-color);
   timeline-scope: --scripts-scroll-timeline;
@@ -241,7 +227,10 @@ body {
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px);
-  animation: show-scroll-button linear both;
+  animation:
+    fade-in linear both,
+    slide-up linear both,
+    reveal linear both;
   animation-timeline: --scripts-scroll-timeline;
   animation-range: 50px 150px;
   z-index: 1;
