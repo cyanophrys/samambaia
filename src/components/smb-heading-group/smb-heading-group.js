@@ -15,9 +15,8 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import reset from '../../css/reset.css' with { type: 'css' };
-import common from '../../css/common.css' with { type: 'css' };
-import styles from './smb-heading-group.css' with { type: 'css' };
+import styles from '../../css/styles.css' with { type: 'css' };
+import component from './smb-heading-group.css' with { type: 'css' };
 
 import {
   applyTranslations,
@@ -47,7 +46,7 @@ export class SmbHeadingGroup extends HTMLElement {
     super();
 
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.adoptedStyleSheets = [reset, common, styles];
+    this.shadowRoot.adoptedStyleSheets = [styles, component];
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     this.#container = this.shadowRoot.querySelector('div');

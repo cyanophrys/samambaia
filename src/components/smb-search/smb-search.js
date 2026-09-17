@@ -15,9 +15,8 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import reset from '../../css/reset.css' with { type: 'css' };
-import common from '../../css/common.css' with { type: 'css' };
-import search from './smb-search.css' with { type: 'css' };
+import styles from '../../css/styles.css' with { type: 'css' };
+import component from './smb-search.css' with { type: 'css' };
 
 import {
   applyTranslations,
@@ -47,7 +46,7 @@ export class SmbSearch extends HTMLElement {
     super();
 
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.adoptedStyleSheets = [reset, common, search];
+    this.shadowRoot.adoptedStyleSheets = [styles, component];
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     applyTranslations(this.shadowRoot);
