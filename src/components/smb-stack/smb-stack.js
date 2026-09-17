@@ -16,8 +16,7 @@
  */
 
 import reset from '../../css/reset.css' with { type: 'css' };
-import common from '../../css/common.css' with { type: 'css' };
-import styles from './smb-stack.css' with { type: 'css' };
+import component from './smb-stack.css' with { type: 'css' };
 
 class SmbStack extends HTMLElement {
   constructor() {
@@ -25,7 +24,7 @@ class SmbStack extends HTMLElement {
 
     this.attachShadow({ mode: 'open' });
 
-    this.shadowRoot.adoptedStyleSheets = [reset, common, styles];
+    this.shadowRoot.adoptedStyleSheets = [reset, component];
 
     this.shadowRoot.innerHTML = `
       <slot></slot>
