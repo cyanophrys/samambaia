@@ -1,0 +1,202 @@
+.label-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+
+  &.compact {
+    gap: var(--spacing-sm);
+  }
+}
+
+.label-group .contents {
+  display: contents;
+}
+
+.label-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  position: relative;
+  overflow: hidden;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  height: 44px;
+  border: 1px solid var(--border-hc-color);
+  border-radius: var(--radius-md);
+  background-color: transparent;
+  color: var(--text-fg-color);
+  transition: background-color var(--transition-medium),
+              color var(--transition-medium);
+  user-select: none;
+  cursor: pointer;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 44px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset-block: 50%;
+    inset-inline-start: 0;
+    width: 4px;
+    height: 0;
+    transform: translateY(-50%);
+    background-color: var(--accent-color);
+    border-radius: var(--radius-max);
+    opacity: 0;
+    transition:
+      height var(--transition-medium),
+      opacity var(--transition-medium);
+  }
+
+  &:hover {
+    background-color: color-mix(in srgb, currentColor 8%, transparent);
+  }
+
+  &:active {
+    background-color: color-mix(in srgb, currentColor 12%, transparent);
+  }
+
+  :root[data-high-contrast="true"] &::before {
+    background-color: currentColor;
+  }
+
+  &:has([aria-haspopup]) {
+    padding-inline-end: var(--spacing-xs);
+  }
+
+  > svg:not(.color-icon) {
+    flex-shrink: 0;
+    opacity: var(--dimmed-opacity);
+    transition:
+      opacity var(--transition-medium),
+      color var(--transition-medium);
+  }
+
+  > .pin-icon {
+    display: none;
+    width: 18px;
+    height: 18px;
+  }
+
+  > .color-icon {
+    fill: var(--label-color);
+  }
+
+  > span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition:
+      color var(--transition-medium),
+      font-weight var(--transition-medium);
+  }
+
+  &[data-color="blue"]     { --label-color: var(--palette-blue); }
+  &[data-color="brown"]    { --label-color: var(--palette-brown); }
+  &[data-color="green"]    { --label-color: var(--palette-green); }
+  &[data-color="lavender"] { --label-color: var(--palette-lavender); }
+  &[data-color="orange"]   { --label-color: var(--palette-orange); }
+  &[data-color="pink"]     { --label-color: var(--palette-pink); }
+  &[data-color="purple"]   { --label-color: var(--palette-purple); }
+  &[data-color="red"]      { --label-color: var(--palette-red); }
+  &[data-color="teal"]     { --label-color: var(--palette-teal); }
+  &[data-color="yellow"]   { --label-color: var(--palette-yellow); }
+
+  &.compact {
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+  }
+
+  [aria-haspopup],
+  > .count {
+    margin-inline-start: auto;
+  }
+
+  > .count {
+    font-size: var(--font-size-xs);
+    opacity: var(--dimmed-opacity);
+    align-self: center;
+  }
+
+  .menu .unpin-icon {
+    display: none;
+  }
+
+  &[aria-current] {
+    background-color: color-mix(in srgb, var(--accent-color) 18%, transparent);
+
+    &::before {
+      height: 24px;
+      opacity: 1;
+
+      @starting-style {
+        height: 0;
+        opacity: 0;
+      }
+    }
+
+    > svg:not(.color-icon),
+    > span {
+      color: oklch(from var(--accent-color) calc(l - 0.20) calc(c + 0.05) h);
+      font-weight: 600;
+    }
+
+    > span {
+      font-weight: 600;
+    }
+
+    [data-theme="dark"] & {
+      > svg:not(.color-icon),
+      > span {
+        color: oklch(from var(--accent-color) calc(l + 0.3) c h);
+      }
+    }
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--accent-color) 28%, transparent);
+    }
+
+    &:active {
+      background-color: color-mix(in srgb, var(--accent-color) 38%, transparent);
+    }
+
+    :root[data-high-contrast="true"] & {
+      background-color: color-mix(in srgb, currentColor 18%, transparent);
+
+      &:hover {
+        background-color: color-mix(in srgb, currentColor 28%, transparent);
+      }
+
+      &:active {
+        background-color: color-mix(in srgb, currentColor 38%, transparent);
+      }
+
+      > span,
+      > svg:not(.color-icon) {
+        color: currentColor;
+      }
+    }
+
+    > svg:not(.color-icon) {
+      opacity: 1;
+    }
+  }
+
+  &[data-pinned="true"] {
+    .menu .pin-icon {
+      display: none;
+    }
+
+    .menu .unpin-icon {
+      display: block;
+    }
+  }
+
+  &[data-color="none"] {
+    > .color-icon {
+      display: none;
+    }
+  }
+}
