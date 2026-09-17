@@ -16,8 +16,8 @@
  */
 
 import reset from '../../css/reset.css' with { type: 'css' };
-import common from '../../css/common.css' with { type: 'css' };
-import dialog from './smb-dialog.css' with { type: 'css' };
+import styles from '../../css/styles.css' with { type: 'css' };
+import component from './smb-dialog.css' with { type: 'css' };
 
 import {
   applyTranslations,
@@ -56,7 +56,7 @@ export class SmbDialog extends HTMLElement {
     super();
 
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.adoptedStyleSheets = [reset, common, dialog];
+    this.shadowRoot.adoptedStyleSheets = [reset, styles, component];
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     applyTranslations(this.shadowRoot);

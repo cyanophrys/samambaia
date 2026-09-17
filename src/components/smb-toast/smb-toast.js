@@ -16,8 +16,8 @@
  */
 
 import reset from '../../css/reset.css' with { type: 'css' };
-import common from '../../css/common.css' with { type: 'css' };
-import toast from './smb-toast.css' with { type: 'css' };
+import styles from '../../css/styles.css' with { type: 'css' };
+import component from './smb-toast.css' with { type: 'css' };
 
 import {
   applyTranslations,
@@ -58,7 +58,7 @@ export class SmbToast extends HTMLElement {
     super();
 
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.adoptedStyleSheets = [reset, common, toast];
+    this.shadowRoot.adoptedStyleSheets = [reset, styles, component];
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     applyTranslations(this.shadowRoot);
