@@ -32,7 +32,7 @@ export const PALETTE_COLORS = [
 ];
 
 export const TEXT_EXPANSION_PREFIXES = {
-  default: '/',
+  default: ';',
   options: [
     '/',
     ';',
