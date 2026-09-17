@@ -228,7 +228,6 @@
     <div id="script-dialog-toast" class="toast-container" style="position-anchor: --script-dialog-toast;"></div>
     <div class="scrollable-area">
       <form id="script-form" class="list-group rows-separated" data-action="saveScript">
-        <input type="hidden" id="script-id" name="id">
         <div class="list-row field-row">
           <input class="input" type="text" id="script-name" name="name" placeholder=" " autocomplete="off" maxlength="128" required autofocus>
           <label class="label" for="script-name" data-i18n="name"></label>
@@ -265,6 +264,7 @@
           <input class="input" type="text" id="script-shortcut" name="shortcut" placeholder=" " autocomplete="off" maxlength="32">
           <label class="label" for="script-shortcut" data-i18n="scriptShortcut"></label>
         </div>
+        <input type="hidden" id="script-id" name="id">
       </form>
     </div>
     <button slot="footer-left" class="button" type="button" data-target="script-dialog" data-i18n="cancel" data-dialog-close></button>
@@ -273,7 +273,6 @@
   <smb-dialog id="label-dialog" style="--dialog-width: 430px;" action-dialog>
     <div class="scrollable-area">
       <form id="label-form" class="list-group rows-separated" data-action="saveLabel">
-        <input type="hidden" id="label-id" name="id">
         <div class="list-row field-row">
           <input class="input" type="text" id="label-name" name="name" placeholder=" " autocomplete="off" maxlength="128" required autofocus>
           <label class="label" for="label-name" data-i18n="name"></label>
@@ -291,6 +290,7 @@
           <input type="radio" name="label-color" value="purple" data-i18n-attr="aria-label:purple" data-tooltip>
           <input type="radio" name="label-color" value="lavender" data-i18n-attr="aria-label:lavender" data-tooltip>
         </div>
+        <input type="hidden" id="label-id" name="id">
       </form>
       <div id="label-dialog-toast" class="toast-container"></div>
     </div>
@@ -328,11 +328,11 @@
     <div class="scrollable-area">
       <section>
         <form id="variable-form" class="list-group" data-action="saveVariable">
-          <input type="hidden" id="variable-id" name="id">
           <div class="list-row field-row">
             <input class="input" type="text" id="variable-name" name="name" placeholder=" " maxlength="64" autocomplete="off" required autofocus>
             <label class="label" for="variable-name" data-i18n="name"></label>
           </div>
+          <input type="hidden" id="variable-id" name="id">
         </form>
       </section>
     </div>
