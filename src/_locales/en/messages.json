@@ -54,6 +54,12 @@
   "moreOptions": { "message": "More options" },
   "name": { "message": "Name" },
 
+  "loadingFailedHeading": { "message": "Something went wrong" },
+  "loadingFailedDescription": {
+    "message": "An error occurred while loading the page."
+  },
+  "tryAgain": { "message": "Try again" },
+
   "backToTop": { "message": "Back to top" },
   "mainNavigation": { "message": "Main navigation" },
   "moveToNext": { "message": "Move to next" },

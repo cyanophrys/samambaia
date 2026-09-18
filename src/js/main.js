@@ -237,42 +237,58 @@ function handleAction(event, actions) {
 
 async function init() {
   const pendingToast = sessionStorage.getItem('pendingToast');
-  const manifest = await getManifestInfo();
   const loading = document.getElementById('loading');
+  const spinner = loading?.querySelector('.spinner');
+  const placeholder = loading?.querySelector('smb-placeholder');
+  const errorDetails = loading?.querySelector('code');
   const searchInput = document.getElementById('scripts-search-input');
 
-  document.title = manifest.name;
-  document.documentElement.lang = await getLocale();
+  try {
+    const manifest = await getManifestInfo();
 
-  applyTranslations();
+    document.title = manifest.name;
+    document.documentElement.lang = await getLocale();
 
-  await initDB();
-  await renderLabels();
-  await renderVariables();
-  await renderScripts();
-  await initScratchpad();
-  initScriptsSortable();
+    applyTranslations();
 
-  applyShortcutDisplays();
-  applyAriaKeyshortcuts();
+    await initDB();
+    await renderLabels();
+    await renderVariables();
+    await renderScripts();
+    await initScratchpad();
+    initScriptsSortable();
 
-  suppressTransitions(() => {
-    setAccentColor(userPreferences.accentColor);
-    setBackupReminder(userPreferences.backupReminder);
-    setHighContrast(userPreferences.highContrast);
-    setLargeText(userPreferences.largeText);
-    setRecentScripts(userPreferences.recentScripts);
-    setTextExpansion(userPreferences.textExpansion);
-    setTextExpansionPrefix(userPreferences.textExpansionPrefix);
-    setTextExpansionTrigger(userPreferences.textExpansionTrigger);
-    setTheme(userPreferences.theme);
-    setViewMode(userPreferences.viewMode);
+    applyShortcutDisplays();
+    applyAriaKeyshortcuts();
 
-    toggleBackupBanner(state.hasChanges);
-    toggleLabelsSidebar(userPreferences.sidebars.labels);
-    toggleScratchpadSidebar(userPreferences.sidebars.scratchpad);
-    toggleVariablesSidebar(userPreferences.sidebars.variables);
-  });
+    suppressTransitions(() => {
+      setAccentColor(userPreferences.accentColor);
+      setBackupReminder(userPreferences.backupReminder);
+      setHighContrast(userPreferences.highContrast);
+      setLargeText(userPreferences.largeText);
+      setRecentScripts(userPreferences.recentScripts);
+      setTextExpansion(userPreferences.textExpansion);
+      setTextExpansionPrefix(userPreferences.textExpansionPrefix);
+      setTextExpansionTrigger(userPreferences.textExpansionTrigger);
+      setTheme(userPreferences.theme);
+      setViewMode(userPreferences.viewMode);
+
+      toggleBackupBanner(state.hasChanges);
+      toggleLabelsSidebar(userPreferences.sidebars.labels);
+      toggleScratchpadSidebar(userPreferences.sidebars.scratchpad);
+      toggleVariablesSidebar(userPreferences.sidebars.variables);
+    });
+  } catch (error) {
+    console.error(error);
+
+    spinner?.setAttribute('hidden', '');
+    placeholder?.removeAttribute('hidden');
+
+    if (errorDetails)
+      errorDetails.textContent = error.message;
+
+    return;
+  }
 
   loading?.setAttribute('hidden', '');
 
