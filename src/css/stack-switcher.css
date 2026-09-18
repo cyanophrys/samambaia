@@ -1,0 +1,107 @@
+.stack-switcher-group {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+}
+
+.stack-switcher {
+  display: grid;
+  place-items: center;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: color var(--transition-medium);
+
+  > div:has(.icon, span) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2xs);
+  }
+
+  svg,
+  span {
+    opacity: var(--dimmed-opacity);
+    transition:
+      opacity var(--transition-medium),
+      color var(--transition-medium);
+  }
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .icon {
+    display: grid;
+    place-items: center;
+    padding: var(--spacing-2xs) var(--spacing-md);
+    flex-shrink: 0;
+    border: 1px solid var(--border-hc-color);
+    border-radius: var(--radius-max);
+    transition:
+      opacity var(--transition-medium),
+      background-color var(--transition-medium);
+  }
+
+  &:hover .icon {
+    background-color: color-mix(in srgb, currentColor 12%, transparent);
+  }
+
+  &:focus-visible .icon {
+    outline: 2px solid var(--focus-outline-color);
+    outline-offset: 2px;
+  }
+
+  &[aria-selected="true"] {
+    .icon {
+      background-color: color-mix(in srgb, var(--accent-color) 18%, transparent);
+    }
+
+    &:hover .icon {
+      background-color: color-mix(in srgb, var(--accent-color) 28%, transparent);
+    }
+
+    &:active .icon {
+      background-color: color-mix(in srgb, var(--accent-color) 38%, transparent);
+    }
+
+    svg,
+    span {
+      color: oklch(from var(--accent-color) calc(l - 0.20) calc(c + 0.05) h);
+      opacity: 1;
+    }
+
+    [data-theme="dark"] & {
+      svg,
+      span {
+        color: oklch(from var(--accent-color) calc(l + 0.3) c h);
+      }
+    }
+
+    :root[data-high-contrast="true"] & {
+      .icon {
+      background-color: color-mix(in srgb, currentColor 18%, transparent);
+    }
+
+      &:hover .icon {
+        background-color: color-mix(in srgb, currentColor 28%, transparent);
+      }
+
+      &:active .icon {
+        background-color: color-mix(in srgb, currentColor 38%, transparent);
+      }
+
+      svg,
+      span {
+        color: currentColor;
+      }
+    }
+  }
+}
