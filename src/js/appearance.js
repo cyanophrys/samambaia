@@ -15,7 +15,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-const storage = browser.storage;
+const storage = chrome.storage;
 
 storage.local.get('userPreferences').then(({ userPreferences }) => {
   const root = document.documentElement;
