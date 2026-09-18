@@ -15,7 +15,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-const storage = globalThis.browser?.storage ?? globalThis.chrome?.storage;
+const storage = chrome.storage;
 
 if (!storage?.local) {
   throw new Error('Extension storage API is unavailable.');
