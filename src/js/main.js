@@ -121,6 +121,7 @@ import {
 import {
   applyAriaKeyshortcuts,
   applyShortcutDisplays,
+  filterShortcuts,
   handleShortcut,
   KEYBOARD_SHORTCUTS,
   openShortcutsDialog,
@@ -203,6 +204,7 @@ const actions = {
   },
 
   input: {
+    filterShortcuts,
     filterScripts: debounce(filterScripts, 150),
     filterScriptLabels: debounce(filterScriptLabels, 150),
     handleVariableValueInput,
