@@ -195,10 +195,6 @@ body {
   }
 }
 
-#script-dialog #script-content {
-  min-height: 120px;
-}
-
 #custom-scripts {
   justify-content: center;
   grid-template-columns: minmax(0, 700px);
