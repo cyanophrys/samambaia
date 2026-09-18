@@ -592,98 +592,111 @@
       </section>
     </div>
   </smb-dialog>
-  <smb-dialog id="shortcuts-dialog" data-i18n-attr="heading:keyboardShortcuts">
-    <div class="scrollable-area grid">
-      <section class="section">
-        <header class="header">
-          <h4 data-i18n="general"></h4>
-        </header>
-        <div class="shortcut-item">
-          <div data-shortcut-display="addScript"></div>
-          <span data-i18n="addScript"></span>
+  <smb-dialog id="shortcuts-dialog" data-i18n-attr="heading:keyboardShortcuts" style="--dialog-height: 90dvh;">
+    <smb-search slot="subheader" id="shortcuts-search-input" name="shortcuts-search" data-i18n-attr="placeholder:searchShortcuts" data-action="filterShortcuts" autofocus></smb-search>
+    <smb-stack id="shortcuts-stack" transition homogeneous>
+      <div data-page-name="shortcuts">
+        <div class="scrollable-area grid">
+          <section class="section">
+            <header class="header">
+              <h4 data-i18n="general"></h4>
+            </header>
+            <div class="shortcut-item">
+              <div data-shortcut-display="addScript"></div>
+              <span data-i18n="addScript"></span>
+            </div>
+            <div class="shortcut-item">
+              <div data-shortcut-display="addLabel"></div>
+              <span data-i18n="addLabel"></span>
+            </div>
+            <div class="shortcut-item">
+              <div data-shortcut-display="addVariable"></div>
+              <span data-i18n="addVariable"></span>
+            </div>
+            <div class="shortcut-item">
+              <div data-shortcut-display="importBackup"></div>
+              <span data-i18n="restoreBackup"></span>
+            </div>
+            <div class="shortcut-item">
+              <div data-shortcut-display="exportBackup"></div>
+              <span data-i18n="backUpAction"></span>
+            </div>
+            <div class="shortcut-item">
+              <div data-shortcut-display="openPreferences"></div>
+              <span data-i18n="openPreferences"></span>
+            </div>
+            <div class="shortcut-item">
+              <div data-shortcut-display="setViewMode"></div>
+              <span data-i18n="toggleScriptViewMode"></span>
+            </div>
+            <div class="shortcut-item">
+              <div class="keys" data-shortcut-display="openShortcuts"></div>
+              <span data-i18n="showKeyboardShortcuts"></span>
+            </div>
+          </section>
+          <section class="section">
+            <header class="header">
+              <h4 data-i18n="navigation"></h4>
+            </header>
+            <div class="shortcut-item">
+              <div data-shortcut-display="showAllScripts"></div>
+              <span data-i18n="showAllScripts"></span>
+            </div>
+            <div class="shortcut-item">
+              <div data-shortcut-display="showFavorites"></div>
+              <span data-i18n="showFavoriteScripts"></span>
+            </div>
+            <div class="shortcut-item">
+              <div data-shortcut-display="showRecent"></div>
+              <span data-i18n="showRecentScripts"></span>
+            </div>
+            <div class="shortcut-item">
+              <div data-shortcut-display="toggleLabelsSidebar"></div>
+              <span data-i18n="toggleLabelsSidebar"></span>
+            </div>
+            <div class="shortcut-item">
+              <div data-shortcut-display="toggleScratchpadSidebar"></div>
+              <span data-i18n="toggleScratchpadSidebar"></span>
+            </div>
+            <div class="shortcut-item">
+              <div data-shortcut-display="expandScratchpad"></div>
+              <span data-i18n="expandScratchpad"></span>
+            </div>
+            <div class="shortcut-item">
+              <div data-shortcut-display="toggleVariablesSidebar"></div>
+              <span data-i18n="toggleVariablesSidebar"></span>
+            </div>
+            <div class="shortcut-item">
+              <div data-shortcut-display="scrollScriptsView"></div>
+              <span data-i18n="backToTop"></span>
+            </div>
+          </section>
+          <section class="section">
+            <header>
+              <h4 data-i18n="search"></h4>
+            </header>
+            <div class="shortcut-item">
+              <div data-shortcut-display="searchScripts"></div>
+              <span data-i18n="searchScripts"></span>
+            </div>
+            <div class="shortcut-item">
+              <div>
+                <kbd>Esc</kbd>
+              </div>
+              <span data-i18n="cancelSearch"></span>
+            </div>
+          </section>
         </div>
-        <div class="shortcut-item">
-          <div data-shortcut-display="addLabel"></div>
-          <span data-i18n="addLabel"></span>
-        </div>
-        <div class="shortcut-item">
-          <div data-shortcut-display="addVariable"></div>
-          <span data-i18n="addVariable"></span>
-        </div>
-        <div class="shortcut-item">
-          <div data-shortcut-display="importBackup"></div>
-          <span data-i18n="restoreBackup"></span>
-        </div>
-        <div class="shortcut-item">
-          <div data-shortcut-display="exportBackup"></div>
-          <span data-i18n="backUpAction"></span>
-        </div>
-        <div class="shortcut-item">
-          <div data-shortcut-display="openPreferences"></div>
-          <span data-i18n="openPreferences"></span>
-        </div>
-        <div class="shortcut-item">
-          <div data-shortcut-display="setViewMode"></div>
-          <span data-i18n="toggleScriptViewMode"></span>
-        </div>
-        <div class="shortcut-item">
-          <div class="keys" data-shortcut-display="openShortcuts"></div>
-          <span data-i18n="showKeyboardShortcuts"></span>
-        </div>
-      </section>
-      <section class="section">
-        <header class="header">
-          <h4 data-i18n="navigation"></h4>
-        </header>
-        <div class="shortcut-item">
-          <div data-shortcut-display="showAllScripts"></div>
-          <span data-i18n="showAllScripts"></span>
-        </div>
-        <div class="shortcut-item">
-          <div data-shortcut-display="showFavorites"></div>
-          <span data-i18n="showFavoriteScripts"></span>
-        </div>
-        <div class="shortcut-item">
-          <div data-shortcut-display="showRecent"></div>
-          <span data-i18n="showRecentScripts"></span>
-        </div>
-        <div class="shortcut-item">
-          <div data-shortcut-display="toggleLabelsSidebar"></div>
-          <span data-i18n="toggleLabelsSidebar"></span>
-        </div>
-        <div class="shortcut-item">
-          <div data-shortcut-display="toggleScratchpadSidebar"></div>
-          <span data-i18n="toggleScratchpadSidebar"></span>
-        </div>
-        <div class="shortcut-item">
-          <div data-shortcut-display="expandScratchpad"></div>
-          <span data-i18n="expandScratchpad"></span>
-        </div>
-        <div class="shortcut-item">
-          <div data-shortcut-display="toggleVariablesSidebar"></div>
-          <span data-i18n="toggleVariablesSidebar"></span>
-        </div>
-        <div class="shortcut-item">
-          <div data-shortcut-display="scrollScriptsView"></div>
-          <span data-i18n="backToTop"></span>
-        </div>
-      </section>
-      <section class="section">
-        <header>
-          <h4 data-i18n="search"></h4>
-        </header>
-        <div class="shortcut-item">
-          <div data-shortcut-display="searchScripts"></div>
-          <span data-i18n="searchScripts"></span>
-        </div>
-        <div class="shortcut-item">
-          <div>
-            <kbd>Esc</kbd>
-          </div>
-          <span data-i18n="cancelSearch"></span>
-        </div>
-      </section>
-    </div>
+      </div>
+      <div data-page-name="shortcuts-results" class="scrollable-area">
+        <section id="shortcuts-results-section" class="section"></section>
+      </div>
+      <div data-page-name="no-shortcuts-results">
+        <smb-heading-group heading="noResultsFound" description="tryDifferentSearch" page>
+          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="currentColor"><path d="M152.15-161.09q-49.99-50.01-49.99-120.54 0-70.52 50.01-120.52t120.54-50q70.52 0 120.52 50.01t50 120.54q0 70.52-50.01 120.52-50.02 50-120.54 50-70.53 0-120.53-50.01Zm676.04 20.9L571.27-397.12q-17.35 13.97-39.39 27.08-22.03 13.12-41.38 20.92-1.96-12.11-4.92-24-2.96-11.88-8.04-21.5 57.04-19.92 96.21-69.15 39.17-49.23 39.17-119.08 0-81.54-56.81-138.65-56.81-57.12-138.36-57.12-81.67 0-139.02 57.12-57.35 57.11-57.35 138.65 0 17.1 3.5 36.72 3.5 19.63 8.43 33.01-8.93 1.24-20.87 4.87-11.94 3.63-20.86 6.9-6.73-16.27-10.39-38.46-3.65-22.19-3.65-43.1 0-100.27 69.97-169.91t170.27-69.64q99.3 0 169.14 69.97 69.85 69.96 69.85 169.64 0 43-15.23 83.54-15.23 40.54-40.46 70.09L860.5-172.5l-32.31 32.31ZM204-190.54l68.88-68.88 67.89 68.07 21.15-20.67-68.57-69.12 70.3-70.36-21.18-20.58-69.28 68.81-69.69-69.31-21.27 21.27 69.89 69.19-69.7 69.7L204-190.54Z"/></svg>
+        </smb-heading-group>
+      </div>
+    </smb-stack>
   </smb-dialog>
   <smb-dialog id="scratchpad-dialog" data-i18n-attr="heading:scratchpad" style="--dialog-width: min(90vw, 720px); --dialog-height: 90dvh; anchor-name: --scratchpad-dialog-toast;">
     <div id="scratchpad-dialog-toast" class="toast-container" style="position-anchor: --scratchpad-dialog-toast;"></div>
