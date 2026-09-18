@@ -64,6 +64,7 @@ export const KEYBOARD_SHORTCUTS = [
     name: "openShortcuts",
     action: "openShortcutsDialog",
     alt: true,
+    shift: true,
     key: "?",
   },
   {
@@ -128,17 +129,13 @@ export const KEYBOARD_SHORTCUTS = [
 export function handleShortcut(event, actions, shortcuts) {
   const target = event.target;
 
-  if (
-    !event.ctrlKey &&
-    !event.metaKey &&
-    !event.altKey &&
-    (
-      target instanceof HTMLInputElement ||
-      target instanceof HTMLTextAreaElement ||
-      target instanceof HTMLSelectElement ||
-      target.isContentEditable
-    )
-  ) return;
+  const isEditable =
+    target instanceof HTMLInputElement ||
+    target instanceof HTMLTextAreaElement ||
+    target instanceof HTMLSelectElement ||
+    target.isContentEditable;
+
+  if (isEditable && !event.ctrlKey && !event.metaKey) return;
 
   const shortcutString = [
     (event.ctrlKey || event.metaKey) && "ctrl",
@@ -176,7 +173,7 @@ export function handleShortcut(event, actions, shortcuts) {
       shortcut.key.toLowerCase() === event.key.toLowerCase() &&
       !!shortcut.ctrl === (event.ctrlKey || event.metaKey) &&
       !!shortcut.alt === event.altKey &&
-      (shortcut.shift ? event.shiftKey : true)
+      !!shortcut.shift === event.shiftKey
     );
   });
 
