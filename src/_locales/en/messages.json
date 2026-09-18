@@ -20,6 +20,7 @@
     "description": "Action used to clear content"
   },
   "copiedToClipboard": { "message": "Copied to clipboard" },
+  "copyToClipboardError": { "message": "Failed to copy to clipboard" },
   "close": {
     "message": "Close",
     "description": "Action used to close or dismissing an item"

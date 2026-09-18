@@ -498,6 +498,8 @@ export async function copyScript(target) {
   const id = Number(target?.dataset?.target);
   if (Number.isNaN(id)) return;
 
+  const toast = document.createElement('smb-toast');
+
   try {
     const script = await getScript(id);
     if (!script) return;
@@ -505,14 +507,14 @@ export async function copyScript(target) {
     await navigator.clipboard.writeText(applyVariables(script.content));
     addRecentScript(id);
 
-    const message = t('copiedToClipboard');
-    const toast = document.createElement('smb-toast');
-
-    toast.message = message;
-    toast.show('main-toast');
+    toast.message = t('copiedToClipboard');
   } catch (error) {
     console.error(error);
+
+    toast.message = t('copyToClipboardError');
   }
+
+  toast.show('main-toast');
 }
 
 function scriptMatchesLabel(script) {
