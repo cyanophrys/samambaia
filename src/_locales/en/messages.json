@@ -209,7 +209,7 @@
   "light": { "message": "Light" },
   "dark": { "message": "Dark" },
 
-  "accentColors": { "message": "Accent colors" },
+  "accentColor": { "message": "Accent color" },
 
   "highContrast": { "message": "High contrast" },
   "highContrastDescription": { "message": "Increases color contrast to make the interface easier to see" },
