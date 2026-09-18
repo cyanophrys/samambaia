@@ -1,0 +1,174 @@
+.script-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  user-select: none;
+  padding: 4px;
+  outline-width: 2px;
+  outline-color: transparent;
+  outline-offset: 4px;
+  border-radius: var(--radius-md);
+  transition:
+    background-color var(--transition-medium),
+    outline-color var(--transition-medium);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 100px;
+
+  &:focus-visible {
+    outline-color: var(--focus-outline-color);
+    outline-style: solid;
+  }
+
+  .header {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    padding: 0;
+
+    [data-drag-handle] {
+      display: grid;
+      place-items: center;
+      opacity: var(--dimmed-opacity);
+      cursor: grab;
+      justify-self: start;
+
+      &[data-disabled] {
+        opacity: var(--disabled-opacity);
+        cursor: default;
+        pointer-events: none;
+      }
+    }
+
+    .title-group {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-self: start;
+    }
+
+    .shortcut {
+      opacity: var(--dimmed-opacity);
+    }
+
+    .button-group {
+      justify-self: end;
+    }
+  }
+
+  h4,
+  .content,
+  .notes span {
+    overflow-wrap: anywhere;
+  }
+
+  .content,
+  .notes span {
+    white-space: pre-wrap;
+    text-wrap: pretty;
+  }
+
+  .content {
+    border: 1px solid var(--border-hc-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    background-color: color-mix(in srgb, currentColor 10%, transparent);
+    transition: background-color var(--transition-medium),
+                color var(--transition-medium),
+                border-color var(--transition-medium);
+    cursor: pointer;
+
+    &:hover {
+      background-color: color-mix(in srgb, currentColor 15%, transparent);
+    }
+
+    &:active {
+      background-color: color-mix(in srgb, currentColor 20%, transparent);
+    }
+
+    &[data-color="blue"]     { --script-color: var(--palette-blue); }
+    &[data-color="brown"]    { --script-color: var(--palette-brown); }
+    &[data-color="green"]    { --script-color: var(--palette-green); }
+    &[data-color="lavender"] { --script-color: var(--palette-lavender); }
+    &[data-color="orange"]   { --script-color: var(--palette-orange); }
+    &[data-color="pink"]     { --script-color: var(--palette-pink); }
+    &[data-color="purple"]   { --script-color: var(--palette-purple); }
+    &[data-color="red"]      { --script-color: var(--palette-red); }
+    &[data-color="teal"]     { --script-color: var(--palette-teal); }
+    &[data-color="yellow"]   { --script-color: var(--palette-yellow); }
+
+    &[data-color]:not([data-color="none"]) {
+      background-color: var(--script-color);
+      color: black;
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--script-color) 85%, black 15%);
+      }
+
+      &:active {
+        background-color: color-mix(in srgb, var(--script-color) 80%, black 20%);
+      }
+
+      :root[data-high-contrast="true"] & {
+        background-color: color-mix(in srgb, currentColor 10%, transparent);
+        color: inherit;
+        border-color: var(--script-color);
+        box-shadow: inset 0 0 0 2px var(--script-color);
+
+        &:hover {
+          background-color: color-mix(in srgb, currentColor 15%, transparent);
+        }
+
+        &:active {
+          background-color: color-mix(in srgb, currentColor 20%, transparent);
+        }
+      }
+    }
+  }
+
+  .notes {
+    display: flex;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm);
+    border: 1px solid var(--border-hc-color);
+    border-radius: var(--radius-md);
+    background-color: color-mix(in srgb, currentColor 8%, transparent);
+    user-select: text;
+
+    svg,
+    span {
+      opacity: var(--dimmed-opacity);
+      transition: opacity var(--transition-medium);
+    }
+
+    &:hover :is(svg, span) {
+      opacity: 1;
+    }
+  }
+
+  .favorite-remove-icon {
+    display: none;
+  }
+
+  &[data-favorite="true"] {
+    .favorite-add-icon {
+      display: none;
+    }
+
+    .favorite-remove-icon {
+      display: block;
+    }
+  }
+
+  &[data-dragging="true"] {
+    outline-color: var(--dragging-outline-color);
+    outline-style: dashed;
+    cursor: grabbing;
+
+    > * {
+      pointer-events: none;
+    }
+
+    button {
+      opacity: var(--disabled-opacity);
+    }
+  }
+}
