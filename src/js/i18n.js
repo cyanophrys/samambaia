@@ -15,6 +15,10 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+const locales = [
+  'en',
+];
+
 export function applyTranslations(root = document) {
   root.querySelectorAll('[data-i18n]').forEach(el => {
     el.textContent = chrome.i18n.getMessage(el.dataset.i18n);
@@ -30,4 +34,18 @@ export function applyTranslations(root = document) {
 
 export function t(key, substitutions) {
   return chrome.i18n.getMessage(key, substitutions);
+}
+
+export function getLocale() {
+  const locale = chrome.i18n.getUILanguage().replace('-', '_');
+
+  if (locales.includes(locale))
+    return locale;
+
+  const language = locale.split('_')[0];
+
+  if (locales.includes(language))
+    return language;
+
+  return 'en';
 }
