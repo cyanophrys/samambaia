@@ -224,14 +224,3 @@ main {
     }
   }
 }
-
-#about-dialog section:first-child > header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  user-select: none;
-
-  > img {
-    margin-block-end: var(--spacing-sm);
-  }
-}
