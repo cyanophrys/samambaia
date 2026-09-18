@@ -452,26 +452,6 @@ svg {
   }
 }
 
-.label-item,
-.variable-item {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 44px;
-
-  .menu .unpin-icon {
-    display: none;
-  }
-
-  &[data-pinned="true"] {
-    .menu .pin-icon {
-      display: none;
-    }
-
-    .menu .unpin-icon {
-      display: block;
-    }
-  }
-}
-
 .shortcut-item {
   display: flex;
   align-items: center;
