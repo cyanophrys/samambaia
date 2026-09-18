@@ -120,16 +120,19 @@ export async function copyScratchpad() {
 
   if (!textarea || !textarea.value.trim()) return;
 
+  const toast = document.createElement('smb-toast');
+
   try {
     await navigator.clipboard.writeText(textarea.value);
 
-    const toast = document.createElement('smb-toast');
-
     toast.message = t('copiedToClipboard');
-    toast.show(getToastTarget());
   } catch (error) {
     console.error(error);
+
+    toast.message = t('copyToClipboardError');
   }
+
+  toast.show(getToastTarget());
 }
 
 export async function clearScratchpad() {
