@@ -164,3 +164,7 @@ svg {
   padding: var(--spacing-sm);
   border-radius: var(--radius-md);
 }
+
+.clamp {
+  width: min(100%, var(--clamp-width));
+}
