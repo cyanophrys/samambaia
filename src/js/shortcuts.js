@@ -263,6 +263,42 @@ export function applyAriaKeyshortcuts() {
 
 export function openShortcutsDialog() {
   const dialog = document.getElementById('shortcuts-dialog');
+  const searchInput = dialog.querySelector('smb-search');
+
+  searchInput.value = '';
 
   dialog.showModal();
+}
+
+export function filterShortcuts() {
+  const searchInput = document.getElementById('shortcuts-search-input');
+  const stack = document.getElementById('shortcuts-stack');
+  const results = document.getElementById('shortcuts-results-section');
+  const query = searchInput?.value.toLowerCase().trim() ?? '';
+
+  if (!query) {
+    results?.replaceChildren();
+    stack?.show('shortcuts');
+    return;
+  }
+
+  const shortcuts = document.querySelectorAll(
+    '[data-page-name="shortcuts"] .shortcut-item'
+  );
+
+  const matches = [...shortcuts].filter((shortcut) => {
+    const label = shortcut.querySelector('[data-i18n]')?.textContent.toLowerCase() ?? '';
+
+    return label.includes(query);
+  });
+
+  results?.replaceChildren(
+    ...matches.map((shortcut) => shortcut.cloneNode(true))
+  );
+
+  stack?.show(
+    matches.length
+      ? 'shortcuts-results'
+      : 'no-shortcuts-results'
+  );
 }

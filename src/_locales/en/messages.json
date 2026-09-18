@@ -70,6 +70,7 @@
     "message": "Search",
     "description": "Noun indicating something related to search"
   },
+  "searchShortcuts": { "message": "Search shortcuts" },
   "searchScripts": { "message": "Search scripts" },
   "searchLabels": { "message": "Search labels" },
   "searchAllScripts": { "message": "Search all scripts" },
