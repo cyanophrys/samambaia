@@ -189,6 +189,7 @@ const actions = {
     openPreferencesDialog: (target) => openPreferencesDialog(target?.dataset?.page),
     openShortcutsDialog,
     restoreBackup,
+    reload: () => window.location.reload(),
     scrollScriptsView,
     searchAllScripts,
     setViewMode,
