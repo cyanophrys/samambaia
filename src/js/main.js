@@ -145,6 +145,7 @@ import {
 
 import {
   applyTranslations,
+  getLocale,
   t,
 } from './i18n.js';
 
@@ -240,7 +241,7 @@ async function init() {
   const searchInput = document.getElementById('scripts-search-input');
 
   document.title = manifest.name;
-  document.documentElement.lang = chrome.i18n.getUILanguage();
+  document.documentElement.lang = await getLocale();
 
   applyTranslations();
 
