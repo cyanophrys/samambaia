@@ -21,17 +21,16 @@ export function getManifestInfo() {
 
 export async function openAboutDialog() {
   const dialog = document.getElementById('about-dialog');
-  const name = dialog.querySelector('#about-name');
+  const headingGroup = dialog.querySelector('smb-heading-group');
   const version = dialog.querySelector('#about-version');
-  const author = dialog.querySelector('#about-author');
   const homepage_url = dialog.querySelector('#about-homepage');
 
   try {
     const manifest = await getManifestInfo();
 
-    name.textContent = manifest.name;
+    headingGroup.heading = manifest.name;
+    headingGroup.description = manifest.author;
     version.textContent = manifest.version;
-    author.textContent = manifest.author;
     homepage_url.href = manifest.homepage_url;
     homepage_url.textContent = manifest.homepage_url;
   } catch (error) {
