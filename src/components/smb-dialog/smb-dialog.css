@@ -64,9 +64,9 @@ dialog {
 
     slot[name="subheader"] {
       display: flex;
+      justify-content: center;
       width: 100%;
       min-width: 0;
-      flex: 1;
       grid-column: 1 / -1;
       grid-row: 2;
     }
