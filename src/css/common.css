@@ -157,3 +157,10 @@ svg {
   padding-bottom: var(--spacing-md);
   pointer-events: none;
 }
+
+.code {
+  font-family: monospace;
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-md);
+}
