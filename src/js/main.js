@@ -19,6 +19,7 @@ import '../components/smb-alert-dialog/smb-alert-dialog.js';
 import '../components/smb-dialog/smb-dialog.js';
 import '../components/smb-placeholder/smb-placeholder.js';
 import '../components/smb-search/smb-search.js';
+import '../components/smb-stack-page/smb-stack-page.js';
 import '../components/smb-stack/smb-stack.js';
 import '../components/smb-toast/smb-toast.js';
 
