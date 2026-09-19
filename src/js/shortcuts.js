@@ -290,7 +290,7 @@ export function filterShortcuts() {
   }
 
   const shortcuts = document.querySelectorAll(
-    '[data-page-name="shortcuts"] .shortcut-item'
+    'smb-stack-page[page-name="shortcuts"] .shortcut-item'
   );
 
   const matches = [...shortcuts].filter((shortcut) => {
