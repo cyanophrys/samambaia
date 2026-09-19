@@ -49,8 +49,8 @@ export const KEYBOARD_SHORTCUTS = [
     key: "p",
   },
   {
-    name: "importBackup",
-    action: "importBackup",
+    name: "restoreBackup",
+    action: "restoreBackup",
     alt: true,
     key: "i",
   },
