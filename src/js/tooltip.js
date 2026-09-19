@@ -1,3 +1,7 @@
+import {
+  formatShortcut,
+} from './shortcuts.js';
+
 const tooltip = document.querySelector('.tooltip');
 
 const SHOW_DELAY = 500;
@@ -33,7 +37,23 @@ function show(element) {
   clearTimeout(showTimer);
 
   showTimer = setTimeout(() => {
-    tooltip.textContent = element.getAttribute('aria-label');
+    const label = element.getAttribute('aria-label');
+    const shortcut = element.getAttribute('aria-keyshortcuts');
+
+    if (shortcut) {
+      const shortcutElement = document.createElement('span');
+      shortcutElement.className = 'dimmed';
+      shortcutElement.textContent = `(${formatShortcut(shortcut)})`;
+
+      tooltip.replaceChildren(
+        label,
+        '\u00a0',
+        shortcutElement,
+      );
+    } else {
+      tooltip.textContent = label;
+    }
+
     tooltip.style.positionAnchor = getAnchor(element);
     tooltip.showPopover();
   }, SHOW_DELAY);
