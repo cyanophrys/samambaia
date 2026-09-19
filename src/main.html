@@ -135,10 +135,10 @@
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="currentColor"><path d="M455.95-255.74v-397.54L289.23-488.05l-35.38-35.8 226.56-226.56 226.82 226.56-35.38 35.39L506.2-654.1v398.36h-50.25Z"/></svg>
           </button>
           <smb-stack id="scripts-view-stack" transition>
-            <div data-page-name="scripts">
+            <smb-stack-page page-name="scripts">
               <div id="custom-scripts" class="scrollable-area grid"></div>
-            </div>
-            <div data-page-name="no-scripts">
+            </smb-stack-page>
+            <smb-stack-page page-name="no-scripts">
               <smb-placeholder heading="noScriptsAdded" description="addFirstScript" page>
                 <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="currentColor"><path d="M238.85-103.08q-22.62 0-39.35-16.73t-16.73-39.34v-641.7q0-22.61 16.73-39.34 16.73-16.73 39.42-16.73h346.31l192 191.5v506.19q0 22.69-16.73 39.42t-39.35 16.73h-482.3Zm324.61-542.31v-167.69H238.92q-4.61 0-8.46 3.85-3.84 3.85-3.84 8.46v641.54q0 4.61 3.84 8.46 3.85 3.85 8.46 3.85h482.16q4.61 0 8.46-3.85 3.84-3.85 3.84-8.46v-486.16H563.46ZM226.62-813.08v167.69-167.69V-146.92v-666.16Z"/></svg>
                 <div slot="additional-content" class="button-group vertical">
@@ -146,45 +146,45 @@
                   <button class="button pill" type="button" data-action="restoreBackup" data-i18n="restoreBackupEllipsis"></button>
                 </div>
               </smb-placeholder>
-            </div>
-            <div data-page-name="no-favorites">
+            </smb-stack-page>
+            <smb-stack-page page-name="no-favorites">
               <smb-placeholder heading="noFavorites" description="noFavoritesDescription" page>
                 <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="128px" viewBox="0 -960 960 960" width="128px" fill="currentColor"><path d="m480-147.54-31.77-28.92q-103.07-94.43-170.27-162.56-67.19-68.13-106.84-120.94-39.66-52.81-55.39-95.38Q100-597.9 100-640.69q0-82.3 55.5-137.8Q211-834 292.69-834q55.85 0 103.58 28.16Q444-777.69 480-724q40.46-55.92 86.83-82.96Q613.2-834 667.31-834q81.69 0 137.19 55.51 55.5 55.5 55.5 137.8 0 42.79-15.73 85.35-15.73 42.57-55.34 95.3-39.61 52.72-106.85 120.93-67.24 68.22-170.31 162.65L480-147.54Zm0-60.15q99.72-91.29 164.12-156.48 64.4-65.2 102.33-114.09 37.93-48.89 53.05-86.94 15.11-38.04 15.11-75.35 0-64.22-41.61-106.14-41.62-41.92-105.47-41.92-51.14 0-94.03 30.53-42.88 30.54-74.89 90.23h-37.84q-31.77-59.07-74.65-89.92-42.88-30.84-93.65-30.84-63.47 0-105.28 41.92-41.8 41.92-41.8 106.44 0 37.25 15.17 75.5 15.18 38.24 52.85 87.38 37.67 49.14 102.71 113.98 65.03 64.85 163.88 155.7Zm0-290.46Z"/></svg>
               </smb-placeholder>
-            </div>
-            <div data-page-name="no-recent">
+            </smb-stack-page>
+            <smb-stack-page page-name="no-recent">
               <smb-placeholder heading="noRecentHistory" description="noRecentHistoryDescription" page>
                 <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="currentColor"><path d="M612-316.39 457.31-471.08v-191.61h45.38v173.77L643.61-348 612-316.39Zm-473.84 5.54q-16.54-34.38-25.93-71.34-9.38-36.96-11.61-75.12h45q2 32.08 10.77 63.27 8.76 31.19 22.07 60.5l-40.3 22.69Zm-37.54-191.84q2.23-38.77 11.8-75.73 9.58-36.96 26.74-71.73l39.3 22.69q-14.31 29.31-22.57 61-8.27 31.69-10.27 63.77h-45Zm169.92 341.46q-33.15-22-61.23-49.39-28.08-27.38-49.08-60.54l39.92-23.07q17.77 27.69 41.58 51.5t51.5 41.58l-22.69 39.92Zm-70.39-505.54-39.3-22.69q21-32.77 48.96-60.54 27.96-27.77 60.73-48.77l22.69 39.54q-27.69 18.15-51.31 41.46-23.61 23.31-41.77 51Zm257.16 566.15q-38.77-2.23-75.73-11.8-36.96-9.58-71.73-26.74l22.69-39.3q29.31 14.31 61 22.57 31.69 8.27 63.77 10.27v45Zm-124.77-681.3-22.69-38.92q34.77-17.16 71.73-26.74 36.96-9.57 75.73-11.8v45q-32.08 2-63.77 10.27-31.69 8.26-61 22.19Zm170.15 681.3v-45q32.08-2 63.77-10.27 31.69-8.26 61-22.57l22.69 39.3q-34.77 17.16-71.73 26.74-36.96 9.57-75.73 11.8Zm124.77-681.3q-29.31-13.93-61-22.19-31.69-8.27-63.77-10.27v-45q38.77 2.23 75.73 11.5t71.73 27.04l-22.69 38.92Zm62 620.69-22.69-39.92q27.69-17.77 51-41.08t41.46-51l39.54 22.69q-21 32.77-48.77 60.35-27.77 27.57-60.54 48.96Zm69.77-505.92q-18.15-27.7-41.46-50.81-23.31-23.12-51-41.27l22.69-39.54q32.77 21.39 60.04 48.77 27.27 27.39 48.65 60.16l-38.92 22.69Zm55.15 164.46q-2-33.08-10.77-64.27-8.76-31.19-23.07-60.89l40.3-22.69q17.77 34.77 27.04 71.73t11.5 76.12h-45Zm6.46 192.84-38.92-22.69q13.93-29.31 22.19-61 8.27-31.69 10.27-63.77h45q-2.23 38.77-11.8 75.73-9.58 36.96-26.74 71.73Z"/></svg>
               </smb-placeholder>
-            </div>
-            <div data-page-name="recent-disabled">
+            </smb-stack-page>
+            <smb-stack-page page-name="recent-disabled">
               <smb-placeholder heading="recentScriptsOff" description="recentScriptsOffDescription" page>
                 <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="currentColor"><path d="M612-316.39 457.31-471.08v-191.61h45.38v173.77L643.61-348 612-316.39Zm-473.84 5.54q-16.54-34.38-25.93-71.34-9.38-36.96-11.61-75.12h45q2 32.08 10.77 63.27 8.76 31.19 22.07 60.5l-40.3 22.69Zm-37.54-191.84q2.23-38.77 11.8-75.73 9.58-36.96 26.74-71.73l39.3 22.69q-14.31 29.31-22.57 61-8.27 31.69-10.27 63.77h-45Zm169.92 341.46q-33.15-22-61.23-49.39-28.08-27.38-49.08-60.54l39.92-23.07q17.77 27.69 41.58 51.5t51.5 41.58l-22.69 39.92Zm-70.39-505.54-39.3-22.69q21-32.77 48.96-60.54 27.96-27.77 60.73-48.77l22.69 39.54q-27.69 18.15-51.31 41.46-23.61 23.31-41.77 51Zm257.16 566.15q-38.77-2.23-75.73-11.8-36.96-9.58-71.73-26.74l22.69-39.3q29.31 14.31 61 22.57 31.69 8.27 63.77 10.27v45Zm-124.77-681.3-22.69-38.92q34.77-17.16 71.73-26.74 36.96-9.57 75.73-11.8v45q-32.08 2-63.77 10.27-31.69 8.26-61 22.19Zm170.15 681.3v-45q32.08-2 63.77-10.27 31.69-8.26 61-22.57l22.69 39.3q-34.77 17.16-71.73 26.74-36.96 9.57-75.73 11.8Zm124.77-681.3q-29.31-13.93-61-22.19-31.69-8.27-63.77-10.27v-45q38.77 2.23 75.73 11.5t71.73 27.04l-22.69 38.92Zm62 620.69-22.69-39.92q27.69-17.77 51-41.08t41.46-51l39.54 22.69q-21 32.77-48.77 60.35-27.77 27.57-60.54 48.96Zm69.77-505.92q-18.15-27.7-41.46-50.81-23.31-23.12-51-41.27l22.69-39.54q32.77 21.39 60.04 48.77 27.27 27.39 48.65 60.16l-38.92 22.69Zm55.15 164.46q-2-33.08-10.77-64.27-8.76-31.19-23.07-60.89l40.3-22.69q17.77 34.77 27.04 71.73t11.5 76.12h-45Zm6.46 192.84-38.92-22.69q13.93-29.31 22.19-61 8.27-31.69 10.27-63.77h45q-2.23 38.77-11.8 75.73-9.58 36.96-26.74 71.73Z"/></svg>
                 <button slot="additional-content" class="button suggested-action pill" type="button" data-action="openPreferencesDialog" data-page="storage" data-i18n="openPreferences"></button>
               </smb-placeholder>
-            </div>
-            <div data-page-name="no-search-results">
+            </smb-stack-page>
+            <smb-stack-page page-name="no-search-results">
               <smb-placeholder heading="noResultsFound" description="tryDifferentSearch" page>
                 <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="currentColor"><path d="M152.15-161.09q-49.99-50.01-49.99-120.54 0-70.52 50.01-120.52t120.54-50q70.52 0 120.52 50.01t50 120.54q0 70.52-50.01 120.52-50.02 50-120.54 50-70.53 0-120.53-50.01Zm676.04 20.9L571.27-397.12q-17.35 13.97-39.39 27.08-22.03 13.12-41.38 20.92-1.96-12.11-4.92-24-2.96-11.88-8.04-21.5 57.04-19.92 96.21-69.15 39.17-49.23 39.17-119.08 0-81.54-56.81-138.65-56.81-57.12-138.36-57.12-81.67 0-139.02 57.12-57.35 57.11-57.35 138.65 0 17.1 3.5 36.72 3.5 19.63 8.43 33.01-8.93 1.24-20.87 4.87-11.94 3.63-20.86 6.9-6.73-16.27-10.39-38.46-3.65-22.19-3.65-43.1 0-100.27 69.97-169.91t170.27-69.64q99.3 0 169.14 69.97 69.85 69.96 69.85 169.64 0 43-15.23 83.54-15.23 40.54-40.46 70.09L860.5-172.5l-32.31 32.31ZM204-190.54l68.88-68.88 67.89 68.07 21.15-20.67-68.57-69.12 70.3-70.36-21.18-20.58-69.28 68.81-69.69-69.31-21.27 21.27 69.89 69.19-69.7 69.7L204-190.54Z"/></svg>
               </smb-placeholder>
-            </div>
-            <div data-page-name="no-label-search-results">
+            </smb-stack-page>
+            <smb-stack-page page-name="no-label-search-results">
               <smb-placeholder heading="noResultsFound" description="tryDifferentSearchOrAll" page>
                 <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="currentColor"><path d="M152.15-161.09q-49.99-50.01-49.99-120.54 0-70.52 50.01-120.52t120.54-50q70.52 0 120.52 50.01t50 120.54q0 70.52-50.01 120.52-50.02 50-120.54 50-70.53 0-120.53-50.01Zm676.04 20.9L571.27-397.12q-17.35 13.97-39.39 27.08-22.03 13.12-41.38 20.92-1.96-12.11-4.92-24-2.96-11.88-8.04-21.5 57.04-19.92 96.21-69.15 39.17-49.23 39.17-119.08 0-81.54-56.81-138.65-56.81-57.12-138.36-57.12-81.67 0-139.02 57.12-57.35 57.11-57.35 138.65 0 17.1 3.5 36.72 3.5 19.63 8.43 33.01-8.93 1.24-20.87 4.87-11.94 3.63-20.86 6.9-6.73-16.27-10.39-38.46-3.65-22.19-3.65-43.1 0-100.27 69.97-169.91t170.27-69.64q99.3 0 169.14 69.97 69.85 69.96 69.85 169.64 0 43-15.23 83.54-15.23 40.54-40.46 70.09L860.5-172.5l-32.31 32.31ZM204-190.54l68.88-68.88 67.89 68.07 21.15-20.67-68.57-69.12 70.3-70.36-21.18-20.58-69.28 68.81-69.69-69.31-21.27 21.27 69.89 69.19-69.7 69.7L204-190.54Z"/></svg>
                 <button slot="additional-content" class="button suggested-action pill" type="button" data-action="searchAllScripts" data-i18n="searchAllScripts"></button>
               </smb-placeholder>
-            </div>
-            <div data-page-name="empty-label">
+            </smb-stack-page>
+            <smb-stack-page page-name="empty-label">
               <smb-placeholder heading="emptyLabel" description="emptyLabelDescription" page>
                 <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="currentColor"><path d="M159.23-183.08q-22.86 0-39.51-16.64-16.64-16.65-16.64-39.51v-481.73q0-22.87 16.64-39.51 16.65-16.64 39.51-16.64h445.12q13.59 0 25.34 5.67 11.75 5.68 19.89 16.56L857.54-480 650.19-205.31q-8.13 10.88-19.69 16.56-11.56 5.67-25.15 5.67H159.23Zm0-43.84h445.12q2.88 0 5.67-1.16 2.79-1.15 4.33-3.46L802.85-480 614.46-728.65q-1.54-2.31-4.33-3.46-2.79-1.16-5.67-1.16H159.23q-5.38 0-8.84 3.56-3.47 3.56-3.47 8.75v481.73q0 5.38 3.47 8.84 3.46 3.47 8.84 3.47ZM382.39-480Z"/></svg>
                 <button slot="additional-content" class="button suggested-action pill" type="button" data-action="addScript" data-i18n="addScriptEllipsis"></button>
               </smb-placeholder>
-            </div>
+            </smb-stack-page>
           </smb-stack>
         </section>
         <aside id="variables-sidebar" class="surface collapsible-sidebar" aria-label="Variables list">
           <smb-stack id="variables-stack">
-            <div data-page-name="variables-list">
+            <smb-stack-page page-name="variables-list">
               <div class="scrollable-area">
                 <section class="section">
                   <header class="header">
@@ -194,13 +194,13 @@
                   <div id="custom-variables" class="list-group"></div>
                 </section>
               </div>
-            </div>
-            <div data-page-name="empty-variables">
+            </smb-stack-page>
+            <smb-stack-page page-name="empty-variables">
               <smb-placeholder heading="noVariables" description="createVariablesDescription" compact page>
                 <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="64px" viewBox="0 -960 960 960" width="64px" fill="currentColor"><path d="M570-160v-60h120q21 0 35.5-14.38Q740-248.75 740-270v-100q0-37 22.5-66t57.5-40v-8q-35-10-57.5-39.5T740-590v-100q0-21.25-14.37-35.63Q711.25-740 690-740H570v-60h120q46 0 78 32.08 32 32.09 32 77.92v100q0 21.25 14.38 35.62Q828.75-540 850-540h30v120h-30q-21.25 0-35.62 14.37Q800-391.25 800-370v100q0 45.83-32.08 77.92Q735.83-160 690-160H570Zm-300 0q-46 0-78-32.08-32-32.09-32-77.92v-100q0-21.25-14.37-35.63Q131.25-420 110-420H80v-120h30q21.25 0 35.63-14.38Q160-568.75 160-590v-100q0-45.83 32.08-77.92Q224.17-800 270-800h120v60H270q-21 0-35.5 14.37Q220-711.25 220-690v100q0 37-22.5 66.5T140-484v8q35 11 57.5 40t22.5 66v100q0 21.25 14.38 35.62Q248.75-220 270-220h120v60H270Z"/></svg>
                 <button slot="additional-content" class="button suggested-action pill" type="button" data-action="addVariable" data-i18n="addVariableEllipsis"></button>
               </smb-placeholder>
-            </div>
+            </smb-stack-page>
           </smb-stack>
         </aside>
         <aside id="scratchpad-sidebar" class="surface collapsible-sidebar">
@@ -303,27 +303,27 @@
   <smb-dialog id="labels-selection-dialog" data-i18n-attr="heading:selectLabels" style="--dialog-width: 400px;">
     <smb-search slot="subheader" id="labels-search-input" name="labels-search" class="clamp" style="--clamp-width: 300px;" data-i18n-attr="placeholder:searchLabels" data-action="filterScriptLabels" autofocus></smb-search>
     <smb-stack id="labels-stack" homogeneous transition>
-      <div data-page-name="labels-list" class="scrollable-area">
+      <smb-stack-page page-name="labels-list" class="scrollable-area">
         <section class="section" id="selected-labels-section" data-i18n-attr="aria-label:selectedLabels">
           <div class="list-group" id="selected-labels-list"></div>
         </section>
         <section class="section" data-i18n-attr="aria-label:availableLabels">
           <div class="list-group" id="available-labels-list"></div>
         </section>
-      </div>
-      <div data-page-name="search-results" class="scrollable-area">
+      </smb-stack-page>
+      <smb-stack-page page-name="search-results" class="scrollable-area">
         <div id="labels-search-results"></div>
-      </div>
-      <div data-page-name="no-labels">
+      </smb-stack-page>
+      <smb-stack-page page-name="no-labels">
         <smb-placeholder heading="noLabelsAvailable" description="labelsAppearHere" page>
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="currentColor"><path d="M159.23-183.08q-22.86 0-39.51-16.64-16.64-16.65-16.64-39.51v-481.73q0-22.87 16.64-39.51 16.65-16.64 39.51-16.64h445.12q13.59 0 25.34 5.67 11.75 5.68 19.89 16.56L857.54-480 650.19-205.31q-8.13 10.88-19.69 16.56-11.56 5.67-25.15 5.67H159.23Zm0-43.84h445.12q2.88 0 5.67-1.16 2.79-1.15 4.33-3.46L802.85-480 614.46-728.65q-1.54-2.31-4.33-3.46-2.79-1.16-5.67-1.16H159.23q-5.38 0-8.84 3.56-3.47 3.56-3.47 8.75v481.73q0 5.38 3.47 8.84 3.46 3.47 8.84 3.47ZM382.39-480Z"/></svg>
         </smb-placeholder>
-      </div>
-      <div data-page-name="no-search-results">
+      </smb-stack-page>
+      <smb-stack-page page-name="no-search-results">
         <smb-placeholder heading="noResultsFound" description="tryDifferentSearch" page>
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="currentColor"><path d="M152.15-161.09q-49.99-50.01-49.99-120.54 0-70.52 50.01-120.52t120.54-50q70.52 0 120.52 50.01t50 120.54q0 70.52-50.01 120.52-50.02 50-120.54 50-70.53 0-120.53-50.01Zm676.04 20.9L571.27-397.12q-17.35 13.97-39.39 27.08-22.03 13.12-41.38 20.92-1.96-12.11-4.92-24-2.96-11.88-8.04-21.5 57.04-19.92 96.21-69.15 39.17-49.23 39.17-119.08 0-81.54-56.81-138.65-56.81-57.12-138.36-57.12-81.67 0-139.02 57.12-57.35 57.11-57.35 138.65 0 17.1 3.5 36.72 3.5 19.63 8.43 33.01-8.93 1.24-20.87 4.87-11.94 3.63-20.86 6.9-6.73-16.27-10.39-38.46-3.65-22.19-3.65-43.1 0-100.27 69.97-169.91t170.27-69.64q99.3 0 169.14 69.97 69.85 69.96 69.85 169.64 0 43-15.23 83.54-15.23 40.54-40.46 70.09L860.5-172.5l-32.31 32.31ZM204-190.54l68.88-68.88 67.89 68.07 21.15-20.67-68.57-69.12 70.3-70.36-21.18-20.58-69.28 68.81-69.69-69.31-21.27 21.27 69.89 69.19-69.7 69.7L204-190.54Z"/></svg>
         </smb-placeholder>
-      </div>
+      </smb-stack-page>
     </smb-stack>
   </smb-dialog>
   <smb-dialog id="variable-dialog" style="anchor-name: --variable-dialog-toast; --dialog-width: 430px;" action-dialog>
@@ -345,7 +345,7 @@
   <smb-dialog id="preferences-dialog" data-i18n-attr="heading:preferences" style="--dialog-width: 420px; --dialog-height: 90dvh; anchor-name: --preferences-dialog-toast;">
     <div id="preferences-dialog-toast" class="toast-container" style="position-anchor: --preferences-dialog-toast;"></div>
     <smb-stack id="preferences-stack" transition homogeneous>
-      <div data-page-name="appearance">
+      <smb-stack-page page-name="appearance">
         <div class="scrollable-area">
           <section class="section">
             <header class="header">
@@ -387,8 +387,8 @@
             </div>
           </section>
         </div>
-      </div>
-      <div data-page-name="text-expansion">
+      </smb-stack-page>
+      <smb-stack-page page-name="text-expansion">
         <div class="scrollable-area">
           <section class="section">
             <div class="list-group">
@@ -442,8 +442,8 @@
             </div>
           </section>
         </div>
-      </div>
-      <div data-page-name="accessibility">
+      </smb-stack-page>
+      <smb-stack-page page-name="accessibility">
         <div class="scrollable-area">
           <section>
             <div class="list-group">
@@ -464,8 +464,8 @@
             </div>
           </section>
         </div>
-      </div>
-      <div data-page-name="storage">
+      </smb-stack-page>
+      <smb-stack-page page-name="storage">
         <div class="scrollable-area">
           <section class="section">
             <header class="header">
@@ -504,7 +504,7 @@
             <button class="button big destructive-action" type="button" data-action="wipeData" data-i18n="deleteAllDataEllipsis"></button>
           </section>
         </div>
-      </div>
+      </smb-stack-page>
     </smb-stack>
     <div slot="footer-center" class="stack-switcher-group">
       <button class="stack-switcher" type="button" data-target="preferences-stack" data-page-name="appearance">
@@ -596,7 +596,7 @@
   <smb-dialog id="shortcuts-dialog" data-i18n-attr="heading:keyboardShortcuts" style="--dialog-height: 90dvh;">
     <smb-search slot="subheader" id="shortcuts-search-input" name="shortcuts-search"  class="clamp" style="--clamp-width: 300px;" data-i18n-attr="placeholder:searchShortcuts" data-action="filterShortcuts" autofocus></smb-search>
     <smb-stack id="shortcuts-stack" transition homogeneous>
-      <div data-page-name="shortcuts">
+      <smb-stack-page page-name="shortcuts">
         <div class="scrollable-area grid">
           <section class="section">
             <header class="header">
@@ -688,15 +688,15 @@
             </div>
           </section>
         </div>
-      </div>
-      <div data-page-name="shortcuts-results" class="scrollable-area">
+      </smb-stack-page>
+      <smb-stack-page page-name="shortcuts-results" class="scrollable-area">
         <section id="shortcuts-results-section" class="section"></section>
-      </div>
-      <div data-page-name="no-shortcuts-results">
+      </smb-stack-page>
+      <smb-stack-page page-name="no-shortcuts-results">
         <smb-placeholder heading="noResultsFound" description="tryDifferentSearch" page>
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="currentColor"><path d="M152.15-161.09q-49.99-50.01-49.99-120.54 0-70.52 50.01-120.52t120.54-50q70.52 0 120.52 50.01t50 120.54q0 70.52-50.01 120.52-50.02 50-120.54 50-70.53 0-120.53-50.01Zm676.04 20.9L571.27-397.12q-17.35 13.97-39.39 27.08-22.03 13.12-41.38 20.92-1.96-12.11-4.92-24-2.96-11.88-8.04-21.5 57.04-19.92 96.21-69.15 39.17-49.23 39.17-119.08 0-81.54-56.81-138.65-56.81-57.12-138.36-57.12-81.67 0-139.02 57.12-57.35 57.11-57.35 138.65 0 17.1 3.5 36.72 3.5 19.63 8.43 33.01-8.93 1.24-20.87 4.87-11.94 3.63-20.86 6.9-6.73-16.27-10.39-38.46-3.65-22.19-3.65-43.1 0-100.27 69.97-169.91t170.27-69.64q99.3 0 169.14 69.97 69.85 69.96 69.85 169.64 0 43-15.23 83.54-15.23 40.54-40.46 70.09L860.5-172.5l-32.31 32.31ZM204-190.54l68.88-68.88 67.89 68.07 21.15-20.67-68.57-69.12 70.3-70.36-21.18-20.58-69.28 68.81-69.69-69.31-21.27 21.27 69.89 69.19-69.7 69.7L204-190.54Z"/></svg>
         </smb-placeholder>
-      </div>
+      </smb-stack-page>
     </smb-stack>
   </smb-dialog>
   <smb-dialog id="scratchpad-dialog" data-i18n-attr="heading:scratchpad" style="--dialog-width: min(90vw, 720px); --dialog-height: 90dvh; anchor-name: --scratchpad-dialog-toast;">
