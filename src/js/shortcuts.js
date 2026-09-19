@@ -258,13 +258,11 @@ export function applyAriaKeyshortcuts() {
       key.length === 1 ? key.toUpperCase() : key,
     ].join('+');
 
-    const elements = shortcut.target
-      ? [document.getElementById(shortcut.target)].filter(Boolean)
-      : document.querySelectorAll(
-          `[data-action="${CSS.escape(shortcut.action)}"]`
-        );
+    const selector = shortcut.target
+      ? `[data-action="${CSS.escape(shortcut.action)}"][data-target="${CSS.escape(shortcut.target)}"]`
+      : `[data-action="${CSS.escape(shortcut.action)}"]`;
 
-    elements.forEach((element) => {
+    document.querySelectorAll(selector).forEach((element) => {
       element.setAttribute('aria-keyshortcuts', ariaShortcut);
     });
   }
