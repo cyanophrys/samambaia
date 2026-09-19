@@ -79,7 +79,6 @@
 
     > kbd + kbd::before {
       content: "+";
-      margin-inline: var(--spacing-2xs);
     }
   }
 }
