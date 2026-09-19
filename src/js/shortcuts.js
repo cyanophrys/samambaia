@@ -126,6 +126,30 @@ export const KEYBOARD_SHORTCUTS = [
   },
 ];
 
+const KEY_LABELS = {
+  ArrowLeft: "←",
+  ArrowRight: "→",
+  ArrowUp: "↑",
+  Backspace: "⌫",
+};
+
+export function formatShortcut(shortcut) {
+  const keys = typeof shortcut === 'string'
+    ? shortcut.split('+')
+    : [
+        shortcut.ctrl && 'Ctrl',
+        shortcut.shift && 'Shift',
+        shortcut.alt && 'Alt',
+        shortcut.meta && 'Meta',
+        shortcut.key,
+      ].filter(Boolean);
+
+  return keys.map((key) => {
+    return KEY_LABELS[key] ??
+      (key.length === 1 ? key.toUpperCase() : key);
+  }).join('+');
+}
+
 export function handleShortcut(event, actions, shortcuts) {
   const target = event.target;
 
@@ -192,15 +216,6 @@ export function handleShortcut(event, actions, shortcuts) {
 }
 
 export function applyShortcutDisplays() {
-  const keyLabels = {
-    ArrowLeft: "←",
-    ArrowRight: "→",
-    ArrowUp: "↑",
-    Backspace: "⌫",
-  };
-
-  const formatKey = (key) => keyLabels[key] ??
-    (key.length === 1 ? key.toUpperCase() : key);
   const shortcutDisplays = document.querySelectorAll('[data-shortcut-display]');
 
   shortcutDisplays.forEach((container) => {
@@ -210,13 +225,7 @@ export function applyShortcutDisplays() {
 
     if (!shortcut) return;
 
-    const keys = [
-      shortcut.ctrl && 'Ctrl',
-      shortcut.shift && 'Shift',
-      shortcut.alt && 'Alt',
-      shortcut.meta && 'Meta',
-      formatKey(shortcut.key),
-    ].filter(Boolean);
+    const keys = formatShortcut(shortcut).split('+');
 
     container.replaceChildren(
       ...keys.map((key) => {
