@@ -18,7 +18,13 @@
 import reset from '../../css/reset.css' with { type: 'css' };
 import component from './smb-stack.css' with { type: 'css' };
 
+import '../smb-stack-page/smb-stack-page.js';
+
 class SmbStack extends HTMLElement {
+  #pages;
+  #slot;
+  #initialized = false;
+
   constructor() {
     super();
 
@@ -29,57 +35,60 @@ class SmbStack extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <slot></slot>
     `;
+
+    this.#slot = this.shadowRoot.querySelector('slot');
+    this.#slot.addEventListener('slotchange', this.#handleSlotChange);
   }
-
-  #handleSwitcherClick = (event) => {
-    const button = event.target.closest(`.stack-switcher[data-target="${this.id}"][data-page-name]`);
-    if (!button) return;
-
-    this.show(button.dataset.pageName);
-  };
 
   connectedCallback() {
-    document.addEventListener('click', this.#handleSwitcherClick);
-    this.show(this.getAttribute('active-page-name') ?? this.pages[0]?.getAttribute('data-page-name'));
-  }
-
-  disconnectedCallback() {
-    document.removeEventListener('click', this.#handleSwitcherClick);
+    if (this.pages.length)
+      this.#initialize();
   }
 
   get pages() {
-    return [...this.children].filter(
-      child => child.hasAttribute?.('data-page-name')
-    );
+    if (!this.#pages) {
+      this.#pages = [...this.children].filter(
+        child => child.matches?.('smb-stack-page') && child.pageName
+      );
+    }
+
+    return this.#pages;
   }
 
-  get buttons() {
-    return document.querySelectorAll(
-      `[data-target="${this.id}"][data-page-name]`
-    );
+  #handleSlotChange = () => {
+    this.#pages = null;
+
+    if (this.pages.length)
+      this.#initialize();
+  };
+
+  #initialize() {
+    if (this.#initialized) return;
+
+    const name = this.getAttribute('active-page-name') ?? this.pages[0].pageName;
+
+    if (!name) return;
+
+    this.#initialized = true;
+
+    this.show(name);
   }
 
   show(name) {
-    const pageExists = this.pages.some(
-      page => page.getAttribute('data-page-name') === name
+    const pages = this.pages;
+    const pageExists = pages.some(
+      page => page.pageName === name
     );
 
     if (!pageExists) return;
 
-    for (const page of this.pages) {
-      const isActive = page.getAttribute('data-page-name') === name;
+    for (const page of pages) {
+      const isActive = page.pageName === name;
 
       page.toggleAttribute('data-active', isActive);
-      page.setAttribute('role', 'tabpanel');
-      page.setAttribute('aria-hidden', !isActive);
 
       if (!this.hasAttribute('homogeneous') && !this.hasAttribute('transition'))
         page.hidden = !isActive;
-    }
-
-    for (const button of this.buttons) {
-      const isActive = button.dataset.pageName === name;
-      button.setAttribute('aria-selected', isActive ? 'true' : 'false');
     }
 
     this.dispatchEvent(new CustomEvent('stack-change', {
