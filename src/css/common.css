@@ -103,17 +103,19 @@ svg {
 }
 
 :where(.header) {
-  :is(h1, h4, span) {
+  h4,
+  span {
     user-select: none;
   }
 
-  &:has(.description) {
+  &:has(> h4 + span) {
     flex-direction: column;
-    gap: 0;
-  }
-
-  &:has(.description):not(.centered) {
     align-items: flex-start;
+    gap: 0;
+
+    span {
+      opacity: var(--dimmed-opacity);
+    }
   }
 }
 
