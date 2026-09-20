@@ -29,7 +29,7 @@ template.innerHTML = `
     <header class="header">
       <slot name="header-left"></slot>
       <div class="heading">
-        <h4 id="heading"></h4>
+        <h1 id="heading"></h1>
         <span id="subtitle"></span>
       </div>
       <slot name="header-right"></slot>
