@@ -110,10 +110,15 @@
   transition: outline-color var(--transition-medium);
 
   label {
+    display: block;
     pointer-events: none;
     user-select: none;
     color: currentColor;
     opacity: var(--dimmed-opacity);
+    width: anchor-size(--field-input width);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     transition: font-weight var(--transition-medium);
   }
 
@@ -132,6 +137,7 @@
 
   &:not(.multiline) {
     input[type="text"] {
+      anchor-name: --field-input;
       padding: var(--spacing-sm) 0 0;
     }
 
@@ -149,6 +155,10 @@
       top: var(--field-label-top);
       transform: translateY(0) scale(var(--field-label-scale));
       font-weight: 600;
+    }
+
+    &:focus-within label {
+      width: calc(anchor-size(--field-input width) / var(--field-label-scale));
     }
   }
 
