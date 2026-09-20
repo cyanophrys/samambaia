@@ -94,7 +94,11 @@ dialog {
     align-items: center;
     min-width: 0;
 
-    h4,
+    h1 {
+      font-size: 1em;
+    }
+
+    h1,
     span {
       overflow: hidden;
       text-overflow: ellipsis;

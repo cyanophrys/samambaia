@@ -24,7 +24,7 @@ template.innerHTML = `
   <dialog id="dialog" role="alertdialog" aria-labelledby="heading" aria-describedby="body">
     <div class="scrollable-area">
       <section class="section">
-        <h2 id="heading"></h2>
+        <h1 id="heading"></h1>
         <p id="body"></p>
       </section>
       <section class="section">
