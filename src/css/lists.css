@@ -48,9 +48,12 @@
     border-radius: var(--radius-md);
   }
 
-  &:has(:disabled) {
-    opacity: var(--disabled-opacity);
+  &:has(> input:disabled) {
     pointer-events: none;
+
+    > * {
+      opacity: var(--disabled-opacity);
+    }
   }
 
   &.activatable:not(:disabled) {
