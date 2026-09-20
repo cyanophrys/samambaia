@@ -113,8 +113,7 @@
     }
   }
 
-  [aria-haspopup],
-  > .count {
+  .suffix {
     margin-inline-start: auto;
   }
 
