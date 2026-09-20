@@ -63,6 +63,13 @@
   --layout-color: light-dark(#f4f4f5, #18181b);
   --popover-color: light-dark(#fafafa, #27272a);
   --scrollbar-color: color-mix(in srgb, currentColor 30%, transparent) transparent;
+  --selected-active-bg-color: color-mix(in srgb, var(--accent-color) 38%, transparent);
+  --selected-bg-color: color-mix(in srgb, var(--accent-color) 18%, transparent);
+  --selected-fg-color: light-dark(
+    oklch(from var(--accent-color) calc(l - 0.20) calc(c + 0.05) h),
+    oklch(from var(--accent-color) calc(l + 0.3) c h)
+  );
+  --selected-hover-bg-color: color-mix(in srgb, var(--accent-color) 28%, transparent);
   --text-color: light-dark(black, rgb(255 255 255 / 90%));
 
   &[data-accent-color="blue"] { --accent-color: var(--accent-blue); }
@@ -93,6 +100,10 @@
     --placeholder-color: color-mix(in srgb, currentColor 60%, transparent);
     --popover-color: var(--background-color);
     --scrollbar-color: color-mix(in srgb, currentColor 60%, transparent) transparent;
+    --selected-active-bg-color: color-mix(in srgb, currentColor 38%, transparent);
+    --selected-bg-color: color-mix(in srgb, currentColor 18%, transparent);
+    --selected-fg-color: var(--text-color);
+    --selected-hover-bg-color: color-mix(in srgb, currentColor 28%, transparent);
     --text-color: light-dark(black, white);
   }
 
