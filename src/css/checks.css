@@ -1,19 +1,28 @@
-.radio {
+.checkbox,
+.radio,
+.switch {
   appearance: none;
   position: relative;
   display: grid;
   place-items: center;
+  flex-shrink: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+.checkbox,
+.radio {
   width: 20px;
   height: 20px;
-  flex-shrink: 0;
   background-color: transparent;
-  color: inherit;
   border: 2px solid color-mix(in srgb, currentColor 30%, transparent);
-  border-radius: var(--radius-max);
   transition:
     border-color var(--transition-medium),
     background-color var(--transition-medium);
-  cursor: pointer;
+}
+
+.radio {
+  border-radius: var(--radius-max);
 
   &::before {
     content: "";
@@ -79,18 +88,11 @@
 }
 
 .switch {
-  appearance: none;
-  position: relative;
-  display: grid;
-  place-items: center;
   width: 44px;
   height: 24px;
-  flex-shrink: 0;
   background-color: color-mix(in srgb, currentColor 25%, transparent);
-  color: inherit;
   border-radius: var(--radius-md);
   transition: background-color var(--transition-medium);
-  cursor: pointer;
 
   &::before,
   &::after {
@@ -159,21 +161,7 @@
 }
 
 .checkbox {
-  appearance: none;
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  background-color: transparent;
-  color: inherit;
-  border: 2px solid color-mix(in srgb, currentColor 30%, transparent);
   border-radius: var(--radius-sm);
-  transition:
-    border-color var(--transition-medium),
-    background-color var(--transition-medium);
-  cursor: pointer;
 
   &::after {
     content: "";
