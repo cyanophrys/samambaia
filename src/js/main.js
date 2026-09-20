@@ -238,7 +238,7 @@ function handleAction(event, actions) {
 async function init() {
   const pendingToast = sessionStorage.getItem('pendingToast');
   const manifest = await getManifestInfo();
-  const loading = document.querySelector('.loading');
+  const loading = document.getElementById('loading');
   const searchInput = document.getElementById('scripts-search-input');
 
   document.title = manifest.name;
