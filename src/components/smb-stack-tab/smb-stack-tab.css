@@ -1,0 +1,81 @@
+:host {
+  display: block;
+  min-width: 0;
+  outline: none !important;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2xs);
+    color: inherit;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: color var(--transition-medium);
+
+    ::slotted(*) {
+      opacity: var(--dimmed-opacity);
+      transition:
+        opacity var(--transition-medium),
+        color var(--transition-medium);
+    }
+
+    span {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: center;
+      opacity: var(--dimmed-opacity);
+      transition:
+        opacity var(--transition-medium),
+        color var(--transition-medium);
+    }
+
+    .icon {
+      display: grid;
+      place-items: center;
+      padding: var(--spacing-2xs) var(--spacing-md);
+      flex-shrink: 0;
+      border: 1px solid var(--border-hc-color);
+      border-radius: var(--radius-max);
+      transition:
+        opacity var(--transition-medium),
+        background-color var(--transition-medium);
+    }
+  }
+}
+
+:host(:hover) .icon {
+  background-color: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+:host(:active) .icon {
+  background-color: color-mix(in srgb, currentColor 18%, transparent);
+}
+
+:host(:focus-visible) .icon {
+  outline: 2px solid var(--focus-outline-color);
+  outline-offset: 2px;
+}
+
+:host([aria-selected="true"]) .icon {
+  background-color: var(--selected-bg-color);
+}
+
+:host([aria-selected="true"]:hover) .icon {
+  background-color: var(--selected-hover-bg-color);
+}
+
+:host([aria-selected="true"]:active) .icon {
+  background-color: var(--selected-active-bg-color);
+}
+
+:host([aria-selected="true"]) ::slotted(*),
+:host([aria-selected="true"]) span {
+  color: var(--selected-fg-color);
+  opacity: 1;
+}
