@@ -281,7 +281,7 @@ export function handleVariableValueInput(value, event) {
   debouncedSaveVariable({ ...variable });
 }
 
-export function applyVariables(content) {
+export function getVariableValuesMap() {
   const inputs = document.querySelectorAll('#custom-variables [data-variable-value]');
   const values = new Map();
 
@@ -290,6 +290,10 @@ export function applyVariables(content) {
     if (name && input.value) values.set(name, input.value);
   });
 
+  return values;
+}
+
+export function applyVariables(content, values = getVariableValuesMap()) {
   return content.replace(NAME_TOKEN_PATTERN, (match, name) =>
     values.has(name) ? values.get(name) : match
   );
