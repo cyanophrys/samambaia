@@ -42,16 +42,8 @@ export function makeSortable(container, {
   }
 
   function getItemAtPoint(x, y) {
-    return getItems().find(item => {
-      const rect = item.getBoundingClientRect();
-
-      return (
-        x >= rect.left &&
-        x <= rect.right &&
-        y >= rect.top &&
-        y <= rect.bottom
-      );
-    });
+    const target = document.elementFromPoint(x, y)?.closest(itemSelector);
+    return target && container.contains(target) ? target : undefined;
   }
 
   function moveDraggingItem(x, y) {
