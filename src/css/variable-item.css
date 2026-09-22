@@ -15,4 +15,43 @@
       display: block;
     }
   }
+
+  [data-action="clearVariable"] {
+    display: none;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: color-mix(in srgb, currentColor 80%, transparent);
+    opacity: 0;
+    cursor: pointer;
+    transition:
+      opacity var(--transition-fast),
+      color var(--transition-medium),
+      display var(--transition-fast) allow-discrete;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      color: currentColor;
+    }
+
+    &:active {
+      color: color-mix(in srgb, currentColor 90%, transparent);
+    }
+  }
+
+  &:has(input:not(:placeholder-shown)) {
+    [data-action="clearVariable"] {
+      display: grid;
+      opacity: 1;
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
 }
