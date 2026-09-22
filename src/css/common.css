@@ -19,6 +19,11 @@
   opacity: var(--dimmed-opacity);
 }
 
+::highlight(query) {
+  background-color: var(--highlight-bg-color);
+  color: var(--highlight-fg-color);
+}
+
 * {
   scrollbar-color: var(--scrollbar-color);
 }
