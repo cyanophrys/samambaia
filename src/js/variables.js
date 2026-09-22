@@ -107,6 +107,7 @@ export function createVariableElement(variable) {
   const deleteButton = item.querySelector('[data-action="deleteVariable"]');
   const pinButton = item.querySelector('[data-action="togglePinVariable"]');
   const pinLabel = pinButton.querySelector('span');
+  const clearButton = item.querySelector('[data-action="clearVariable"]');
 
   const inputId = `var-input-${variable.id}`;
   const menuId = `variable-menu-${variable.id}`;
@@ -116,6 +117,8 @@ export function createVariableElement(variable) {
   input.dataset.name = variable.name;
   input.dataset.target = variable.id;
   input.value = variable.value ?? '';
+
+  clearButton.dataset.target = variable.id;
 
   label.htmlFor = inputId;
   label.textContent = `{{${variable.name}}}`;
@@ -254,8 +257,8 @@ export async function deleteVariable(element) {
     if (e.detail.response !== 'delete') return;
 
     await deleteVariableData(id);
-    document.dispatchEvent(new Event('variable:changed'));
     await renderVariables();
+    document.dispatchEvent(new Event('variable:changed'));
 
     const toast = document.createElement('smb-toast');
 
@@ -327,4 +330,16 @@ export async function togglePinVariable(target) {
   });
 
   toast.show('main-toast');
+}
+
+export function clearVariable(element) {
+  const id = Number(element.dataset.target);
+  if (Number.isNaN(id)) return;
+
+  const input = document.getElementById(`var-input-${id}`);
+  if (!input) return;
+
+  input.value = '';
+  input.dispatchEvent(new Event('input', { bubbles: true }));
+  input.focus();
 }

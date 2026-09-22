@@ -158,6 +158,7 @@
   "addVariable": { "message": "Add variable" },
   "addVariableEllipsis": { "message": "Add variable…" },
   "createVariablesDescription": { "message": "Create variables to reuse in your scripts" },
+  "clearVariable": { "message": "Clear variable" },
   "deleteVariable": { "message": "Delete variable" },
   "deleteVariableBody": {
     "message": "Are you sure you want to delete the variable \"$1\"? Scripts using \"{{$1}}\" will no longer replace it."
