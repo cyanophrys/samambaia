@@ -1,5 +1,7 @@
 #tooltip {
   display: none;
+  align-items: center;
+  gap: var(--spacing-xs);
   position: fixed;
   position-anchor: --tooltip-anchor;
   inset-block-start: anchor(bottom);
