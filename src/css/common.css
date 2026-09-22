@@ -28,9 +28,9 @@
   scrollbar-color: var(--scrollbar-color);
 }
 
-.transitions-disabled,
-.transitions-disabled * {
-  transition: none !important;
+.transitions-disabled {
+  --transition-fast: 0s;
+  --transition-medium: 0s;
 }
 
 h1 { font-size: 2em; }
