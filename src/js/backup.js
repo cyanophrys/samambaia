@@ -34,6 +34,7 @@ import {
 } from './state.js';
 
 import {
+  applyPreferences,
   userPreferences,
 } from './preferences.js';
 
@@ -290,7 +291,7 @@ export async function restoreBackup() {
     });
 
     if (data.preferences)
-      Object.assign(userPreferences, data.preferences);
+      applyPreferences(data.preferences);
 
     resetState();
 
