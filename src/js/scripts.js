@@ -17,7 +17,8 @@ import {
 } from './labels.js';
 
 import {
-  applyVariables
+  applyVariables,
+  getVariableValuesMap,
 } from './variables.js';
 
 import {
@@ -130,14 +131,15 @@ function updateDragHandles(items) {
   });
 }
 
-export async function updateTextExpansionShortcuts() {
-  const scripts = await getAllScripts();
+export async function updateTextExpansionShortcuts(scripts) {
+  const list = scripts ?? await getAllScripts();
+  const values = getVariableValuesMap();
   const textExpansionShortcuts = {};
 
-  for (const script of scripts) {
+  for (const script of list) {
     if (!script.shortcut) continue;
     textExpansionShortcuts[script.shortcut.toLowerCase()] =
-      applyVariables(script.content);
+      applyVariables(script.content, values);
   }
 
   chrome.storage.local.set({ textExpansionShortcuts }).catch((error) => {
@@ -264,7 +266,7 @@ export async function renderScripts() {
     (a.order ?? Infinity) - (b.order ?? Infinity) || a.id - b.id
   );
 
-  updateTextExpansionShortcuts();
+  updateTextExpansionShortcuts(scripts);
 
   const container = getScriptsContainer();
   container.replaceChildren();
