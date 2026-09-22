@@ -1,4 +1,4 @@
-.tooltip {
+#tooltip {
   display: none;
   position: fixed;
   position-anchor: --tooltip-anchor;
