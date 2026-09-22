@@ -273,6 +273,7 @@ export function openShortcutsDialog() {
   const searchInput = dialog.querySelector('smb-search');
 
   searchInput.value = '';
+  filterShortcuts();
 
   dialog.showModal();
 }
