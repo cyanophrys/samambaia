@@ -19,16 +19,30 @@
   const LOOKBEHIND_CHARS = 64;
 
   let shortcuts = {};
+  let shortcutsCount = 0;
   let textExpansion = true;
   let prefix = '';
   let trigger = '';
   let pendingShortcut = null;
+  let prefixPattern = null;
+
+  function updatePrefixPattern() {
+    if (!prefix) {
+      prefixPattern = null;
+      return;
+    }
+
+    const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    prefixPattern = new RegExp(`(?:^|\\s)${escapedPrefix}([a-zA-Z0-9_-]{1,32})$`);
+  }
 
   chrome.storage.local.get(['textExpansionShortcuts', 'userPreferences'], (result) => {
     shortcuts = result.textExpansionShortcuts ?? {};
+    shortcutsCount = Object.keys(shortcuts).length;
     textExpansion = result.userPreferences?.textExpansion ?? true;
     prefix = result.userPreferences?.textExpansionPrefix ?? '';
     trigger = result.userPreferences?.textExpansionTrigger ?? '';
+    updatePrefixPattern();
   });
 
   chrome.storage.onChanged.addListener((changes, area) => {
@@ -36,12 +50,14 @@
 
     if (changes.textExpansionShortcuts) {
       shortcuts = changes.textExpansionShortcuts.newValue ?? {};
+      shortcutsCount = Object.keys(shortcuts).length;
     }
 
     if (changes.userPreferences) {
       textExpansion = changes.userPreferences.newValue?.textExpansion ?? true;
       prefix = changes.userPreferences.newValue?.textExpansionPrefix ?? '';
       trigger = changes.userPreferences.newValue?.textExpansionTrigger ?? '';
+      updatePrefixPattern();
     }
   });
 
@@ -65,9 +81,40 @@
 
     const range = selection.getRangeAt(0).cloneRange();
     range.collapse(true);
-    range.setStart(field, 0);
 
-    return range.toString();
+    let text = '';
+    let node = range.startContainer;
+    let offset = range.startOffset;
+
+    while (node && text.length < LOOKBEHIND_CHARS) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        text = node.textContent.slice(0, offset) + text;
+        offset = 0;
+      }
+
+      let previous = node.previousSibling;
+
+      while (!previous && node.parentNode && node.parentNode !== field) {
+        node = node.parentNode;
+        previous = node.previousSibling;
+      }
+
+      if (!previous) break;
+
+      node = previous;
+      offset = node.nodeType === Node.TEXT_NODE
+        ? node.textContent.length
+        : node.childNodes.length;
+
+      while (node.nodeType !== Node.TEXT_NODE && node.childNodes.length) {
+        node = node.childNodes[node.childNodes.length - 1];
+        offset = node.nodeType === Node.TEXT_NODE
+          ? node.textContent.length
+          : node.childNodes.length;
+      }
+    }
+
+    return text.slice(-LOOKBEHIND_CHARS);
   }
 
   function selectPrefix(field, isNative, prefixLength) {
@@ -108,18 +155,15 @@
     (event) => {
       pendingShortcut = null;
 
-      if (!textExpansion || !prefix || !Object.keys(shortcuts).length) return;
+      if (!textExpansion || !prefixPattern || !shortcutsCount) return;
 
       const field = event.target;
       if (!isEditableField(field)) return;
 
       const isNative = isNativeField(field);
-      const textBeforeCaret = getTextBeforeCaret(field, isNative).slice(-LOOKBEHIND_CHARS);
-      const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const prefixPattern = new RegExp(
-        `(?:^|\\s)${escapedPrefix}([a-zA-Z0-9_-]{1,32})$`
-      );
+      const textBeforeCaret = getTextBeforeCaret(field, isNative);
       const match = textBeforeCaret.match(prefixPattern);
+
       if (!match) return;
 
       const shortcut = match[1].toLowerCase();
