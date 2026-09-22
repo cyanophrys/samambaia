@@ -25,6 +25,10 @@ import {
 } from './db.js';
 
 import {
+  createShortcutDisplay,
+} from './shortcuts.js';
+
+import {
   PALETTE_COLORS,
 } from './config.js';
 
@@ -86,6 +90,7 @@ export function createLabelElement(label) {
   const title = item.querySelector('.title');
   const moreButton = item.querySelector('[aria-haspopup]');
   const menu = item.querySelector('.menu');
+  const menuItems = menu.querySelectorAll('.menu-item');
   const editButton = item.querySelector('[data-action="editLabel"]');
   const deleteButton = item.querySelector('[data-action="deleteLabel"]');
   const pinButton = item.querySelector('[data-action="togglePinLabel"]');
@@ -102,6 +107,17 @@ export function createLabelElement(label) {
   menu.id = actionsId;
   menu.style.positionAnchor = anchorName;
   menu.setAttribute('aria-label', t('labelMenuOptions', label.name));
+
+  menuItems.forEach((menuItem) => {
+    const shortcut = menuItem.dataset.keyboardShortcut;
+
+    if (!shortcut) return;
+
+    const display = createShortcutDisplay(shortcut);
+    display.classList.add('suffix');
+
+    menuItem.append(display);
+  });
 
   pinButton.setAttribute('popovertarget', actionsId);
   pinButton.setAttribute('popovertargetaction', 'hide');
