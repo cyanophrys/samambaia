@@ -220,6 +220,22 @@ export function handleShortcut(event, actions, shortcuts) {
   handler(targetElement, event, targetElement);
 }
 
+export function createShortcutDisplay(shortcut) {
+  const display = document.createElement('div');
+
+  display.className = 'shortcut-display';
+
+  display.append(
+    ...formatShortcut(shortcut).map((key) => {
+      const kbd = document.createElement('kbd');
+      kbd.textContent = key;
+      return kbd;
+    })
+  );
+
+  return display;
+}
+
 export function applyShortcutDisplays() {
   const shortcutDisplays = document.querySelectorAll('[data-shortcut-display]');
 
@@ -230,15 +246,9 @@ export function applyShortcutDisplays() {
 
     if (!shortcut) return;
 
-    const keys = formatShortcut(shortcut);
+    const display = createShortcutDisplay(shortcut);
 
-    container.replaceChildren(
-      ...keys.map((key) => {
-        const kbd = document.createElement('kbd');
-        kbd.textContent = key;
-        return kbd;
-      })
-    );
+    container.replaceChildren(...display.childNodes);
   });
 }
 
