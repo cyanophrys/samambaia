@@ -173,7 +173,23 @@ export function handleShortcut(event, actions, shortcuts) {
     event.key.toLowerCase(),
   ].filter(Boolean).join("+");
 
-  const element = document.querySelector(`[data-keyboard-shortcut="${shortcutString}"]`);
+  const elements = document.querySelectorAll(
+    `[data-keyboard-shortcut="${shortcutString}"]`
+  );
+
+  const element = [...elements].find((element) => {
+    const scope = element.dataset.keyboardShortcutScope;
+
+    if (!scope) return true;
+
+    if (scope === 'menu') {
+      const popover = element.closest('[popover]');
+
+      return popover?.matches(':popover-open');
+    }
+
+    return false;
+  });
 
   if (element) {
     event.preventDefault();
