@@ -55,6 +55,10 @@ import {
   t,
 } from './i18n.js';
 
+import {
+  createShortcutDisplay,
+} from './shortcuts.js';
+
 const MAX_HIGHLIGHT_RANGES = 500;
 const MAX_RECENT_SCRIPTS = 30;
 const MAX_SCRIPT_NAME_LENGTH = 128;
@@ -211,6 +215,7 @@ export function createScriptElement(script) {
   const copyButton = item.querySelector('[data-action="copyScript"]');
   const content = item.querySelector('.content');
   const menu = item.querySelector('.menu');
+  const menuItems = menu.querySelectorAll('.menu-item');
   const notes = item.querySelector('.notes');
   const favoriteButton = item.querySelector('[data-action="toggleFavoriteScript"]');
   const favoriteLabel = favoriteButton.querySelector('span');
@@ -247,6 +252,17 @@ export function createScriptElement(script) {
   menu.id = popoverId;
   menu.style.positionAnchor = anchorName;
   menu.setAttribute('aria-label', t('scriptMenuOptions', [script.name]));
+
+  menuItems.forEach((menuItem) => {
+    const shortcut = menuItem.dataset.keyboardShortcut;
+
+    if (!shortcut) return;
+
+    const display = createShortcutDisplay(shortcut);
+    display.classList.add('suffix');
+
+    menuItem.append(display);
+  });
 
   if (script.notes) {
     notes.id = `script-notes-${script.id}`;
