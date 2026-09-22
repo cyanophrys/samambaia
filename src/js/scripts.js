@@ -55,6 +55,7 @@ import {
   t,
 } from './i18n.js';
 
+const MAX_HIGHLIGHT_RANGES = 500;
 const MAX_RECENT_SCRIPTS = 30;
 const MAX_SCRIPT_NAME_LENGTH = 128;
 const MAX_SCRIPT_CONTENT_LENGTH = 5000;
@@ -556,9 +557,14 @@ export function highlightQuery(roots, query) {
   }
 
   highlight.clear();
-  if (!query) return;
+
+  if (query.length < 2) return;
+
+  let rangeCount = 0;
 
   for (const root of roots) {
+    if (rangeCount >= MAX_HIGHLIGHT_RANGES) break;
+
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     let node;
 
@@ -571,6 +577,10 @@ export function highlightQuery(roots, query) {
         range.setStart(node, index);
         range.setEnd(node, index + query.length);
         highlight.add(range);
+        rangeCount++;
+
+        if (rangeCount >= MAX_HIGHLIGHT_RANGES) return;
+
         index = text.indexOf(query, index + query.length);
       }
     }
@@ -621,14 +631,10 @@ export function filterScripts() {
 
   updateDragHandles(visibleItems);
 
-  if (query.length >= 2) {
-    const highlightTargets = getScriptsContainer().querySelectorAll(
-      '.script-item:not([hidden]) :is(h4, .content, .notes)'
-    );
-    highlightQuery(highlightTargets, query);
-  } else {
-    highlightQuery([], '');
-  }
+  const highlightTargets = getScriptsContainer().querySelectorAll(
+    '.script-item:not([hidden]) :is(h4, .content, .notes)'
+  );
+  highlightQuery(highlightTargets, query);
 
   if (stack) {
     let page = 'scripts';
