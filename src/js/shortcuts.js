@@ -279,34 +279,45 @@ export function openShortcutsDialog() {
 }
 
 export function filterShortcuts() {
-  const searchInput = document.getElementById('shortcuts-search-input');
+  const input = document.getElementById('shortcuts-search-input');
   const stack = document.getElementById('shortcuts-stack');
-  const results = document.getElementById('shortcuts-results-section');
-  const query = searchInput?.value.toLowerCase().trim() ?? '';
+  const query = input?.value.toLowerCase().trim() ?? '';
+
+  if (!stack) return;
 
   if (!query) {
-    results?.replaceChildren();
-    stack?.show('shortcuts');
+    stack.show('shortcuts');
     return;
   }
 
-  const shortcuts = document.querySelectorAll(
-    'smb-stack-page[page-name="shortcuts"] .shortcut-item'
+  const shortcutsPage = stack.querySelector(
+    'smb-stack-page[page-name="shortcuts"]'
   );
 
-  const matches = [...shortcuts].filter((shortcut) => {
-    const label = shortcut.querySelector('[data-i18n]')?.textContent.toLowerCase() ?? '';
-
-    return label.includes(query);
-  });
-
-  results?.replaceChildren(
-    ...matches.map((shortcut) => shortcut.cloneNode(true))
+  const searchResults = stack.querySelector(
+    'smb-stack-page[page-name="search-results"] #shortcuts-search-results'
   );
 
-  stack?.show(
-    matches.length
-      ? 'shortcuts-results'
-      : 'no-shortcuts-results'
-  );
+  const shortcuts = shortcutsPage?.querySelectorAll('.list-row') ?? [];
+
+  const matchingShortcuts = [...shortcuts]
+    .filter(shortcut => {
+      const label = shortcut.querySelector('span')?.textContent.toLowerCase() ?? '';
+
+      return label.includes(query);
+    });
+
+  if (matchingShortcuts.length === 0) {
+    stack.show('no-shortcuts-results');
+    return;
+  }
+
+  if (searchResults) {
+    const list = document.createElement('div');
+    list.className = 'list-group rows-separated';
+    list.replaceChildren(...matchingShortcuts.map(shortcut => shortcut.cloneNode(true)));
+    searchResults.replaceChildren(list);
+  }
+
+  stack.show('search-results');
 }
