@@ -210,7 +210,7 @@ export function handleShortcut(event, actions, shortcuts) {
 
   const targetElement = shortcut.target
     ? document.getElementById(shortcut.target) ?? document.querySelector(shortcut.target) ?? shortcut.target
-    : null;
+    : event.target;
 
   handler(targetElement, event, targetElement);
 }
