@@ -92,6 +92,15 @@ export function updatePreferenceControl(name, value) {
   }
 }
 
+export function applyPreferences(data) {
+  if (!data || typeof data !== 'object' || Array.isArray(data)) return;
+
+  for (const key of Object.keys(DEFAULT_PREFERENCES)) {
+    if (data[key] === undefined) continue;
+    userPreferences[key] = data[key];
+  }
+}
+
 export function toggleSidebar(button, value) {
   if (!(button instanceof HTMLElement)) return;
 
