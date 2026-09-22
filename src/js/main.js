@@ -398,7 +398,9 @@ async function wipeData() {
     if (e.detail.response !== 'wipe') return;
 
     try {
-      await wipeStoredData();
+      const { mainTabId } = await chrome.storage.local.get('mainTabId');
+
+      await wipeStoredData(mainTabId !== undefined ? { mainTabId } : {});
       await wipeDB();
 
       state.hasChanges = false;
