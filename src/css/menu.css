@@ -68,5 +68,6 @@
 
   [data-shortcut-display] {
     margin-inline-start: auto;
+    padding-inline-start: var(--spacing-sm);
   }
 }
