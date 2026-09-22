@@ -73,6 +73,8 @@ const PSEUDO_LABELS = [
   'recent',
 ];
 
+const searchTextCache = new WeakMap();
+
 let scriptsContainer;
 let scriptItemTemplate = null;
 let selectedLabel = 'all';
@@ -289,6 +291,8 @@ export function createScriptElement(script) {
 
   deleteButton.setAttribute('popovertarget', popoverId);
   deleteButton.dataset.target = script.id;
+
+  searchTextCache.set(item, item.textContent.toLowerCase());
 
   return item;
 }
@@ -634,8 +638,9 @@ export function filterScripts() {
 
   scriptItems.forEach(script => {
     const matchesLabel = searchAll || scriptMatchesLabel(script);
+    const searchText = searchTextCache.get(script) ?? script.textContent.toLowerCase();
     const isVisible = matchesLabel
-      && (!query || script.textContent.toLowerCase().includes(query));
+      && (!query || searchText.includes(query));
 
     script.hidden = !isVisible;
 
