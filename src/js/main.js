@@ -340,7 +340,10 @@ function bindEvents() {
   bindDialogEvents();
 
   document.addEventListener('recentScripts:changed', filterScripts);
-  document.addEventListener('variable:changed', updateTextExpansionShortcuts);
+  document.addEventListener(
+    'variable:changed',
+    () => updateTextExpansionShortcuts()
+  );
 
   ['label:changed', 'textExpansionPrefix:changed'].forEach((event) => {
     document.addEventListener(event, renderScripts);
