@@ -35,10 +35,6 @@
     "description": "Action used to edit an item"
   },
   "editEllipsis": { "message": "Edit…" },
-  "expand": {
-    "message": "Expand",
-    "description": "Action used to expand content"
-  },
   "pin": {
     "message": "Pin",
     "description": "Action used to pin an item to the top of a list"
