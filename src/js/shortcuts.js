@@ -133,7 +133,7 @@ const KEY_LABELS = {
   Backspace: "⌫",
 };
 
-export function formatShortcut(shortcut) {
+export function formatShortcut(shortcut, { format = 'keys' } = {}) {
   const keys = typeof shortcut === 'string'
     ? shortcut.split('+')
     : [
@@ -144,10 +144,15 @@ export function formatShortcut(shortcut) {
         shortcut.key,
       ].filter(Boolean);
 
-  return keys.map((key) => {
+  const labels = keys.map((key) => {
     return KEY_LABELS[key] ??
       (key.length === 1 ? key.toUpperCase() : key);
-  }).join('+');
+  });
+
+  if (format === 'text')
+    return labels.join('+');
+
+  return labels;
 }
 
 export function handleShortcut(event, actions, shortcuts) {
@@ -225,7 +230,7 @@ export function applyShortcutDisplays() {
 
     if (!shortcut) return;
 
-    const keys = formatShortcut(shortcut).split('+');
+    const keys = formatShortcut(shortcut);
 
     container.replaceChildren(
       ...keys.map((key) => {
