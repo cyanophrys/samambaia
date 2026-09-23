@@ -200,6 +200,9 @@ export function handleShortcut(event, actions, shortcuts) {
       element instanceof HTMLSelectElement
     ) {
       element.focus();
+    } else if (element.dataset.keyboardShortcutScope === 'menu') {
+      element.click();
+      element.focus();
     } else if (
       element instanceof HTMLButtonElement ||
       element instanceof HTMLAnchorElement ||
