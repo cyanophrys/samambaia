@@ -15,6 +15,8 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+const MENU_SELECTOR = '[role="menu"][popover]';
+
 export function bindMenuBehaviors() {
   document.addEventListener('keydown', handleMenuKeyboardNav);
   document.addEventListener('toggle', handlePopoverToggle, true);
@@ -22,7 +24,7 @@ export function bindMenuBehaviors() {
 
 function handleMenuKeyboardNav(event) {
   const menuInvoker = event.target.closest(
-    '[tabindex]:has(.menu[role="menu"][popover])'
+    `[tabindex]:has(${MENU_SELECTOR})`
   );
 
   if (menuInvoker && event.key === 'ContextMenu') {
@@ -35,7 +37,7 @@ function handleMenuKeyboardNav(event) {
     return;
   }
 
-  const menu = event.target.closest('.menu[role="menu"]:popover-open');
+  const menu = event.target.closest(`${MENU_SELECTOR}:popover-open`);
   if (!menu) return;
 
   const items = [...menu.querySelectorAll('[role="menuitem"]:not(:disabled)')];
@@ -65,7 +67,7 @@ function handlePopoverToggle(event) {
   if (!(popover instanceof HTMLElement) || !popover.hasAttribute('popover'))
     return;
 
-  if (popover.getAttribute('role') === 'menu' && event.newState === 'open') {
+  if (popover.matches(MENU_SELECTOR) && event.newState === 'open') {
     const item = popover.querySelector('[role="menuitem"]:not(:disabled)');
 
     requestAnimationFrame(() => {
