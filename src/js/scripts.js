@@ -781,18 +781,13 @@ export async function moveScriptPrevious(target) {
   if (index <= 0) return;
 
   const menu = item.querySelector('.menu');
-  const focused = document.activeElement;
   const wasOpen = menu?.matches(':popover-open');
 
   items[index - 1].before(item);
   updateScriptMoveButtons(items);
 
-  if (wasOpen) {
+  if (wasOpen)
     menu.showPopover();
-
-    if (menu.contains(focused))
-      focused.focus();
-  }
 
   await saveScriptsOrder(item.parentElement);
 }
@@ -809,18 +804,13 @@ export async function moveScriptNext(target) {
   if (index === -1 || index === items.length - 1) return;
 
   const menu = item.querySelector('.menu');
-  const focused = document.activeElement;
   const wasOpen = menu?.matches(':popover-open');
 
   items[index + 1].after(item);
   updateScriptMoveButtons(items);
 
-  if (wasOpen) {
+  if (wasOpen)
     menu.showPopover();
-
-    if (menu.contains(focused))
-      focused.focus();
-  }
 
   await saveScriptsOrder(item.parentElement);
 }
