@@ -21,6 +21,20 @@ export function bindMenuBehaviors() {
 }
 
 function handleMenuKeyboardNav(event) {
+  const menuInvoker = event.target.closest(
+    '[tabindex]:has(.menu[role="menu"][popover])'
+  );
+
+  if (menuInvoker && event.key === 'ContextMenu') {
+    event.preventDefault();
+
+    menuInvoker
+      .querySelector('[aria-haspopup="menu"]')
+      ?.click();
+
+    return;
+  }
+
   const menu = event.target.closest('.menu[role="menu"]:popover-open');
   if (!menu) return;
 
