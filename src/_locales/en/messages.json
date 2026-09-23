@@ -262,6 +262,7 @@
   "showFavoriteScripts": { "message": "Show favorite scripts" },
   "showRecentScripts": { "message": "Show recent scripts" },
   "showKeyboardShortcuts": { "message": "Show keyboard shortcuts" },
+  "showUnlabeled": { "message": "Show unlabeled scripts" },
   "toggleLabelsSidebar": { "message": "Toggle labels sidebar" },
   "toggleScratchpadSidebar": { "message": "Toggle scratchpad sidebar" },
   "toggleScriptViewMode": { "message": "Toggle script view mode" },

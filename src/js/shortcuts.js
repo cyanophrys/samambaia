@@ -106,6 +106,13 @@ export const KEYBOARD_SHORTCUTS = [
     key: "r",
   },
   {
+    name: "showUnlabeled",
+    action: "filterByLabel",
+    target: "none",
+    alt: true,
+    key: "u",
+  },
+  {
     name: "toggleLabelsSidebar",
     action: "toggleLabelsSidebar",
     alt: true,
