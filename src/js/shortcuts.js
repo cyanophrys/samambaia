@@ -45,7 +45,6 @@ export const KEYBOARD_SHORTCUTS = [
     name: "expandScratchpad",
     action: "expandScratchpad",
     alt: true,
-    shift: true,
     key: "p",
   },
   {
@@ -116,7 +115,8 @@ export const KEYBOARD_SHORTCUTS = [
     name: "toggleScratchpadSidebar",
     action: "toggleScratchpadSidebar",
     alt: true,
-    key: "p",
+    shift: true,
+    key: "ArrowRight",
   },
   {
     name: "toggleVariablesSidebar",
