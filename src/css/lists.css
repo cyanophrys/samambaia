@@ -35,6 +35,7 @@
   background-color: color-mix(in srgb, currentColor 8%, transparent);
   transition: background-color var(--transition-medium);
   user-select: none;
+  text-align: start;
 
   &:first-child {
     border-radius: var(--radius-md) var(--radius-md) 0 0;
