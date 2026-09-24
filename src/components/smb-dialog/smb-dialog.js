@@ -65,6 +65,8 @@ export class SmbDialog extends HTMLElement {
     this.#heading = this.shadowRoot.getElementById('heading');
     this.#subtitle = this.shadowRoot.getElementById('subtitle');
 
+    this.#subtitle.hidden = !this.subtitle;
+
     const closeButton = this.shadowRoot.getElementById('close-button');
     closeButton.addEventListener('click', () => this.close());
 
@@ -121,6 +123,7 @@ export class SmbDialog extends HTMLElement {
 
     if (name === 'subtitle') {
       this.#subtitle.textContent = newValue ?? '';
+      this.#subtitle.hidden = !this.#subtitle.textContent;
 
       if (newValue)
         this.#dialog.setAttribute('aria-describedby', 'subtitle');
