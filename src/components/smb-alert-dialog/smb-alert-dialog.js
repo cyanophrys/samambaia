@@ -31,7 +31,7 @@ template.innerHTML = `
         <slot name="additional-content" id="additional-content"></slot>
       </section>
     </div>
-    <footer id="actions" class="footer"></footer>
+    <footer id="actions" class="footer scroll-shadow-bottom"></footer>
   </dialog>
 `;
 

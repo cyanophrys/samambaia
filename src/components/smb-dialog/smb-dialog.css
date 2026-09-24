@@ -1,3 +1,7 @@
+:host {
+  timeline-scope: --scroll;
+}
+
 dialog {
   position: fixed;
   position-area: center;
