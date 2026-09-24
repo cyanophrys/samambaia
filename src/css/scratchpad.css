@@ -7,3 +7,7 @@
   background-color: transparent;
   resize: none;
 }
+
+#scratchpad-sidebar {
+  timeline-scope: --scroll;
+}
