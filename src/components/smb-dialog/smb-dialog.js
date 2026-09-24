@@ -28,7 +28,7 @@ template.innerHTML = `
   <dialog id="dialog" aria-labelledby="heading">
     <header class="header scroll-shadow-top">
       <slot name="header-left"></slot>
-      <div class="heading">
+      <div>
         <h1 id="heading"></h1>
         <span id="subtitle"></span>
       </div>
