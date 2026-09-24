@@ -10,6 +10,8 @@
   --radius-2md: 9px;
   --radius-md: 12px;
   --radius-max: 9999px;
+  --scroll-shadow-bottom: 0 -4px 6px -4px rgb(0 0 0 / 30%);
+  --scroll-shadow-top: 0 4px 6px -4px rgb(0 0 0 / 30%);
   --spacing-2xs: 4px;
   --spacing-xs: 6px;
   --spacing-2sm: 8px;
