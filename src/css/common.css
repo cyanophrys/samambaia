@@ -105,6 +105,20 @@ svg {
       justify-self: end;
     }
   }
+
+  &.scroll-shadow-top {
+    border-bottom: 1px solid transparent;
+    animation: scroll-shadow-top linear;
+    animation-timeline: --scroll;
+    animation-range: 0 calc(100% + 1px);
+  }
+
+  &.scroll-shadow-bottom {
+    border-top: 1px solid transparent;
+    animation: scroll-shadow-bottom linear;
+    animation-timeline: --scroll;
+    animation-range: 0 calc(100% - 1px);
+  }
 }
 
 :where(.header) {
