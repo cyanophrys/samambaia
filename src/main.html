@@ -303,16 +303,20 @@
   <smb-dialog id="labels-selection-dialog" data-i18n-attr="heading:selectLabels" style="--dialog-width: 400px;">
     <smb-search slot="subheader" id="labels-search-input" name="labels-search" class="clamp" style="--clamp-width: 300px;" data-i18n-attr="placeholder:searchLabels" data-action="filterScriptLabels" autofocus></smb-search>
     <smb-stack id="labels-stack" homogeneous transition>
-      <smb-stack-page page-name="labels-list" class="scrollable-area">
-        <section class="section" id="selected-labels-section" data-i18n-attr="aria-label:selectedLabels">
-          <div class="list-group" id="selected-labels-list"></div>
-        </section>
-        <section class="section" data-i18n-attr="aria-label:availableLabels">
-          <div class="list-group" id="available-labels-list"></div>
-        </section>
+      <smb-stack-page page-name="labels-list">
+        <div class="scrollable-area">
+          <section class="section" id="selected-labels-section" data-i18n-attr="aria-label:selectedLabels">
+            <div class="list-group" id="selected-labels-list"></div>
+          </section>
+          <section class="section" data-i18n-attr="aria-label:availableLabels">
+            <div class="list-group" id="available-labels-list"></div>
+          </section>
+        </div>
       </smb-stack-page>
-      <smb-stack-page page-name="search-results" class="scrollable-area">
-        <div id="labels-search-results"></div>
+      <smb-stack-page page-name="search-results">
+        <div class="scrollable-area">
+          <section id="labels-search-results"></section>
+        </div>
       </smb-stack-page>
       <smb-stack-page page-name="no-labels">
         <smb-placeholder heading="noLabelsAvailable" description="labelsAppearHere" page>
