@@ -61,9 +61,14 @@ dialog {
     display: grid;
     grid-template-columns: 1fr auto auto 1fr;
     grid-template-rows: auto auto;
+    flex-shrink: 0;
 
     &:has(slot[name="subheader"][hidden]) {
       row-gap: 0;
+    }
+
+    &:has(.heading > span:not([hidden])) {
+      padding: var(--spacing-xs);
     }
 
     slot[name="subheader"] {
