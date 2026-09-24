@@ -32,3 +32,37 @@
     visibility: visible;
   }
 }
+
+@keyframes scroll-shadow-top {
+  0% {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  0.001% {
+    border-color: var(--border-color);
+    box-shadow: var(--scroll-shadow-top);
+  }
+
+  100% {
+    border-color: var(--border-color);
+    box-shadow: var(--scroll-shadow-top);
+  }
+}
+
+@keyframes scroll-shadow-bottom {
+  0% {
+    border-color: var(--border-color);
+    box-shadow: var(--scroll-shadow-bottom);
+  }
+
+  99.999% {
+    border-color: var(--border-color);
+    box-shadow: var(--scroll-shadow-bottom);
+  }
+
+  100% {
+    border-color: transparent;
+    box-shadow: none;
+  }
+}

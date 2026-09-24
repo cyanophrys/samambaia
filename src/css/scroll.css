@@ -1,0 +1,7 @@
+.scrollable-area {
+  scroll-timeline: --scroll block;
+}
+
+smb-stack-page:not([data-active]) .scrollable-area {
+  scroll-timeline-name: none;
+}
