@@ -1,0 +1,10 @@
+smb-dialog {
+  .scrollable-area,
+  smb-stack-page[data-active] .scrollable-area {
+    scroll-timeline: --dialog-scroll block;
+  }
+
+  smb-stack-page:not([data-active]) .scrollable-area {
+    scroll-timeline-name: none;
+  }
+}

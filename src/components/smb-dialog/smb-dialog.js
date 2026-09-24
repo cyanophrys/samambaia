@@ -26,7 +26,7 @@ import {
 const template = document.createElement('template');
 template.innerHTML = `
   <dialog id="dialog" aria-labelledby="heading">
-    <header class="header">
+    <header class="header scroll-shadow-top">
       <slot name="header-left"></slot>
       <div class="heading">
         <h1 id="heading"></h1>
@@ -39,7 +39,7 @@ template.innerHTML = `
       <slot name="subheader"></slot>
     </header>
     <slot></slot>
-    <footer class="footer">
+    <footer class="footer scroll-shadow-bottom">
       <slot name="footer-left"></slot>
       <slot name="footer-center"></slot>
       <slot name="footer-right"></slot>
