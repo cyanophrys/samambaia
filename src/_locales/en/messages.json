@@ -179,6 +179,7 @@
   "variableNameTooLong": { "message": "Variable name cannot exceed $1 characters" },
   "variablePinned": { "message": "Variable \"$1\" pinned" },
   "variables": { "message": "Variables" },
+  "variablesList": { "message": "Variables list" },
   "variableUnpinned": { "message": "Variable \"$1\" unpinned" },
 
   "backup": { "message": "Backup" },
