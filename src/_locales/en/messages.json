@@ -11,20 +11,20 @@
     "description": "Action used to cancel"
   },
   "cancelSearch": { "message": "Cancel search" },
-  "copy": {
-    "message": "Copy",
-    "description": "Action used to copy content"
-  },
   "clear": {
     "message": "Clear",
     "description": "Action used to clear content"
   },
-  "copiedToClipboard": { "message": "Copied to clipboard" },
-  "copyToClipboardError": { "message": "Failed to copy to clipboard" },
   "close": {
     "message": "Close",
     "description": "Action used to close or dismissing an item"
   },
+  "copiedToClipboard": { "message": "Copied to clipboard" },
+  "copy": {
+    "message": "Copy",
+    "description": "Action used to copy content"
+  },
+  "copyToClipboardError": { "message": "Failed to copy to clipboard" },
   "deleteEllipsis": { "message": "Delete…" },
   "dismiss": {
     "message": "Dismiss",
@@ -35,9 +35,15 @@
     "description": "Action used to edit an item"
   },
   "editEllipsis": { "message": "Edit…" },
+  "moreOptions": { "message": "More options" },
+  "name": { "message": "Name" },
   "pin": {
     "message": "Pin",
     "description": "Action used to pin an item to the top of a list"
+  },
+  "select": {
+    "message": "Select",
+    "description": "Action used to select an item"
   },
   "undo": {
     "message": "Undo",
@@ -47,17 +53,11 @@
     "message": "Unpin",
     "description": "Action used to unpin an item"
   },
-  "moreOptions": { "message": "More options" },
-  "name": { "message": "Name" },
-  "select": {
-    "message": "Select",
-    "description": "Action used to select an item"
-  },
 
-  "loadingFailedHeading": { "message": "Something went wrong" },
   "loadingFailedDescription": {
     "message": "An error occurred while loading the page."
   },
+  "loadingFailedHeading": { "message": "Something went wrong" },
   "tryAgain": { "message": "Try again" },
 
   "backToTop": { "message": "Back to top" },
@@ -70,10 +70,10 @@
     "message": "Search",
     "description": "Noun indicating something related to search"
   },
-  "searchShortcuts": { "message": "Search shortcuts" },
-  "searchScripts": { "message": "Search scripts" },
-  "searchLabels": { "message": "Search labels" },
   "searchAllScripts": { "message": "Search all scripts" },
+  "searchLabels": { "message": "Search labels" },
+  "searchScripts": { "message": "Search scripts" },
+  "searchShortcuts": { "message": "Search shortcuts" },
 
   "allScripts": { "message": "All scripts" },
   "favorites": { "message": "Favorites" },
@@ -84,6 +84,7 @@
   "brown": { "message": "Brown" },
   "green": { "message": "Green" },
   "lavender": { "message": "Lavender" },
+  "noColor": { "message": "No color" },
   "orange": { "message": "Orange" },
   "pink": { "message": "Pink" },
   "purple": { "message": "Purple" },
@@ -91,7 +92,6 @@
   "slate": { "message": "Slate" },
   "teal": { "message": "Teal" },
   "yellow": { "message": "Yellow" },
-  "noColor": { "message": "No color" },
 
   "addFirstScript": { "message": "Add your first script to get started or restore an existing backup" },
   "noFavorites": { "message": "No favorites" },
@@ -125,9 +125,9 @@
   "scriptMenuOptions": { "message": "Options for $1" },
   "scriptNotes": { "message": "Notes (optional)" },
   "scriptRemovedFromFavorites": { "message": "Script \"$1\" removed from favorites" },
-  "scriptTextExpansionShortcut": { "message": "Text expansion shortcut (optional)" },
   "scriptShortcutDuplicate": { "message": "A script with this shortcut already exists" },
   "scriptShortcutInvalid": { "message": "The shortcut can only contain letters, numbers, \"_\" and \"-\"" },
+  "scriptTextExpansionShortcut": { "message": "Text expansion shortcut (optional)" },
 
   "addLabel": { "message": "Add label" },
   "addLabelEllipsis": { "message": "Add label…" },
@@ -156,13 +156,13 @@
   "noLabelsAvailable": { "message": "No labels available" },
   "noLabelsSelected": { "message": "No labels selected" },
   "oneLabelSelected": { "message": "1 label selected" },
-  "selectLabels": { "message": "Select labels" },
   "selectedLabels": { "message": "Selected labels" },
+  "selectLabels": { "message": "Select labels" },
 
   "addVariable": { "message": "Add variable" },
   "addVariableEllipsis": { "message": "Add variable…" },
-  "createVariablesDescription": { "message": "Create variables to reuse in your scripts" },
   "clearVariable": { "message": "Clear variable" },
+  "createVariablesDescription": { "message": "Create variables to reuse in your scripts" },
   "deleteVariable": { "message": "Delete variable" },
   "deleteVariableBody": {
     "message": "Are you sure you want to delete the variable \"$1\"? Scripts using \"{{$1}}\" will no longer replace it."
@@ -178,16 +178,16 @@
   "variableNameInvalid": { "message": "The name can only contain letters, numbers, \"_\" and \"-\"" },
   "variableNameTooLong": { "message": "Variable name cannot exceed $1 characters" },
   "variablePinned": { "message": "Variable \"$1\" pinned" },
-  "variableUnpinned": { "message": "Variable \"$1\" unpinned" },
   "variables": { "message": "Variables" },
+  "variableUnpinned": { "message": "Variable \"$1\" unpinned" },
 
   "backup": { "message": "Backup" },
   "backUpAction": {
     "message": "Back up",
     "description": "Verb indicating an action that exports a backup file"
   },
-  "backUpEllipsis": { "message": "Back up…" },
   "backupCompleted": { "message": "Backup completed" },
+  "backUpEllipsis": { "message": "Back up…" },
   "backupFailed": { "message": "Backup failed" },
   "backupRestored": { "message": "Backup restored" },
   "jsonFiles": { "message": "JSON Files" },
@@ -206,16 +206,16 @@
   "scratchpadCleared": { "message": "Scratchpad cleared" },
   "typeSomethingHere": { "message": "Type something here" },
 
-  "appearance": { "message": "Appearance" },
   "accessibility": { "message": "Accessibility" },
+  "appearance": { "message": "Appearance" },
   "openPreferences": { "message": "Open preferences" },
   "preferences": { "message": "Preferences" },
   "storage": { "message": "Storage" },
 
-  "theme": { "message": "Theme" },
-  "systemDefault": { "message": "System default" },
-  "light": { "message": "Light" },
   "dark": { "message": "Dark" },
+  "light": { "message": "Light" },
+  "systemDefault": { "message": "System default" },
+  "theme": { "message": "Theme" },
 
   "accentColor": { "message": "Accent color" },
 
@@ -236,26 +236,26 @@
   "textExpansionPrefixSlash": { "message": "Slash (/)" },
   "textExpansionTrigger": { "message": "Text expansion trigger" },
   "textExpansionTriggerDescription": { "message": "Choose the key used to trigger text expansion" },
+  "textExpansionTriggerEnter": { "message": "Enter" },
   "textExpansionTriggerSpace": { "message": "Space" },
   "textExpansionTriggerTab": { "message": "Tab" },
-  "textExpansionTriggerEnter": { "message": "Enter" },
 
   "clearHistory": { "message": "Clear history" },
-  "clearRecentHistoryEllipsis": { "message": "Clear recent history…" },
   "clearRecentHistoryBody": {
     "message": "This will remove all recently copied scripts from your history. This action cannot be undone."
   },
+  "clearRecentHistoryEllipsis": { "message": "Clear recent history…" },
   "clearRecentHistoryHeading": { "message": "Clear recent history?" },
   "history": { "message": "History" },
   "recentScripts": { "message": "Recent scripts" },
   "recentScriptsDescription": { "message": "Show scripts that were recently copied" },
 
   "dataDeleted": { "message": "Data deleted" },
+  "deleteAllDataBody": { "message": "This will permanently remove all local data. This action cannot be undone." },
+  "deleteAllDataEllipsis": { "message": "Delete all data…" },
+  "deleteAllDataHeading": { "message": "Delete all data?" },
   "deleteData": { "message": "Delete data" },
   "deleteDataDescription": { "message": "Use the button below to permanently remove all local data." },
-  "deleteAllDataEllipsis": { "message": "Delete all data…" },
-  "deleteAllDataBody": { "message": "This will permanently remove all local data. This action cannot be undone." },
-  "deleteAllDataHeading": { "message": "Delete all data?" },
   "errorDeletingData": { "message": "Error deleting data" },
   "wipeConfirmationLabel": { "message": "I understand and want to continue" },
 
@@ -264,8 +264,8 @@
   "navigation": { "message": "Navigation" },
   "showAllScripts": { "message": "Show all scripts" },
   "showFavoriteScripts": { "message": "Show favorite scripts" },
-  "showRecentScripts": { "message": "Show recent scripts" },
   "showKeyboardShortcuts": { "message": "Show keyboard shortcuts" },
+  "showRecentScripts": { "message": "Show recent scripts" },
   "showUnlabeled": { "message": "Show unlabeled scripts" },
   "toggleLabelsSidebar": { "message": "Toggle labels sidebar" },
   "toggleScratchpadSidebar": { "message": "Toggle scratchpad sidebar" },
