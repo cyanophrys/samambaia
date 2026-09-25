@@ -134,6 +134,10 @@ svg {
   opacity: var(--dimmed-opacity);
 }
 
+.contents {
+  display: contents;
+}
+
 .toast-container {
   position: fixed;
   inset: 0;

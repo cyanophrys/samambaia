@@ -8,10 +8,6 @@
   }
 }
 
-.label-group .contents {
-  display: contents;
-}
-
 .label-item {
   display: flex;
   align-items: center;
