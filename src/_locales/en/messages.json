@@ -49,6 +49,10 @@
   },
   "moreOptions": { "message": "More options" },
   "name": { "message": "Name" },
+  "select": {
+    "message": "Select",
+    "description": "Action used to select an item"
+  },
 
   "loadingFailedHeading": { "message": "Something went wrong" },
   "loadingFailedDescription": {

@@ -42,6 +42,7 @@ const MAX_LABEL_NAME_LENGTH = 128;
 let cachedLabels = [];
 let labelItemTemplate;
 let selectedScriptLabels = [];
+let draftScriptLabels = [];
 let scriptLabelRowTemplate;
 
 function getLabelItemTemplate() {
@@ -305,15 +306,25 @@ function updateScriptLabelsSubtitle() {
       : t('labelsSelectedCount', String(count));
 }
 
-export async function openLabelsSelectionDialog() {
+export async function selectScriptLabels() {
   const dialog = document.getElementById('labels-selection-dialog');
   const input = dialog.querySelector('smb-search');
 
+  draftScriptLabels = [...selectedScriptLabels];
   input.value = '';
 
   await renderScriptLabelsList();
 
   dialog.showModal();
+}
+
+export function saveLabelsSelection() {
+  const dialog = document.getElementById('labels-selection-dialog');
+
+  setSelectedScriptLabels(draftScriptLabels);
+  draftScriptLabels = [];
+
+  dialog.close();
 }
 
 function createScriptLabelRow(label) {
@@ -325,7 +336,7 @@ function createScriptLabelRow(label) {
 
   input.name = `script-label-${label.id}`;
   input.dataset.target = label.id;
-  input.checked = selectedScriptLabels.includes(String(label.id));
+  input.checked = draftScriptLabels.includes(String(label.id));
 
   span.textContent = label.name;
 
@@ -343,8 +354,8 @@ export async function renderScriptLabelsList() {
     a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
   );
 
-  const selected = cachedLabels.filter(label => selectedScriptLabels.includes(String(label.id)));
-  const available = cachedLabels.filter(label => !selectedScriptLabels.includes(String(label.id)));
+  const selected = cachedLabels.filter(label => draftScriptLabels.includes(String(label.id)));
+  const available = cachedLabels.filter(label => !draftScriptLabels.includes(String(label.id)));
 
   selectedSection.hidden = selected.length === 0;
 
@@ -390,12 +401,10 @@ export function toggleScriptLabel(value, event, element) {
   const id = String(element.dataset.target);
 
   if (element.checked) {
-    if (!selectedScriptLabels.includes(id)) selectedScriptLabels.push(id);
+    if (!draftScriptLabels.includes(id)) draftScriptLabels.push(id);
   } else {
-    selectedScriptLabels = selectedScriptLabels.filter(labelId => labelId !== id);
+    draftScriptLabels = draftScriptLabels.filter(labelId => labelId !== id);
   }
-
-  updateScriptLabelsSubtitle();
 }
 
 export async function togglePinLabel(target) {

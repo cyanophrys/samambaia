@@ -235,7 +235,7 @@
           <input class="input" type="text" id="script-name" name="name" placeholder=" " autocomplete="off" maxlength="128" required autofocus>
           <label class="label" for="script-name" data-i18n="name"></label>
         </div>
-        <button class="list-row activatable" type="button" data-action="openLabelsSelectionDialog">
+        <button class="list-row activatable" type="button" data-action="selectScriptLabels">
           <div>
             <span class="title" data-i18n="labels"></span>
             <span id="script-labels-subtitle" class="subtitle" data-i18n="noLabelsSelected"></span>
@@ -300,17 +300,19 @@
     <button slot="footer-left" class="button" type="button" data-target="label-dialog" data-i18n="cancel" data-dialog-close></button>
     <button id="label-save-button" slot="footer-right" class="button suggested-action" type="submit" form="label-form"></button>
   </smb-dialog>
-  <smb-dialog id="labels-selection-dialog" data-i18n-attr="heading:selectLabels" style="--dialog-width: 400px;">
+  <smb-dialog id="labels-selection-dialog" data-i18n-attr="heading:selectLabels" style="--dialog-width: 400px;" action-dialog>
     <smb-search slot="subheader" id="labels-search-input" name="labels-search" class="clamp" style="--clamp-width: 300px;" data-i18n-attr="placeholder:searchLabels" data-action="filterScriptLabels" autofocus></smb-search>
     <smb-stack id="labels-stack" homogeneous transition>
       <smb-stack-page page-name="labels-list">
         <div class="scrollable-area">
-          <section class="section" id="selected-labels-section" data-i18n-attr="aria-label:selectedLabels">
-            <div class="list-group" id="selected-labels-list"></div>
-          </section>
-          <section class="section" data-i18n-attr="aria-label:availableLabels">
-            <div class="list-group" id="available-labels-list"></div>
-          </section>
+          <form id="labels-selection-form" class="contents" data-action="saveLabelsSelection">
+            <section class="section" id="selected-labels-section" data-i18n-attr="aria-label:selectedLabels">
+              <div class="list-group" id="selected-labels-list"></div>
+            </section>
+            <section class="section" data-i18n-attr="aria-label:availableLabels">
+              <div class="list-group" id="available-labels-list"></div>
+            </section>
+          </form>
         </div>
       </smb-stack-page>
       <smb-stack-page page-name="search-results">
@@ -329,6 +331,8 @@
         </smb-placeholder>
       </smb-stack-page>
     </smb-stack>
+    <button slot="footer-left" class="button" type="button" data-action="cancelLabelsSelection" data-i18n="cancel" data-dialog-close></button>
+    <button slot="footer-right" class="button suggested-action" type="submit" form="labels-selection-form" data-i18n="select"></button>
   </smb-dialog>
   <smb-dialog id="variable-dialog" style="anchor-name: --variable-dialog-toast; --dialog-width: 430px;" action-dialog>
     <div id="variable-dialog-toast" class="toast-container" style="position-anchor: --variable-dialog-toast;"></div>
