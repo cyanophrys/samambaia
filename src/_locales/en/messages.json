@@ -260,6 +260,7 @@
   "errorDeletingData": { "message": "Error deleting data" },
   "wipeConfirmationLabel": { "message": "I understand and want to continue" },
 
+  "copyScratchpad": { "message": "Copy scratchpad" },
   "general": { "message": "General" },
   "keyboardShortcuts": { "message": "Keyboard shortcuts" },
   "navigation": { "message": "Navigation" },

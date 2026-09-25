@@ -36,6 +36,14 @@ export const KEYBOARD_SHORTCUTS = [
     key: "v",
   },
   {
+    name: "copyScratchpad",
+    action: "copyScratchpad",
+    alt: true,
+    shift: true,
+    key: "c",
+    allowInEditable: true,
+  },
+  {
     name: "exportBackup",
     action: "exportBackup",
     alt: true,
