@@ -160,6 +160,10 @@
   }
 
   &[data-pinned="true"] {
+    > .pin-icon {
+      display: block;
+    }
+
     .menu .pin-icon {
       display: none;
     }
