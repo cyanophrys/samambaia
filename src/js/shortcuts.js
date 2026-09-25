@@ -171,7 +171,21 @@ export function handleShortcut(event, actions, shortcuts) {
     target instanceof HTMLSelectElement ||
     target.isContentEditable;
 
-  if (isEditable && !event.ctrlKey && !event.metaKey) return;
+  const shortcut = shortcuts.find((shortcut) => {
+    return (
+      shortcut.key.toLowerCase() === event.key.toLowerCase() &&
+      !!shortcut.ctrl === (event.ctrlKey || event.metaKey) &&
+      !!shortcut.alt === event.altKey &&
+      !!shortcut.shift === event.shiftKey
+    );
+  });
+
+  if (
+    isEditable &&
+    !event.ctrlKey &&
+    !event.metaKey &&
+    !shortcut?.allowInEditable
+  ) return;
 
   const shortcutString = [
     (event.ctrlKey || event.metaKey) && "ctrl",
@@ -222,15 +236,6 @@ export function handleShortcut(event, actions, shortcuts) {
 
     return;
   }
-
-  const shortcut = shortcuts.find((shortcut) => {
-    return (
-      shortcut.key.toLowerCase() === event.key.toLowerCase() &&
-      !!shortcut.ctrl === (event.ctrlKey || event.metaKey) &&
-      !!shortcut.alt === event.altKey &&
-      !!shortcut.shift === event.shiftKey
-    );
-  });
 
   if (!shortcut) return;
 
