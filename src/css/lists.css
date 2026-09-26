@@ -136,6 +136,15 @@
     outline-color: var(--focus-outline-color);
   }
 
+  &:has(> :required:user-invalid) {
+    outline-color: var(--error-color);
+
+    label {
+      color: var(--error-color);
+      opacity: 1;
+    }
+  }
+
   &:not(.multiline) {
     input[type="text"] {
       anchor-name: --field-input;
