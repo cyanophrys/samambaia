@@ -61,6 +61,7 @@
   );
   --dialog-color: light-dark(#f6f6f7, #27272a);
   --dragging-outline-color: var(--focus-outline-color);
+  --error-color: light-dark(#c62828, #ef5350);
   --focus-outline-color: var(--accent-color);
   --highlight-bg-color: color-mix(in oklab, #ffeb3b 80%, transparent);
   --highlight-fg-color: black;
@@ -100,6 +101,7 @@
     --dark-border-color: var(--border-hc-color);
     --destructive-fg-color: var(--text-color);
     --dialog-color: var(--background-color);
+    --error-color: currentColor;
     --focus-outline-color: currentColor;
     --highlight-bg-color: light-dark(black, white);
     --highlight-fg-color: light-dark(white, black);
