@@ -129,24 +129,20 @@ dialog {
   }
 
   footer {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-
     slot {
       display: flex;
+      flex: 1;
+      min-width: 0;
 
       &[name="footer-left"] {
-        grid-column: 1;
         justify-content: flex-start;
       }
 
       &[name="footer-center"] {
-        grid-column: 2;
         justify-content: center;
       }
 
       &[name="footer-right"] {
-        grid-column: 3;
         justify-content: flex-end;
       }
     }
@@ -158,18 +154,7 @@ dialog {
     visibility: hidden;
   }
 
-  footer {
-    display: flex;
-  }
-
-  footer slot[name="footer-left"],
-  footer slot[name="footer-right"] {
-    flex: 1;
-    width: 100%;
-  }
-
   footer ::slotted(button) {
-    flex: 1;
     width: 100%;
   }
 }
