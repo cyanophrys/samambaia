@@ -60,15 +60,15 @@ svg {
     flex-direction: column;
   }
 
-  &:where(:has(> :only-child):not(:has(h4))) {
+  &.centered {
     justify-content: center;
   }
 
-  &:where(:has(> :nth-child(2):last-child)) {
+  &.spaced {
     justify-content: space-between;
   }
 
-  &:where(:has(> :nth-child(3):last-child):not(.vertical)) {
+  &.three-column {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 
