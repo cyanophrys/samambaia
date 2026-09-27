@@ -19,6 +19,7 @@ const MENU_SELECTOR = '[role="menu"][popover]';
 
 export function bindMenuBehaviors() {
   document.addEventListener('keydown', handleMenuKeyboardNav);
+  document.addEventListener('contextmenu', handleContextMenu);
   document.addEventListener('toggle', handlePopoverToggle, true);
 }
 
@@ -29,11 +30,7 @@ function handleMenuKeyboardNav(event) {
 
   if (menuInvoker && event.key === 'ContextMenu') {
     event.preventDefault();
-
-    menuInvoker
-      .querySelector('[aria-haspopup="menu"]')
-      ?.click();
-
+    menuInvoker.querySelector('[aria-haspopup="menu"]')?.click();
     return;
   }
 
@@ -59,6 +56,16 @@ function handleMenuKeyboardNav(event) {
     event.preventDefault();
     focusAt(items.length - 1);
   }
+}
+
+function handleContextMenu(event) {
+  if (event.target.closest('[data-context-menu-ignore]')) return;
+
+  const menuInvoker = event.target.closest(`[tabindex]:has(${MENU_SELECTOR})`);
+  if (!menuInvoker) return;
+
+  event.preventDefault();
+  menuInvoker.querySelector('[aria-haspopup="menu"]')?.click();
 }
 
 function handlePopoverToggle(event) {
