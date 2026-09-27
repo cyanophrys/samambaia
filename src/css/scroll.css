@@ -8,6 +8,7 @@
   gap: var(--spacing-lg);
   overflow-x: hidden;
   overflow-y: auto;
+  scroll-timeline: var(--scroll-timeline-name, --scroll) block;
 
   &.grid {
     display: grid;
