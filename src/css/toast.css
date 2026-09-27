@@ -10,4 +10,8 @@
   justify-self: center;
   padding-bottom: var(--spacing-md);
   pointer-events: none;
+
+  > * {
+    align-self: center;
+  }
 }
