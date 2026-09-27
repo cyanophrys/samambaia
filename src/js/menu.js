@@ -23,6 +23,12 @@ export function bindMenuBehaviors() {
   document.addEventListener('toggle', handlePopoverToggle, true);
 }
 
+function activateMenuInvoker(invoker) {
+  const menuInvoker = invoker.querySelector('[aria-haspopup="menu"]');
+
+  menuInvoker?.click();
+}
+
 function handleMenuKeyboardNav(event) {
   const menuInvoker = event.target.closest(
     `[tabindex]:has(${MENU_SELECTOR})`
@@ -30,7 +36,7 @@ function handleMenuKeyboardNav(event) {
 
   if (menuInvoker && event.key === 'ContextMenu') {
     event.preventDefault();
-    menuInvoker.querySelector('[aria-haspopup="menu"]')?.click();
+    activateMenuInvoker(menuInvoker);
     return;
   }
 
@@ -65,7 +71,7 @@ function handleContextMenu(event) {
   if (!menuInvoker) return;
 
   event.preventDefault();
-  menuInvoker.querySelector('[aria-haspopup="menu"]')?.click();
+  activateMenuInvoker(menuInvoker);
 }
 
 function handlePopoverToggle(event) {
