@@ -59,8 +59,11 @@
     padding-inline-end: var(--spacing-xs);
   }
 
-  > svg:not(.color-icon) {
+  > svg {
     flex-shrink: 0;
+  }
+
+  > svg:not(.color-icon) {
     opacity: var(--dimmed-opacity);
     transition:
       opacity var(--transition-medium),

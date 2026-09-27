@@ -18,6 +18,7 @@ div {
   ::slotted([slot="icon"]) {
     width: 128px;
     height: 128px;
+    flex-shrink: 0;
   }
 
   > h1,

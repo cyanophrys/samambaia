@@ -136,6 +136,7 @@
 
     svg {
       opacity: var(--dimmed-opacity);
+      flex-shrink: 0;
     }
   }
 
