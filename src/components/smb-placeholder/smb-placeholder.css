@@ -66,6 +66,7 @@ div {
     height: 100%;
     padding: var(--spacing-lg);
     overflow-y: auto;
+    scroll-timeline: var(--scroll-timeline-name, --scroll) block;
 
     ::slotted([slot="icon"]) {
       opacity: var(--dimmed-opacity);
