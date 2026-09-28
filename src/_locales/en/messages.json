@@ -160,7 +160,6 @@
 
   "addVariable": { "message": "Add variable" },
   "addVariableEllipsis": { "message": "Add variable…" },
-  "clearVariable": { "message": "Clear variable" },
   "createVariablesDescription": { "message": "Create variables to reuse in your scripts" },
   "deleteVariable": { "message": "Delete variable" },
   "deleteVariableBody": {
