@@ -61,9 +61,9 @@
   "tryAgain": { "message": "Try again" },
 
   "backToTop": { "message": "Back to top" },
-  "mainNavigation": { "message": "Main navigation" },
   "moveToNext": { "message": "Move to next" },
   "moveToPrevious": { "message": "Move to previous" },
+  "primaryControls": { "message": "Primary controls" },
   "viewMore": { "message": "View more" },
 
   "search": {
