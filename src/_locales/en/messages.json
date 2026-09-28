@@ -150,7 +150,6 @@
   "labelPinned": { "message": "Label \"$1\" pinned" },
   "labels": { "message": "Labels" },
   "labelsAppearHere": { "message": "The labels you add will appear here" },
-  "labelsList": { "message": "Labels list" },
   "labelsSelectedCount": { "message": "$1 labels selected" },
   "labelUnpinned": { "message": "Label \"$1\" unpinned" },
   "noLabelsAvailable": { "message": "No labels available" },

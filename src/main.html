@@ -99,11 +99,11 @@
         </div>
       </header>
       <div id="workspace">
-        <aside id="labels-sidebar" class="surface collapsible-sidebar" data-i18n-attr="aria-label:labelsList">
+        <aside id="labels-sidebar" class="surface collapsible-sidebar" aria-labelledby="labels-sidebar-heading">
           <div class="scrollable-area">
             <section class="section">
               <header class="header">
-                <h4 class="dimmed" data-i18n="labels"></h4>
+                <h4 id="labels-sidebar-heading" class="dimmed" data-i18n="labels"></h4>
               </header>
               <div class="label-group">
                 <button class="label-item" data-action="filterByLabel" data-target="favorites" data-active="false" aria-current="false">
@@ -192,11 +192,11 @@
             </smb-stack-page>
           </smb-stack>
         </section>
-        <aside id="scratchpad-sidebar" class="surface collapsible-sidebar">
+        <aside id="scratchpad-sidebar" class="surface collapsible-sidebar" aria-labelledby="scratchpad-sidebar-heading">
           <div class="scrollable-area">
             <section class="section">
               <header class="header">
-                <h4 class="dimmed" data-i18n="scratchpad"></h4>
+                <h4 id="scratchpad-sidebar-heading" class="dimmed" data-i18n="scratchpad"></h4>
               </header>
               <textarea class="scratchpad-textarea" name="scratchpad" data-i18n-attr="placeholder:typeSomethingHere" data-action="handleScratchpadInput"></textarea>
             </section>
@@ -213,13 +213,13 @@
             </button>
           </footer>
         </aside>
-        <aside id="variables-sidebar" class="surface collapsible-sidebar" aria-label="Variables list">
+        <aside id="variables-sidebar" class="surface collapsible-sidebar" aria-labelledby="variables-sidebar-heading">
           <smb-stack id="variables-stack">
             <smb-stack-page page-name="variables-list">
               <div class="scrollable-area">
                 <section class="section">
                   <header class="header">
-                    <h4 class="dimmed" data-i18n="variables"></h4>
+                    <h4 id="variables-sidebar-heading" class="dimmed" data-i18n="variables"></h4>
                   </header>
                   <div id="pinned-variables" class="list-group"></div>
                   <div id="custom-variables" class="list-group"></div>
