@@ -199,6 +199,7 @@
   "restoreFailed": { "message": "Restore failed. Check that the file is valid." },
   "unsavedChanges": { "message": "There are unsaved changes" },
 
+  "copyScratchpad": { "message": "Copy scratchpad" },
   "expandScratchpad": { "message": "Expand scratchpad" },
   "scratchpad": { "message": "Scratchpad" },
   "scratchpadCleared": { "message": "Scratchpad cleared" },
@@ -257,7 +258,6 @@
   "errorDeletingData": { "message": "Error deleting data" },
   "wipeConfirmationLabel": { "message": "I understand and want to continue" },
 
-  "copyScratchpad": { "message": "Copy scratchpad" },
   "general": { "message": "General" },
   "keyboardShortcuts": { "message": "Keyboard shortcuts" },
   "navigation": { "message": "Navigation" },
