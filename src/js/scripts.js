@@ -269,7 +269,7 @@ export function createScriptElement(script) {
   if (script.notes) {
     notes.id = `script-notes-${script.id}`;
     notes.hidden = false;
-    notes.querySelector('span').textContent = script.notes;
+    linkifyScriptNotes(notes.querySelector('span'), script.notes);
 
     item.setAttribute(
       'aria-describedby',
