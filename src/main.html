@@ -348,10 +348,23 @@
     <div id="variable-dialog-toast" class="toast-container" style="position-anchor: --variable-dialog-toast;"></div>
     <div class="scrollable-area">
       <section>
-        <form id="variable-form" class="list-group" data-action="saveVariable">
+        <form id="variable-form" class="list-group rows-separated" data-action="saveVariable">
           <div class="list-row field-row">
             <input class="input" type="text" id="variable-name" name="name" placeholder=" " maxlength="64" autocomplete="off" required autofocus>
             <label class="label" for="variable-name" data-i18n="name"></label>
+          </div>
+          <div class="list-row color-picker palette" role="radiogroup" data-i18n-attr="aria-label:variableColor">
+            <input type="radio" name="variable-color" value="none" data-i18n-attr="aria-label:noColor" data-tooltip checked>
+            <input type="radio" name="variable-color" value="blue" data-i18n-attr="aria-label:blue" data-tooltip>
+            <input type="radio" name="variable-color" value="teal" data-i18n-attr="aria-label:teal" data-tooltip>
+            <input type="radio" name="variable-color" value="green" data-i18n-attr="aria-label:green" data-tooltip>
+            <input type="radio" name="variable-color" value="yellow" data-i18n-attr="aria-label:yellow" data-tooltip>
+            <input type="radio" name="variable-color" value="brown" data-i18n-attr="aria-label:brown" data-tooltip>
+            <input type="radio" name="variable-color" value="orange" data-i18n-attr="aria-label:orange" data-tooltip>
+            <input type="radio" name="variable-color" value="red" data-i18n-attr="aria-label:red" data-tooltip>
+            <input type="radio" name="variable-color" value="pink" data-i18n-attr="aria-label:pink" data-tooltip>
+            <input type="radio" name="variable-color" value="purple" data-i18n-attr="aria-label:purple" data-tooltip>
+            <input type="radio" name="variable-color" value="lavender" data-i18n-attr="aria-label:lavender" data-tooltip>
           </div>
           <input type="hidden" id="variable-id" name="id">
         </form>

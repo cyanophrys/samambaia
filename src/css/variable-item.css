@@ -16,6 +16,46 @@
     }
   }
 
+  &[data-color="blue"]     { --variable-color: var(--palette-blue); }
+  &[data-color="brown"]    { --variable-color: var(--palette-brown); }
+  &[data-color="green"]    { --variable-color: var(--palette-green); }
+  &[data-color="lavender"] { --variable-color: var(--palette-lavender); }
+  &[data-color="orange"]   { --variable-color: var(--palette-orange); }
+  &[data-color="pink"]     { --variable-color: var(--palette-pink); }
+  &[data-color="purple"]   { --variable-color: var(--palette-purple); }
+  &[data-color="red"]      { --variable-color: var(--palette-red); }
+  &[data-color="teal"]     { --variable-color: var(--palette-teal); }
+  &[data-color="yellow"]   { --variable-color: var(--palette-yellow); }
+
+  &[data-color]:not([data-color="none"]) {
+    background-color: var(--variable-color);
+    color: black;
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--variable-color) 85%, black 15%);
+    }
+
+    &:has(> :focus-visible) {
+      background-color: color-mix(in srgb, currentColor 8%, transparent);
+      color: inherit;
+    }
+
+    :root[data-high-contrast="true"] & {
+      background-color: color-mix(in srgb, currentColor 10%, transparent);
+      color: inherit;
+      border-color: var(--variable-color);
+      box-shadow: inset 0 0 0 2px var(--variable-color);
+
+      &:hover {
+        background-color: color-mix(in srgb, currentColor 15%, transparent);
+      }
+
+      &:has(> :focus-visible) {
+        box-shadow: none;
+      }
+    }
+  }
+
   .clear-button {
     display: none;
     place-items: center;

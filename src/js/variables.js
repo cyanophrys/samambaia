@@ -32,6 +32,7 @@ import {
 
 import {
   NAME_TOKEN_PATTERN,
+  PALETTE_COLORS,
   TOKEN_CHARS_PATTERN,
 } from './config.js';
 
@@ -61,6 +62,12 @@ function getVariableItemTemplate() {
   }
 
   return variableItemTemplate;
+}
+
+function getVariableColor(color) {
+  return PALETTE_COLORS.includes(color)
+    ? color
+    : 'none';
 }
 
 export async function renderVariables() {
@@ -102,6 +109,7 @@ export function createVariableElement(variable) {
 
   item.dataset.target = variable.id;
   item.dataset.pinned = variable.pinned ? 'true' : 'false';
+  item.dataset.color = getVariableColor(variable.color);
 
   const input = item.querySelector('input');
   const label = item.querySelector('label');
@@ -185,9 +193,13 @@ export async function editVariable(element) {
   const dialog = document.getElementById('variable-dialog');
   const form = dialog.querySelector('form');
   const saveButton = dialog.querySelector('button[type="submit"]');
+  const colorInput = form.elements['variable-color'];
 
   form.elements['id'].value = variable.id;
   form.elements['name'].value = variable.name;
+
+  for (const input of colorInput)
+    input.checked = input.value === getVariableColor(variable.color);
 
   dialog.heading = t('editVariable');
   dialog.subtitle = variable.name;
@@ -202,6 +214,7 @@ export async function saveVariable() {
   const id = form.elements['id'].value ? Number(form.elements['id'].value) : undefined;
   const rawName = form.elements['name'].value.trim();
   const name = rawName.replace(TOKEN_CHARS_PATTERN, '');
+  const color = getVariableColor(form.elements['variable-color']?.value);
 
   if (!rawName) return;
 
@@ -236,8 +249,8 @@ export async function saveVariable() {
 
   const existingVariable = variables.find(variable => variable.id === id);
   const variableData = existingVariable
-    ? { ...existingVariable, name }
-    : { id, name, value: '' };
+    ? { ...existingVariable, name, color }
+    : { id, name, value: '', color };
 
   await saveVariableData(variableData);
   dialog.close();
