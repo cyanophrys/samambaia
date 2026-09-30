@@ -844,3 +844,31 @@ export async function saveScriptsOrder() {
     console.error(error);
   }
 }
+
+function linkifyScriptNotes(element, text) {
+  const URL_PATTERN = /(?:https?:\/\/|www\.)[^\s<]+/gi;
+  const fragment = document.createDocumentFragment();
+  let lastIndex = 0;
+
+  for (const match of text.matchAll(URL_PATTERN)) {
+    const url = match[0];
+    const start = match.index;
+
+    fragment.append(text.slice(lastIndex, start));
+
+    const link = document.createElement('a');
+    link.href = url.startsWith('www.')
+      ? `https://${url}`
+      : url;
+    link.textContent = url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+
+    fragment.append(link);
+
+    lastIndex = start + url.length;
+  }
+
+  fragment.append(text.slice(lastIndex));
+  element.replaceChildren(fragment);
+}
