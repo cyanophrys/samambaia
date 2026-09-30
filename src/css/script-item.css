@@ -7,7 +7,7 @@
   outline-width: 2px;
   outline-color: transparent;
   outline-offset: 4px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   transition:
     background-color var(--transition-medium),
     outline-color var(--transition-medium);
