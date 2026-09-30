@@ -110,6 +110,10 @@
   outline-offset: -2px;
   transition: outline-color var(--transition-medium);
 
+  &:hover:not(:has(> :focus-visible)) {
+    background-color: color-mix(in srgb, currentColor 12%, transparent);
+  }
+
   label {
     display: block;
     pointer-events: none;
