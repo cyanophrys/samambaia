@@ -33,7 +33,9 @@
   min-height: 52px;
   padding: var(--spacing-xs) var(--row-pad-x);
   background-color: color-mix(in srgb, currentColor 8%, transparent);
-  transition: background-color var(--transition-medium);
+  transition:
+    background-color var(--transition-medium),
+    outline-color var(--transition-medium);
   user-select: none;
   text-align: start;
 
@@ -108,7 +110,6 @@
   position: relative;
   outline: 2px solid transparent;
   outline-offset: -2px;
-  transition: outline-color var(--transition-medium);
 
   &:hover:not(:has(> :focus-visible)) {
     background-color: color-mix(in srgb, currentColor 12%, transparent);
