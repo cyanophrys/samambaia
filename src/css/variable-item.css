@@ -61,26 +61,28 @@
     place-items: center;
     padding: 0;
     border: 0;
+    border-radius: var(--radius-sm);
     background: transparent;
-    color: color-mix(in srgb, currentColor 80%, transparent);
+    color: inherit;
     opacity: 0;
     cursor: pointer;
     transition:
       opacity var(--transition-fast),
-      color var(--transition-medium),
       display var(--transition-fast) allow-discrete;
 
     svg {
       width: 20px;
       height: 20px;
+      opacity: var(--dimmed-opacity);
+      transition: opacity var(--transition-medium);
     }
 
-    &:hover {
-      color: currentColor;
+    &:hover svg {
+      opacity: 1;
     }
 
-    &:active {
-      color: color-mix(in srgb, currentColor 90%, transparent);
+    &:active svg {
+      opacity: var(--dimmed-opacity);
     }
   }
 
