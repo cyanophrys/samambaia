@@ -97,7 +97,7 @@ export const KEYBOARD_SHORTCUTS = [
     action: "filterByLabel",
     target: "all",
     alt: true,
-    key: "Backspace",
+    key: "a",
   },
   {
     name: "showFavorites",
