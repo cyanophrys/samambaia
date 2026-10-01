@@ -50,11 +50,28 @@ function getAnchor(element) {
   return anchor;
 }
 
+function getTooltipSource(element) {
+  const selector = element.dataset.tooltipSource;
+
+  return selector
+    ? element.querySelector(selector)
+    : element;
+}
+
+function isTruncated(element) {
+  return element.scrollWidth > element.clientWidth;
+}
+
 function show(element) {
   clearTimeout(showTimer);
 
   showTimer = setTimeout(() => {
-    const label = element.getAttribute('aria-label');
+    const source = getTooltipSource(element);
+
+    if (!source) return;
+    if (element.dataset.tooltip === 'truncated' && !isTruncated(source)) return;
+
+    const label = element.getAttribute('aria-label') ?? source.textContent.trim();
     const shortcut = element.getAttribute('aria-keyshortcuts');
 
     if (shortcut) {
