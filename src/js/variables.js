@@ -314,12 +314,10 @@ export function handleVariableValueInput(value, event) {
 }
 
 export function getVariableValuesMap() {
-  const inputs = document.querySelectorAll('#custom-variables [data-variable-value]');
   const values = new Map();
 
-  inputs.forEach(input => {
-    const name = input.dataset.name;
-    if (name && input.value) values.set(name, input.value);
+  cachedVariables.forEach(variable => {
+    if (variable.name && variable.value) values.set(variable.name, variable.value);
   });
 
   return values;
