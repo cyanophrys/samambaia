@@ -162,7 +162,9 @@
       left: var(--row-pad-x);
       transform: translateY(-50%);
       transform-origin: left center;
-      transition: top var(--transition-medium), transform var(--transition-medium);
+      transition:
+        top var(--transition-medium),
+        transform var(--transition-medium);
     }
 
     &:has(input:not(:placeholder-shown)) label,
@@ -194,7 +196,9 @@
       left: var(--row-pad-x);
       transform: translateY(0);
       transform-origin: left top;
-      transition: top var(--transition-medium), transform var(--transition-medium);
+      transition:
+        top var(--transition-medium),
+        transform var(--transition-medium);
     }
 
     &:has(textarea:not(:placeholder-shown)) label,
@@ -251,10 +255,11 @@
     background-color: var(--radio-color);
     outline: 3px solid transparent;
     outline-offset: 2px;
-    transition: background-color var(--transition-medium),
-                outline-color var(--transition-medium),
-                outline-offset var(--transition-medium),
-                box-shadow var(--transition-medium);
+    transition:
+      background-color var(--transition-medium),
+      outline-color var(--transition-medium),
+      outline-offset var(--transition-medium),
+      box-shadow var(--transition-medium);
     cursor: pointer;
 
     &::before,

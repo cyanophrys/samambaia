@@ -20,8 +20,9 @@
   border-radius: var(--radius-md);
   background-color: transparent;
   color: var(--text-fg-color);
-  transition: background-color var(--transition-medium),
-              color var(--transition-medium);
+  transition:
+    background-color var(--transition-medium),
+    color var(--transition-medium);
   user-select: none;
   cursor: pointer;
   content-visibility: auto;

@@ -16,9 +16,10 @@ div {
   line-height: 1;
   outline: 2px solid transparent;
   outline-offset: -2px;
-  transition: background-color var(--transition-medium),
-              border-color var(--transition-medium),
-              outline-color var(--transition-medium);
+  transition:
+    background-color var(--transition-medium),
+    border-color var(--transition-medium),
+    outline-color var(--transition-medium);
 
   &:hover:not(:focus-within) {
     background-color: color-mix(in srgb, currentColor 12%, transparent);

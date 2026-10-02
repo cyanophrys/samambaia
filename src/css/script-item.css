@@ -72,9 +72,10 @@
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
     background-color: color-mix(in srgb, currentColor 10%, transparent);
-    transition: background-color var(--transition-medium),
-                color var(--transition-medium),
-                border-color var(--transition-medium);
+    transition:
+      background-color var(--transition-medium),
+      color var(--transition-medium),
+      border-color var(--transition-medium);
     cursor: pointer;
 
     &:hover {
