@@ -3,6 +3,7 @@
   width: 100%;
   height: 100dvh;
   background-color: var(--layout-color);
+  transition: background-color var(--transition-medium);
 }
 
 .surface,
@@ -71,6 +72,7 @@ main {
     border: 1px solid var(--border-hc-color);
     border-radius: var(--radius-md);
     box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+    transition: background-color var(--transition-medium);
   }
 
   .collapsible-sidebar {

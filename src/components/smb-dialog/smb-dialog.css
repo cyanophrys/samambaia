@@ -21,7 +21,8 @@ dialog {
   box-shadow: 0 10px 25px rgb(0 0 0 / 50%);
   opacity: 0;
   transform: scale(0.95);
-  transition: opacity var(--transition-medium),
+  transition: background-color var(--transition-medium),
+              opacity var(--transition-medium),
               transform var(--transition-medium),
               display var(--transition-medium) allow-discrete,
               overlay var(--transition-medium) allow-discrete;
