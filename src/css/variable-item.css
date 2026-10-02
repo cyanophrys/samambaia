@@ -36,18 +36,18 @@
     }
 
     &:has(> :focus-visible) {
-      background-color: color-mix(in srgb, currentColor 8%, transparent);
+      background-color: color-mix(in oklab, currentColor 8%, transparent);
       color: inherit;
     }
 
     :root[data-high-contrast="true"] & {
-      background-color: color-mix(in srgb, currentColor 10%, transparent);
+      background-color: color-mix(in oklab, currentColor 10%, transparent);
       color: inherit;
       border-color: var(--variable-color);
       box-shadow: inset 0 0 0 2px var(--variable-color);
 
       &:hover {
-        background-color: color-mix(in srgb, currentColor 15%, transparent);
+        background-color: color-mix(in oklab, currentColor 15%, transparent);
       }
 
       &:has(> :focus-visible) {

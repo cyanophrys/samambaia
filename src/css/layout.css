@@ -129,7 +129,7 @@ main {
     border: 0 solid var(--border-hc-color);
     border-radius: var(--radius-2md);
     color: inherit;
-    background: color-mix(in srgb, var(--accent-color) 18%, transparent);
+    background: color-mix(in oklab, var(--accent-color) 18%, transparent);
     height: 0;
     opacity: 0;
     overflow: hidden;
@@ -148,7 +148,7 @@ main {
     }
 
     [data-theme="dark"] & {
-      background: color-mix(in srgb, var(--accent-color) 22%, transparent);
+      background: color-mix(in oklab, var(--accent-color) 22%, transparent);
     }
 
     &[data-visible="true"] {

@@ -65,15 +65,15 @@
   --highlight-fg-color: black;
   --layout-color: light-dark(#f4f4f5, #18181b);
   --popover-color: light-dark(#fafafa, #27272a);
-  --placeholder-color: color-mix(in srgb, currentColor 50%, transparent);
-  --scrollbar-color: color-mix(in srgb, currentColor 30%, transparent) transparent;
-  --selected-active-bg-color: color-mix(in srgb, var(--accent-color) 38%, transparent);
-  --selected-bg-color: color-mix(in srgb, var(--accent-color) 18%, transparent);
+  --placeholder-color: color-mix(in oklab, currentColor 50%, transparent);
+  --scrollbar-color: color-mix(in oklab, currentColor 30%, transparent) transparent;
+  --selected-active-bg-color: color-mix(in oklab, var(--accent-color) 38%, transparent);
+  --selected-bg-color: color-mix(in oklab, var(--accent-color) 18%, transparent);
   --selected-fg-color: light-dark(
     oklch(from var(--accent-color) calc(l - 0.20) calc(c + 0.05) h),
     oklch(from var(--accent-color) calc(l + 0.3) c h)
   );
-  --selected-hover-bg-color: color-mix(in srgb, var(--accent-color) 28%, transparent);
+  --selected-hover-bg-color: color-mix(in oklab, var(--accent-color) 28%, transparent);
   --text-color: light-dark(black, rgb(255 255 255 / 90%));
 
   &[data-accent-color="blue"] { --accent-color: var(--accent-blue); }
@@ -95,7 +95,7 @@
 
     --background-color: light-dark(#fff, #222);
     --border-color: var(--border-hc-color);
-    --border-hc-color: color-mix(in srgb, currentColor 45%, transparent);
+    --border-hc-color: color-mix(in oklab, currentColor 45%, transparent);
     --dark-border-color: var(--border-hc-color);
     --destructive-fg-color: var(--text-color);
     --dialog-color: var(--background-color);
@@ -104,13 +104,13 @@
     --highlight-bg-color: light-dark(black, white);
     --highlight-fg-color: light-dark(white, black);
     --layout-color: light-dark(#f5f5f5, #0d0d0d);
-    --placeholder-color: color-mix(in srgb, currentColor 75%, transparent);
+    --placeholder-color: color-mix(in oklab, currentColor 75%, transparent);
     --popover-color: var(--background-color);
-    --scrollbar-color: color-mix(in srgb, currentColor 60%, transparent) transparent;
-    --selected-active-bg-color: color-mix(in srgb, currentColor 38%, transparent);
-    --selected-bg-color: color-mix(in srgb, currentColor 18%, transparent);
+    --scrollbar-color: color-mix(in oklab, currentColor 60%, transparent) transparent;
+    --selected-active-bg-color: color-mix(in oklab, currentColor 38%, transparent);
+    --selected-bg-color: color-mix(in oklab, currentColor 18%, transparent);
     --selected-fg-color: var(--text-color);
-    --selected-hover-bg-color: color-mix(in srgb, currentColor 28%, transparent);
+    --selected-hover-bg-color: color-mix(in oklab, currentColor 28%, transparent);
     --text-color: light-dark(black, white);
   }
 

@@ -50,11 +50,11 @@
 }
 
 :host(:hover) .icon {
-  background-color: color-mix(in srgb, currentColor 12%, transparent);
+  background-color: color-mix(in oklab, currentColor 12%, transparent);
 }
 
 :host(:active) .icon {
-  background-color: color-mix(in srgb, currentColor 18%, transparent);
+  background-color: color-mix(in oklab, currentColor 18%, transparent);
 }
 
 :host(:focus-visible) .icon {

@@ -11,7 +11,7 @@ div {
   height: 32px;
   border: 1px solid var(--border-hc-color);
   border-radius: var(--radius-max);
-  background-color: color-mix(in srgb, currentColor 8%, transparent);
+  background-color: color-mix(in oklab, currentColor 8%, transparent);
   padding: 0 var(--spacing-2xs) 0 var(--spacing-xs);
   line-height: 1;
   outline: 2px solid transparent;
@@ -22,7 +22,7 @@ div {
     outline-color var(--transition-medium);
 
   &:hover:not(:focus-within) {
-    background-color: color-mix(in srgb, currentColor 12%, transparent);
+    background-color: color-mix(in oklab, currentColor 12%, transparent);
   }
 
   &:focus-within {

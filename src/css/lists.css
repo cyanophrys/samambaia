@@ -32,7 +32,7 @@
   gap: var(--spacing-sm);
   min-height: 52px;
   padding: var(--spacing-xs) var(--row-pad-x);
-  background-color: color-mix(in srgb, currentColor 8%, transparent);
+  background-color: color-mix(in oklab, currentColor 8%, transparent);
   transition:
     background-color var(--transition-medium),
     outline-color var(--transition-medium);
@@ -63,11 +63,11 @@
     cursor: pointer;
 
     &:hover {
-      background-color: color-mix(in srgb, currentColor 12%, transparent);
+      background-color: color-mix(in oklab, currentColor 12%, transparent);
     }
 
     &:active {
-      background-color: color-mix(in srgb, currentColor 16%, transparent);
+      background-color: color-mix(in oklab, currentColor 16%, transparent);
     }
   }
 
@@ -112,7 +112,7 @@
   outline-offset: -2px;
 
   &:hover:not(:has(> :focus-visible)) {
-    background-color: color-mix(in srgb, currentColor 12%, transparent);
+    background-color: color-mix(in oklab, currentColor 12%, transparent);
   }
 
   label {
@@ -241,7 +241,7 @@
     input[value="yellow"] { --radio-color: var(--palette-yellow); }
 
     input[value="none"] {
-      border: 2px solid color-mix(in srgb, currentColor 30%, transparent);
+      border: 2px solid color-mix(in oklab, currentColor 30%, transparent);
     }
   }
 

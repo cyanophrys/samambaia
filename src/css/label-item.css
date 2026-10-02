@@ -45,11 +45,11 @@
   }
 
   &:hover {
-    background-color: color-mix(in srgb, currentColor 8%, transparent);
+    background-color: color-mix(in oklab, currentColor 8%, transparent);
   }
 
   &:active {
-    background-color: color-mix(in srgb, currentColor 12%, transparent);
+    background-color: color-mix(in oklab, currentColor 12%, transparent);
   }
 
   :root[data-high-contrast="true"] &::before {

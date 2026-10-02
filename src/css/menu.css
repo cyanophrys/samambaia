@@ -53,11 +53,11 @@
     user-select: none;
 
     &:hover {
-      background-color: color-mix(in srgb, currentColor 10%, transparent);
+      background-color: color-mix(in oklab, currentColor 10%, transparent);
     }
 
     &:active {
-      background-color: color-mix(in srgb, currentColor 15%, transparent);
+      background-color: color-mix(in oklab, currentColor 15%, transparent);
     }
   }
 
