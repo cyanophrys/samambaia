@@ -197,6 +197,7 @@ export async function editVariable(element) {
 
   form.elements['id'].value = variable.id;
   form.elements['name'].value = variable.name;
+  form.elements['value'].value = variable.value ?? '';
 
   for (const input of colorInput)
     input.checked = input.value === getVariableColor(variable.color);
@@ -214,6 +215,7 @@ export async function saveVariable() {
   const id = form.elements['id'].value ? Number(form.elements['id'].value) : undefined;
   const rawName = form.elements['name'].value.trim();
   const name = rawName.replace(TOKEN_CHARS_PATTERN, '');
+  const value = form.elements['value'].value;
   const color = getVariableColor(form.elements['variable-color']?.value);
 
   if (!rawName) return;
@@ -249,8 +251,8 @@ export async function saveVariable() {
 
   const existingVariable = variables.find(variable => variable.id === id);
   const variableData = existingVariable
-    ? { ...existingVariable, name, color }
-    : { id, name, value: '', color };
+    ? { ...existingVariable, name, value, color }
+    : { id, name, value, color };
 
   await saveVariableData(variableData);
   dialog.close();

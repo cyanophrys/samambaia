@@ -53,6 +53,9 @@
     "message": "Unpin",
     "description": "Action used to unpin an item"
   },
+  "value": {
+    "message": "Value (optional)"
+  },
 
   "loadingFailedDescription": {
     "message": "An error occurred while loading the page."
