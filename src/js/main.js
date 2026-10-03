@@ -376,14 +376,12 @@ async function wipeData() {
   dialog.heading = t('deleteAllDataHeading');
   dialog.body = t('deleteAllDataBody');
 
-  const confirmation = document.createElement('label');
-  confirmation.className = "label";
-  confirmation.innerHTML = `
-    <input type="checkbox" class="checkbox" name="wipe-confirmation">
-    <span>${t('wipeConfirmationLabel')}</span>
-  `;
-  confirmation.slot = 'additional-content';
+  const confirmation = document
+    .getElementById('wipe-confirmation-template')
+    .content.firstElementChild.cloneNode(true);
+  const confirmationLabel = confirmation.querySelector('span');
 
+  confirmationLabel.textContent = t('wipeConfirmationLabel');
   dialog.append(confirmation);
 
   dialog.addResponses([
