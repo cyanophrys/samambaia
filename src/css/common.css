@@ -82,11 +82,6 @@
   scrollbar-color: var(--scrollbar-color);
 }
 
-.transitions-disabled,
-.transitions-disabled * {
-  transition: none !important;
-}
-
 a {
   color: oklch(from var(--accent-color) calc(l - 0.1) c h);
   text-decoration: none;
