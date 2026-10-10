@@ -21,10 +21,44 @@ import {
   getLocale,
 } from './i18n.js';
 
+const actions = {
+  change: {},
+
+  click: {},
+
+  input: {},
+
+  submit: {},
+};
+
+function handleAction(event, actions) {
+  const element = event.target.closest('[data-action]');
+  if (!element) return;
+
+  const { action } = element.dataset;
+  const eventType = event.type;
+
+  const handler = actions[eventType]?.[action];
+  if (!handler) return;
+
+  if (event.type === 'submit') event.preventDefault();
+
+  const param = eventType === 'change' ? event.target.value : element;
+  handler(param, event, element);
+}
+
 async function init() {
   document.documentElement.lang = getLocale();
 
   applyTranslations();
 }
 
+function bindEvents() {
+  document.addEventListener('click', (e) => handleAction(e, actions));
+  document.addEventListener('change', (e) => handleAction(e, actions));
+  document.addEventListener('input', (e) => handleAction(e, actions));
+  document.addEventListener('submit', (e) => handleAction(e, actions));
+}
+
+bindEvents();
 init();
