@@ -9,6 +9,11 @@
     "message": "en"
   },
 
+  "close": {
+    "message": "Close",
+    "description": "Action used to close or dismissing an item"
+  },
+
   "primaryControls": {
     "message": "Primary controls"
   },
