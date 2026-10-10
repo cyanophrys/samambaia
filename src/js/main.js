@@ -21,6 +21,10 @@ import {
   getLocale,
 } from './i18n.js';
 
+import {
+  getManifestInfo,
+} from './about.js';
+
 const actions = {
   change: {},
 
@@ -48,7 +52,10 @@ function handleAction(event, actions) {
 }
 
 async function init() {
+  const manifest = getManifestInfo();
+
   document.documentElement.lang = getLocale();
+  document.title = manifest.name;
 
   applyTranslations();
 }
