@@ -1,0 +1,155 @@
+/**
+ * Samambaia - A simple scripts manager.
+ * Copyright (C) 2026 Raul Sousa
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+import {
+  debounce,
+} from './utils.js';
+
+const storage = globalThis.browser?.storage ?? globalThis.chrome?.storage;
+const pendingFlushes = new Set();
+
+if (!storage?.local) {
+  throw new Error('Extension storage API is unavailable.');
+}
+
+export function flushStores() {
+  return Promise.all([...pendingFlushes].map(flush => flush()));
+}
+
+globalThis.addEventListener('pagehide', flushStores);
+
+function mergeDefaults(defaults, stored) {
+  if (
+    !stored ||
+    typeof stored !== 'object' ||
+    Array.isArray(stored)
+  ) {
+    return structuredClone(defaults);
+  }
+
+  const result = structuredClone(defaults);
+
+  for (const key of Object.keys(defaults)) {
+    if (stored[key] === undefined) continue;
+
+    if (
+      defaults[key] &&
+      typeof defaults[key] === 'object' &&
+      !Array.isArray(defaults[key])
+    ) {
+      result[key] = mergeDefaults(defaults[key], stored[key]);
+    } else {
+      result[key] = stored[key];
+    }
+  }
+
+  return result;
+}
+
+export async function loadState(storageKey, defaultState) {
+  if (!storageKey) return structuredClone(defaultState);
+
+  try {
+    const result = await storage.local.get(storageKey);
+    return mergeDefaults(defaultState, result[storageKey]);
+  } catch (error) {
+    console.error(`Failed to load state for key "${storageKey}":`, error);
+    return structuredClone(defaultState);
+  }
+}
+
+export function createStore(initialState, options = {}, onUpdate) {
+  const proxyCache = new WeakMap();
+
+  const saveState = debounce(() => {
+    if (!options.storageKey) return;
+
+    return storage.local
+      .set({
+        [options.storageKey]: initialState
+      })
+      .catch((error) => {
+        console.error(
+          `Failed to save state for key "${options.storageKey}":`,
+          error
+        );
+      });
+  }, 100);
+
+  pendingFlushes.add(saveState.flush);
+
+  function makeProxy(target, path = []) {
+    if (!target || typeof target !== 'object') {
+      return target;
+    }
+
+    if (proxyCache.has(target)) {
+      return proxyCache.get(target);
+    }
+
+    const proxy = new Proxy(target, {
+      get(target, property) {
+        const value = target[property];
+
+        if (
+          value &&
+          typeof value === 'object' &&
+          !Array.isArray(value)
+        ) {
+          return makeProxy(value, [...path, property]);
+        }
+
+        return value;
+      },
+
+      set(target, property, value) {
+        target[property] = value;
+
+        saveState();
+
+        onUpdate?.({
+          path: [...path, property],
+          value,
+          state: initialState
+        });
+
+        return true;
+      },
+
+      deleteProperty(target, property) {
+        delete target[property];
+
+        saveState();
+
+        onUpdate?.({
+          path: [...path, property],
+          value: undefined,
+          state: initialState
+        });
+
+        return true;
+      }
+    });
+
+    proxyCache.set(target, proxy);
+
+    return proxy;
+  }
+
+  return makeProxy(initialState);
+}
