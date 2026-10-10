@@ -1,0 +1,15 @@
+:root {
+  --font-size-base: 14px;
+
+  --radius-md: 12px;
+
+  --spacing-xs: 6px;
+  --spacing-sm: 10px;
+
+  --accent-color: #3a78e8;
+
+  --layout-color: #f4f4f5;
+  --scrollbar-color: color-mix(in oklab, currentColor 30%, transparent) transparent;
+  --surface-color: white;
+  --text-color: black;
+}
