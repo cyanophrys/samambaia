@@ -6,6 +6,9 @@
   "license": "GPL-3.0-or-later",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=20.11"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cyanophrys/samambaia.git"
@@ -13,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/cyanophrys/samambaia/issues"
   },
-  "homepage": "https://github.com/cyanophrys/samambaia"
+  "homepage": "https://github.com/cyanophrys/samambaia",
+  "scripts": {
+    "build": "node build.js"
+  }
 }
