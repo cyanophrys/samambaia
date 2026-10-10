@@ -49,6 +49,7 @@ function handleAction(event, actions) {
 
 async function init() {
   document.documentElement.lang = getLocale();
+  document.title = chrome.runtime.getManifest().name;
 
   applyTranslations();
 }
