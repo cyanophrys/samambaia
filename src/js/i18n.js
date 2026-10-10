@@ -13,18 +13,26 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-  applyTranslations,
-  getLocale,
-} from './i18n.js';
+export function applyTranslations(root = document) {
+  root.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = chrome.i18n.getMessage(el.dataset.i18n);
+  });
 
-async function init() {
-  document.documentElement.lang = getLocale();
-
-  applyTranslations();
+  root.querySelectorAll('[data-i18n-attr]').forEach(el => {
+    el.dataset.i18nAttr.split('|').forEach(pair => {
+      const [attr, key] = pair.split(':');
+      el.setAttribute(attr, chrome.i18n.getMessage(key));
+    });
+  });
 }
 
-init();
+export function t(key, substitutions) {
+  return chrome.i18n.getMessage(key, substitutions);
+}
+
+export function getLocale() {
+  return t('lang');
+}
