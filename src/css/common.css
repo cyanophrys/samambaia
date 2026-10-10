@@ -13,3 +13,19 @@
     flex: 1;
   }
 }
+
+:where(.section) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+
+  header {
+    > * {
+      user-select: none;
+    }
+
+    .heading {
+      font-size: var(--font-size-base);
+    }
+  }
+}
