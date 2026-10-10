@@ -6,6 +6,7 @@
   --spacing-xs: 6px;
   --spacing-sm: 10px;
   --spacing-md: 16px;
+  --transition-medium: 0.2s ease;
 
   --layout-color: #f4f4f5;
   --surface-color: white;
