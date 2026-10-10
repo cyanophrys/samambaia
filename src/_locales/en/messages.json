@@ -7,5 +7,15 @@
   },
   "lang": {
     "message": "en"
+  },
+
+  "primaryControls": {
+    "message": "Primary controls"
+  },
+  "labels": {
+    "message": "Labels"
+  },
+  "variables": {
+    "message": "Variables"
   }
 }
