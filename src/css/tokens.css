@@ -1,13 +1,25 @@
 :root {
+  --disabled-opacity: 0.4;
+
   --font-size-base: 14px;
 
   --radius-md: 12px;
+  --radius-max: 9999px;
 
   --spacing-xs: 6px;
   --spacing-sm: 10px;
   --spacing-md: 16px;
 
+  --transition-medium: 0.2s ease;
+
   --accent-color: #3a78e8;
+
+  --focus-outline-color: var(--accent-color);
+  --focus-outline-offset: 2px;
+
+  --destructive-color: red;
+  --destructive-bg-color: oklch(from var(--destructive-color) 0.85 0.06 h);
+  --destructive-fg-color: oklch(from var(--destructive-color) 0.45 0.18 h);
 
   --layout-color: #f4f4f5;
   --scrollbar-color: color-mix(in oklab, currentColor 30%, transparent) transparent;

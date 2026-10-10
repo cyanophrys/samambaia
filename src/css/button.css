@@ -1,0 +1,137 @@
+:where(.button-group) {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  justify-content: center;
+
+  &.vertical {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+:where(.button) {
+  --button-bg: 15%;
+  --button-bg-hover: 25%;
+  --button-bg-active: 35%;
+  --button-intensity: var(--button-bg);
+
+  display: grid;
+  place-items: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 0;
+  border-radius: var(--radius-md);
+  background-color: color-mix(in oklab, currentColor var(--button-intensity), transparent);
+  height: 32px;
+  color: inherit;
+  font-weight: 600;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition:
+    opacity var(--transition-medium),
+    background-color var(--transition-medium),
+    display var(--transition-medium) allow-discrete;
+  user-select: none;
+  cursor: pointer;
+
+  &:hover {
+    --button-intensity: var(--button-bg-hover);
+  }
+
+  &:active {
+    --button-intensity: var(--button-bg-active);
+  }
+
+  &:disabled {
+    opacity: var(--disabled-opacity);
+    pointer-events: none;
+    cursor: default;
+  }
+
+  &.flat {
+    --button-bg: 0%;
+    --button-bg-hover: 15%;
+    --button-bg-active: 25%;
+  }
+
+  &[aria-expanded="true"] {
+    --button-bg: 20%;
+    --button-bg-hover: 30%;
+    --button-bg-active: 40%;
+  }
+
+  &:has(> svg):not(:has(> :not(svg))) {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    padding: 0;
+
+    > svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    &.small {
+      width: 24px;
+      height: 24px;
+      border-radius: var(--radius-max);
+
+      > svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+
+  &.pill {
+    border-radius: var(--radius-max);
+    height: 40px;
+    padding-inline: var(--spacing-lg);
+
+    &.small {
+      height: 32px;
+      padding-inline: var(--spacing-md);
+    }
+  }
+
+  &.big,
+  &.pill {
+    height: 40px;
+    padding: 0 var(--spacing-lg);
+  }
+
+  &.suggested-action {
+    --button-bg: 100%;
+    --button-bg-hover: 88%;
+    --button-bg-active: 76%;
+
+    background-color: color-mix(in oklab, var(--accent-color) var(--button-intensity), white);
+    border-color: var(--accent-color);
+    color: white;
+
+    &[aria-expanded="true"] {
+      --button-bg: 92%;
+      --button-bg-hover: 82%;
+      --button-bg-active: 72%;
+    }
+  }
+
+  &.destructive-action {
+    background-color: var(--destructive-bg-color);
+    color: var(--destructive-fg-color);
+
+    &:hover {
+      background-color: color-mix(in oklab, currentColor 15%, var(--destructive-bg-color));
+    }
+
+    &:active {
+      background-color: color-mix(in oklab, currentColor 25%, var(--destructive-bg-color));
+    }
+
+    &:focus-visible {
+      outline-color: var(--destructive-fg-color);
+    }
+  }
+}
