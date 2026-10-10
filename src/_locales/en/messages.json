@@ -2,5 +2,9 @@
   "extName": { "message": "Samambaia" },
   "extDesc": { "message": "A simple script manager." },
 
-  "lang": { "message": "en" }
+  "lang": { "message": "en" },
+
+  "labels": { "message": "Labels" },
+  "primaryControls": { "message": "Primary controls" },
+  "variables": { "message": "Variables" }
 }

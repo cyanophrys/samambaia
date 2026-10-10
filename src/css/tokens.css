@@ -1,0 +1,12 @@
+:root {
+  --dimmed-opacity: 0.6;
+  --font-size-base: 16px;
+  --font-size-sm: 0.95em;
+  --radius-md: 12px;
+  --spacing-xs: 6px;
+  --spacing-sm: 10px;
+
+  --layout-color: #f4f4f5;
+  --surface-color: white;
+  --text-color: black;
+}

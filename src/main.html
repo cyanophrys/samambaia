@@ -3,8 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div id="layout">
+    <aside id="sidebar" data-i18n-attr="aria-label:primaryControls">
+      <header>
+      </header>
+      <footer>
+      </footer>
+    </aside>
+    <main>
+      <header>
+      </header>
+      <div id="workspace">
+        <aside class="surface" aria-labelledby="labels-heading">
+          <div class="scrollable-area">
+            <section class="section">
+              <header>
+                <h1 id="labels-heading" data-i18n="labels"></h1>
+              </header>
+            </section>
+          </div>
+        </aside>
+        <div id="main-view" class="surface">
+          <div class="scrollable-area">
+          </div>
+        </div>
+        <aside class="surface" aria-labelledby="variables-heading">
+          <div class="scrollable-area">
+            <section class="section">
+              <header>
+                <h1 id="variables-heading" data-i18n="variables"></h1>
+              </header>
+            </section>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
