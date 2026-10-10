@@ -16,7 +16,15 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {
+  applyTranslations,
+  getLocale,
+} from './i18n.js';
+
 async function init() {
+  document.documentElement.lang = getLocale();
+
+  applyTranslations();
 }
 
 init();
