@@ -1,0 +1,70 @@
+:where(.radio) {
+  --check-intensity: var(--check-bg);
+  --check-bg: 30%;
+  --check-bg-hover: 60%;
+  --check-bg-active: 80%;
+
+  appearance: none;
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: inherit;
+  cursor: pointer;
+  inline-size: 20px;
+  block-size: 20px;
+  background-color: transparent;
+  border: 2px solid color-mix(in oklab, currentColor var(--check-intensity), transparent);
+  border-radius: var(--radius-max);
+  transition:
+    border-color var(--transition-medium),
+    background-color var(--transition-medium);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    inline-size: 40px;
+    block-size: 40px;
+    transform: translate(-50%, -50%) scale(0);
+    background-color: var(--accent-color);
+    border-radius: var(--radius-max);
+    opacity: 0.08;
+    transition:
+      transform var(--transition-medium),
+      opacity var(--transition-medium);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    inline-size: 10px;
+    block-size: 10px;
+    background-color: #fff;
+    border-radius: var(--radius-max);
+    transform: scale(0);
+    transition: transform var(--transition-medium);
+  }
+
+  &:hover {
+    --check-intensity: var(--check-bg-hover);
+  }
+
+  &:active {
+    --check-intensity: var(--check-bg-active);
+  }
+
+  &:checked {
+    --check-bg: 100%;
+    --check-bg-hover: 85%;
+    --check-bg-active: 70%;
+
+    background-color: color-mix(in oklab, var(--accent-color) var(--check-intensity), white);
+    border-color: color-mix(in oklab, var(--accent-color) var(--check-intensity), white);
+
+    &::after {
+      transform: scale(1);
+    }
+  }
+}
