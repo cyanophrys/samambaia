@@ -22,5 +22,9 @@
   },
   "variables": {
     "message": "Variables"
+  },
+
+  "preferences": {
+    "message": "Preferences"
   }
 }
