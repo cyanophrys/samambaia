@@ -47,18 +47,31 @@ import {
   initDB,
 } from './db.js';
 
+import {
+  addScript,
+  deleteScript,
+  editScript,
+  renderScripts,
+  saveScript,
+} from './scripts.js';
+
 const actions = {
   change: {
     setTheme,
   },
 
   click: {
+    addScript,
+    deleteScript,
+    editScript,
     openPreferencesDialog,
   },
 
   input: {},
 
-  submit: {},
+  submit: {
+    saveScript,
+  },
 };
 
 function handleAction(event, actions) {
@@ -86,6 +99,7 @@ async function init() {
   applyTranslations();
 
   await initDB();
+  await renderScripts();
 
   setTheme(userPreferences.theme);
 
