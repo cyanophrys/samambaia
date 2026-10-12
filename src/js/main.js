@@ -33,11 +33,14 @@ import {
 
 import {
   openPreferencesDialog,
+  setTheme,
   userPreferences,
 } from './preferences.js';
 
 const actions = {
-  change: {},
+  change: {
+    setTheme,
+  },
 
   click: {
     openPreferencesDialog,
@@ -71,9 +74,17 @@ async function init() {
   document.title = manifest.name;
 
   applyTranslations();
+
+  setTheme(userPreferences.theme);
 }
 
 function bindEvents() {
+  const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+
+  prefersDarkMode.addEventListener('change', () => {
+    if (userPreferences.theme === 'system') setTheme('system');
+  });
+
   document.addEventListener('click', (e) => handleAction(e, actions));
   document.addEventListener('change', (e) => handleAction(e, actions));
   document.addEventListener('input', (e) => handleAction(e, actions));
