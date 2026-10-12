@@ -31,10 +31,17 @@ import {
   bindTooltipEvents,
 } from './tooltip.js';
 
+import {
+  openPreferencesDialog,
+  userPreferences,
+} from './preferences.js';
+
 const actions = {
   change: {},
 
-  click: {},
+  click: {
+    openPreferencesDialog,
+  },
 
   input: {},
 
