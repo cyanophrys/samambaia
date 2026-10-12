@@ -22,6 +22,7 @@ import {
 } from './store.js';
 
 const DEFAULT_PREFERENCES = {
+  theme: 'system',
 };
 
 export const userPreferences = createStore(
@@ -46,4 +47,20 @@ export function updatePreferenceControl(name, value) {
 export function openPreferencesDialog() {
   const dialog = document.getElementById('preferences-dialog');
   dialog.showModal();
+}
+
+export function setTheme(value) {
+  const root = document.documentElement;
+  const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+  const theme = value ?? DEFAULT_PREFERENCES.theme;
+
+  userPreferences.theme = theme;
+
+  if (theme === 'system') {
+    root.dataset.theme = prefersDarkMode.matches ? 'dark' : 'light';
+  } else {
+    root.dataset.theme = theme;
+  }
+
+  updatePreferenceControl('theme', theme);
 }
