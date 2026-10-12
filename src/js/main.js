@@ -43,6 +43,10 @@ import {
   userPreferences,
 } from './preferences.js';
 
+import {
+  initDB,
+} from './db.js';
+
 const actions = {
   change: {
     setTheme,
@@ -80,6 +84,8 @@ async function init() {
   document.title = manifest.name;
 
   applyTranslations();
+
+  await initDB();
 
   setTheme(userPreferences.theme);
 
