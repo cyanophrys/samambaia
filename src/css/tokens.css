@@ -1,4 +1,6 @@
 :root {
+  color-scheme: light;
+
   --dimmed-opacity: 0.6;
   --disabled-opacity: 0.4;
 
@@ -22,14 +24,25 @@
   --focus-outline-offset: 2px;
 
   --destructive-color: red;
-  --destructive-bg-color: oklch(from var(--destructive-color) 0.85 0.06 h);
-  --destructive-fg-color: oklch(from var(--destructive-color) 0.45 0.18 h);
+  --destructive-bg-color: light-dark(
+    oklch(from var(--destructive-color) 0.85 0.06 h),
+    oklch(from var(--destructive-color) 0.38 0.045 h)
+  );
+  --destructive-fg-color: light-dark(
+    oklch(from var(--destructive-color) 0.45 0.18 h),
+    oklch(from var(--destructive-color) 0.76 0.12 h)
+  );
 
-  --border-color: rgb(0 0 0 / 18%);
-  --dialog-color: #f6f6f7;
+  --border-color: light-dark(rgb(0 0 0 / 18%), rgb(255 255 255 / 18%));
+  --dark-border-color: light-dark(rgb(0 0 0 / 30%), rgb(0 0 0 / 45%));
 
-  --layout-color: #f4f4f5;
+  --dialog-color: light-dark(#f6f6f7, #27272a);
+  --layout-color: light-dark(#f4f4f5, #18181b);
   --scrollbar-color: color-mix(in oklab, currentColor 30%, transparent) transparent;
-  --surface-color: white;
-  --text-color: black;
+  --surface-color: light-dark(white, #27272a);
+  --text-color: light-dark(black, rgb(255 255 255 / 90%));
+
+  &[data-theme="dark"] {
+    color-scheme: dark;
+  }
 }
