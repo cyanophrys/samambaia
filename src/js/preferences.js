@@ -30,3 +30,8 @@ export const userPreferences = createStore(
     storageKey: 'userPreferences'
   }
 );
+
+export function openPreferencesDialog() {
+  const dialog = document.getElementById('preferences-dialog');
+  dialog.showModal();
+}
