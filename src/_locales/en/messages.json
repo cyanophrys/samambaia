@@ -26,5 +26,17 @@
 
   "preferences": {
     "message": "Preferences"
+  },
+  "dark": {
+    "message": "Dark"
+  },
+  "light": {
+    "message": "Light"
+  },
+  "systemDefault": {
+    "message": "System default"
+  },
+  "theme": {
+    "message": "Theme"
   }
 }
