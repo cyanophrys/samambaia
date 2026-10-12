@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -51,6 +52,25 @@
   </div>
   <smb-dialog id="preferences-dialog" data-i18n-attr="heading:preferences" style="--dialog-width: 420px;">
     <div class="scrollable-area">
+      <section class="section">
+        <header>
+          <h2 id="theme-heading" class="heading" data-i18n="theme"></h2>
+        </header>
+        <div class="list-group" role="radiogroup" aria-labelledby="theme-heading">
+          <label class="list-row activatable">
+            <input class="radio prefix" type="radio" name="theme" value="system" data-action="setTheme">
+            <span data-i18n="systemDefault"></span>
+          </label>
+          <label class="list-row activatable">
+            <input class="radio prefix" type="radio" name="theme" value="light" data-action="setTheme">
+            <span data-i18n="light"></span>
+          </label>
+          <label class="list-row activatable">
+            <input class="radio prefix" type="radio" name="theme" value="dark" data-action="setTheme">
+            <span data-i18n="dark"></span>
+          </label>
+        </div>
+      </section>
     </div>
   </smb-dialog>
   <script type="module" src="js/main.js"></script>
