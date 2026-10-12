@@ -76,6 +76,12 @@ async function init() {
   applyTranslations();
 
   setTheme(userPreferences.theme);
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.body.removeAttribute('data-loading');
+    });
+  });
 }
 
 function bindEvents() {
