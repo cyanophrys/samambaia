@@ -4,10 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
+  <script src="js/appearance-init.js"></script>
+  <style>
+    :not(:defined) {
+      visibility: hidden !important;
+    }
+
+    body {
+      &[data-loading] {
+        &,
+        & * {
+          transition: none !important;
+        }
+
+        #layout,
+        #layout * {
+          visibility: hidden !important;
+        }
+      }
+    }
+  </style>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body data-loading>
   <div id="tooltip" popover="manual" role="tooltip">
     <span id="tooltip-label"></span>
   </div>
