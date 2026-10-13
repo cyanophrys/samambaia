@@ -17,6 +17,9 @@
   "primaryControls": {
     "message": "Primary controls"
   },
+  "addItem": {
+    "message": "Add item"
+  },
   "labels": {
     "message": "Labels"
   },
