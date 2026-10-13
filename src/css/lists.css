@@ -88,3 +88,108 @@
     }
   }
 }
+
+.list-row.entry-row {
+  --entry-label-scale: 0.85;
+  --entry-label-top: 4px;
+  position: relative;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+
+  &:hover:not(:has(> :focus-visible)) {
+    background-color: color-mix(in oklab, currentColor 12%, transparent);
+  }
+
+  label {
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    color: var(--placeholder-color);
+    inline-size: anchor-size(--field-input inline-size);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: font-weight var(--transition-medium);
+  }
+
+  input[type="text"],
+  textarea {
+    inline-size: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+  }
+
+  &:has(> :is(input, textarea):focus-visible) {
+    outline-color: var(--focus-outline-color);
+  }
+
+  &:has(> :required:user-invalid) {
+    outline-color: var(--error-color);
+
+    label {
+      color: var(--error-color);
+      opacity: 1;
+    }
+  }
+
+  &:not(.multiline) {
+    input[type="text"] {
+      anchor-name: --field-input;
+      padding-block-start: var(--spacing-sm);
+    }
+
+    label {
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-start: var(--row-pad-x);
+      transform: translateY(-50%);
+      transform-origin: left center;
+      transition:
+        inset-block-start var(--transition-medium),
+        transform var(--transition-medium);
+    }
+
+    &:has(input:not(:placeholder-shown)) label,
+    &:focus-within label {
+      inset-block-start: var(--entry-label-top);
+      transform: translateY(0) scale(var(--entry-label-scale));
+      font-weight: 600;
+    }
+
+    &:focus-within label {
+      inline-size: calc(anchor-size(--field-input inline-size) / var(--entry-label-scale));
+    }
+  }
+
+  &.multiline {
+    align-items: stretch;
+    padding-inline: 0;
+
+    textarea {
+      margin-block-start: calc(var(--spacing-xs) * 2);
+      min-block-size: 80px;
+      resize: vertical;
+      padding-inline: var(--row-pad-x);
+    }
+
+    label {
+      position: absolute;
+      inset-block-start: var(--spacing-sm);
+      inset-inline-start: var(--row-pad-x);
+      transform: translateY(0);
+      transform-origin: left top;
+      transition:
+        inset-block-start var(--transition-medium),
+        transform var(--transition-medium);
+    }
+
+    &:has(textarea:not(:placeholder-shown)) label,
+    &:focus-within label {
+      inset-block-start: var(--entry-label-top);
+      transform: scale(var(--entry-label-scale));
+      font-weight: 600;
+    }
+  }
+}
