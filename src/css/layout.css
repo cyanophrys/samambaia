@@ -62,4 +62,15 @@ main {
 
 #main-view {
   flex: 1;
+
+  .scrollable-area {
+    padding: calc(var(--spacing-sm) - 4px);
+  }
+
+  #scripts-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: minmax(0, 700px);
+    gap: var(--spacing-xl);
+  }
 }
