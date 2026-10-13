@@ -1,0 +1,75 @@
+.menu {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  inset-block-start: anchor(end);
+  inset-inline-start: anchor(start);
+  position-try-fallbacks:
+    --position-top,
+    --position-bottom-right,
+    --position-top-right,
+    --position-left,
+    --position-top-left,
+    --position-right;
+  margin-block: var(--spacing-xs);
+  padding: var(--spacing-xs);
+  gap: var(--spacing-xs);
+  background-color: var(--popover-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 30%);
+  opacity: 0;
+  transition:
+    opacity var(--transition-medium),
+    overlay var(--transition-medium) allow-discrete,
+    display var(--transition-medium) allow-discrete;
+
+  &:popover-open {
+    display: flex;
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  inline-size: 100%;
+  padding-block: calc(var(--spacing-xs) - 2px);
+  padding-inline: var(--spacing-sm);
+  background-color: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+  color: inherit;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: background-color var(--transition-medium);
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background-color: color-mix(in oklab, currentColor 10%, transparent);
+  }
+
+  &:active {
+    background-color: color-mix(in oklab, currentColor 15%, transparent);
+  }
+
+  svg {
+    inline-size: 24px;
+    block-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .suffix {
+    margin-inline-start: auto;
+    padding-inline-start: var(--spacing-sm);
+  }
+}

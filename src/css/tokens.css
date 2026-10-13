@@ -8,6 +8,7 @@
   --font-size-xs: 0.85em;
   --font-size-sm: 0.95em;
 
+  --radius-sm: 6px;
   --radius-md: 12px;
   --radius-max: 9999px;
 
@@ -40,6 +41,7 @@
   --error-color: light-dark(#c62828, #ef5350);
   --layout-color: light-dark(#f4f4f5, #18181b);
   --placeholder-color: color-mix(in oklab, currentColor 60%, transparent);
+  --popover-color: light-dark(#fafafa, #27272a);
   --scrollbar-color: color-mix(in oklab, currentColor 30%, transparent) transparent;
   --surface-color: light-dark(white, #27272a);
   --text-color: light-dark(black, rgb(255 255 255 / 90%));
