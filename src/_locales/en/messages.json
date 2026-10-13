@@ -9,9 +9,36 @@
     "message": "en"
   },
 
+  "add": {
+    "message": "Add",
+    "description": "Action used to add"
+  },
+  "cancel": {
+    "message": "Cancel",
+    "description": "Action used to cancel"
+  },
   "close": {
     "message": "Close",
     "description": "Action used to close or dismissing an item"
+  },
+  "edit": {
+    "message": "Edit",
+    "description": "Action used to edit an item"
+  },
+  "editEllipsis": {
+    "message": "Edit…"
+  },
+  "deleteEllipsis": {
+    "message": "Delete…"
+  },
+  "moreOptions": {
+    "message": "More options"
+  },
+  "name": {
+    "message": "Name"
+  },
+  "optionsFor": {
+    "message": "Options for \"$1\""
   },
 
   "primaryControls": {
@@ -41,5 +68,36 @@
   },
   "theme": {
     "message": "Theme"
+  },
+
+  "addScript": {
+    "message": "Add script"
+  },
+  "addScriptEllipsis": {
+    "message": "Add script…"
+  },
+  "deleteScript": {
+    "message": "Delete script"
+  },
+  "deleteScriptBody": {
+    "message": "Are you sure you want to delete \"$1\"? This action cannot be undone."
+  },
+  "deleteScriptHeading": {
+    "message": "Delete script?"
+  },
+  "editScript": {
+    "message": "Edit script"
+  },
+  "scriptAdded": {
+    "message": "Script \"$1\" added"
+  },
+  "scriptContent": {
+    "message": "Content"
+  },
+  "scriptDeleted": {
+    "message": "Script \"$1\" deleted"
+  },
+  "scriptEdited": {
+    "message": "Script \"$1\" edited"
   }
 }
