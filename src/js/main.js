@@ -16,6 +16,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import '/components/smb-alert-dialog/smb-alert-dialog.js';
 import '/components/smb-dialog/smb-dialog.js';
 
 import {
