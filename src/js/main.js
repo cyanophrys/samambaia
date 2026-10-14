@@ -54,6 +54,7 @@ import {
   copyScript,
   deleteScript,
   editScript,
+  filterScripts,
   renderScripts,
   saveScript,
 } from './scripts.js';
@@ -72,7 +73,9 @@ const actions = {
     setViewMode,
   },
 
-  input: {},
+  input: {
+    filterScripts,
+  },
 
   submit: {
     saveScript,

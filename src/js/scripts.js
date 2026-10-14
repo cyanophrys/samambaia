@@ -28,12 +28,17 @@ import {
   t,
 } from './i18n.js';
 
+import {
+  normalizeQuery,
+} from './utils.js';
+
 const MAX_SCRIPT_NAME_LENGTH = 128;
 const MAX_SCRIPT_CONTENT_LENGTH = 5000;
 const RENDER_CHUNK_SIZE = 250;
 
 let scriptsContainer;
 let scriptItemTemplate = null;
+const searchTextCache = new WeakMap();
 
 function getScriptItemTemplate() {
   if (!scriptItemTemplate) {
@@ -90,6 +95,8 @@ export function createScriptElement(script) {
   deleteButton.setAttribute('popovertarget', popoverId);
   deleteButton.dataset.target = script.id;
 
+  searchTextCache.set(item, normalizeQuery(item.textContent));
+
   return item;
 }
 
@@ -113,6 +120,8 @@ export async function renderScripts() {
     if (end < scripts.length)
       await new Promise(requestAnimationFrame);
   }
+
+  filterScripts();
 }
 
 export function addScript() {
@@ -252,4 +261,15 @@ export async function copyScript(target) {
   }
 
   toast.show('main-toast');
+}
+
+export function filterScripts() {
+  const searchInput = document.querySelector('[data-action="filterScripts"]');
+  const items = getScriptsContainer().querySelectorAll('.script-item');
+  const query = normalizeQuery(searchInput?.value ?? '');
+
+  items.forEach(script => {
+    const searchText = searchTextCache.get(script) ?? normalizeQuery(script.textContent);
+    script.hidden = !searchText.includes(query);
+  });
 }
