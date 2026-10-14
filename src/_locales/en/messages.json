@@ -98,6 +98,33 @@
   "theme": {
     "message": "Theme"
   },
+  "storage": {
+    "message": "Storage"
+  },
+  "dataDeleted": {
+    "message": "Data deleted"
+  },
+  "deleteAllDataBody": {
+    "message": "This will permanently remove all local data. This action cannot be undone."
+  },
+  "deleteAllDataEllipsis": {
+    "message": "Delete all data…"
+  },
+  "deleteAllDataHeading": {
+    "message": "Delete all data?"
+  },
+  "deleteData": {
+    "message": "Delete data"
+  },
+  "deleteDataDescription": {
+    "message": "Use the button below to permanently remove all local data."
+  },
+  "errorDeletingData": {
+    "message": "Error deleting data"
+  },
+  "wipeConfirmationLabel": {
+    "message": "I understand and want to continue"
+  },
 
   "addFirstScript": {
     "message": "Add your first script to get started or restore an existing backup"
