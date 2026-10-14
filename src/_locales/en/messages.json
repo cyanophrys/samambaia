@@ -163,5 +163,39 @@
   },
   "scriptEdited": {
     "message": "Script \"$1\" edited"
+  },
+
+  "addLabel": {
+    "message": "Add label"
+  },
+  "addLabelEllipsis": {
+    "message": "Add label…"
+  },
+  "deleteLabel": {
+    "message": "Delete label"
+  },
+  "deleteLabelBody": {
+    "message": "Are you sure you want to delete the label \"$1\"? It will be removed from associated scripts."
+  },
+  "deleteLabelHeading": {
+    "message": "Delete label?"
+  },
+  "editLabel": {
+    "message": "Edit label"
+  },
+  "labelAdded": {
+    "message": "Label \"$1\" added"
+  },
+  "labelDeleted": {
+    "message": "Label \"$1\" deleted"
+  },
+  "labelEdited": {
+    "message": "Label \"$1\" edited"
+  },
+  "labelNameDuplicate": {
+    "message": "A label with this name already exists"
+  },
+  "labelNameTooLong": {
+    "message": "Label name cannot exceed $1 characters"
   }
 }
