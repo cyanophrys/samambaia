@@ -69,6 +69,12 @@
   user-select: none;
 }
 
+:where(.separator) {
+  block-size: 1px;
+  background-color: var(--border-color);
+  inline-size: 100%;
+}
+
 .toast-container {
   display: flex;
   flex-direction: column-reverse;
