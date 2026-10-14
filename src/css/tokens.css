@@ -38,6 +38,14 @@
     oklch(from var(--destructive-color) 0.76 0.12 h)
   );
 
+  --selected-active-bg-color: color-mix(in oklab, var(--accent-color) 38%, transparent);
+  --selected-bg-color: color-mix(in oklab, var(--accent-color) 18%, transparent);
+  --selected-fg-color: light-dark(
+    oklch(from var(--accent-color) calc(l - 0.20) calc(c + 0.05) h),
+    oklch(from var(--accent-color) calc(l + 0.3) c h)
+  );
+  --selected-hover-bg-color: color-mix(in oklab, var(--accent-color) 28%, transparent);
+
   --border-color: light-dark(rgb(0 0 0 / 18%), rgb(255 255 255 / 18%));
   --dark-border-color: light-dark(rgb(0 0 0 / 30%), rgb(0 0 0 / 45%));
 
