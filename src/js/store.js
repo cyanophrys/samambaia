@@ -153,3 +153,10 @@ export function createStore(initialState, options = {}, onUpdate) {
 
   return makeProxy(initialState);
 }
+
+export async function wipeStoredData(preserved = {}) {
+  await storage.local.clear();
+
+  if (Object.keys(preserved).length)
+    await storage.local.set(preserved);
+}
