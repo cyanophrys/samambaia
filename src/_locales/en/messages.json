@@ -85,6 +85,9 @@
   "preferences": {
     "message": "Preferences"
   },
+  "appearance": {
+    "message": "Appearance"
+  },
   "dark": {
     "message": "Dark"
   },
