@@ -1,0 +1,50 @@
+:host {
+  display: grid;
+  flex: 1;
+  min-inline-size: 0;
+  min-block-size: 0;
+  overflow: hidden;
+
+  ::slotted(smb-stack-page) {
+    grid-area: 1 / 1;
+  }
+
+  @starting-style {
+    ::slotted(smb-stack-page[data-active]) {
+      opacity: 0;
+    }
+  }
+}
+
+:host([homogeneous]) {
+  ::slotted(smb-stack-page:not([data-active])) {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+:host([transition]) {
+  ::slotted(smb-stack-page) {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity var(--transition-medium),
+      visibility 0s linear var(--transition-medium);
+  }
+
+  ::slotted(smb-stack-page[data-active]) {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      opacity var(--transition-medium),
+      visibility 0s;
+  }
+}
+
+:host(:not([transition]):not([homogeneous])) {
+  ::slotted(smb-stack-page:not([data-active])) {
+    display: none;
+  }
+}
