@@ -96,6 +96,9 @@
     "message": "Theme"
   },
 
+  "addFirstScript": {
+    "message": "Add your first script to get started or restore an existing backup"
+  },
   "addScript": {
     "message": "Add script"
   },
@@ -113,6 +116,9 @@
   },
   "editScript": {
     "message": "Edit script"
+  },
+  "noScriptsAdded": {
+    "message": "No scripts added"
   },
   "searchScripts": {
     "message": "Search scripts"
