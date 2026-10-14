@@ -105,6 +105,7 @@ function handleAction(event, actions) {
 
 async function init() {
   const manifest = getManifestInfo();
+  const pendingToast = sessionStorage.getItem('pendingToast');
 
   document.documentElement.lang = getLocale();
   document.title = manifest.name;
@@ -122,6 +123,19 @@ async function init() {
       document.body.removeAttribute('data-loading');
     });
   });
+
+  if (pendingToast) {
+    sessionStorage.removeItem('pendingToast');
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const toast = document.createElement('smb-toast');
+
+        toast.message = pendingToast;
+        toast.show('main-toast');
+      });
+    });
+  }
 }
 
 function bindEvents() {
