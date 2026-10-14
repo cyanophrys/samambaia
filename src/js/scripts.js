@@ -34,6 +34,7 @@ const RENDER_CHUNK_SIZE = 250;
 
 let scriptsContainer;
 let scriptItemTemplate = null;
+const searchTextCache = new WeakMap();
 
 function getScriptItemTemplate() {
   if (!scriptItemTemplate) {
@@ -90,6 +91,8 @@ export function createScriptElement(script) {
   deleteButton.setAttribute('popovertarget', popoverId);
   deleteButton.dataset.target = script.id;
 
+  searchTextCache.set(item, item.textContent.toLowerCase());
+
   return item;
 }
 
@@ -113,6 +116,8 @@ export async function renderScripts() {
     if (end < scripts.length)
       await new Promise(requestAnimationFrame);
   }
+
+  filterScripts();
 }
 
 export function addScript() {
@@ -252,4 +257,15 @@ export async function copyScript(target) {
   }
 
   toast.show('main-toast');
+}
+
+export function filterScripts() {
+  const searchInput = document.querySelector('[data-action="filterScripts"]');
+  const items = getScriptsContainer().querySelectorAll('.script-item');
+  const query = searchInput?.value.toLowerCase().trim() ?? '';
+
+  items.forEach(script => {
+    const searchText = searchTextCache.get(script) ?? script.textContent.toLowerCase();
+    script.hidden = !searchText.includes(query);
+  });
 }
