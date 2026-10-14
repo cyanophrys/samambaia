@@ -1,0 +1,79 @@
+:host {
+  display: block;
+}
+
+div {
+  display: grid;
+  place-items: center;
+  align-content: center;
+
+  slot {
+    display: flex;
+  }
+
+  slot[name="icon"] {
+    margin-block-end: var(--spacing-sm);
+  }
+
+  ::slotted([slot="icon"]) {
+    inline-size: 128px;
+    block-size: 128px;
+    flex-shrink: 0;
+  }
+
+  > h1,
+  > span {
+    user-select: none;
+    text-align: center;
+    text-wrap: pretty;
+  }
+
+  > span {
+    opacity: var(--dimmed-opacity);
+  }
+
+  slot[name="additional-content"] {
+    margin-block-start: var(--spacing-md);
+  }
+}
+
+:host([compact]) {
+  div {
+    slot[name="icon"] {
+      margin-block-end: var(--spacing-md);
+    }
+
+    ::slotted([slot="icon"]) {
+      inline-size: 96px;
+      block-size: 96px;
+    }
+
+    > h1 {
+      font-size: clamp(1.1em, 3vw, 1.5em);
+    }
+
+    slot[name="additional-content"] {
+      margin-block-start: var(--spacing-md);
+    }
+  }
+}
+
+:host([page]) {
+  inline-size: 100%;
+  block-size: 100%;
+
+  div {
+    inline-size: 100%;
+    block-size: 100%;
+    padding: var(--spacing-lg);
+    overflow-block: auto;
+
+    ::slotted([slot="icon"]) {
+      opacity: var(--dimmed-opacity);
+    }
+
+    slot[name="additional-content"] {
+      margin-block-start: var(--spacing-lg);
+    }
+  }
+}
