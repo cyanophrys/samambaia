@@ -108,6 +108,9 @@
   "editScript": {
     "message": "Edit script"
   },
+  "searchScripts": {
+    "message": "Search scripts"
+  },
   "scriptAdded": {
     "message": "Script \"$1\" added"
   },
