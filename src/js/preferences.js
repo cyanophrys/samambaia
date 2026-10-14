@@ -21,8 +21,13 @@ import {
   loadState,
 } from './store.js';
 
+import {
+  t,
+} from './i18n.js';
+
 const DEFAULT_PREFERENCES = {
   theme: 'system',
+  viewMode: 'grid',
 };
 
 export const userPreferences = createStore(
@@ -63,4 +68,27 @@ export function setTheme(value) {
   }
 
   updatePreferenceControl('theme', theme);
+}
+
+export function setViewMode(value) {
+  const validValue = value === 'grid' || value === 'list' ? value : null;
+  const currentView = userPreferences.viewMode
+    ?? DEFAULT_PREFERENCES.viewMode
+    ?? 'grid';
+  const newView = validValue ?? (currentView === 'grid' ? 'list' : 'grid');
+
+  userPreferences.viewMode = newView;
+
+  const container = document.getElementById('scripts-container');
+  if (container) container.dataset.view = newView;
+
+  const button = document.getElementById('view-toggle-button');
+  if (!button) return;
+
+  const label = newView === 'grid'
+    ? t('listView')
+    : t('gridView');
+
+  button.setAttribute('aria-label', label);
+  button.setAttribute('aria-pressed', newView === 'grid');
 }

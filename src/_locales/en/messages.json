@@ -64,6 +64,13 @@
     "message": "Variables"
   },
 
+  "gridView": {
+    "message": "Grid view"
+  },
+  "listView": {
+    "message": "List view"
+  },
+
   "preferences": {
     "message": "Preferences"
   },
