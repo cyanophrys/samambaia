@@ -32,6 +32,22 @@ main {
 
   > header {
     padding-inline-start: 0;
+
+    #view-toggle-button {
+      .list-icon {
+        display: none;
+      }
+
+      &[aria-pressed="true"] {
+        .grid-icon {
+          display: none;
+        }
+
+        .list-icon {
+          display: block;
+        }
+      }
+    }
   }
 }
 
@@ -68,5 +84,13 @@ main {
     justify-content: center;
     grid-template-columns: minmax(0, 700px);
     gap: var(--spacing-xl);
+
+    &[data-view="grid"] {
+      grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    }
+
+    &[data-view="list"] {
+      grid-template-columns: minmax(0, 700px);
+    }
   }
 }

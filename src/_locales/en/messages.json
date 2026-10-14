@@ -57,8 +57,14 @@
   "addItem": {
     "message": "Add item"
   },
+  "gridView": {
+    "message": "Grid view"
+  },
   "labels": {
     "message": "Labels"
+  },
+  "listView": {
+    "message": "List view"
   },
   "variables": {
     "message": "Variables"
