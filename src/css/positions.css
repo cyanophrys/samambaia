@@ -1,0 +1,28 @@
+@position-try --position-top {
+  inset-block-end: anchor(start);
+}
+
+@position-try --position-top-left {
+  inset-block-start: auto;
+  inset-block-end: anchor(start);
+}
+
+@position-try --position-top-right {
+  inset-block-start: auto;
+  inset-block-end: anchor(start);
+  inset-inline-start: auto;
+  inset-inline-end: anchor(end);
+}
+
+@position-try --position-right {
+  inset-inline-start: anchor(end);
+}
+
+@position-try --position-left {
+  inset-inline-end: anchor(start);
+}
+
+@position-try --position-bottom-right {
+  inset-inline-start: auto;
+  inset-inline-end: anchor(end);
+}
