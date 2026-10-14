@@ -1,0 +1,15 @@
+.variable-item {
+  .menu .unpin-icon {
+    display: none;
+  }
+
+  &[data-pinned="true"] {
+    .menu .pin-icon {
+      display: none;
+    }
+
+    .menu .unpin-icon {
+      display: block;
+    }
+  }
+}
