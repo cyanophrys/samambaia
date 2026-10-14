@@ -1,0 +1,53 @@
+.label-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.label-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  overflow: hidden;
+  padding-block: var(--spacing-xs);
+  padding-inline: var(--spacing-sm);
+  block-size: 44px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background-color: transparent;
+  color: inherit;
+  transition:
+    background-color var(--transition-medium),
+    color var(--transition-medium);
+  user-select: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: color-mix(in oklab, currentColor 8%, transparent);
+  }
+
+  &:active {
+    background-color: color-mix(in oklab, currentColor 12%, transparent);
+  }
+
+  &:has([aria-haspopup]) {
+    padding-inline-end: var(--spacing-xs);
+  }
+
+  > svg {
+    flex-shrink: 0;
+    opacity: var(--dimmed-opacity);
+    transition: opacity var(--transition-medium);
+  }
+
+  > span {
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .suffix {
+    margin-inline-start: auto;
+  }
+}
