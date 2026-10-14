@@ -53,6 +53,16 @@ function getScriptsContainer() {
   return scriptsContainer ??= document.getElementById('scripts-container');
 }
 
+function updateScriptsControls(hasScripts) {
+  const controls = document.querySelectorAll(
+    '[data-action="filterScripts"], [data-action="setViewMode"]'
+  );
+
+  controls.forEach(control => {
+    control.toggleAttribute('disabled', !hasScripts);
+  });
+}
+
 export function createScriptElement(script) {
   const template = getScriptItemTemplate();
   const item = template.content.firstElementChild.cloneNode(true);
@@ -105,6 +115,8 @@ export async function renderScripts() {
 
   const container = getScriptsContainer();
   container.replaceChildren();
+
+  updateScriptsControls(scripts.length > 0);
 
   for (let i = 0; i < scripts.length; i += RENDER_CHUNK_SIZE) {
     const fragment = document.createDocumentFragment();
