@@ -68,15 +68,26 @@ import {
   saveScript,
 } from './scripts.js';
 
+import {
+  addLabel,
+  deleteLabel,
+  editLabel,
+  renderLabels,
+  saveLabel,
+} from './labels.js';
+
 const actions = {
   change: {
     setTheme,
   },
 
   click: {
+    addLabel,
     addScript,
     copyScript,
+    deleteLabel,
     deleteScript,
+    editLabel,
     editScript,
     openPreferencesDialog,
     setViewMode,
@@ -88,6 +99,7 @@ const actions = {
   },
 
   submit: {
+    saveLabel,
     saveScript,
   },
 };
@@ -122,6 +134,7 @@ async function init() {
 
   await initDB();
   await renderScripts();
+  await renderLabels();
 
   setTheme(userPreferences.theme);
   setViewMode(userPreferences.viewMode);
