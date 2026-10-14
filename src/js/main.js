@@ -40,6 +40,7 @@ import {
 import {
   openPreferencesDialog,
   setTheme,
+  setViewMode,
   userPreferences,
 } from './preferences.js';
 
@@ -67,6 +68,7 @@ const actions = {
     deleteScript,
     editScript,
     openPreferencesDialog,
+    setViewMode,
   },
 
   input: {},
@@ -104,6 +106,7 @@ async function init() {
   await renderScripts();
 
   setTheme(userPreferences.theme);
+  setViewMode(userPreferences.viewMode);
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
