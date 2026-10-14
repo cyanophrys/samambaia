@@ -116,6 +116,12 @@
   "editScript": {
     "message": "Edit script"
   },
+  "noScriptsHeading": {
+    "message": "No scripts added"
+  },
+  "noScriptsDescription": {
+    "message": "Add your first script to get started or restore an existing backup"
+  },
   "scriptAdded": {
     "message": "Script \"$1\" added"
   },
