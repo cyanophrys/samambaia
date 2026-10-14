@@ -17,6 +17,9 @@
     "message": "Cancel",
     "description": "Action used to cancel"
   },
+  "cancelSearch": {
+    "message": "Cancel search"
+  },
   "close": {
     "message": "Close",
     "description": "Action used to close or dismissing an item"
