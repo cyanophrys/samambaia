@@ -55,6 +55,10 @@ import {
 } from './db.js';
 
 import {
+  wipeData,
+} from './wipe.js';
+
+import {
   addScript,
   copyScript,
   deleteScript,
@@ -76,6 +80,7 @@ const actions = {
     editScript,
     openPreferencesDialog,
     setViewMode,
+    wipeData,
   },
 
   input: {
