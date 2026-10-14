@@ -126,6 +126,13 @@
       <smb-stack-page page-name="storage" data-i18n-attr="page-title:storage">
         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M134.62-168.46v-143.08h690.76v143.08H134.62Zm70.77-35.39h72.3v-72.3h-72.3v72.3Zm-70.77-444.61v-143.08h690.76v143.08H134.62Zm70.77-35.39h72.3v-72.3h-72.3v72.3Zm-70.77 275.39v-143.08h690.76v143.08H134.62Zm70.77-35.39h72.3v-72.3h-72.3v72.3Z"/></svg>
         <div class="scrollable-area">
+          <section class="section">
+            <header>
+              <h2 class="heading" data-i18n="deleteData"></h4>
+              <p data-i18n="deleteDataDescription"></p>
+            </header>
+            <button class="button big destructive-action" type="button" data-action="wipeData" data-i18n="deleteAllDataEllipsis"></button>
+          </section>
         </div>
       </smb-stack-page>
     </smb-stack>
@@ -174,6 +181,12 @@
         </button>
       </div>
     </section>
+  </template>
+  <template id="wipe-confirmation-template">
+    <label class="label" slot="additional-content">
+      <input type="checkbox" class="checkbox" name="wipe-confirmation">
+      <span></span>
+    </label>
   </template>
   <div id="add-item-menu" class="menu" style="position-anchor: --add-item-button" role="menu" data-i18n-attr="aria-label:addItem" popover>
     <button class="menu-item" role="menuitem" data-action="addScript">
