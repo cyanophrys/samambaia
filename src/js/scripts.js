@@ -280,6 +280,10 @@ export function filterScripts() {
   let page = 'scripts';
 
   switch (true) {
+    case items.length === 0:
+      page = 'no-scripts';
+      break;
+
     case Boolean(query) && visibleItemsCount === 0:
       page = 'no-search-results';
       break;
