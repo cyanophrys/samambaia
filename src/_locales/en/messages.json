@@ -50,8 +50,14 @@
   "name": {
     "message": "Name"
   },
+  "noResultsFound": {
+    "message": "No results found"
+  },
   "optionsFor": {
     "message": "Options for \"$1\""
+  },
+  "tryDifferentSearch": {
+    "message": "Try a different search"
   },
 
   "primaryControls": {

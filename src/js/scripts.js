@@ -260,11 +260,29 @@ export async function copyScript(target) {
 
 export function filterScripts() {
   const searchInput = document.querySelector('[data-action="filterScripts"]');
+  const stack = document.getElementById('main-stack');
   const items = getScriptsContainer().querySelectorAll('.script-item');
   const query = searchInput?.value.toLowerCase().trim() ?? '';
 
-  items.forEach(script => {
-    const searchText = searchTextCache.get(script) ?? script.textContent.toLowerCase();
-    script.hidden = !searchText.includes(query);
+  let visibleItemsCount = 0;
+
+  items.forEach(item => {
+    const searchText = searchTextCache.get(item) ?? item.textContent.toLowerCase();
+    const isVisible = searchText.includes(query);
+
+    item.hidden = !isVisible;
+
+    if (isVisible)
+      visibleItemsCount++;
   });
+
+  let page = 'scripts';
+
+  switch (true) {
+    case Boolean(query) && visibleItemsCount === 0:
+      page = 'no-search-results';
+      break;
+  }
+
+  stack?.show(page);
 }
