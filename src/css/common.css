@@ -60,3 +60,21 @@
 :where(.dimmed) {
   opacity: var(--dimmed-opacity);
 }
+
+.toast-container {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--spacing-sm);
+  align-self: end;
+  justify-self: center;
+  position: fixed;
+  inset: 0;
+  position-area: center;
+  z-index: 1000;
+  padding-block-end: var(--spacing-md);
+  pointer-events: none;
+
+  > * {
+    align-self: center;
+  }
+}
