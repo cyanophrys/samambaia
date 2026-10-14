@@ -1,0 +1,125 @@
+/**
+ * Samambaia - A simple scripts manager.
+ * Copyright (C) 2026 Raul Sousa
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+import reset from '../../css/reset.css' with { type: 'css' };
+import component from './smb-placeholder.css' with { type: 'css' };
+
+const template = document.createElement('template');
+template.innerHTML = `
+  <div>
+    <slot name="icon" aria-hidden="true"></slot>
+    <span></span>
+    <p></p>
+    <slot name="additional-content"></slot>
+  </div>
+`;
+
+export class SmbPlaceholder extends HTMLElement {
+  #container;
+  #heading;
+  #description;
+  #additionalContent;
+
+  static get observedAttributes() {
+    return [
+      'aria-atomic',
+      'aria-label',
+      'aria-live',
+      'compact',
+      'description',
+      'heading',
+      'page',
+      'role'
+    ];
+  }
+
+  constructor() {
+    super();
+
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.adoptedStyleSheets = [reset, component];
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+    this.#container = this.shadowRoot.querySelector('div');
+    this.#heading = this.shadowRoot.querySelector('span');
+    this.#description = this.shadowRoot.querySelector('p');
+    const slots = this.shadowRoot.querySelectorAll('slot');
+    const updateSlots = () => {
+      for (const slot of slots)
+        slot.hidden = !slot.assignedElements({ flatten: true }).length;
+    };
+
+    for (const slot of slots)
+      slot.addEventListener('slotchange', updateSlots);
+
+    updateSlots();
+  }
+
+  attributeChangedCallback(name, _, newValue) {
+    if (name === 'heading') {
+      this.#heading.textContent = newValue ?? '';
+      this.#heading.hidden = !newValue;
+    }
+
+    if (name === 'description') {
+      this.#description.textContent = newValue ?? '';
+      this.#description.hidden = !newValue;
+    }
+
+    if (['role', 'aria-label', 'aria-live', 'aria-atomic'].includes(name)) {
+      if (newValue !== null)
+        this.#container.setAttribute(name, newValue);
+      else
+        this.#container.removeAttribute(name);
+    }
+  }
+
+  get heading() {
+    return this.getAttribute('heading') ?? '';
+  }
+
+  set heading(value) {
+    this.setAttribute('heading', value ?? '');
+  }
+
+  get description() {
+    return this.getAttribute('description') ?? '';
+  }
+
+  set description(value) {
+    this.setAttribute('description', value ?? '');
+  }
+
+  get compact() {
+    return this.hasAttribute('compact');
+  }
+
+  set compact(isCompact) {
+    this.toggleAttribute('compact', Boolean(isCompact));
+  }
+
+  get page() {
+    return this.hasAttribute('page');
+  }
+
+  set page(isPage) {
+    this.toggleAttribute('page', Boolean(isPage));
+  }
+}
+
+customElements.define('smb-placeholder', SmbPlaceholder);
