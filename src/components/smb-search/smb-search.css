@@ -1,0 +1,81 @@
+:host {
+  display: block;
+  inline-size: 100%;
+}
+
+div {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2xs);
+  inline-size: 100%;
+  block-size: 32px;
+  border-radius: var(--radius-max);
+  background-color: color-mix(in oklab, currentColor 8%, transparent);
+  padding-block: 0;
+  padding-inline: var(--spacing-xs) var(--spacing-2xs);
+  line-height: 1;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+  transition:
+    background-color var(--transition-medium),
+    border-color var(--transition-medium),
+    outline-color var(--transition-medium);
+
+  &:hover:not(:focus-within) {
+    background-color: color-mix(in oklab, currentColor 12%, transparent);
+  }
+
+  &:focus-within {
+    border-color: transparent;
+    outline-color: var(--focus-outline-color);
+  }
+
+  &:has(input:disabled) {
+    opacity: var(--disabled-opacity);
+    pointer-events: none;
+  }
+
+  > svg {
+    opacity: var(--dimmed-opacity);
+    inline-size: 24px;
+    block-size: 24px;
+    flex-shrink: 0;
+  }
+
+  input[type="search"] {
+    flex: 1;
+    min-inline-size: 0;
+    padding-block: var(--spacing-2sm);
+    padding-inline: 0;
+    background-color: transparent;
+    color: inherit;
+    outline: none;
+    border: none;
+
+    &::placeholder {
+      color: var(--placeholder-color);
+    }
+
+    &:disabled {
+      opacity: 1;
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+
+  button {
+    display: none;
+    opacity: 0;
+
+    &[data-visible="true"] {
+      display: grid;
+      opacity: 1;
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
+}

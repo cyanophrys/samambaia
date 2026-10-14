@@ -18,6 +18,7 @@
 
 import '/components/smb-alert-dialog/smb-alert-dialog.js';
 import '/components/smb-dialog/smb-dialog.js';
+import '/components/smb-search/smb-search.js';
 import '/components/smb-toast/smb-toast.js';
 
 import {
