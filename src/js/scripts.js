@@ -60,6 +60,7 @@ export function createScriptElement(script) {
   const moreButton = item.querySelector('[aria-haspopup]');
   const editButton = item.querySelector('[data-action="editScript"]');
   const deleteButton = item.querySelector('[data-action="deleteScript"]');
+  const copyButton = item.querySelector('[data-action="copyScript"]');
 
   const popoverId = `script-menu-${script.id}`;
   const anchorName = `--script-menu-${script.id}`;
@@ -67,8 +68,11 @@ export function createScriptElement(script) {
   title.id = `script-title-${script.id}`;
   title.textContent = script.name;
 
+  copyButton.dataset.target = script.id;
+
   content.id = `script-content-${script.id}`;
   content.textContent = script.content;
+  content.dataset.target = script.id;
 
   item.setAttribute('aria-labelledby', title.id);
   item.setAttribute('aria-describedby', content.id);
@@ -225,4 +229,26 @@ export async function deleteScript(element) {
   }, { once: true });
 
   dialog.showModal();
+}
+
+export async function copyScript(target) {
+  const id = Number(target?.dataset?.target);
+  if (Number.isNaN(id)) return;
+
+  const toast = document.createElement('smb-toast');
+
+  try {
+    const script = await getScript(id);
+    if (!script) return;
+
+    await navigator.clipboard.writeText(script.content);
+
+    toast.message = t('copiedToClipboard');
+  } catch (error) {
+    console.error(error);
+
+    toast.message = t('copyToClipboardError');
+  }
+
+  toast.show('main-toast');
 }
