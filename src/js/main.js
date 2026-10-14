@@ -49,6 +49,7 @@ import {
 
 import {
   addScript,
+  copyScript,
   deleteScript,
   editScript,
   renderScripts,
@@ -62,6 +63,7 @@ const actions = {
 
   click: {
     addScript,
+    copyScript,
     deleteScript,
     editScript,
     openPreferencesDialog,

@@ -21,6 +21,16 @@
     "message": "Close",
     "description": "Action used to close or dismissing an item"
   },
+  "copiedToClipboard": {
+    "message": "Copied to clipboard"
+  },
+  "copy": {
+    "message": "Copy",
+    "description": "Action used to copy content"
+  },
+  "copyToClipboardError": {
+    "message": "Failed to copy to clipboard"
+  },
   "edit": {
     "message": "Edit",
     "description": "Action used to edit an item"
