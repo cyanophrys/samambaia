@@ -72,6 +72,7 @@ import {
   renderScripts,
   saveScript,
   searchAllScripts,
+  toggleFavoriteScript,
 } from './scripts.js';
 
 import {
@@ -104,6 +105,7 @@ const actions = {
     searchAllScripts,
     selectScriptLabels,
     setViewMode,
+    toggleFavoriteScript,
     toggleScriptLabel,
     wipeData,
   },
