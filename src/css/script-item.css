@@ -63,4 +63,18 @@
       background-color: color-mix(in oklab, currentColor 20%, transparent);
     }
   }
+
+  .favorite-remove-icon {
+    display: none;
+  }
+
+  &[data-favorite="true"] {
+    .favorite-add-icon {
+      display: none;
+    }
+
+    .favorite-remove-icon {
+      display: block;
+    }
+  }
 }
