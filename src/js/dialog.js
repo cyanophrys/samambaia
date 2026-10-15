@@ -1,0 +1,61 @@
+/**
+ * Samambaia - A simple scripts manager.
+ * Copyright (C) 2026 Raul Sousa
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+import {
+  scrollToTop,
+} from './utils.js';
+
+function resetScrollableAreas(dialog) {
+  const scrollableAreas = dialog.querySelectorAll('.scrollable-area');
+
+  scrollableAreas.forEach(element => scrollToTop(element));
+}
+
+function resetToasts(dialog) {
+  const toasts = dialog.querySelectorAll('smb-toast');
+  toasts.forEach(toast => toast.close());
+}
+
+function resetTextareas(dialog) {
+  const textareas = dialog.querySelectorAll('textarea');
+
+  textareas.forEach(textarea => {
+    textarea.style.height = '';
+  });
+}
+
+function resetStacks(dialog) {
+  const stacks = dialog.querySelectorAll('smb-stack');
+
+  stacks.forEach(stack => {
+    if (stack.pages.length)
+      stack.show(stack.pages[0].pageName);
+  });
+}
+
+export function bindDialogEvents() {
+  document.addEventListener('toggle', (event) => {
+    if (event.target?.localName !== 'smb-dialog') return;
+    if (event.detail.newState !== 'open') return;
+
+    resetScrollableAreas(event.target);
+    resetToasts(event.target);
+    resetTextareas(event.target);
+    resetStacks(event.target);
+  });
+}
