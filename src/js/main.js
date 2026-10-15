@@ -44,6 +44,10 @@ import {
 } from './menu.js';
 
 import {
+  bindDialogEvents,
+} from './dialog.js';
+
+import {
   openPreferencesDialog,
   setTheme,
   setViewMode,
@@ -187,6 +191,7 @@ function bindEvents() {
 
   bindTooltipEvents();
   bindMenuEvents();
+  bindDialogEvents();
 }
 
 bindEvents();
