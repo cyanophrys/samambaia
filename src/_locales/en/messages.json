@@ -56,6 +56,10 @@
   "optionsFor": {
     "message": "Options for \"$1\""
   },
+  "select": {
+    "message": "Select",
+    "description": "Action used to select an item"
+  },
   "tryDifferentSearch": {
     "message": "Try a different search"
   },
@@ -197,5 +201,27 @@
   },
   "labelNameTooLong": {
     "message": "Label name cannot exceed $1 characters"
+  },
+
+  "availableLabels": {
+    "message": "Available labels"
+  },
+  "labelsSelectedCount": {
+    "message": "$1 labels selected"
+  },
+  "noLabelsSelected": {
+    "message": "No labels selected"
+  },
+  "oneLabelSelected": {
+    "message": "1 label selected"
+  },
+  "searchLabels": {
+    "message": "Search labels"
+  },
+  "selectedLabels": {
+    "message": "Selected labels"
+  },
+  "selectLabels": {
+    "message": "Select labels"
   }
 }

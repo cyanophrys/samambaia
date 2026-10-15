@@ -72,8 +72,12 @@ import {
   addLabel,
   deleteLabel,
   editLabel,
+  filterScriptLabels,
   renderLabels,
   saveLabel,
+  selectScriptLabels,
+  saveLabelsSelection,
+  toggleScriptLabel,
 } from './labels.js';
 
 const actions = {
@@ -90,16 +94,20 @@ const actions = {
     editLabel,
     editScript,
     openPreferencesDialog,
+    selectScriptLabels,
     setViewMode,
+    toggleScriptLabel,
     wipeData,
   },
 
   input: {
     filterScripts,
+    filterScriptLabels,
   },
 
   submit: {
     saveLabel,
+    saveLabelsSelection,
     saveScript,
   },
 };
@@ -170,6 +178,8 @@ function bindEvents() {
   document.addEventListener('change', (e) => handleAction(e, actions));
   document.addEventListener('input', (e) => handleAction(e, actions));
   document.addEventListener('submit', (e) => handleAction(e, actions));
+
+  document.addEventListener('label:changed', renderScripts);
 
   bindTooltipEvents();
   bindMenuEvents();
