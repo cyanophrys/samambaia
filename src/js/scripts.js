@@ -26,6 +26,7 @@ import {
 import {
   getSelectedScriptLabels,
   setSelectedScriptLabels,
+  updateSelectedLabelItem,
 } from './labels.js';
 
 import {
@@ -35,6 +36,7 @@ import {
 
 import {
   normalizeQuery,
+  scrollToTop,
 } from './utils.js';
 
 const MAX_SCRIPT_NAME_LENGTH = 128;
@@ -43,6 +45,11 @@ const RENDER_CHUNK_SIZE = 250;
 
 let scriptsContainer;
 let scriptItemTemplate = null;
+let selectedLabel = 'all';
+
+const PSEUDO_LABELS = [
+  'all',
+];
 const searchTextCache = new WeakMap();
 
 function getScriptItemTemplate() {
@@ -73,6 +80,7 @@ export function createScriptElement(script) {
   const item = template.content.firstElementChild.cloneNode(true);
 
   item.dataset.target = script.id;
+  item.dataset.labels = (script.labels?.length ? script.labels.map(String) : ['none']).join(' ');
 
   const title = item.querySelector('.title');
   const content = item.querySelector('.content');
@@ -149,7 +157,11 @@ export function addScript() {
   form.reset();
   form.elements['id'].value = '';
 
-  setSelectedScriptLabels([]);
+  setSelectedScriptLabels(
+    PSEUDO_LABELS.includes(selectedLabel) || selectedLabel === 'none'
+      ? []
+      : [String(selectedLabel)]
+  );
 
   dialog.heading = t('addScript');
   dialog.subtitle = '';
@@ -289,17 +301,36 @@ export async function copyScript(target) {
   toast.show('main-toast');
 }
 
+function scriptMatchesLabel(script) {
+  return selectedLabel === 'all'
+    ? true
+    : script.dataset.labels.split(' ').includes(String(selectedLabel));
+}
+
 export function filterScripts() {
   const searchInput = document.querySelector('[data-action="filterScripts"]');
   const stack = document.getElementById('main-stack');
   const items = getScriptsContainer().querySelectorAll('.script-item');
   const query = normalizeQuery(searchInput?.value ?? '');
 
+  updateSelectedLabelItem(selectedLabel);
+
+  let labelScriptsCount = 0;
   let visibleItemsCount = 0;
 
   items.forEach(item => {
+    if (scriptMatchesLabel(item))
+      labelScriptsCount++;
+  });
+
+  const searchAll = selectedLabel !== 'all'
+    && labelScriptsCount === 0
+    && query.length > 0;
+
+  items.forEach(item => {
     const searchText = searchTextCache.get(item) ?? normalizeQuery(item.textContent);
-    const isVisible = searchText.includes(query);
+    const matchesLabel = searchAll || scriptMatchesLabel(item);
+    const isVisible = matchesLabel && searchText.includes(query);
 
     item.hidden = !isVisible;
 
@@ -314,10 +345,43 @@ export function filterScripts() {
       page = 'no-scripts';
       break;
 
-    case Boolean(query) && visibleItemsCount === 0:
-      page = 'no-search-results';
+    case labelScriptsCount === 0 && !searchAll:
+      page = 'empty-label';
+      break;
+
+    case visibleItemsCount === 0:
+      page = selectedLabel === 'all'
+        ? 'no-search-results'
+        : 'no-label-search-results';
       break;
   }
 
   stack?.show(page);
+}
+
+export function filterByLabel(target) {
+  const label = String(
+    typeof target === 'string'
+      ? target
+      : target.dataset.target
+  );
+
+  const element = getScriptsContainer().closest('.scrollable-area');
+
+  selectedLabel = label;
+
+  scrollToTop(element);
+  filterScripts();
+}
+
+export function searchAllScripts() {
+  if (selectedLabel === 'all') return;
+
+  const input = document.querySelector('[data-action="filterScripts"]');
+
+  selectedLabel = 'all';
+
+  filterScripts();
+
+  input?.focus();
 }
