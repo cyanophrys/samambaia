@@ -27,6 +27,11 @@
     .heading {
       font-size: var(--font-size-base);
     }
+
+    &:has(.heading) p {
+      opacity: var(--dimmed-opacity);
+      text-wrap: pretty;
+    }
   }
 }
 
