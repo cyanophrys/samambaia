@@ -223,5 +223,24 @@
   },
   "selectLabels": {
     "message": "Select labels"
+  },
+
+  "allScripts": {
+    "message": "All scripts"
+  },
+  "emptyLabel": {
+    "message": "Empty label"
+  },
+  "emptyLabelDescription": {
+    "message": "This label doesn't have any scripts yet"
+  },
+  "searchAllScripts": {
+    "message": "Search all scripts"
+  },
+  "tryDifferentSearchOrSearchAll": {
+    "message": "Try a different search or search all scripts"
+  },
+  "unlabeled": {
+    "message": "Unlabeled"
   }
 }

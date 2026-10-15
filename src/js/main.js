@@ -63,9 +63,11 @@ import {
   copyScript,
   deleteScript,
   editScript,
+  filterByLabel,
   filterScripts,
   renderScripts,
   saveScript,
+  searchAllScripts,
 } from './scripts.js';
 
 import {
@@ -93,7 +95,9 @@ const actions = {
     deleteScript,
     editLabel,
     editScript,
+    filterByLabel,
     openPreferencesDialog,
+    searchAllScripts,
     selectScriptLabels,
     setViewMode,
     toggleScriptLabel,
