@@ -4,6 +4,7 @@
 
   --font-size-base: 14px;
   --font-size-xs: 0.85em;
+  --font-size-sm: 0.95em;
 
   --radius-md: 12px;
   --radius-max: 9999px;
@@ -12,6 +13,7 @@
   --spacing-sm: 10px;
   --spacing-md: 16px;
 
+  --transition-fast: 0.1s ease;
   --transition-medium: 0.2s ease;
 
   --accent-color: #3a78e8;
