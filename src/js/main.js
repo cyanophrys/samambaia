@@ -27,6 +27,10 @@ import {
   getManifestInfo,
 } from './about.js';
 
+import {
+  bindTooltipEvents,
+} from './tooltip.js';
+
 const actions = {
   change: {},
 
@@ -67,6 +71,8 @@ function bindEvents() {
   document.addEventListener('change', (e) => handleAction(e, actions));
   document.addEventListener('input', (e) => handleAction(e, actions));
   document.addEventListener('submit', (e) => handleAction(e, actions));
+
+  bindTooltipEvents();
 }
 
 bindEvents();
