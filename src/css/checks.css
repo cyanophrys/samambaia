@@ -1,8 +1,5 @@
-:where(.checkbox, .radio) {
+:where(.checkbox, .radio, .switch) {
   --check-intensity: var(--check-bg);
-  --check-bg: 30%;
-  --check-bg-hover: 60%;
-  --check-bg-active: 80%;
 
   appearance: none;
   position: relative;
@@ -11,13 +8,6 @@
   flex-shrink: 0;
   color: inherit;
   cursor: pointer;
-  inline-size: 20px;
-  block-size: 20px;
-  background-color: transparent;
-  border: 2px solid color-mix(in oklab, currentColor var(--check-intensity), transparent);
-  transition:
-    border-color var(--transition-medium),
-    background-color var(--transition-medium);
 
   &:hover {
     --check-intensity: var(--check-bg-hover);
@@ -31,7 +21,23 @@
     --check-bg: 100%;
     --check-bg-hover: 85%;
     --check-bg-active: 70%;
+  }
+}
 
+:where(.checkbox, .radio) {
+  --check-bg: 30%;
+  --check-bg-hover: 60%;
+  --check-bg-active: 80%;
+
+  inline-size: 20px;
+  block-size: 20px;
+  background-color: transparent;
+  border: 2px solid color-mix(in oklab, currentColor var(--check-intensity), transparent);
+  transition:
+    border-color var(--transition-medium),
+    background-color var(--transition-medium);
+
+  &:checked {
     background-color: color-mix(in oklab, var(--accent-color) var(--check-intensity), white);
     border-color: color-mix(in oklab, var(--accent-color) var(--check-intensity), white);
   }
@@ -93,5 +99,64 @@
 
   &:checked::after {
     transform: scale(1);
+  }
+}
+
+:where(.switch) {
+  --check-bg: 25%;
+  --check-bg-hover: 35%;
+  --check-bg-active: 45%;
+
+  inline-size: 44px;
+  block-size: 24px;
+  background-color: color-mix(in oklab, currentColor var(--check-intensity), transparent);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-medium);
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset-block-start: 3px;
+    inset-inline-start: 3px;
+    inline-size: 18px;
+    block-size: 18px;
+    border-radius: var(--radius-max);
+    transform-origin: left center;
+  }
+
+  &::before {
+    background-color: white;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+    transition: transform var(--transition-medium);
+  }
+
+  &::after {
+    background-color: black;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23434343'%3E%3Cpath d='M166-417v-126h628v126H166Z'/%3E%3C/svg%3E");
+    mask-position: center;
+    mask-size: 12px;
+    mask-repeat: no-repeat;
+    opacity: var(--dimmed-opacity);
+    pointer-events: none;
+    transition:
+      opacity var(--transition-medium),
+      transform var(--transition-medium);
+  }
+
+  &:checked {
+    background-color: color-mix(in oklab, var(--accent-color) var(--check-intensity), white);
+
+    &::before,
+    &::after {
+      transform: translateX(20px);
+      transform-origin: right center;
+    }
+
+    &::after {
+      background-color: var(--accent-color);
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M382-220 130-472l84-84 168 168 364-364 84 84-448 448Z'/%3E%3C/svg%3E");
+      opacity: 1;
+    }
   }
 }
