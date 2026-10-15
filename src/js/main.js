@@ -44,6 +44,10 @@ import {
 } from './menu.js';
 
 import {
+  bindDialogEvents,
+} from './dialog.js';
+
+import {
   openPreferencesDialog,
   setBackupReminder,
   setLargeText,
@@ -288,6 +292,7 @@ function bindEvents() {
 
   bindTooltipEvents();
   bindMenuEvents();
+  bindDialogEvents();
 }
 
 bindEvents();
