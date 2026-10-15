@@ -61,6 +61,13 @@
   opacity: var(--dimmed-opacity);
 }
 
+:where(.label) {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+}
+
 .toast-container {
   display: flex;
   flex-direction: column-reverse;
