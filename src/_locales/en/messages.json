@@ -63,6 +63,10 @@
   "tryDifferentSearch": {
     "message": "Try a different search"
   },
+  "undo": {
+    "message": "Undo",
+    "description": "Action used to revert a change"
+  },
 
   "primaryControls": {
     "message": "Primary controls"
@@ -132,6 +136,9 @@
     "message": "I understand and want to continue"
   },
 
+  "addScriptFavorite": {
+    "message": "Add to favorites"
+  },
   "addScript": {
     "message": "Add script"
   },
@@ -150,14 +157,26 @@
   "editScript": {
     "message": "Edit script"
   },
+  "noFavorites": {
+    "message": "No favorites"
+  },
+  "noFavoritesDescription": {
+    "message": "Favorite scripts will appear here"
+  },
   "noScriptsHeading": {
     "message": "No scripts added"
   },
   "noScriptsDescription": {
     "message": "Add your first script to get started or restore an existing backup"
   },
+  "removeScriptFavorite": {
+    "message": "Remove from favorites"
+  },
   "scriptAdded": {
     "message": "Script \"$1\" added"
+  },
+  "scriptAddedToFavorites": {
+    "message": "Script \"$1\" added to favorites"
   },
   "scriptContent": {
     "message": "Content"
@@ -167,6 +186,9 @@
   },
   "scriptEdited": {
     "message": "Script \"$1\" edited"
+  },
+  "scriptRemovedFromFavorites": {
+    "message": "Script \"$1\" removed from favorites"
   },
 
   "addLabel": {
@@ -233,6 +255,9 @@
   },
   "emptyLabelDescription": {
     "message": "This label doesn't have any scripts yet"
+  },
+  "favorites": {
+    "message": "Favorites"
   },
   "searchAllScripts": {
     "message": "Search all scripts"
