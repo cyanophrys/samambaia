@@ -93,6 +93,9 @@ const actions = {
 };
 
 function handleAction(event, actions) {
+  const ignored = event.target.closest('[data-action-ignore]');
+  if (ignored) return;
+
   const element = event.target.closest('[data-action]');
   if (!element) return;
 
