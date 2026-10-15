@@ -60,6 +60,17 @@ export function setSelectedScriptLabels(labels) {
   updateScriptLabelsSubtitle();
 }
 
+export function updateSelectedLabelItem(selectedLabel) {
+  const labelItems = document.querySelectorAll('.label-item');
+
+  labelItems.forEach(item => {
+    item.setAttribute(
+      'aria-current',
+      String(item.dataset.target === String(selectedLabel))
+    );
+  });
+}
+
 function updateScriptLabelsVisibility() {
   const button = document.querySelector(
     '[data-action="selectScriptLabels"]'
