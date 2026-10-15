@@ -24,6 +24,11 @@ import {
 } from './db.js';
 
 import {
+  getSelectedScriptLabels,
+  setSelectedScriptLabels,
+} from './labels.js';
+
+import {
   applyTranslations,
   t,
 } from './i18n.js';
@@ -139,6 +144,8 @@ export function addScript() {
 
   form.reset();
 
+  setSelectedScriptLabels([]);
+
   dialog.heading = t('addScript');
   dialog.subtitle = '';
 
@@ -158,6 +165,8 @@ export async function editScript(element) {
   const dialog = document.getElementById('script-dialog');
   const form = dialog.querySelector('form');
   const saveButton = dialog.querySelector('button[type="submit"]');
+
+  setSelectedScriptLabels(script.labels);
 
   form.elements['id'].value = script.id;
   form.elements['name'].value = script.name;
@@ -188,7 +197,12 @@ export async function saveScript() {
     return;
   }
 
-  const scriptData = { id, name, content };
+  const scriptData = {
+    id,
+    name,
+    labels: getSelectedScriptLabels(),
+    content,
+  };
 
   await saveScriptData(scriptData);
 

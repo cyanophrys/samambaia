@@ -32,7 +32,11 @@ import {
 
 const MAX_LABEL_NAME_LENGTH = 128;
 
+let cachedLabels = [];
+let draftScriptLabels = [];
+let selectedScriptLabels = [];
 let labelItemTemplate;
+let scriptLabelRowTemplate;
 
 function getLabelItemTemplate() {
   if (!labelItemTemplate) {
@@ -43,17 +47,54 @@ function getLabelItemTemplate() {
   return labelItemTemplate;
 }
 
-export async function renderLabels() {
-  const labels = await getAllLabels();
-  const container = document.getElementById('labels-container');
+function getScriptLabelRowTemplate() {
+  return scriptLabelRowTemplate ??= document.getElementById('script-label-row-template');
+}
 
-  labels.sort((a, b) =>
+export function getSelectedScriptLabels() {
+  return [...selectedScriptLabels];
+}
+
+export function setSelectedScriptLabels(labels) {
+  selectedScriptLabels = (labels ?? []).map(String);
+  updateScriptLabelsSubtitle();
+}
+
+function updateScriptLabelsVisibility() {
+  const button = document.querySelector(
+    '[data-action="selectScriptLabels"]'
+  );
+
+  if (button) {
+    button.hidden = cachedLabels.length === 0;
+  }
+}
+
+function updateScriptLabelsSubtitle() {
+  const subtitle = document.getElementById('script-labels-subtitle');
+  if (!subtitle) return;
+
+  const count = selectedScriptLabels.length;
+
+  subtitle.textContent = count === 0
+    ? t('noLabelsSelected')
+    : count === 1
+      ? t('oneLabelSelected')
+      : t('labelsSelectedCount', [String(count)]);
+}
+
+export async function renderLabels() {
+  cachedLabels = (await getAllLabels()).sort((a, b) =>
     a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
   );
 
+  const container = document.getElementById('labels-container');
+
   container.replaceChildren(
-    ...labels.map(createLabelElement)
+    ...cachedLabels.map(createLabelElement)
   );
+
+  updateScriptLabelsVisibility();
 }
 
 export function createLabelElement(label) {
@@ -225,4 +266,110 @@ export async function saveLabel() {
   toast.show('main-toast');
 
   document.dispatchEvent(new CustomEvent('label:changed'));
+}
+
+export async function selectScriptLabels() {
+  const dialog = document.getElementById('labels-selection-dialog');
+  const input = dialog.querySelector('[data-action="filterScriptLabels"]');
+
+  draftScriptLabels = [...selectedScriptLabels];
+  input.value = '';
+
+  await renderScriptLabelsList();
+
+  dialog.showModal();
+}
+
+export function saveLabelsSelection() {
+  const dialog = document.getElementById('labels-selection-dialog');
+
+  setSelectedScriptLabels(draftScriptLabels);
+  draftScriptLabels = [];
+
+  dialog.close();
+}
+
+function createScriptLabelRow(label) {
+  const template = getScriptLabelRowTemplate();
+  const row = template.content.firstElementChild.cloneNode(true);
+
+  const input = row.querySelector('input');
+  const span = row.querySelector('span');
+
+  input.name = `script-label-${label.id}`;
+  input.dataset.target = label.id;
+  input.checked = draftScriptLabels.includes(String(label.id));
+
+  span.textContent = label.name;
+
+  return row;
+}
+
+export async function renderScriptLabelsList() {
+  const selectedSection = document.getElementById('selected-labels-section');
+  const selectedContainer = document.getElementById('selected-labels-list');
+  const availableContainer = document.getElementById('available-labels-list');
+
+  if (!selectedSection || !selectedContainer || !availableContainer) return;
+
+  cachedLabels = (await getAllLabels()).sort((a, b) =>
+    a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+  );
+
+  updateScriptLabelsVisibility();
+
+  const selected = cachedLabels.filter(label => draftScriptLabels.includes(String(label.id)));
+  const available = cachedLabels.filter(label => !draftScriptLabels.includes(String(label.id)));
+
+  selectedSection.hidden = selected.length === 0;
+
+  selectedContainer.replaceChildren(...selected.map(createScriptLabelRow));
+  availableContainer.replaceChildren(...available.map(createScriptLabelRow));
+
+  filterScriptLabels();
+}
+
+export function filterScriptLabels() {
+  const dialog = document.getElementById('labels-selection-dialog');
+  const input = dialog.querySelector('[data-action="filterScriptLabels"]');
+  const stack = dialog.querySelector('smb-stack');
+  const results = document.getElementById('labels-search-results');
+  const query = input.value.toLowerCase().trim();
+
+  if (!query) {
+    stack.show('labels-list');
+    return;
+  }
+
+  const matchingLabels = cachedLabels
+    .filter(label => label.name.toLowerCase().includes(query))
+    .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
+
+  if (matchingLabels.length === 0) {
+    stack.show('no-search-results');
+    return;
+  }
+
+  if (results)
+    results.replaceChildren(...matchingLabels.map(createScriptLabelRow));
+
+  stack.show('search-results');
+}
+
+export function toggleScriptLabel(value, event, element) {
+  const id = String(element.dataset.target);
+  const dialog = document.getElementById('labels-selection-dialog');
+  const inputs = dialog.querySelectorAll(
+    `[data-action="toggleScriptLabel"][data-target="${id}"]`
+  );
+
+  if (element.checked) {
+    if (!draftScriptLabels.includes(id)) draftScriptLabels.push(id);
+  } else {
+    draftScriptLabels = draftScriptLabels.filter(labelId => labelId !== id);
+  }
+
+  inputs.forEach(input => {
+    input.checked = element.checked;
+  });
 }
