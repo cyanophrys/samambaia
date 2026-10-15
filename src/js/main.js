@@ -32,6 +32,10 @@ import {
 } from './tooltip.js';
 
 import {
+  bindMenuEvents,
+} from './menu.js';
+
+import {
   openPreferencesDialog,
   setTheme,
   userPreferences,
@@ -97,6 +101,7 @@ function bindEvents() {
   document.addEventListener('submit', (e) => handleAction(e, actions));
 
   bindTooltipEvents();
+  bindMenuEvents();
 }
 
 bindEvents();
