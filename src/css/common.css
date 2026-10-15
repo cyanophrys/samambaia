@@ -83,6 +83,10 @@
   display: contents
 }
 
+:where(.clamp) {
+  width: min(100%, var(--clamp-width));
+}
+
 .toast-container {
   display: flex;
   flex-direction: column-reverse;
