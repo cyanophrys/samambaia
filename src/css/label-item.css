@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  position: relative;
   overflow: hidden;
   padding-block: var(--spacing-xs);
   padding-inline: var(--spacing-sm);
@@ -21,6 +22,21 @@
     color var(--transition-medium);
   user-select: none;
   cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset-block: 50%;
+    inset-inline-start: 0;
+    inline-size: 4px;
+    block-size: 0;
+    transform: translateY(-50%);
+    border-radius: var(--radius-max);
+    opacity: 0;
+    transition:
+      block-size var(--transition-medium),
+      opacity var(--transition-medium);
+  }
 
   &:hover {
     background-color: color-mix(in oklab, currentColor 8%, transparent);
@@ -50,5 +66,33 @@
 
   .suffix {
     margin-inline-start: auto;
+  }
+
+  &[aria-current="true"] {
+    background-color: var(--selected-bg-color);
+    color: var(--selected-fg-color);
+
+    &::before {
+      background-color: var(--accent-color);
+      block-size: 24px;
+      opacity: 1;
+
+      @starting-style {
+        block-size: 0;
+        opacity: 0;
+      }
+    }
+
+    &:hover {
+      background-color: var(--selected-hover-bg-color);
+    }
+
+    &:active {
+      background-color: var(--selected-active-bg-color);
+    }
+
+    > svg {
+      opacity: 1;
+    }
   }
 }
