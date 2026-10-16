@@ -22,6 +22,17 @@
           visibility: hidden !important;
         }
       }
+
+      &:not([data-loading]) #loading {
+        display: none;
+      }
+    }
+
+    #loading {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
     }
   </style>
   <link rel="stylesheet" href="css/reset.css">
@@ -30,6 +41,15 @@
 <body data-loading>
   <div id="tooltip" popover="manual" role="tooltip">
     <span id="tooltip-label"></span>
+  </div>
+  <div id="loading">
+    <smb-stack id="loading-stack" active-page-name="loading">
+      <smb-stack-page page-name="loading">
+        <smb-placeholder page>
+          <div slot="icon" class="spinner"></div>
+        </smb-placeholder>
+      </smb-stack-page>
+    </smb-stack>
   </div>
   <div id="layout">
     <aside id="sidebar" data-i18n-attr="aria-label:primaryControls">
