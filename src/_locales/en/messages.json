@@ -119,6 +119,9 @@
   "theme": {
     "message": "Theme"
   },
+  "accessibility": {
+    "message": "Accessibility"
+  },
   "storage": {
     "message": "Storage"
   },
