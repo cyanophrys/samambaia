@@ -46,6 +46,7 @@ import {
 import {
   openPreferencesDialog,
   setBackupReminder,
+  setLargeText,
   setTheme,
   setViewMode,
   toggleLabelsSidebar,
@@ -122,6 +123,7 @@ import {
 const actions = {
   change: {
     setBackupReminder,
+    setLargeText,
     setTheme,
   },
 
@@ -209,6 +211,7 @@ async function init() {
     await initScratchpad();
 
     setBackupReminder(userPreferences.backupReminder);
+    setLargeText(userPreferences.largeText);
     setTheme(userPreferences.theme);
     setViewMode(userPreferences.viewMode);
 

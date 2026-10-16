@@ -62,4 +62,8 @@
   &[data-theme="dark"] {
     color-scheme: dark;
   }
+
+  &[data-large-text="true"] {
+    --font-size-base: 18px;
+  }
 }
