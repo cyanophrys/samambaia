@@ -112,6 +112,18 @@
   resize: none;
 }
 
+:where(.spinner) {
+  width: 48px;
+  height: 48px;
+  border: 4px solid color-mix(in oklab, currentColor 20%, transparent);
+  border-top-color: currentColor;
+  border-radius: var(--radius-max);
+  opacity: 0;
+  animation:
+    rotate 0.8s linear infinite,
+    fade-in 0.5s ease 0.5s forwards;
+}
+
 .toast-container {
   display: flex;
   flex-direction: column-reverse;
