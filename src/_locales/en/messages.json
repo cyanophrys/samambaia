@@ -79,6 +79,12 @@
   "loading": {
     "message": "Loading"
   },
+  "loadingFailedHeading": {
+    "message": "Something went wrong"
+  },
+  "tryAgain": {
+    "message": "Try again"
+  },
 
   "primaryControls": {
     "message": "Primary controls"
