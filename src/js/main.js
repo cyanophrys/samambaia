@@ -93,6 +93,7 @@ import {
   saveLabel,
   selectScriptLabels,
   saveLabelsSelection,
+  togglePinLabel,
   toggleScriptLabel,
 } from './labels.js';
 
@@ -155,6 +156,7 @@ const actions = {
     setViewMode,
     toggleFavoriteScript,
     toggleLabelsSidebar,
+    togglePinLabel,
     toggleScratchpadSidebar,
     toggleScriptLabel,
     toggleVariablesSidebar,

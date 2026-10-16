@@ -99,11 +99,15 @@ export async function renderLabels() {
     a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
   );
 
+  const pinnedContainer = document.getElementById('pinned-labels-container');
   const container = document.getElementById('labels-container');
 
-  container.replaceChildren(
-    ...cachedLabels.map(createLabelElement)
-  );
+  const pinned = cachedLabels.filter(label => label.pinned);
+  const unpinned = cachedLabels.filter(label => !label.pinned);
+
+  pinnedContainer.hidden = pinned.length === 0;
+  pinnedContainer.replaceChildren(...pinned.map(createLabelElement));
+  container.replaceChildren(...unpinned.map(createLabelElement));
 
   updateScriptLabelsVisibility();
 }
@@ -114,12 +118,15 @@ export function createLabelElement(label) {
 
   item.dataset.target = label.id;
   item.setAttribute('aria-label', label.name);
+  item.dataset.pinned = label.pinned ? 'true' : 'false';
 
   const title = item.querySelector('.title');
   const moreButton = item.querySelector('[aria-haspopup]');
   const menu = item.querySelector('.menu');
   const editButton = item.querySelector('[data-action="editLabel"]');
   const deleteButton = item.querySelector('[data-action="deleteLabel"]');
+  const pinButton = item.querySelector('[data-action="togglePinLabel"]');
+  const pinLabel = pinButton.querySelector('span');
 
   const actionsId = `label-menu-${label.id}`;
   const anchorName = `--label-menu-${label.id}`;
@@ -132,6 +139,10 @@ export function createLabelElement(label) {
   menu.id = actionsId;
   menu.style.positionAnchor = anchorName;
   menu.setAttribute('aria-label', t('optionsFor', [label.name]));
+
+  pinButton.setAttribute('popovertarget', actionsId);
+  pinButton.dataset.target = label.id;
+  pinLabel.textContent = label.pinned ? t('unpin') : t('pin');
 
   editButton.setAttribute('popovertarget', actionsId);
   editButton.dataset.target = label.id;
@@ -384,4 +395,34 @@ export function toggleScriptLabel(value, event, element) {
   inputs.forEach(input => {
     input.checked = element.checked;
   });
+}
+
+export async function togglePinLabel(target) {
+  const id = Number(target.dataset.target);
+  if (Number.isNaN(id)) return;
+
+  const label = await getLabel(id);
+  if (!label) return;
+
+  const isPinned = !label.pinned;
+
+  await saveLabelData({ ...label, pinned: isPinned });
+  await renderLabels();
+
+  const message = isPinned
+    ? t('labelPinned', label.name)
+    : t('labelUnpinned', label.name);
+  const toast = document.createElement('smb-toast');
+
+  toast.message = message;
+  toast.addAction(t('undo'), async () => {
+    try {
+      await saveLabelData({ ...label, pinned: !isPinned });
+      await renderLabels();
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  toast.show('main-toast');
 }
