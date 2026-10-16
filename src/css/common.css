@@ -88,6 +88,16 @@
   width: min(100%, var(--clamp-width));
 }
 
+:where(.textarea-autogrow) {
+  flex: 1;
+  field-sizing: content;
+  min-height: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  resize: none;
+}
+
 .toast-container {
   display: flex;
   flex-direction: column-reverse;
