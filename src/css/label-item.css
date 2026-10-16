@@ -50,10 +50,18 @@
     padding-inline-end: var(--spacing-xs);
   }
 
-  > svg {
+  > .pin-icon {
     flex-shrink: 0;
     opacity: var(--dimmed-opacity);
     transition: opacity var(--transition-medium);
+    inline-size: 18px;
+    block-size: 18px;
+  }
+
+  > .pin-icon,
+  .menu .pin-icon,
+  .menu .unpin-icon {
+    display: none;
   }
 
   > span {
@@ -90,12 +98,18 @@
       background-color: var(--selected-active-bg-color);
     }
 
-    > svg {
+    > .pin-icon {
       opacity: 1;
     }
 
     > span {
       font-weight: 600;
     }
+  }
+
+  &:not([data-pinned="true"]) .menu .pin-icon,
+  &[data-pinned="true"] > .pin-icon,
+  &[data-pinned="true"] .menu .unpin-icon {
+    display: block;
   }
 }
