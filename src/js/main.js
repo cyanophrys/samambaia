@@ -83,6 +83,15 @@ import {
   toggleScriptLabel,
 } from './labels.js';
 
+import {
+  addVariable,
+  deleteVariable,
+  editVariable,
+  handleVariableValueInput,
+  renderVariables,
+  saveVariable,
+} from './variables.js';
+
 const actions = {
   change: {
     setTheme,
@@ -91,11 +100,14 @@ const actions = {
   click: {
     addLabel,
     addScript,
+    addVariable,
     copyScript,
     deleteLabel,
     deleteScript,
+    deleteVariable,
     editLabel,
     editScript,
+    editVariable,
     filterByLabel,
     openPreferencesDialog,
     searchAllScripts,
@@ -109,12 +121,14 @@ const actions = {
   input: {
     filterScripts,
     filterScriptLabels,
+    handleVariableValueInput,
   },
 
   submit: {
     saveLabel,
     saveLabelsSelection,
     saveScript,
+    saveVariable,
   },
 };
 
@@ -149,6 +163,7 @@ async function init() {
   await initDB();
   await renderScripts();
   await renderLabels();
+  await renderVariables();
 
   setTheme(userPreferences.theme);
   setViewMode(userPreferences.viewMode);
