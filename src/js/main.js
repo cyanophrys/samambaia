@@ -96,6 +96,14 @@ import {
   saveVariable,
 } from './variables.js';
 
+import {
+  copyScratchpad,
+  clearScratchpad,
+  expandScratchpad,
+  handleScratchpadInput,
+  initScratchpad,
+} from './scratchpad.js';
+
 const actions = {
   change: {
     setTheme,
@@ -105,13 +113,16 @@ const actions = {
     addLabel,
     addScript,
     addVariable,
+    copyScratchpad,
     copyScript,
+    clearScratchpad,
     deleteLabel,
     deleteScript,
     deleteVariable,
     editLabel,
     editScript,
     editVariable,
+    expandScratchpad,
     filterByLabel,
     openPreferencesDialog,
     searchAllScripts,
@@ -125,6 +136,7 @@ const actions = {
   input: {
     filterScripts,
     filterScriptLabels,
+    handleScratchpadInput,
     handleVariableValueInput,
   },
 
@@ -169,6 +181,8 @@ async function init() {
   await renderScripts();
   await renderLabels();
   await renderVariables();
+
+  await initScratchpad();
 
   setTheme(userPreferences.theme);
   setViewMode(userPreferences.viewMode);
