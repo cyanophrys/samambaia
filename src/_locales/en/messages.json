@@ -64,6 +64,10 @@
   "optionsFor": {
     "message": "Options for \"$1\""
   },
+  "pin": {
+    "message": "Pin",
+    "description": "Action used to pin an item to the top of a list"
+  },
   "select": {
     "message": "Select",
     "description": "Action used to select an item"
@@ -74,6 +78,10 @@
   "undo": {
     "message": "Undo",
     "description": "Action used to revert a change"
+  },
+  "unpin": {
+    "message": "Unpin",
+    "description": "Action used to unpin an item"
   },
 
   "loadingFailedHeading": { "message": "Something went wrong" },
@@ -255,6 +263,12 @@
   },
   "labelNameTooLong": {
     "message": "Label name cannot exceed $1 characters"
+  },
+  "labelPinned": {
+    "message": "Label \"$1\" pinned"
+  },
+  "labelUnpinned": {
+    "message": "Label \"$1\" unpinned"
   },
 
   "availableLabels": {
