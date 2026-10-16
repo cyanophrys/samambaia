@@ -76,6 +76,10 @@
     "description": "Action used to revert a change"
   },
 
+  "loading": {
+    "message": "Loading"
+  },
+
   "primaryControls": {
     "message": "Primary controls"
   },
