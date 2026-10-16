@@ -58,6 +58,10 @@ import {
 } from './preferences.js';
 
 import {
+  state,
+} from './state.js';
+
+import {
   initDB,
 } from './db.js';
 
@@ -110,7 +114,13 @@ import {
 import {
   exportBackup,
   restoreBackup,
+  toggleBackupBanner,
+  warnBeforeUnload,
 } from './backup.js';
+
+import {
+  debounce,
+} from './utils.js';
 
 const actions = {
   change: {
@@ -204,6 +214,7 @@ async function init() {
     setTheme(userPreferences.theme);
     setViewMode(userPreferences.viewMode);
 
+    toggleBackupBanner(state.hasUnsavedChanges);
     toggleLabelsSidebar(userPreferences.sidebars.labels);
     toggleScratchpadSidebar(userPreferences.sidebars.scratchpad);
     toggleVariablesSidebar(userPreferences.sidebars.variables);
@@ -239,10 +250,16 @@ async function init() {
 
 function bindEvents() {
   const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+  const debouncedToggleBackupBanner = debounce(
+    () => toggleBackupBanner(state.hasUnsavedChanges),
+    300
+  );
 
   prefersDarkMode.addEventListener('change', () => {
     if (userPreferences.theme === 'system') setTheme('system');
   });
+
+  window.addEventListener('beforeunload', warnBeforeUnload);
 
   document.addEventListener('click', (e) => handleAction(e, actions));
   document.addEventListener('change', (e) => handleAction(e, actions));
@@ -250,6 +267,13 @@ function bindEvents() {
   document.addEventListener('submit', (e) => handleAction(e, actions));
 
   document.addEventListener('label:changed', renderScripts);
+
+  ['data:changed', 'backup:completed'].forEach((event) => {
+    document.addEventListener(event, () => {
+      state.hasUnsavedChanges = event === 'data:changed';
+      debouncedToggleBackupBanner();
+    });
+  });
 
   bindTooltipEvents();
   bindMenuEvents();

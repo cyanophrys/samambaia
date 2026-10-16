@@ -376,5 +376,8 @@
   },
   "restoreFailed": {
     "message": "Restore failed. Check that the file is valid."
+  },
+  "unsavedChanges": {
+    "message": "There are unsaved changes"
   }
 }

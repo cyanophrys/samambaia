@@ -22,6 +22,7 @@ import {
 } from './store.js';
 
 const DEFAULT_STATE = {
+  hasUnsavedChanges: false,
 };
 
 export const state = createStore(
