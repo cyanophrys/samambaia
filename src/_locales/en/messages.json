@@ -360,6 +360,12 @@
   "variableNameTooLong": {
     "message": "Variable name cannot exceed $1 characters"
   },
+  "variablePinned": {
+    "message": "Variable \"$1\" pinned"
+  },
+  "variableUnpinned": {
+    "message": "Variable \"$1\" unpinned"
+  },
 
   "scratchpad": {
     "message": "Scratchpad"
