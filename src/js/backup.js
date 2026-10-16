@@ -46,7 +46,9 @@ import {
 const BACKUP_SCHEMA_VERSION = 1;
 
 export function warnBeforeUnload(event) {
-  if (state.hasUnsavedChanges) {
+  const isEnabled = userPreferences.backupReminder ?? true;
+
+  if (state.hasUnsavedChanges && isEnabled) {
     event.preventDefault();
     event.returnValue = '';
   }
@@ -56,7 +58,9 @@ export function toggleBackupBanner(hasUnsavedChanges) {
   const banner = document.getElementById('backup-banner');
   if (!banner) return;
 
-  banner.dataset.visible = String(hasUnsavedChanges);
+  const isEnabled = userPreferences.backupReminder ?? true;
+
+  banner.dataset.visible = String(hasUnsavedChanges && isEnabled);
 }
 
 function confirmRestore() {
