@@ -171,28 +171,39 @@ function handleAction(event, actions) {
 }
 
 async function init() {
-  const manifest = getManifestInfo();
   const pendingToast = sessionStorage.getItem('pendingToast');
+  const stack = document.getElementById('loading-stack');
+  const placeholder = document.getElementById('loading-placeholder');
   const searchInput = document.querySelector('[data-action="filterScripts"]');
 
-  document.documentElement.lang = getLocale();
-  document.title = manifest.name;
+  try {
+    const manifest = getManifestInfo();
 
-  applyTranslations();
+    document.documentElement.lang = getLocale();
+    document.title = manifest.name;
 
-  await initDB();
-  await renderScripts();
-  await renderLabels();
-  await renderVariables();
+    applyTranslations();
 
-  await initScratchpad();
+    await initDB();
+    await renderScripts();
+    await renderLabels();
+    await renderVariables();
+    await initScratchpad();
 
-  setTheme(userPreferences.theme);
-  setViewMode(userPreferences.viewMode);
+    setTheme(userPreferences.theme);
+    setViewMode(userPreferences.viewMode);
 
-  toggleLabelsSidebar(userPreferences.sidebars.labels);
-  toggleScratchpadSidebar(userPreferences.sidebars.scratchpad);
-  toggleVariablesSidebar(userPreferences.sidebars.variables);
+    toggleLabelsSidebar(userPreferences.sidebars.labels);
+    toggleScratchpadSidebar(userPreferences.sidebars.scratchpad);
+    toggleVariablesSidebar(userPreferences.sidebars.variables);
+  } catch (error) {
+    console.error(error);
+
+    placeholder.description = error.message;
+    stack.show('error');
+
+    return;
+  }
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
