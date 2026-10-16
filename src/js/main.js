@@ -103,6 +103,11 @@ import {
   initScratchpad,
 } from './scratchpad.js';
 
+import {
+  exportBackup,
+  restoreBackup,
+} from './backup.js';
+
 const actions = {
   change: {
     setTheme,
@@ -122,9 +127,11 @@ const actions = {
     editScript,
     editVariable,
     expandScratchpad,
+    exportBackup,
     filterByLabel,
     openPreferencesDialog,
     reload: () => window.location.reload(),
+    restoreBackup,
     searchAllScripts,
     selectScriptLabels,
     setViewMode,
