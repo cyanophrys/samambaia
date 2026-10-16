@@ -76,6 +76,9 @@
     "description": "Action used to revert a change"
   },
 
+  "loadingFailedHeading": { "message": "Something went wrong" },
+  "tryAgain": { "message": "Try again" },
+
   "primaryControls": {
     "message": "Primary controls"
   },
