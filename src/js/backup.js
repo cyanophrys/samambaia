@@ -17,6 +17,7 @@
  */
 
 import {
+  dbHasContent,
   getAllLabels,
   getAllScripts,
   getAllVariables,
@@ -42,6 +43,26 @@ import {
 } from './i18n.js';
 
 const BACKUP_SCHEMA_VERSION = 1;
+
+function confirmRestore() {
+  const dialog = document.createElement('smb-alert-dialog');
+
+  dialog.heading = t('replaceExistingDataHeading');
+  dialog.body = t('replaceExistingDataBody');
+
+  dialog.addResponses([
+    { id: 'cancel', label: t('cancel'), appearance: 'default' },
+    { id: 'restore', label: t('replaceData'), appearance: 'destructive' },
+  ]);
+
+  return new Promise((resolve) => {
+    dialog.addEventListener('response', (event) => {
+      resolve(event.detail.response === 'restore');
+    }, { once: true });
+
+    dialog.showModal();
+  });
+}
 
 function formatTimestamp(date) {
   const pad = (value) => String(value).padStart(2, '0');
@@ -225,6 +246,13 @@ export async function restoreBackup() {
 
     if (!validateBackup(data))
       throw new Error('Invalid file format');
+
+    if (await dbHasContent()) {
+      const confirmed = await confirmRestore();
+
+      if (!confirmed)
+        return;
+    }
 
     await restoreBackupFromFile({
       labels: data.labels,
