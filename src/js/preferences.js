@@ -149,3 +149,14 @@ export function toggleScratchpadSidebar(value) {
 
   userPreferences.sidebars.scratchpad = isOpen;
 }
+
+export function setBackupReminder(value, event) {
+  const isEnabled =
+    (typeof value === 'boolean' ? value : event?.target?.checked)
+    ?? DEFAULT_PREFERENCES.backupReminder ?? true;
+
+  userPreferences.backupReminder = isEnabled;
+  updatePreferenceControl('backup-reminder', isEnabled);
+
+  document.dispatchEvent(new Event('backupReminder:changed'));
+}
