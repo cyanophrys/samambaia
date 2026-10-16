@@ -154,6 +154,7 @@ function handleAction(event, actions) {
 async function init() {
   const manifest = getManifestInfo();
   const pendingToast = sessionStorage.getItem('pendingToast');
+  const searchInput = document.querySelector('[data-action="filterScripts"]');
 
   document.documentElement.lang = getLocale();
   document.title = manifest.name;
@@ -171,6 +172,7 @@ async function init() {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       document.body.removeAttribute('data-loading');
+      searchInput?.focus();
     });
   });
 
