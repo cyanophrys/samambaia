@@ -19,6 +19,7 @@
 import reset from '../../css/reset.css' with { type: 'css' };
 import common from '../../css/common.css' with { type: 'css' };
 import button from '../../css/button.css' with { type: 'css' };
+import animations from '../../css/animations.css' with { type: 'css' };
 import component from './smb-dialog.css' with { type: 'css' };
 
 import {
@@ -28,7 +29,7 @@ import {
 const template = document.createElement('template');
 template.innerHTML = `
   <dialog id="dialog" aria-labelledby="heading">
-    <header class="header">
+    <header class="header scroll-shadow-top">
       <div>
         <h1 id="heading"></h1>
         <span id="subtitle"></span>
@@ -39,7 +40,7 @@ template.innerHTML = `
       <slot name="subheader"></slot>
     </header>
     <slot></slot>
-    <footer class="footer">
+    <footer class="footer scroll-shadow-bottom">
       <slot name="footer-left"></slot>
       <slot name="footer-center"></slot>
       <slot name="footer-right"></slot>
@@ -56,7 +57,7 @@ export class SmbDialog extends HTMLElement {
     super();
 
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.adoptedStyleSheets = [reset, common, button, component];
+    this.shadowRoot.adoptedStyleSheets = [reset, common, button, animations, component];
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     applyTranslations(this.shadowRoot);

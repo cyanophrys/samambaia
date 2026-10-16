@@ -19,6 +19,7 @@
 import reset from '../../css/reset.css' with { type: 'css' };
 import common from '../../css/common.css' with { type: 'css' };
 import button from '../../css/button.css' with { type: 'css' };
+import animations from '../../css/animations.css' with { type: 'css' };
 import component from './smb-alert-dialog.css' with { type: 'css' };
 
 const template = document.createElement('template');
@@ -33,7 +34,7 @@ template.innerHTML = `
         <slot name="additional-content" id="additional-content"></slot>
       </section>
     </div>
-    <footer id="actions" class="footer"></footer>
+    <footer id="actions" class="footer scroll-shadow-bottom"></footer>
   </dialog>
 `;
 
@@ -54,7 +55,7 @@ export class SmbAlertDialog extends HTMLElement {
     super();
 
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.adoptedStyleSheets = [reset, common, button, component];
+    this.shadowRoot.adoptedStyleSheets = [reset, common, button, animations, component];
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     this.#dialog = this.shadowRoot.getElementById('dialog');
