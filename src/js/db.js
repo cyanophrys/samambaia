@@ -20,6 +20,7 @@ const DB_NAME = 'SamambaiaDB';
 const DB_VERSION = 1;
 const SCRIPTS_STORE = 'scripts';
 const LABELS_STORE = 'labels';
+const VARIABLES_STORE = 'variables';
 
 let db;
 
@@ -58,6 +59,13 @@ export function initDB() {
 
       if (!database.objectStoreNames.contains(LABELS_STORE)) {
         database.createObjectStore(LABELS_STORE, {
+          keyPath: 'id',
+          autoIncrement: true,
+        });
+      }
+
+      if (!database.objectStoreNames.contains(VARIABLES_STORE)) {
+        database.createObjectStore(VARIABLES_STORE, {
           keyPath: 'id',
           autoIncrement: true,
         });
@@ -198,6 +206,69 @@ export function deleteLabelData(id) {
     const request = store.delete(id);
 
     request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function getAllVariables() {
+  return new Promise((resolve, reject) => {
+    const database = getDB();
+    const transaction = database.transaction(VARIABLES_STORE, 'readonly');
+    const store = transaction.objectStore(VARIABLES_STORE);
+    const request = store.getAll();
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function getVariable(id) {
+  return new Promise((resolve, reject) => {
+    const database = getDB();
+    const transaction = database.transaction(VARIABLES_STORE, 'readonly');
+    const store = transaction.objectStore(VARIABLES_STORE);
+    const request = store.get(id);
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function saveVariableData(variable) {
+  return new Promise((resolve, reject) => {
+    const database = getDB();
+    const transaction = database.transaction(VARIABLES_STORE, 'readwrite');
+    const store = transaction.objectStore(VARIABLES_STORE);
+
+    const data = { ...variable };
+
+    if (data.id == null || data.id === '') {
+      delete data.id;
+    } else {
+      data.id = Number(data.id);
+    }
+
+    const request = data.id == null
+      ? store.add(data)
+      : store.put(data);
+
+    request.onsuccess = () => {
+      resolve(request.result);
+    };
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function deleteVariableData(id) {
+  return new Promise((resolve, reject) => {
+    const database = getDB();
+    const transaction = database.transaction(VARIABLES_STORE, 'readwrite');
+    const store = transaction.objectStore(VARIABLES_STORE);
+    const request = store.delete(id);
+
+    request.onsuccess = () => {
+      resolve();
+    };
     request.onerror = () => reject(request.error);
   });
 }
