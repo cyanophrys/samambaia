@@ -26,6 +26,7 @@ import {
 } from './i18n.js';
 
 const DEFAULT_PREFERENCES = {
+  backupReminder: true,
   sidebars: {
     labels: true,
     scratchpad: false,
@@ -82,6 +83,17 @@ function toggleSidebar(button, value) {
 export function openPreferencesDialog() {
   const dialog = document.getElementById('preferences-dialog');
   dialog.showModal();
+}
+
+export function setBackupReminder(value, event) {
+  const isEnabled =
+    (typeof value === 'boolean' ? value : event?.target?.checked)
+    ?? DEFAULT_PREFERENCES.backupReminder ?? true;
+
+  userPreferences.backupReminder = isEnabled;
+  updatePreferenceControl('backup-reminder', isEnabled);
+
+  document.dispatchEvent(new Event('backupReminder:changed'));
 }
 
 export function setTheme(value) {
