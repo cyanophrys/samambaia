@@ -75,6 +75,10 @@
   inline-size: 100%;
 }
 
+:where(.contents) {
+  display: contents
+}
+
 .toast-container {
   display: flex;
   flex-direction: column-reverse;
