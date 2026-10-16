@@ -359,6 +359,15 @@
   "jsonFiles": {
     "message": "JSON Files"
   },
+  "replaceData": {
+    "message": "Replace data"
+  },
+  "replaceExistingDataBody": {
+    "message": "This will replace your existing data. This action cannot be undone."
+  },
+  "replaceExistingDataHeading": {
+    "message": "Replace existing data?"
+  },
   "restoreBackup": {
     "message": "Restore backup"
   },
