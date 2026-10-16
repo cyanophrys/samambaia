@@ -8,6 +8,7 @@
   gap: var(--spacing-md);
   overflow-inline: hidden;
   overflow-block: auto;
+  scroll-timeline: var(--scroll-timeline-name, --scroll) block;
 
   > *:only-child {
     flex: 1;

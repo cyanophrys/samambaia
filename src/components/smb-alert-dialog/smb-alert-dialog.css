@@ -1,3 +1,7 @@
+:host {
+  timeline-scope: --scroll;
+}
+
 dialog {
   position: fixed;
   position-area: center;
@@ -58,6 +62,7 @@ dialog {
   .scrollable-area {
     text-align: center;
     padding: var(--spacing-lg);
+    scroll-timeline: --scroll block;
 
     h1,
     p {
