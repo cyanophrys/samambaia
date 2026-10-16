@@ -1,7 +1,13 @@
 :host {
+  --scroll-timeline-name: none;
+
   display: flex;
   flex-direction: column;
   min-inline-size: 0;
   min-block-size: 0;
   overflow: hidden;
+}
+
+:host([data-active]) {
+  --scroll-timeline-name: --scroll;
 }

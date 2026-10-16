@@ -105,6 +105,10 @@ main {
       font-size: var(--font-size-base);
     }
   }
+
+  #scratchpad-sidebar {
+    timeline-scope: --scroll;
+  }
 }
 
 #main-view {
