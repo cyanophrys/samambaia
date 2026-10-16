@@ -26,6 +26,11 @@ import {
 } from './i18n.js';
 
 const DEFAULT_PREFERENCES = {
+  sidebars: {
+    labels: true,
+    scratchpad: false,
+    variables: true,
+  },
   theme: 'system',
   viewMode: 'grid',
 };
@@ -107,4 +112,31 @@ export function setViewMode(value) {
 
   button.setAttribute('aria-label', label);
   button.setAttribute('aria-pressed', newView === 'grid');
+}
+
+export function toggleLabelsSidebar(value) {
+  const button = document.querySelector('[data-action="toggleLabelsSidebar"]');
+  if (!button) return;
+
+  const isOpen = toggleSidebar(button, value);
+
+  userPreferences.sidebars.labels = isOpen;
+}
+
+export function toggleVariablesSidebar(value) {
+  const button = document.querySelector('[data-action="toggleVariablesSidebar"]');
+  if (!button) return;
+
+  const isOpen = toggleSidebar(button, value);
+
+  userPreferences.sidebars.variables = isOpen;
+}
+
+export function toggleScratchpadSidebar(value) {
+  const button = document.querySelector('[data-action="toggleScratchpadSidebar"]');
+  if (!button) return;
+
+  const isOpen = toggleSidebar(button, value);
+
+  userPreferences.sidebars.scratchpad = isOpen;
 }
