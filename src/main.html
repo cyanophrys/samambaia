@@ -123,6 +123,10 @@
         </aside>
         <div id="main-view" class="surface" style="anchor-name: --main-view-anchor;">
           <div id="main-toast" class="toast-container" style="position-anchor: --main-view-anchor;"></div>
+          <div id="backup-banner" class="banner" data-visible="false" role="status" aria-live="polite">
+            <span data-i18n="unsavedChanges"></span>
+            <button type="button" class="button suggested-action" data-action="exportBackup" data-i18n="backUpEllipsis"></button>
+          </div>
           <smb-stack id="main-stack" transition>
             <smb-stack-page page-name="scripts">
               <div class="scrollable-area">
