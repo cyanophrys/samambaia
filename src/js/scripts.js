@@ -30,6 +30,10 @@ import {
 } from './labels.js';
 
 import {
+  applyVariables
+} from './variables.js';
+
+import {
   applyTranslations,
   t,
 } from './i18n.js';
@@ -294,7 +298,7 @@ export async function copyScript(target) {
     const script = await getScript(id);
     if (!script) return;
 
-    await navigator.clipboard.writeText(script.content);
+    await navigator.clipboard.writeText(applyVariables(script.content));
 
     toast.message = t('copiedToClipboard');
   } catch (error) {
