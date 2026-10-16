@@ -21,6 +21,10 @@ import {
 } from './store.js';
 
 import {
+  state,
+} from './state.js';
+
+import {
   wipeDB,
 } from './db.js';
 
@@ -63,6 +67,8 @@ export async function wipeData() {
 
       await wipeStoredData(mainTabId !== undefined ? { mainTabId } : {});
       await wipeDB();
+
+      state.hasUnsavedChanges = false;
 
       sessionStorage.setItem('pendingToast', t('dataDeleted'));
 
