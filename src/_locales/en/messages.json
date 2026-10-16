@@ -338,5 +338,34 @@
   },
   "typeSomethingHere": {
     "message": "Type something here"
+  },
+
+  "backUpAction": {
+    "message": "Back up",
+    "description": "Verb indicating an action that exports a backup file"
+  },
+  "backUpEllipsis": {
+    "message": "Back up…"
+  },
+  "backupCompleted": {
+    "message": "Backup completed"
+  },
+  "backupFailed": {
+    "message": "Backup failed"
+  },
+  "backupRestored": {
+    "message": "Backup restored"
+  },
+  "jsonFiles": {
+    "message": "JSON Files"
+  },
+  "restoreBackup": {
+    "message": "Restore backup"
+  },
+  "restoreBackupEllipsis": {
+    "message": "Restore backup…"
+  },
+  "restoreFailed": {
+    "message": "Restore failed. Check that the file is valid."
   }
 }
