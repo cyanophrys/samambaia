@@ -113,6 +113,13 @@ main {
 
 #main-view {
   flex: 1;
+  container-type: inline-size;
+
+  &:has(#backup-banner[data-visible="true"]) {
+    .scrollable-area {
+      padding-top: var(--spacing-lg);
+    }
+  }
 
   .scrollable-area {
     padding: calc(var(--spacing-sm) - 4px);

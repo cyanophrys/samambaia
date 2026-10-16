@@ -31,6 +31,7 @@ import {
 
 import {
   resetState,
+  state,
 } from './state.js';
 
 import {
@@ -43,6 +44,20 @@ import {
 } from './i18n.js';
 
 const BACKUP_SCHEMA_VERSION = 1;
+
+export function warnBeforeUnload(event) {
+  if (state.hasUnsavedChanges) {
+    event.preventDefault();
+    event.returnValue = '';
+  }
+}
+
+export function toggleBackupBanner(hasUnsavedChanges) {
+  const banner = document.getElementById('backup-banner');
+  if (!banner) return;
+
+  banner.dataset.visible = String(hasUnsavedChanges);
+}
 
 function confirmRestore() {
   const dialog = document.createElement('smb-alert-dialog');
@@ -170,6 +185,7 @@ export async function exportBackup() {
         await writable.write(blob);
         await writable.close();
 
+        state.hasUnsavedChanges = false;
         document.dispatchEvent(new Event('backup:completed'));
 
         const toast = document.createElement('smb-toast');
@@ -194,6 +210,7 @@ export async function exportBackup() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
+    state.hasUnsavedChanges = false;
     document.dispatchEvent(new Event('backup:completed'));
 
     const toast = document.createElement('smb-toast');
