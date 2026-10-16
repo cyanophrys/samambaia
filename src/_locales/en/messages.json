@@ -122,6 +122,15 @@
   "storage": {
     "message": "Storage"
   },
+  "backup": {
+    "message": "Backup"
+  },
+  "backupReminder": {
+    "message": "Backup reminder"
+  },
+  "backupReminderDescription": {
+    "message": "Get a reminder to back up your data after making changes"
+  },
   "dataDeleted": {
     "message": "Data deleted"
   },

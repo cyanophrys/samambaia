@@ -45,6 +45,7 @@ import {
 
 import {
   openPreferencesDialog,
+  setBackupReminder,
   setTheme,
   setViewMode,
   toggleLabelsSidebar,
@@ -120,6 +121,7 @@ import {
 
 const actions = {
   change: {
+    setBackupReminder,
     setTheme,
   },
 
@@ -207,6 +209,7 @@ async function init() {
     await renderVariables();
     await initScratchpad();
 
+    setBackupReminder(userPreferences.backupReminder);
     setTheme(userPreferences.theme);
     setViewMode(userPreferences.viewMode);
 
@@ -274,6 +277,10 @@ function bindEvents() {
         toggleBackupBanner(state.hasUnsavedChanges);
       }
     });
+  });
+
+  document.addEventListener('backupReminder:changed', () => {
+    toggleBackupBanner(state.hasUnsavedChanges);
   });
 
   bindTooltipEvents();
