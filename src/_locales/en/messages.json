@@ -20,6 +20,10 @@
   "cancelSearch": {
     "message": "Cancel search"
   },
+  "clear": {
+    "message": "Clear",
+    "description": "Action used to clear content"
+  },
   "close": {
     "message": "Close",
     "description": "Action used to close or dismissing an item"
@@ -40,6 +44,10 @@
   },
   "editEllipsis": {
     "message": "Edit…"
+  },
+  "expand": {
+    "message": "Expand",
+    "description": "Action used to expand an item"
   },
   "deleteEllipsis": {
     "message": "Delete…"
@@ -313,5 +321,18 @@
   },
   "variableNameTooLong": {
     "message": "Variable name cannot exceed $1 characters"
+  },
+
+  "scratchpad": {
+    "message": "Scratchpad"
+  },
+  "scratchpadCleared": {
+    "message": "Scratchpad cleared"
+  },
+  "toggleScratchpadSidebar": {
+    "message": "Toggle scratchpad sidebar"
+  },
+  "typeSomethingHere": {
+    "message": "Type something here"
   }
 }
