@@ -51,6 +51,9 @@ import {
   openPreferencesDialog,
   setTheme,
   setViewMode,
+  toggleLabelsSidebar,
+  toggleScratchpadSidebar,
+  toggleVariablesSidebar,
   userPreferences,
 } from './preferences.js';
 
@@ -129,7 +132,10 @@ const actions = {
     selectScriptLabels,
     setViewMode,
     toggleFavoriteScript,
+    toggleLabelsSidebar,
+    toggleScratchpadSidebar,
     toggleScriptLabel,
+    toggleVariablesSidebar,
     wipeData,
   },
 
@@ -186,6 +192,10 @@ async function init() {
 
   setTheme(userPreferences.theme);
   setViewMode(userPreferences.viewMode);
+
+  toggleLabelsSidebar(userPreferences.sidebars.labels);
+  toggleScratchpadSidebar(userPreferences.sidebars.scratchpad);
+  toggleVariablesSidebar(userPreferences.sidebars.variables);
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
