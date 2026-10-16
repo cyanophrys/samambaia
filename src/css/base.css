@@ -15,6 +15,10 @@
   outline-offset: 2px;
 }
 
+::placeholder {
+  color: var(--placeholder-color);
+}
+
 * {
   scrollbar-color: var(--scrollbar-color);
 }
