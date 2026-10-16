@@ -21,6 +21,7 @@ const DB_VERSION = 1;
 const SCRIPTS_STORE = 'scripts';
 const LABELS_STORE = 'labels';
 const VARIABLES_STORE = 'variables';
+const SCRATCHPAD_STORE = 'scratchpad';
 
 let db;
 
@@ -70,6 +71,9 @@ export function initDB() {
           autoIncrement: true,
         });
       }
+
+      if (!database.objectStoreNames.contains(SCRATCHPAD_STORE))
+        database.createObjectStore(SCRATCHPAD_STORE, { keyPath: 'id' });
     };
   });
 }
@@ -269,6 +273,39 @@ export function deleteVariableData(id) {
     request.onsuccess = () => {
       resolve();
     };
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function getScratchpadData() {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(SCRATCHPAD_STORE, 'readonly');
+    const store = transaction.objectStore(SCRATCHPAD_STORE);
+    const request = store.get(1);
+
+    request.onsuccess = () => resolve(request.result ? request.result.content : '');
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function saveScratchpadData(content) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(SCRATCHPAD_STORE, 'readwrite');
+    const store = transaction.objectStore(SCRATCHPAD_STORE);
+    const request = store.put({ id: 1, content });
+
+    request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export function clearScratchpadData() {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(SCRATCHPAD_STORE, 'readwrite');
+    const store = transaction.objectStore(SCRATCHPAD_STORE);
+    const request = store.put({ id: 1, content: '' });
+
+    request.onsuccess = () => resolve();
     request.onerror = () => reject(request.error);
   });
 }
