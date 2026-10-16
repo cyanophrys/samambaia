@@ -27,6 +27,7 @@ import {
 
 const DEFAULT_PREFERENCES = {
   backupReminder: true,
+  largeText: false,
   sidebars: {
     labels: true,
     scratchpad: false,
@@ -94,6 +95,16 @@ export function setBackupReminder(value, event) {
   updatePreferenceControl('backup-reminder', isEnabled);
 
   document.dispatchEvent(new Event('backupReminder:changed'));
+}
+
+export function setLargeText(value, event) {
+  const isLargeTextEnabled =
+    (typeof value === 'boolean' ? value : event?.target?.checked)
+    ?? DEFAULT_PREFERENCES.largeText;
+
+  userPreferences.largeText = isLargeTextEnabled;
+  document.documentElement.setAttribute('data-large-text', isLargeTextEnabled);
+  updatePreferenceControl('large-text', isLargeTextEnabled);
 }
 
 export function setTheme(value) {

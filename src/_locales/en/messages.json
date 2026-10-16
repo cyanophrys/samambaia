@@ -122,6 +122,15 @@
   "accessibility": {
     "message": "Accessibility"
   },
+  "largeText": {
+    "message": "Large text"
+  },
+  "largeTextDescription": {
+    "message": "Increases the text size throughout the interface"
+  },
+  "interface": {
+    "message": "Interface"
+  },
   "storage": {
     "message": "Storage"
   },
