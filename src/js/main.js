@@ -124,6 +124,7 @@ const actions = {
     expandScratchpad,
     filterByLabel,
     openPreferencesDialog,
+    reload: () => window.location.reload(),
     searchAllScripts,
     selectScriptLabels,
     setViewMode,
