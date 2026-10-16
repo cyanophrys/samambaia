@@ -268,5 +268,51 @@
   },
   "unlabeled": {
     "message": "Unlabeled"
+  },
+
+  "addVariable": {
+    "message": "Add variable"
+  },
+  "addVariableEllipsis": {
+    "message": "Add variable…"
+  },
+  "value": {
+    "message": "Value (optional)"
+  },
+  "deleteVariable": {
+    "message": "Delete variable"
+  },
+  "deleteVariableBody": {
+    "message": "Are you sure you want to delete the variable \"$1\"? Scripts using \"{{$1}}\" will no longer replace it."
+  },
+  "deleteVariableHeading": {
+    "message": "Delete variable?"
+  },
+  "editVariable": {
+    "message": "Edit variable"
+  },
+  "noVariables": {
+    "message": "No variables"
+  },
+  "createVariablesDescription": {
+    "message": "Create variables to reuse in your scripts"
+  },
+  "variableAdded": {
+    "message": "Variable \"$1\" added"
+  },
+  "variableDeleted": {
+    "message": "Variable \"$1\" deleted"
+  },
+  "variableDuplicate": {
+    "message": "A variable with this name already exists"
+  },
+  "variableEdited": {
+    "message": "Variable \"$1\" edited"
+  },
+  "variableNameInvalid": {
+    "message": "The name can only contain letters, numbers, \"_\" and \"-\""
+  },
+  "variableNameTooLong": {
+    "message": "Variable name cannot exceed $1 characters"
   }
 }
