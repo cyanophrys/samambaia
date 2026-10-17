@@ -301,3 +301,38 @@ function createShortcutKeys(shortcut, className) {
     return kbd;
   });
 }
+
+export function applyShortcutDisplays(root = document) {
+  const displays = root.querySelectorAll('[data-shortcut-display]');
+
+  displays.forEach((display) => {
+    const shortcut = KEYBOARD_SHORTCUTS.find(
+      shortcut => shortcut.name === display.dataset.shortcutDisplay
+    );
+
+    if (!shortcut) return;
+
+    display.replaceChildren(...createShortcutKeys(shortcut, 'kbd'));
+  });
+
+  root.querySelectorAll('.menu-item').forEach((menuItem) => {
+    const shortcut = menuItem.dataset.keyboardShortcut ??
+      KEYBOARD_SHORTCUTS.find(shortcut =>
+        shortcut.action !== 'activate' &&
+        menuItem.matches(getShortcutSelector(shortcut))
+      );
+
+    if (!shortcut || menuItem.querySelector('.shortcut-display')) return;
+
+    const display = document.createElement('div');
+    const keys = createShortcutKeys(shortcut).flatMap((kbd, index) =>
+      index ? ['+', kbd] : [kbd]
+    );
+
+    display.className = 'suffix shortcut-display';
+    display.setAttribute('aria-hidden', 'true');
+    display.append(...keys);
+
+    menuItem.append(display);
+  });
+}
