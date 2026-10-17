@@ -48,6 +48,16 @@ function getVariableItemTemplate() {
   return variableItemTemplate;
 }
 
+export function getVariableValuesMap() {
+  const values = new Map();
+
+  cachedVariables.forEach(variable => {
+    if (variable.name && variable.value) values.set(variable.name, variable.value);
+  });
+
+  return values;
+}
+
 export async function renderVariables() {
   const container = document.getElementById('variables-container');
   const stack = document.getElementById('variables-stack');
@@ -272,4 +282,10 @@ export function handleVariableValueInput(value, event) {
       console.error(error);
     }
   }, 500);
+}
+
+export function applyVariables(content, values = getVariableValuesMap()) {
+  return content.replace(NAME_TOKEN_PATTERN, (match, name) =>
+    values.has(name) ? values.get(name) : match
+  );
 }
