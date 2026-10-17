@@ -193,3 +193,63 @@
     }
   }
 }
+.list-row.color-picker {
+  --radio-bg: 100%;
+  --radio-bg-hover: 85%;
+  --radio-bg-active: 70%;
+  --radio-mix-color: white;
+
+  justify-content: center;
+  flex-wrap: wrap;
+
+  input[type="radio"] {
+    --radio-intensity: var(--radio-bg);
+
+    appearance: none;
+    inline-size: 24px;
+    block-size: 24px;
+    flex-shrink: 0;
+    border: 1px solid transparent;
+    border-radius: var(--radius-max);
+    background-color: color-mix(
+      in oklab,
+      var(--radio-color) var(--radio-intensity),
+      var(--radio-mix-color)
+    );
+    outline: 3px solid transparent;
+    outline-offset: 2px;
+    transition:
+      background-color var(--transition-medium),
+      outline-color var(--transition-medium),
+      outline-offset var(--transition-medium),
+      box-shadow var(--transition-medium);
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      content: none;
+    }
+
+    &:hover {
+      --radio-intensity: var(--radio-bg-hover);
+    }
+
+    &:active {
+      --radio-intensity: var(--radio-bg-active);
+    }
+
+    &:checked {
+      outline-color: var(--accent-color);
+    }
+  }
+
+  input[value="none"] {
+    --radio-color: currentColor;
+    --radio-bg: 10%;
+    --radio-bg-hover: 15%;
+    --radio-bg-active: 20%;
+    --radio-mix-color: transparent;
+
+    border-color: var(--border-color);
+  }
+}
