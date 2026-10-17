@@ -126,6 +126,11 @@ import {
   debounce,
 } from './utils.js';
 
+import {
+  handleShortcut,
+  KEYBOARD_SHORTCUTS,
+} from './shortcuts.js';
+
 const actions = {
   change: {
     setBackupReminder,
@@ -275,6 +280,9 @@ function bindEvents() {
   document.addEventListener('change', (e) => handleAction(e, actions));
   document.addEventListener('input', (e) => handleAction(e, actions));
   document.addEventListener('submit', (e) => handleAction(e, actions));
+  document.addEventListener('keydown', (event) =>
+    handleShortcut(event, actions, KEYBOARD_SHORTCUTS)
+  );
 
   document.addEventListener('label:changed', renderScripts);
 
