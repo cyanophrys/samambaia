@@ -16,6 +16,10 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {
+  normalizeQuery,
+} from './utils.js';
+
 const KEY_LABELS = {
   ArrowLeft: "←",
   ArrowRight: "→",
@@ -335,4 +339,56 @@ export function applyShortcutDisplays(root = document) {
 
     menuItem.append(display);
   });
+}
+
+export function openShortcutsDialog() {
+  const dialog = document.getElementById('shortcuts-dialog');
+  const searchInput = dialog.querySelector('smb-search');
+
+  searchInput.value = '';
+  filterShortcuts();
+
+  dialog.showModal();
+}
+
+export function filterShortcuts() {
+  const input = document.querySelector('[data-action="filterShortcuts"]');
+  const stack = document.getElementById('shortcuts-stack');
+  const query = normalizeQuery(input?.value ?? '');
+
+  if (!stack) return;
+
+  if (!query) {
+    stack.show('shortcuts');
+    return;
+  }
+
+  const shortcutsPage = stack.querySelector(
+    'smb-stack-page[page-name="shortcuts"]'
+  );
+
+  const searchResults = stack.querySelector(
+    'smb-stack-page[page-name="search-results"] #shortcuts-search-results'
+  );
+
+  const shortcuts = shortcutsPage?.querySelectorAll('.list-row') ?? [];
+
+  const matchingShortcuts = [...shortcuts]
+    .filter(shortcut => {
+      const label = normalizeQuery(shortcut.querySelector('span')?.textContent ?? '');
+
+      return label.includes(query);
+    });
+
+  if (matchingShortcuts.length === 0) {
+    stack.show('no-search-results');
+    return;
+  }
+
+  if (searchResults)
+    searchResults.replaceChildren(
+      ...matchingShortcuts.map(shortcut => shortcut.cloneNode(true))
+    );
+
+  stack.show('search-results');
 }
