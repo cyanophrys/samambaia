@@ -294,3 +294,26 @@ export function createShortcutDisplay(shortcut) {
 
   return display;
 }
+
+export function applyShortcutDisplays() {
+  const shortcutDisplays = document.querySelectorAll('[data-shortcut-display]');
+
+  shortcutDisplays.forEach((container) => {
+    const shortcut = KEYBOARD_SHORTCUTS.find(
+      shortcut => shortcut.name === container.dataset.shortcutDisplay
+    );
+
+    if (!shortcut) return;
+
+    const keys = formatShortcut(shortcut).map((key) => {
+      const kbd = document.createElement('kbd');
+
+      kbd.className = 'kbd';
+      kbd.textContent = key;
+
+      return kbd;
+    });
+
+    container.replaceChildren(...keys);
+  });
+}
