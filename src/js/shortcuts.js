@@ -19,6 +19,122 @@
 const SHORTCUT_CONTAINERS = '[popover], smb-dialog';
 
 export const KEYBOARD_SHORTCUTS = [
+  {
+    name: 'addScript',
+    action: 'addScript',
+    alt: true,
+    key: 'n',
+  },
+  {
+    name: 'addLabel',
+    action: 'addLabel',
+    alt: true,
+    key: 'l',
+  },
+  {
+    name: 'addVariable',
+    action: 'addVariable',
+    alt: true,
+    shift: true,
+    key: 'v',
+  },
+  {
+    name: 'copyScratchpad',
+    action: 'copyScratchpad',
+    alt: true,
+    shift: true,
+    key: 'c',
+  },
+  {
+    name: 'exportBackup',
+    action: 'exportBackup',
+    alt: true,
+    key: 'x',
+  },
+  {
+    name: 'expandScratchpad',
+    action: 'expandScratchpad',
+    alt: true,
+    key: 'p',
+  },
+  {
+    name: 'filterScripts',
+    action: 'activate',
+    target: '[data-action="filterScripts"]',
+    key: '/',
+  },
+  {
+    name: 'filterScripts',
+    action: 'activate',
+    target: '[data-action="filterScripts"]',
+    alt: true,
+    key: 's',
+  },
+  {
+    name: 'restoreBackup',
+    action: 'restoreBackup',
+    alt: true,
+    key: 'i',
+  },
+  {
+    name: 'openPreferences',
+    action: 'openPreferencesDialog',
+    alt: true,
+    key: ',',
+  },
+  {
+    name: 'openShortcuts',
+    action: 'openShortcutsDialog',
+    alt: true,
+    shift: true,
+    key: '?',
+  },
+  {
+    name: 'setViewMode',
+    action: 'setViewMode',
+    alt: true,
+    key: 'v',
+  },
+  {
+    name: 'showAllScripts',
+    action: 'filterByLabel',
+    target: 'all',
+    alt: true,
+    key: 'a',
+  },
+  {
+    name: 'showFavorites',
+    action: 'filterByLabel',
+    target: 'favorites',
+    alt: true,
+    key: 'b',
+  },
+  {
+    name: 'showUnlabeled',
+    action: 'filterByLabel',
+    target: 'none',
+    alt: true,
+    key: 'u',
+  },
+  {
+    name: 'toggleLabelsSidebar',
+    action: 'toggleLabelsSidebar',
+    alt: true,
+    key: 'ArrowLeft',
+  },
+  {
+    name: 'toggleScratchpadSidebar',
+    action: 'toggleScratchpadSidebar',
+    alt: true,
+    shift: true,
+    key: 'ArrowRight',
+  },
+  {
+    name: 'toggleVariablesSidebar',
+    action: 'toggleVariablesSidebar',
+    alt: true,
+    key: 'ArrowRight',
+  },
 ];
 
 export function handleShortcut(event, actions, shortcuts) {
