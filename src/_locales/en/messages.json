@@ -422,5 +422,55 @@
   },
   "unsavedChanges": {
     "message": "There are unsaved changes"
+  },
+
+  "keyboardShortcuts": {
+    "message": "Keyboard shortcuts"
+  },
+  "copyScratchpad": {
+    "message": "Copy scratchpad"
+  },
+  "expandScratchpad": {
+    "message": "Expand scratchpad"
+  },
+  "general": {
+    "message": "General"
+  },
+  "navigation": {
+    "message": "Navigation"
+  },
+  "openPreferences": {
+    "message": "Open preferences"
+  },
+  "search": {
+    "message": "Search",
+    "description": "Noun referring to a search"
+  },
+  "searchShortcuts": {
+    "message": "Search shortcuts"
+  },
+  "showAllScripts": {
+    "message": "Show all scripts"
+  },
+  "showFavoriteScripts": {
+    "message": "Show favorite scripts"
+  },
+  "showKeyboardShortcuts": {
+    "message": "Show keyboard shortcuts"
+  },
+  "showUnlabeled": {
+    "message": "Show unlabeled scripts"
+  },
+  "toggleLabelsSidebar": {
+    "message": "Toggle labels sidebar"
+  },
+  "toggleScratchpadSidebar": {
+    "message": "Toggle scratchpad sidebar"
+  },
+  "toggleScriptViewMode": {
+    "message": "Toggle script view mode"
+  },
+  "toggleVariablesSidebar": {
+    "message": "Toggle variables sidebar"
   }
 }

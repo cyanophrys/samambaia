@@ -335,3 +335,55 @@ export function applyShortcutDisplays() {
     container.replaceChildren(...elements);
   });
 }
+
+export function openShortcutsDialog() {
+  const dialog = document.getElementById('shortcuts-dialog');
+  const searchInput = dialog.querySelector('smb-search');
+
+  searchInput.value = '';
+  filterShortcuts();
+
+  dialog.showModal();
+}
+
+export function filterShortcuts() {
+  const input = document.querySelector('[data-action="filterShortcuts"]');
+  const stack = document.getElementById('shortcuts-stack');
+  const query = input?.value.toLowerCase().trim() ?? '';
+
+  if (!stack) return;
+
+  if (!query) {
+    stack.show('shortcuts');
+    return;
+  }
+
+  const shortcutsPage = stack.querySelector(
+    'smb-stack-page[page-name="shortcuts"]'
+  );
+
+  const searchResults = stack.querySelector(
+    'smb-stack-page[page-name="search-results"] #shortcuts-search-results'
+  );
+
+  const shortcuts = shortcutsPage?.querySelectorAll('.list-row:has(kbd)') ?? [];
+
+  const matchingShortcuts = [...shortcuts]
+    .filter(shortcut => {
+      const label = shortcut.querySelector('span')?.textContent.toLowerCase() ?? '';
+
+      return label.includes(query);
+    });
+
+  if (matchingShortcuts.length === 0) {
+    stack.show('no-search-results');
+    return;
+  }
+
+  if (searchResults)
+    searchResults.replaceChildren(
+      ...matchingShortcuts.map(shortcut => shortcut.cloneNode(true))
+    );
+
+  stack.show('search-results');
+}

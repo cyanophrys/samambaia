@@ -128,8 +128,10 @@ import {
 
 import {
   applyShortcutDisplays,
+  filterShortcuts,
   handleShortcut,
   KEYBOARD_SHORTCUTS,
+  openShortcutsDialog,
 } from './shortcuts.js';
 
 const actions = {
@@ -156,6 +158,7 @@ const actions = {
     exportBackup,
     filterByLabel,
     openPreferencesDialog,
+    openShortcutsDialog,
     reload: () => window.location.reload(),
     restoreBackup,
     searchAllScripts,
@@ -174,6 +177,7 @@ const actions = {
   input: {
     filterScripts,
     filterScriptLabels,
+    filterShortcuts,
     handleScratchpadInput,
     handleVariableValueInput,
   },

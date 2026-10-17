@@ -397,7 +397,134 @@
       <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M292.31-140q-29.92 0-51.12-21.19Q220-182.39 220-212.31V-720h-40v-60h180v-35.38h240V-780h180v60h-40v507.69Q740-182 719-161q-21 21-51.31 21H292.31ZM680-720H280v507.69q0 5.39 3.46 8.85t8.85 3.46h375.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46V-720ZM376.16-280h59.99v-360h-59.99v360Zm147.69 0h59.99v-360h-59.99v360ZM280-720v520-520Z"/></svg>
     </button>
   </smb-dialog>
+  <smb-dialog id="shortcuts-dialog" data-i18n-attr="heading:keyboardShortcuts" style="--dialog-width: 420px;">
+    <smb-search slot="subheader" class="clamp" style="--clamp-width: 300px;" data-i18n-attr="placeholder:searchShortcuts" data-action="filterShortcuts" autofocus></smb-search>
+    <smb-stack id="shortcuts-stack" transition homogeneous>
+      <smb-stack-page page-name="shortcuts">
+        <div class="scrollable-area">
+          <section id="general" class="section">
+            <header>
+              <h2 class="heading" data-i18n="general"></h2>
+            </header>
+            <div class="list-group">
+              <div class="list-row">
+                <span data-i18n="addScript"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="addScript"></div>
+              </div>
+              <div class="list-row">
+                <span data-i18n="addLabel"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="addLabel"></div>
+              </div>
+              <div class="list-row">
+                <span data-i18n="addVariable"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="addVariable"></div>
+              </div>
+            </div>
+            <div class="list-group">
+              <div class="list-row">
+                <span data-i18n="restoreBackup"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="restoreBackup"></div>
+              </div>
+              <div class="list-row">
+                <span data-i18n="backUpAction"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="exportBackup"></div>
+              </div>
+            </div>
+            <div class="list-group">
+              <div class="list-row">
+                <span data-i18n="copyScratchpad"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="copyScratchpad"></div>
+              </div>
+              <div class="list-row">
+                <span data-i18n="expandScratchpad"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="expandScratchpad"></div>
+              </div>
+            </div>
+            <div class="list-group">
+              <div class="list-row">
+                <span data-i18n="toggleScriptViewMode"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="setViewMode"></div>
+              </div>
+            </div>
+            <div class="list-group">
+              <div class="list-row">
+                <span data-i18n="openPreferences"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="openPreferences"></div>
+              </div>
+              <div class="list-row">
+                <span data-i18n="showKeyboardShortcuts"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="openShortcuts"></div>
+              </div>
+            </div>
+          </section>
+          <section id="navigation" class="section">
+            <header>
+              <h2 class="heading" data-i18n="navigation"></h2>
+            </header>
+            <div class="list-group">
+              <div class="list-row">
+                <span data-i18n="showAllScripts"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="showAllScripts"></div>
+              </div>
+              <div class="list-row">
+                <span data-i18n="showFavoriteScripts"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="showFavorites"></div>
+              </div>
+              <div class="list-row">
+                <span data-i18n="showUnlabeled"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="showUnlabeled"></div>
+              </div>
+            </div>
+            <div class="list-group">
+              <div class="list-row">
+                <span data-i18n="toggleLabelsSidebar"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="toggleLabelsSidebar"></div>
+              </div>
+              <div class="list-row">
+                <span data-i18n="toggleScratchpadSidebar"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="toggleScratchpadSidebar"></div>
+              </div>
+              <div class="list-row">
+                <span data-i18n="toggleVariablesSidebar"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="toggleVariablesSidebar"></div>
+              </div>
+            </div>
+          </section>
+          <section id="search" class="section">
+            <header>
+              <h2 class="heading" data-i18n="search"></h2>
+            </header>
+            <div class="list-group">
+              <div class="list-row">
+                <span data-i18n="search"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="filterScripts"></div>
+              </div>
+              <div class="list-row">
+                <span data-i18n="cancelSearch"></span>
+                <kbd class="kbd suffix">Esc</kbd>
+              </div>
+            </div>
+          </section>
+        </div>
+      </smb-stack-page>
+      <smb-stack-page page-name="search-results">
+        <div class="scrollable-area">
+          <div id="shortcuts-search-results" class="list-group"></div>
+        </div>
+      </smb-stack-page>
+      <smb-stack-page page-name="no-search-results">
+        <smb-placeholder data-i18n-attr="heading:noResultsFound|description:tryDifferentSearch" page>
+          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="currentColor"><path d="M152.15-161.09q-49.99-50.01-49.99-120.54 0-70.52 50.01-120.52t120.54-50q70.52 0 120.52 50.01t50 120.54q0 70.52-50.01 120.52-50.02 50-120.54 50-70.53 0-120.53-50.01Zm676.04 20.9L571.27-397.12q-17.35 13.97-39.39 27.08-22.03 13.12-41.38 20.92-1.96-12.11-4.92-24-2.96-11.88-8.04-21.5 57.04-19.92 96.21-69.15 39.17-49.23 39.17-119.08 0-81.54-56.81-138.65-56.81-57.12-138.36-57.12-81.67 0-139.02 57.12-57.35 57.11-57.35 138.65 0 17.1 3.5 36.72 3.5 19.63 8.43 33.01-8.93 1.24-20.87 4.87-11.94 3.63-20.86 6.9-6.73-16.27-10.39-38.46-3.65-22.19-3.65-43.1 0-100.27 69.97-169.91t170.27-69.64q99.3 0 169.14 69.97 69.85 69.96 69.85 169.64 0 43-15.23 83.54-15.23 40.54-40.46 70.09L860.5-172.5l-32.31 32.31ZM204-190.54l68.88-68.88 67.89 68.07 21.15-20.67-68.57-69.12 70.3-70.36-21.18-20.58-69.28 68.81-69.69-69.31-21.27 21.27 69.89 69.19-69.7 69.7L204-190.54Z"/></svg>
+        </smb-placeholder>
+      </smb-stack-page>
+    </smb-stack>
+  </smb-dialog>
   <div id="view-more-menu" class="menu" style="position-anchor: --view-more-button" role="menu" data-i18n-attr="aria-label:viewMore" popover>
+    <button class="menu-item" role="menuitem" popovertargetaction="hide" data-action="openShortcutsDialog">
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M170.69-224.04q-28.43 0-48.35-19.92-19.92-19.91-19.92-48.35v-379.42q0-28.44 19.92-48.35Q142.26-740 170.69-740h619.42q28.44 0 48.36 19.92 19.91 19.91 19.91 48.35v379.42q0 28.44-19.91 48.35-19.92 19.92-48.36 19.92H170.69Zm0-55.96h619.42q4.62 0 8.47-3.85 3.84-3.84 3.84-8.46v-379.42q0-4.62-3.84-8.46-3.85-3.85-8.47-3.85H170.69q-4.61 0-8.46 3.85-3.85 3.84-3.85 8.46v379.42q0 4.62 3.85 8.46 3.85 3.85 8.46 3.85Zm154.73-48.65h309.16v-66.73H325.42v66.73Zm-118.38-120h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm-480-120h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73Zm120 0h66.73v-66.73h-66.73v66.73ZM158.38-280v-404.04V-280Z"/></svg>
+      <span data-i18n="keyboardShortcuts"></span>
+      <div class="suffix shortcut-display" data-shortcut-display="openShortcuts"></div>
+    </button>
   </div>
   <template id="script-item-template">
     <section class="script-item" tabindex="0">
