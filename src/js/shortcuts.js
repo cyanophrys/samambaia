@@ -236,3 +236,37 @@ export function formatShortcut(shortcut, { format = 'keys' } = {}) {
 
   return labels;
 }
+
+export function createShortcutDisplay(shortcut) {
+  const display = document.createElement('div');
+
+  display.className = 'shortcut-display';
+
+  display.append(
+    ...formatShortcut(shortcut).map((key) => {
+      const kbd = document.createElement('kbd');
+
+      kbd.className = 'kbd';
+      kbd.textContent = key;
+      return kbd;
+    })
+  );
+
+  return display;
+}
+
+export function applyShortcutDisplays() {
+  const shortcutDisplays = document.querySelectorAll('[data-shortcut-display]');
+
+  shortcutDisplays.forEach((container) => {
+    const shortcut = KEYBOARD_SHORTCUTS.find(
+      (shortcut) => shortcut.name === container.dataset.shortcutDisplay
+    );
+
+    if (!shortcut) return;
+
+    const display = createShortcutDisplay(shortcut);
+
+    container.replaceChildren(...display.childNodes);
+  });
+}
