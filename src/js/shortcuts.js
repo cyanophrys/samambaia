@@ -63,6 +63,12 @@ export const KEYBOARD_SHORTCUTS = [
     key: 'p',
   },
   {
+    name: 'filterScripts',
+    action: 'activate',
+    target: '[data-action="filterScripts"]',
+    key: '/',
+  },
+  {
     name: 'restoreBackup',
     action: 'restoreBackup',
     alt: true,

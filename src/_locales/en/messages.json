@@ -443,6 +443,9 @@
     "message": "Search",
     "description": "Noun referring to a search"
   },
+  "searchScripts": {
+    "message": "Search scripts"
+  },
   "searchShortcuts": {
     "message": "Search shortcuts"
   },
