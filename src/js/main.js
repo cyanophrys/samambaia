@@ -127,6 +127,7 @@ import {
 } from './utils.js';
 
 import {
+  applyShortcutDisplays,
   handleShortcut,
   KEYBOARD_SHORTCUTS,
 } from './shortcuts.js';
@@ -217,6 +218,7 @@ async function init() {
     document.title = manifest.name;
 
     applyTranslations();
+    applyShortcutDisplays();
 
     await initDB();
     await renderScripts();
