@@ -79,4 +79,9 @@
     margin-inline-start: auto;
     padding-inline-start: var(--spacing-sm);
   }
+
+  .shortcut-display {
+    gap: 0;
+    opacity: var(--dimmed-opacity);
+  }
 }
