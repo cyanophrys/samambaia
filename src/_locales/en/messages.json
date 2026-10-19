@@ -257,6 +257,9 @@
   "scriptContent": {
     "message": "Content"
   },
+  "scriptColors": {
+    "message": "Script colors"
+  },
   "scriptDeleted": {
     "message": "Script \"$1\" deleted"
   },

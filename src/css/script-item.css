@@ -47,9 +47,14 @@
   }
 
   .content {
+    --content-bg: 10%;
+    --content-bg-hover: 15%;
+    --content-bg-active: 20%;
+    --content-intensity: var(--content-bg);
+
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
-    background-color: color-mix(in oklab, currentColor 10%, transparent);
+    background-color: color-mix(in oklab, currentColor var(--content-intensity), transparent);
     transition:
       background-color var(--transition-medium),
       color var(--transition-medium),
@@ -59,11 +64,22 @@
     cursor: pointer;
 
     &:hover {
-      background-color: color-mix(in oklab, currentColor 15%, transparent);
+      --content-intensity: var(--content-bg-hover);
     }
 
     &:active {
-      background-color: color-mix(in oklab, currentColor 20%, transparent);
+      --content-intensity: var(--content-bg-active);
+    }
+  }
+
+  &[data-item-color]:not([data-item-color="none"]) {
+    .content {
+      --content-bg: 100%;
+      --content-bg-hover: 90%;
+      --content-bg-active: 80%;
+
+      background-color: color-mix(in oklab, var(--item-color) var(--content-intensity), white);
+      color: black;
     }
   }
 
