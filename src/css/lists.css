@@ -296,4 +296,17 @@
     input[value="teal"]   { --radio-color: var(--accent-teal); }
     input[value="yellow"] { --radio-color: var(--accent-yellow); }
   }
+
+  &.item-colors {
+    input[value="blue"]   { --radio-color: var(--item-blue); }
+    input[value="brown"]  { --radio-color: var(--item-brown); }
+    input[value="green"]  { --radio-color: var(--item-green); }
+    input[value="orange"] { --radio-color: var(--item-orange); }
+    input[value="pink"]   { --radio-color: var(--item-pink); }
+    input[value="purple"] { --radio-color: var(--item-purple); }
+    input[value="red"]    { --radio-color: var(--item-red); }
+    input[value="slate"]  { --radio-color: var(--item-slate); }
+    input[value="teal"]   { --radio-color: var(--item-teal); }
+    input[value="yellow"] { --radio-color: var(--item-yellow); }
+  }
 }
