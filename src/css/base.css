@@ -30,3 +30,21 @@ body {
   line-height: 1.5;
   overflow: hidden;
 }
+
+[data-item-color="blue"] { --item-color: var(--item-blue); }
+[data-item-color="brown"] { --item-color: var(--item-brown); }
+[data-item-color="green"] { --item-color: var(--item-green); }
+[data-item-color="orange"] { --item-color: var(--item-orange); }
+[data-item-color="pink"] { --item-color: var(--item-pink); }
+[data-item-color="purple"] { --item-color: var(--item-purple); }
+[data-item-color="red"] { --item-color: var(--item-red); }
+[data-item-color="slate"] { --item-color: var(--item-slate); }
+[data-item-color="teal"] { --item-color: var(--item-teal); }
+[data-item-color="yellow"] { --item-color: var(--item-yellow); }
+
+[data-item-color]:not([data-item-color="none"]) {
+  --item-bg-color: light-dark(
+    oklch(from var(--item-color) 0.84 calc(c * 0.4) h),
+    oklch(from var(--item-color) 0.40 calc(c * 0.32) h)
+  );
+}
