@@ -22,10 +22,15 @@ import {
 } from './store.js';
 
 import {
+  COLORS,
+} from './colors.js';
+
+import {
   t,
 } from './i18n.js';
 
 const DEFAULT_PREFERENCES = {
+  accentColor: 'blue',
   backupReminder: true,
   largeText: false,
   sidebars: {
@@ -84,6 +89,17 @@ function toggleSidebar(button, value) {
 export function openPreferencesDialog() {
   const dialog = document.getElementById('preferences-dialog');
   dialog.showModal();
+}
+
+export function setAccentColor(value, event) {
+  const rawColor = value ?? event?.target?.value ?? DEFAULT_PREFERENCES.accentColor;
+  const accentColor = COLORS.includes(rawColor)
+    ? rawColor
+    : DEFAULT_PREFERENCES.accentColor;
+
+  userPreferences.accentColor = accentColor;
+  document.documentElement.setAttribute('data-accent-color', accentColor);
+  updatePreferenceControl('accent-color', accentColor);
 }
 
 export function setBackupReminder(value, event) {
