@@ -26,4 +26,7 @@ storage.local.get('userPreferences').then(({ userPreferences }) => {
     theme === 'system'
       ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
       : theme;
+
+  if (userPreferences?.accentColor)
+    root.dataset.accentColor = userPreferences.accentColor;
 });

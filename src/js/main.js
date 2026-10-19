@@ -49,6 +49,7 @@ import {
 
 import {
   openPreferencesDialog,
+  setAccentColor,
   setBackupReminder,
   setLargeText,
   setTheme,
@@ -136,6 +137,7 @@ import {
 
 const actions = {
   change: {
+    setAccentColor,
     setBackupReminder,
     setLargeText,
     setTheme,
@@ -229,6 +231,7 @@ async function init() {
     await renderVariables();
     await initScratchpad();
 
+    setAccentColor(userPreferences.accentColor);
     setBackupReminder(userPreferences.backupReminder);
     setLargeText(userPreferences.largeText);
     setTheme(userPreferences.theme);
