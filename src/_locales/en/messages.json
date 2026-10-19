@@ -127,6 +127,42 @@
   "theme": {
     "message": "Theme"
   },
+    "accentColor": {
+    "message": "Accent color"
+  },
+  "blue": {
+    "message": "Blue"
+  },
+  "brown": {
+    "message": "Brown"
+  },
+  "green": {
+    "message": "Green"
+  },
+  "noColor": {
+    "message": "No color"
+  },
+  "orange": {
+    "message": "Orange"
+  },
+  "pink": {
+    "message": "Pink"
+  },
+  "purple": {
+    "message": "Purple"
+  },
+  "red": {
+    "message": "Red"
+  },
+  "slate": {
+    "message": "Slate"
+  },
+  "teal": {
+    "message": "Teal"
+  },
+  "yellow": {
+    "message": "Yellow"
+  },
   "accessibility": {
     "message": "Accessibility"
   },
