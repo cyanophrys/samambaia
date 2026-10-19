@@ -42,6 +42,10 @@ import {
   scrollToTop,
 } from './utils.js';
 
+import {
+  getColor,
+} from './colors.js';
+
 const MAX_SCRIPT_NAME_LENGTH = 128;
 const MAX_SCRIPT_CONTENT_LENGTH = 5000;
 const RENDER_CHUNK_SIZE = 250;
@@ -86,6 +90,7 @@ export function createScriptElement(script) {
   item.dataset.target = script.id;
   item.dataset.labels = (script.labels?.length ? script.labels.map(String) : ['none']).join(' ');
   item.dataset.favorite = script.favorite ? 'true' : 'false';
+  item.dataset.itemColor = getColor(script.color);
 
   const title = item.querySelector('.title');
   const content = item.querySelector('.content');
@@ -202,6 +207,7 @@ export async function editScript(element) {
   form.elements['id'].value = script.id;
   form.elements['name'].value = script.name;
   form.elements['content'].value = script.content;
+  form.elements['color'].value = getColor(script.color);
 
   dialog.heading = t('editScript');
   dialog.subtitle = script.name;
@@ -218,6 +224,7 @@ export async function saveScript() {
   const id = form.elements['id'].value || undefined;
   const name = form.elements['name'].value.trim();
   const content = form.elements['content'].value;
+  const color = getColor(form.elements['color'].value);
 
   if (
     !name ||
@@ -228,11 +235,15 @@ export async function saveScript() {
     return;
   }
 
+  const existingScript = id ? await getScript(Number(id)) : null;
+
   const scriptData = {
+    ...existingScript,
     id,
     name,
     labels: getSelectedScriptLabels(),
     content,
+    color,
   };
 
   await saveScriptData(scriptData);
