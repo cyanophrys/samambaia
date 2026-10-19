@@ -38,6 +38,17 @@
   --accent-teal: #13ac9b;
   --accent-yellow: #c98a12;
 
+  --item-blue: #7fa8e0;
+  --item-brown: #c08a5c;
+  --item-green: #8ebb84;
+  --item-orange: #e58a54;
+  --item-pink: #e096b5;
+  --item-purple: #b995dd;
+  --item-red: #e08a8a;
+  --item-slate: #9ba9bd;
+  --item-teal: #6fbcae;
+  --item-yellow: #e0bc63;
+
   --focus-outline-color: var(--accent-color);
   --focus-outline-offset: 2px;
 
