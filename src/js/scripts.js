@@ -60,6 +60,11 @@ import {
   makeSortable,
 } from './dnd.js';
 
+import {
+  state,
+} from './state.js';
+
+const MAX_RECENT_SCRIPTS = 30;
 const MAX_SCRIPT_NAME_LENGTH = 128;
 const MAX_SCRIPT_CONTENT_LENGTH = 5000;
 const RENDER_CHUNK_SIZE = 250;
@@ -71,6 +76,7 @@ let selectedLabel = 'all';
 const PSEUDO_LABELS = [
   'all',
   'favorites',
+  'recent',
 ];
 const searchTextCache = new WeakMap();
 
@@ -115,15 +121,17 @@ function updateScriptsCount(scriptCount) {
 }
 
 export function updateScriptMoveButtons(items = getVisibleScripts()) {
+  const isRecent = selectedLabel === 'recent';
+
   items.forEach((item, index) => {
     const previousButton = item.querySelector('[data-action="moveScriptPrevious"]');
     const nextButton = item.querySelector('[data-action="moveScriptNext"]');
 
     if (previousButton)
-      previousButton.disabled = index === 0;
+      previousButton.disabled = isRecent || index === 0;
 
     if (nextButton)
-      nextButton.disabled = index === items.length - 1;
+      nextButton.disabled = isRecent || index === items.length - 1;
   });
 }
 
@@ -369,6 +377,8 @@ export async function copyScript(target) {
 
     await navigator.clipboard.writeText(applyVariables(script.content));
 
+    addRecentScript(id);
+
     toast.message = t('copiedToClipboard');
   } catch (error) {
     console.error(error);
@@ -382,9 +392,11 @@ export async function copyScript(target) {
 function scriptMatchesLabel(script) {
   return selectedLabel === 'favorites'
     ? script.dataset.favorite === 'true'
-    : PSEUDO_LABELS.includes(selectedLabel)
-      ? true
-      : script.dataset.labels.split(' ').includes(String(selectedLabel));
+    : selectedLabel === 'recent'
+      ? state.recentScripts.includes(Number(script.dataset.target))
+      : PSEUDO_LABELS.includes(selectedLabel)
+        ? true
+        : script.dataset.labels.split(' ').includes(String(selectedLabel));
 }
 
 export function filterScripts() {
@@ -395,11 +407,19 @@ export function filterScripts() {
 
   updateSelectedLabelItem(selectedLabel);
 
+  const recentOrder = selectedLabel === 'recent'
+    ? new Map(state.recentScripts.map((id, index) => [id, index]))
+    : null;
+
   let labelScriptsCount = 0;
   let visibleItemsCount = 0;
   const visibleItems = [];
 
   items.forEach(item => {
+    item.style.order = recentOrder
+      ? recentOrder.get(Number(item.dataset.target)) ?? recentOrder.size
+      : '';
+
     if (scriptMatchesLabel(item))
       labelScriptsCount++;
   });
@@ -430,6 +450,10 @@ export function filterScripts() {
 
     case selectedLabel === 'favorites' && labelScriptsCount === 0:
       page = 'no-favorites';
+      break;
+
+    case selectedLabel === 'recent' && labelScriptsCount === 0 && !searchAll:
+      page = 'no-recent';
       break;
 
     case labelScriptsCount === 0 && !searchAll:
@@ -594,4 +618,11 @@ export async function saveScriptsOrder() {
 
 export function scrollScriptsArea(element) {
   scrollToTop(element, 'smooth');
+}
+
+function addRecentScript(id) {
+  const ids = state.recentScripts.filter(recentId => recentId !== id);
+
+  ids.unshift(id);
+  state.recentScripts = ids.slice(0, MAX_RECENT_SCRIPTS);
 }
