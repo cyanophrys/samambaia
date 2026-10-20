@@ -24,6 +24,7 @@ import {
 
 const DEFAULT_STATE = {
   hasUnsavedChanges: false,
+  recentScripts: [],
 };
 
 export const state = createStore(
