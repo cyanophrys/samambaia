@@ -258,6 +258,12 @@
   "noFavoritesDescription": {
     "message": "Favorite scripts will appear here"
   },
+  "noRecentHistory": {
+    "message": "No history"
+  },
+  "noRecentHistoryDescription": {
+    "message": "Recently copied scripts will appear here"
+  },
   "noScriptsHeading": {
     "message": "No scripts added"
   },
@@ -362,6 +368,9 @@
   },
   "favorites": {
     "message": "Favorites"
+  },
+  "recent": {
+    "message": "Recent"
   },
   "searchAllScripts": {
     "message": "Search all scripts"
@@ -512,6 +521,9 @@
   },
   "showKeyboardShortcuts": {
     "message": "Show keyboard shortcuts"
+  },
+  "showRecentScripts": {
+    "message": "Show recent scripts"
   },
   "showUnlabeled": {
     "message": "Show unlabeled scripts"

@@ -123,6 +123,13 @@ export const KEYBOARD_SHORTCUTS = [
     key: 'b',
   },
   {
+    name: 'showRecent',
+    action: 'filterByLabel',
+    target: 'recent',
+    alt: true,
+    key: 'r',
+  },
+  {
     name: 'showUnlabeled',
     action: 'filterByLabel',
     target: 'none',
