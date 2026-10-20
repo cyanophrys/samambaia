@@ -45,3 +45,12 @@ export function normalizeQuery(query) {
     .toLowerCase()
     .trim();
 }
+
+export function scrollToTop(target, behavior = 'instant') {
+  const element = target?.closest('.scrollable-area') ?? target;
+
+  element?.scrollTo({
+    top: 0,
+    behavior,
+  });
+}
