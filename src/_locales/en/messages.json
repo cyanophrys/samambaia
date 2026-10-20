@@ -301,6 +301,9 @@
   "labelAdded": {
     "message": "Label \"$1\" added"
   },
+  "labelColor": {
+    "message": "Label color"
+  },
   "labelDeleted": {
     "message": "Label \"$1\" deleted"
   },
