@@ -134,6 +134,7 @@ import {
 } from './utils.js';
 
 import {
+  applyAriaKeyshortcuts,
   applyShortcutDisplays,
   filterShortcuts,
   handleShortcut,
@@ -304,6 +305,10 @@ function bindEvents() {
     if (!userPreferences.keyboardShortcuts) return;
 
     handleShortcut(event, actions, KEYBOARD_SHORTCUTS);
+  });
+
+  document.addEventListener('keyboardShortcuts:changed', () => {
+    applyAriaKeyshortcuts(userPreferences.keyboardShortcuts);
   });
 
   document.addEventListener('label:changed', renderScripts);
