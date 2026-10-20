@@ -1,4 +1,59 @@
 .variable-item {
+  --variable-bg: 10%;
+  --variable-bg-hover: 15%;
+  --variable-bg-active: 20%;
+  --variable-intensity: var(--variable-bg);
+
+  &,
+  &.entry-row:hover:not(:has(> :focus-visible)) {
+    background-color: color-mix(
+      in oklab,
+      currentColor var(--variable-intensity),
+      transparent
+    );
+  }
+
+  &:hover {
+    --variable-intensity: var(--variable-bg-hover);
+  }
+
+  &:active {
+    --variable-intensity: var(--variable-bg-active);
+  }
+
+  &[data-item-color]:not([data-item-color="none"]) {
+    --variable-bg: 100%;
+    --variable-bg-hover: 90%;
+    --variable-bg-active: 80%;
+
+    color: black;
+
+    &,
+    &.entry-row:hover:not(:has(> :focus-visible)) {
+      background-color: color-mix(
+        in oklab,
+        var(--item-color) var(--variable-intensity),
+        white
+      );
+    }
+  }
+
+  &[data-item-color]:not([data-item-color="none"]):has(> :focus-visible) {
+    --variable-bg: 10%;
+    --variable-bg-hover: 15%;
+    --variable-bg-active: 20%;
+
+    color: inherit;
+  }
+
+  &:has(> :focus-visible) {
+    background-color: color-mix(
+      in oklab,
+      currentColor var(--variable-intensity),
+      transparent
+    );
+  }
+
   .menu .unpin-icon {
     display: none;
   }
