@@ -80,11 +80,14 @@ import {
   filterByLabel,
   filterScripts,
   initScriptsSortable,
+  moveScriptNext,
+  moveScriptPrevious,
   renderScripts,
   saveScript,
   saveScriptsOrder,
   searchAllScripts,
   toggleFavoriteScript,
+  updateScriptMoveButtons,
 } from './scripts.js';
 
 import {
@@ -161,6 +164,8 @@ const actions = {
     expandScratchpad,
     exportBackup,
     filterByLabel,
+    moveScriptNext,
+    moveScriptPrevious,
     openPreferencesDialog,
     openShortcutsDialog,
     reload: () => window.location.reload(),
@@ -316,6 +321,7 @@ function bindEvents() {
   });
 
   document.addEventListener('sort:changed', () => {
+    updateScriptMoveButtons();
     saveScriptsOrder();
   });
 
