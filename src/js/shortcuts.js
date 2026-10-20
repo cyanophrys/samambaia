@@ -16,6 +16,13 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+const KEY_LABELS = {
+  ArrowLeft: "←",
+  ArrowRight: "→",
+  ArrowUp: "↑",
+  Backspace: "⌫",
+};
+
 export const KEYBOARD_SHORTCUTS = [
   {
     name: 'addScript',
@@ -206,4 +213,26 @@ export function handleShortcut(event, actions, shortcuts) {
     : null;
 
   handler(targetElement, event, targetElement);
+}
+
+export function formatShortcut(shortcut, { format = 'keys' } = {}) {
+  const keys = typeof shortcut === 'string'
+    ? shortcut.split('+')
+    : [
+        shortcut.ctrl && 'Ctrl',
+        shortcut.shift && 'Shift',
+        shortcut.alt && 'Alt',
+        shortcut.meta && 'Meta',
+        shortcut.key,
+      ].filter(Boolean);
+
+  const labels = keys.map((key) => {
+    return KEY_LABELS[key] ??
+      (key.length === 1 ? key.toUpperCase() : key);
+  });
+
+  if (format === 'text')
+    return labels.join('+');
+
+  return labels;
 }
