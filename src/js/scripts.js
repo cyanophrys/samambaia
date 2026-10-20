@@ -83,6 +83,13 @@ function updateScriptsControls(hasScripts) {
   });
 }
 
+function updateScriptsCount(scriptCount) {
+  const scriptsCount = document.getElementById('scripts-count');
+
+  if (scriptsCount)
+    scriptsCount.textContent = scriptCount;
+}
+
 export function createScriptElement(script) {
   const template = getScriptItemTemplate();
   const item = template.content.firstElementChild.cloneNode(true);
@@ -164,6 +171,8 @@ export async function renderScripts() {
     if (end < scripts.length)
       await new Promise(requestAnimationFrame);
   }
+
+  updateScriptsCount(scripts.length);
 
   filterScripts();
 }
