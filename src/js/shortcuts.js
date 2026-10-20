@@ -88,6 +88,12 @@ export const KEYBOARD_SHORTCUTS = [
     key: '?',
   },
   {
+    name: 'scrollScriptsArea',
+    action: 'scrollScriptsArea',
+    alt: true,
+    key: 'ArrowUp',
+  },
+  {
     name: 'setViewMode',
     action: 'setViewMode',
     alt: true,
