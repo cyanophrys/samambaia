@@ -397,6 +397,9 @@
   "variableAdded": {
     "message": "Variable \"$1\" added"
   },
+  "variableColor": {
+    "message": "Variable color"
+  },
   "variableDeleted": {
     "message": "Variable \"$1\" deleted"
   },

@@ -34,6 +34,10 @@ import {
   UNDO_DURATION,
 } from './config.js';
 
+import {
+  getColor,
+} from './colors.js';
+
 const MAX_VARIABLE_NAME_LENGTH = 128;
 
 let cachedVariables = [];
@@ -95,6 +99,7 @@ export function createVariableElement(variable) {
 
   item.dataset.target = variable.id;
   item.dataset.pinned = variable.pinned ? 'true' : 'false';
+  item.dataset.itemColor = getColor(variable.color);
 
   const input = item.querySelector('input');
   const label = item.querySelector('label');
@@ -170,6 +175,7 @@ export async function editVariable(element) {
   form.elements['id'].value = variable.id;
   form.elements['name'].value = variable.name;
   form.elements['value'].value = variable.value ?? '';
+  form.elements['color'].value = getColor(variable.color);
 
   dialog.heading = t('editVariable');
   dialog.subtitle = variable.name;
@@ -187,6 +193,7 @@ export async function saveVariable() {
   const rawName = form.elements['name'].value.trim();
   const name = rawName.replace(INVALID_TOKEN_CHARS_PATTERN, '');
   const value = form.elements['value'].value;
+  const color = getColor(form.elements['color'].value);
 
   if (!rawName) return;
 
@@ -221,8 +228,8 @@ export async function saveVariable() {
 
   const existingVariable = variables.find(variable => variable.id === id);
   const variableData = existingVariable
-    ? { ...existingVariable, name, value }
-    : { id, name, value };
+    ? { ...existingVariable, name, value, color }
+    : { id, name, value, color };
 
   await saveVariableData(variableData);
 
