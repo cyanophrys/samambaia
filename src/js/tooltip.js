@@ -59,8 +59,12 @@ function show(element) {
 
   showTimer = setTimeout(() => {
     const label = document.getElementById('tooltip-label');
+    const shortcutElement = document.getElementById('tooltip-shortcut');
+    const shortcut = element.dataset.shortcutText;
 
-    label.textContent = element.getAttribute('aria-label');
+    label.textContent = element.getAttribute('aria-label') ?? '';
+    shortcutElement.hidden = !shortcut;
+    shortcutElement.textContent = shortcut ? `(${shortcut})` : '';
 
     clearTimeout(hideTimer);
     currentTarget = element;
