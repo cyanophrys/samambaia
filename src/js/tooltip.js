@@ -16,6 +16,10 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {
+  formatShortcut,
+} from './shortcuts.js';
+
 const tooltip = document.getElementById('tooltip');
 const SHOW_DELAY = 500;
 const HIDE_DELAY = 100;
@@ -59,8 +63,12 @@ function show(element) {
 
   showTimer = setTimeout(() => {
     const label = document.getElementById('tooltip-label');
+    const shortcutElement = document.getElementById('tooltip-shortcut');
+    const shortcut = element.dataset.shortcutText;
 
-    label.textContent = element.getAttribute('aria-label');
+    label.textContent = element.getAttribute('aria-label') ?? '';
+    shortcutElement.hidden = !shortcut;
+    shortcutElement.textContent = shortcut ? `(${shortcut})` : '';
 
     clearTimeout(hideTimer);
     currentTarget = element;
