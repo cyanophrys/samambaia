@@ -163,6 +163,9 @@ export function handleShortcut(event, actions, shortcuts) {
       element instanceof HTMLSelectElement
     ) {
       element.focus();
+    } else if (element.dataset.keyboardShortcutScope) {
+      element.click();
+      element.focus();
     } else if (
       element instanceof HTMLButtonElement ||
       element instanceof HTMLAnchorElement ||
@@ -181,13 +184,6 @@ export function handleShortcut(event, actions, shortcuts) {
     event.key.toLowerCase(),
   ].filter(Boolean).join('+');
 
-  const element = document.querySelector(`[data-keyboard-shortcut="${shortcutString}"]`);
-
-  if (element) {
-    activateElement(element);
-    return;
-  }
-
   const shortcut = shortcuts.find((shortcut) => {
     return (
       shortcut.key.toLowerCase() === event.key.toLowerCase() &&
@@ -196,6 +192,47 @@ export function handleShortcut(event, actions, shortcuts) {
       (shortcut.shift ? event.shiftKey : true)
     );
   });
+
+  const selectors = [
+    `[data-keyboard-shortcut="${CSS.escape(shortcutString)}"]`,
+  ];
+
+  if (shortcut) {
+    selectors.push(
+      `[data-action="${CSS.escape(shortcut.action)}"][data-keyboard-shortcut-scope="dialog"]`,
+      `[data-action="${CSS.escape(shortcut.action)}"][data-keyboard-shortcut-scope="menu"]`,
+    );
+  }
+
+  const elements = [...document.querySelectorAll(selectors.join(', '))];
+
+  const isScopeOpen = (element, scope) => {
+    if (scope === 'menu')
+      return element.closest('[popover]')?.matches(':popover-open') ?? false;
+
+    if (scope === 'dialog')
+      return element.closest('smb-dialog')?.open ?? false;
+
+    return false;
+  };
+
+  const element =
+    elements.find(element =>
+      element.dataset.keyboardShortcutScope === 'menu' &&
+      isScopeOpen(element, 'menu')
+    ) ??
+    elements.find(element =>
+      element.dataset.keyboardShortcutScope === 'dialog' &&
+      isScopeOpen(element, 'dialog')
+    ) ??
+    elements.find(element =>
+      !element.dataset.keyboardShortcutScope
+    );
+
+  if (element) {
+    activateElement(element);
+    return;
+  }
 
   if (!shortcut) return;
 
