@@ -151,6 +151,7 @@ main {
     justify-content: center;
     grid-template-columns: minmax(0, 700px);
     gap: var(--spacing-xl);
+    reading-flow: grid-order;
 
     &[data-view="grid"] {
       grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
