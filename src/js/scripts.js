@@ -40,6 +40,10 @@ import {
 } from './i18n.js';
 
 import {
+  applyShortcutDisplays,
+} from './shortcuts.js';
+
+import {
   normalizeQuery,
   scrollToTop,
 } from './utils.js';
@@ -73,7 +77,9 @@ const searchTextCache = new WeakMap();
 function getScriptItemTemplate() {
   if (!scriptItemTemplate) {
     scriptItemTemplate = document.getElementById('script-item-template');
+
     applyTranslations(scriptItemTemplate.content);
+    applyShortcutDisplays(scriptItemTemplate.content);
   }
 
   return scriptItemTemplate;

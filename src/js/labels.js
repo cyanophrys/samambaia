@@ -35,6 +35,10 @@ import {
 } from './i18n.js';
 
 import {
+  applyShortcutDisplays,
+} from './shortcuts.js';
+
+import {
   normalizeQuery,
 } from './utils.js';
 
@@ -53,7 +57,9 @@ let scriptLabelRowTemplate;
 function getLabelItemTemplate() {
   if (!labelItemTemplate) {
     labelItemTemplate = document.getElementById('label-item-template');
+
     applyTranslations(labelItemTemplate.content);
+    applyShortcutDisplays(labelItemTemplate.content);
   }
 
   return labelItemTemplate;

@@ -29,6 +29,10 @@ import {
 } from './i18n.js';
 
 import {
+  applyShortcutDisplays,
+} from './shortcuts.js';
+
+import {
   INVALID_TOKEN_CHARS_PATTERN,
   NAME_TOKEN_PATTERN,
   UNDO_DURATION,
@@ -47,7 +51,9 @@ let variableItemTemplate = null;
 function getVariableItemTemplate() {
   if (!variableItemTemplate) {
     variableItemTemplate = document.getElementById('variable-item-template');
+
     applyTranslations(variableItemTemplate.content);
+    applyShortcutDisplays(variableItemTemplate.content);
   }
 
   return variableItemTemplate;
