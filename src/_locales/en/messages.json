@@ -84,6 +84,9 @@
     "description": "Action used to unpin an item"
   },
 
+  "backToTop": {
+    "message": "Back to top"
+  },
   "loading": {
     "message": "Loading"
   },

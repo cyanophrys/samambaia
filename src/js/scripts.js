@@ -591,3 +591,7 @@ export async function saveScriptsOrder() {
     console.error(error);
   }
 }
+
+export function scrollScriptsArea(element) {
+  scrollToTop(element, 'smooth');
+}
