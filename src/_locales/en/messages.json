@@ -236,6 +236,12 @@
   "editScript": {
     "message": "Edit script"
   },
+  "moveToNext": {
+    "message": "Move to next"
+  },
+  "moveToPrevious": {
+    "message": "Move to previous"
+  },
   "noFavorites": {
     "message": "No favorites"
   },
