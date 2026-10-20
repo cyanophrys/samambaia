@@ -79,8 +79,10 @@ import {
   editScript,
   filterByLabel,
   filterScripts,
+  initScriptsSortable,
   renderScripts,
   saveScript,
+  saveScriptsOrder,
   searchAllScripts,
   toggleFavoriteScript,
 } from './scripts.js';
@@ -232,6 +234,8 @@ async function init() {
     await renderVariables();
     await initScratchpad();
 
+    initScriptsSortable();
+
     setAccentColor(userPreferences.accentColor);
     setBackupReminder(userPreferences.backupReminder);
     setLargeText(userPreferences.largeText);
@@ -309,6 +313,10 @@ function bindEvents() {
 
   document.addEventListener('backupReminder:changed', () => {
     toggleBackupBanner(state.hasUnsavedChanges);
+  });
+
+  document.addEventListener('sort:changed', () => {
+    saveScriptsOrder();
   });
 
   bindTooltipEvents();
