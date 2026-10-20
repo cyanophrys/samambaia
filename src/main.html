@@ -397,7 +397,7 @@
     <button slot="footer-right" class="button suggested-action" type="submit" form="label-form"></button>
   </smb-dialog>
   <smb-dialog id="labels-selection-dialog" data-i18n-attr="heading:selectLabels" style="--dialog-width: 430px;" action-dialog>
-    <smb-search slot="subheader" class="clamp" style="--clamp-width: 300px;" data-i18n-attr="placeholder:searchLabels" data-action="filterScriptLabels" autofocus></smb-search>
+    <smb-search slot="subheader" class="clamp" style="--clamp-width: 300px;" data-i18n-attr="placeholder:searchLabels" data-action="filterScriptLabels" data-keyboard-shortcut="/" data-keyboard-shortcut-scope="dialog" autofocus></smb-search>
     <smb-stack homogeneous transition>
       <smb-stack-page page-name="labels-list">
         <div class="scrollable-area">
@@ -473,7 +473,7 @@
     </button>
   </smb-dialog>
   <smb-dialog id="shortcuts-dialog" data-i18n-attr="heading:keyboardShortcuts" style="--dialog-width: 420px;">
-    <smb-search slot="subheader" class="clamp" style="--clamp-width: 300px;" data-i18n-attr="placeholder:searchShortcuts" data-action="filterShortcuts" autofocus></smb-search>
+    <smb-search slot="subheader" class="clamp" style="--clamp-width: 300px;" data-i18n-attr="placeholder:searchShortcuts" data-action="filterShortcuts" data-keyboard-shortcut="/" data-keyboard-shortcut-scope="dialog" autofocus></smb-search>
     <smb-stack id="shortcuts-stack" transition homogeneous>
       <smb-stack-page page-name="shortcuts">
         <div class="scrollable-area">
