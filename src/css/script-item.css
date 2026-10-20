@@ -21,8 +21,15 @@
 
   header {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     gap: var(--spacing-sm);
+
+    [data-drag-handle] {
+      display: grid;
+      place-items: center;
+      opacity: var(--dimmed-opacity);
+      cursor: grab;
+    }
 
     .title-group {
       min-inline-size: 0;
@@ -94,6 +101,20 @@
 
     .favorite-remove-icon {
       display: block;
+    }
+  }
+
+  &[data-dragging="true"] {
+    outline-color: var(--dragging-outline-color);
+    outline-style: dashed;
+    cursor: grabbing;
+
+    > * {
+      pointer-events: none;
+    }
+
+    button:not(.drag-handle) {
+      opacity: var(--disabled-opacity);
     }
   }
 }

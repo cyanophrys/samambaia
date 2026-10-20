@@ -49,6 +49,7 @@
   --item-teal: #6fbcae;
   --item-yellow: #e0bc63;
 
+  --dragging-outline-color: var(--accent-color);
   --focus-outline-color: var(--accent-color);
   --focus-outline-offset: 2px;
 
