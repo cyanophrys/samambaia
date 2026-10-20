@@ -341,6 +341,49 @@ export function applyShortcutDisplays(root = document) {
   });
 }
 
+export function applyAriaKeyshortcuts(enabled = true) {
+  for (const shortcut of KEYBOARD_SHORTCUTS) {
+    const modifiers = [];
+
+    if (shortcut.ctrl) modifiers.push('Control');
+    if (shortcut.shift) modifiers.push('Shift');
+    if (shortcut.alt) modifiers.push('Alt');
+    if (shortcut.meta) modifiers.push('Meta');
+
+    let key = shortcut.key;
+
+    if (key === '?') {
+      if (!shortcut.shift) modifiers.push('Shift');
+      key = '/';
+    }
+
+    const ariaShortcut = [
+      ...modifiers,
+      key.length === 1 ? key.toUpperCase() : key,
+    ].join('+');
+
+    const shortcutText = formatShortcut(shortcut, { format: 'text' });
+    const selector = getShortcutSelector(shortcut);
+
+    const elements = shortcut.action === 'activate'
+      ? [
+          document.getElementById(shortcut.target) ??
+            document.querySelector(shortcut.target),
+        ].filter(Boolean)
+      : document.querySelectorAll(selector);
+
+    elements.forEach((element) => {
+      if (enabled) {
+        element.setAttribute('aria-keyshortcuts', ariaShortcut);
+        element.dataset.shortcutText = shortcutText;
+      } else {
+        element.removeAttribute('aria-keyshortcuts');
+        delete element.dataset.shortcutText;
+      }
+    });
+  }
+}
+
 export function openShortcutsDialog() {
   const dialog = document.getElementById('shortcuts-dialog');
   const searchInput = dialog.querySelector('smb-search');
