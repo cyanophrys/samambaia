@@ -37,6 +37,10 @@ import {
   getColor,
 } from './colors.js';
 
+import {
+  createShortcutDisplay,
+} from './shortcuts.js';
+
 const MAX_VARIABLE_NAME_LENGTH = 128;
 
 let cachedVariables = [];
@@ -104,6 +108,7 @@ export function createVariableElement(variable) {
   const label = item.querySelector('label');
   const moreButton = item.querySelector('[aria-haspopup]');
   const menu = item.querySelector('.menu');
+  const menuItems = menu.querySelectorAll('.menu-item');
   const editButton = item.querySelector('[data-action="editVariable"]');
   const deleteButton = item.querySelector('[data-action="deleteVariable"]');
   const pinButton = item.querySelector('[data-action="togglePinVariable"]');
@@ -127,6 +132,17 @@ export function createVariableElement(variable) {
   menu.id = menuId;
   menu.style.positionAnchor = anchorName;
   menu.setAttribute('aria-label', t('optionsFor', [variable.name]));
+
+  menuItems.forEach((menuItem) => {
+    const shortcut = menuItem.dataset.keyboardShortcut;
+
+    if (!shortcut) return;
+
+    const display = createShortcutDisplay(shortcut);
+    display.classList.add('suffix');
+
+    menuItem.append(display);
+  });
 
   pinButton.setAttribute('popovertarget', menuId);
   pinButton.dataset.target = variable.id;

@@ -51,6 +51,10 @@ import {
   makeSortable,
 } from './dnd.js';
 
+import {
+  createShortcutDisplay,
+} from './shortcuts.js';
+
 const MAX_SCRIPT_NAME_LENGTH = 128;
 const MAX_SCRIPT_CONTENT_LENGTH = 5000;
 const RENDER_CHUNK_SIZE = 250;
@@ -130,6 +134,7 @@ export function createScriptElement(script) {
   const title = item.querySelector('.title');
   const content = item.querySelector('.content');
   const menu = item.querySelector('.menu');
+  const menuItems = menu.querySelectorAll('.menu-item');
   const moreButton = item.querySelector('[aria-haspopup]');
   const favoriteButton = item.querySelector('[data-action="toggleFavoriteScript"]');
   const favoriteLabel = favoriteButton.querySelector('span');
@@ -158,6 +163,17 @@ export function createScriptElement(script) {
   menu.id = popoverId;
   menu.style.positionAnchor = anchorName;
   menu.setAttribute('aria-label', t('optionsFor', [script.name]));
+
+  menuItems.forEach((menuItem) => {
+    const shortcut = menuItem.dataset.keyboardShortcut;
+
+    if (!shortcut) return;
+
+    const display = createShortcutDisplay(shortcut);
+    display.classList.add('suffix');
+
+    menuItem.append(display);
+  });
 
   favoriteLabel.textContent = script.favorite
     ? t('removeScriptFavorite')
