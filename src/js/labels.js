@@ -38,6 +38,10 @@ import {
   normalizeQuery,
 } from './utils.js';
 
+import {
+  getColor,
+} from './colors.js';
+
 const MAX_LABEL_NAME_LENGTH = 128;
 
 let cachedLabels = [];
@@ -127,6 +131,7 @@ export function createLabelElement(label) {
   item.dataset.target = label.id;
   item.setAttribute('aria-label', label.name);
   item.dataset.pinned = label.pinned ? 'true' : 'false';
+  item.dataset.itemColor = getColor(label.color);
 
   const title = item.querySelector('.title');
   const moreButton = item.querySelector('[aria-haspopup]');
@@ -189,6 +194,7 @@ export async function editLabel(element) {
 
   form.elements['id'].value = label.id;
   form.elements['name'].value = label.name;
+  form.elements['color'].value = getColor(label.color);
 
   dialog.heading = t('editLabel');
   dialog.subtitle = label.name;
@@ -255,6 +261,7 @@ export async function saveLabel() {
   const form = document.getElementById('label-form');
   const id = form.elements['id'].value ? Number(form.elements['id'].value) : undefined;
   const name = form.elements['name'].value.trim().replace(/\s+/g, ' ');
+  const color = getColor(form.elements['color'].value);
 
   if (!name) return;
 
@@ -283,8 +290,8 @@ export async function saveLabel() {
 
   const existingLabel = labels.find(label => label.id === id);
   const labelData = existingLabel
-    ? { ...existingLabel, name }
-    : { id, name };
+    ? { ...existingLabel, name, color }
+    : { id, name, color };
 
   await saveLabelData(labelData);
   dialog.close();
