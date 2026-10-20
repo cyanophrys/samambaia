@@ -121,6 +121,31 @@ main {
     }
   }
 
+  #back-to-top-button {
+    position: fixed;
+    bottom: anchor(bottom);
+    right: anchor(right);
+    margin: 0 var(--spacing-lg) var(--spacing-sm) 0;
+    box-shadow: 0 2px 15px rgb(0 0 0 / 50%);
+    width: 48px;
+    height: 48px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    animation:
+      fade-in linear both,
+      slide-up linear both,
+      reveal linear both;
+    animation-timeline: --scroll;
+    animation-range: 50px 150px;
+    z-index: 1;
+
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
   #scripts-container {
     display: grid;
     justify-content: center;

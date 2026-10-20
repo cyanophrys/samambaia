@@ -136,6 +136,9 @@
           <smb-stack id="main-stack" transition>
             <smb-stack-page page-name="scripts">
               <div class="scrollable-area">
+                <button id="back-to-top-button" class="button suggested-action" type="button" data-action="scrollScriptsArea" data-i18n-attr="aria-label:backToTop" style="position-anchor: --main-view-anchor;" data-tooltip>
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="currentColor"><path d="M455.95-255.74v-397.54L289.23-488.05l-35.38-35.8 226.56-226.56 226.82 226.56-35.38 35.39L506.2-654.1v398.36h-50.25Z"/></svg>
+                </button>
                 <div id="scripts-container"></div>
               </div>
             </smb-stack-page>
@@ -535,6 +538,12 @@
             <header>
               <h2 class="heading" data-i18n="navigation"></h2>
             </header>
+            <div class="list-group">
+              <div class="list-row">
+                <span data-i18n="backToTop"></span>
+                <div class="suffix shortcut-display" data-shortcut-display="scrollScriptsArea"></div>
+              </div>
+            </div>
             <div class="list-group">
               <div class="list-row">
                 <span data-i18n="showAllScripts"></span>
