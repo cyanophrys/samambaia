@@ -84,4 +84,10 @@
     gap: 0;
     opacity: var(--dimmed-opacity);
   }
+
+  :root[data-keyboard-shortcuts="false"] & {
+    [data-shortcut-display] {
+      display: none;
+    }
+  }
 }
