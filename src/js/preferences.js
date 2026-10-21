@@ -32,6 +32,7 @@ import {
 const DEFAULT_PREFERENCES = {
   accentColor: 'blue',
   backupReminder: true,
+  keyboardShortcuts: true,
   largeText: false,
   sidebars: {
     labels: true,
@@ -111,6 +112,18 @@ export function setAccentColor(value, event) {
   userPreferences.accentColor = accentColor;
   document.documentElement.setAttribute('data-accent-color', accentColor);
   updatePreferenceControl('accent-color', accentColor);
+}
+
+export function setKeyboardShortcuts(value, event) {
+  const isEnabled =
+    (typeof value === 'boolean' ? value : event?.target?.checked)
+    ?? DEFAULT_PREFERENCES.keyboardShortcuts;
+
+  userPreferences.keyboardShortcuts = isEnabled;
+  document.documentElement.setAttribute('data-keyboard-shortcuts', isEnabled);
+  updatePreferenceControl('keyboard-shortcuts', isEnabled);
+
+  document.dispatchEvent(new Event('keyboardShortcuts:changed'));
 }
 
 export function setLargeText(value, event) {

@@ -124,6 +124,21 @@
   "systemDefault": {
     "message": "System default"
   },
+  "accessibility": {
+    "message": "Accessibility"
+  },
+  "behavior": {
+    "message": "Behavior"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "Use the keyboard to quickly perform actions and navigate the interface"
+  },
+  "largeText": {
+    "message": "Large text"
+  },
+  "largeTextDescription": {
+    "message": "Increases the text size throughout the interface"
+  },
   "theme": {
     "message": "Theme"
   },
@@ -171,9 +186,6 @@
   },
   "largeTextDescription": {
     "message": "Increases the text size throughout the interface"
-  },
-  "interface": {
-    "message": "Interface"
   },
   "storage": {
     "message": "Storage"
