@@ -72,4 +72,11 @@
     margin-inline-start: auto;
     padding-inline-start: var(--spacing-sm);
   }
+
+  :root[data-keyboard-shortcuts="false"] & {
+    [data-shortcut-display],
+    .kbd {
+      display: none;
+    }
+  }
 }
