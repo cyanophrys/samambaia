@@ -178,6 +178,12 @@
   "largeTextDescription": {
     "message": "Increases the text size throughout the interface"
   },
+  "behavior": {
+    "message": "Behavior"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "Use the keyboard to quickly perform actions and navigate the interface"
+  },
   "storage": {
     "message": "Storage"
   },

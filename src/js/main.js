@@ -51,6 +51,7 @@ import {
   openPreferencesDialog,
   setAccentColor,
   setBackupReminder,
+  setKeyboardShortcuts,
   setLargeText,
   setTheme,
   setViewMode,
@@ -144,6 +145,7 @@ const actions = {
   change: {
     setAccentColor,
     setBackupReminder,
+    setKeyboardShortcuts,
     setLargeText,
     setTheme,
   },
@@ -247,6 +249,7 @@ async function init() {
     setViewMode(userPreferences.viewMode);
 
     toggleBackupBanner(state.hasUnsavedChanges);
+    setKeyboardShortcuts(userPreferences.keyboardShortcuts);
     toggleLabelsSidebar(userPreferences.sidebars.labels);
     toggleScratchpadSidebar(userPreferences.sidebars.scratchpad);
     toggleVariablesSidebar(userPreferences.sidebars.variables);
@@ -296,9 +299,12 @@ function bindEvents() {
   document.addEventListener('change', (e) => handleAction(e, actions));
   document.addEventListener('input', (e) => handleAction(e, actions));
   document.addEventListener('submit', (e) => handleAction(e, actions));
-  document.addEventListener('keydown', (event) =>
-    handleShortcut(event, actions, KEYBOARD_SHORTCUTS)
-  );
+
+  document.addEventListener('keydown', (event) => {
+    if (!userPreferences.keyboardShortcuts) return;
+
+    handleShortcut(event, actions, KEYBOARD_SHORTCUTS);
+  });
 
   document.addEventListener('label:changed', renderScripts);
 
