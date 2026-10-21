@@ -51,6 +51,7 @@ import {
   openPreferencesDialog,
   setAccentColor,
   setBackupReminder,
+  setKeyboardShortcuts,
   setLargeText,
   setTheme,
   setViewMode,
@@ -144,6 +145,7 @@ const actions = {
   change: {
     setAccentColor,
     setBackupReminder,
+    setKeyboardShortcuts,
     setLargeText,
     setTheme,
   },
@@ -242,6 +244,7 @@ async function init() {
 
     setAccentColor(userPreferences.accentColor);
     setBackupReminder(userPreferences.backupReminder);
+    setKeyboardShortcuts(userPreferences.keyboardShortcuts);
     setLargeText(userPreferences.largeText);
     setTheme(userPreferences.theme);
     setViewMode(userPreferences.viewMode);
@@ -296,9 +299,12 @@ function bindEvents() {
   document.addEventListener('change', (e) => handleAction(e, actions));
   document.addEventListener('input', (e) => handleAction(e, actions));
   document.addEventListener('submit', (e) => handleAction(e, actions));
-  document.addEventListener('keydown', (event) =>
-    handleShortcut(event, actions, KEYBOARD_SHORTCUTS)
-  );
+
+  document.addEventListener('keydown', (event) => {
+    if (!userPreferences.keyboardShortcuts) return;
+
+    handleShortcut(event, actions, KEYBOARD_SHORTCUTS);
+  });
 
   document.addEventListener('label:changed', renderScripts);
 
