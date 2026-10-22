@@ -5,7 +5,7 @@
   min-inline-size: 0;
   min-block-size: 0;
   padding: var(--spacing-sm);
-  gap: var(--spacing-md);
+  gap: var(--spacing-lg);
   overflow-inline: hidden;
   overflow-block: auto;
   scroll-timeline: var(--scroll-timeline-name, --scroll) block;
