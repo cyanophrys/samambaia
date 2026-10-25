@@ -170,7 +170,8 @@ const actions = {
     filterByLabel,
     moveScriptNext,
     moveScriptPrevious,
-    openPreferencesDialog,
+    openPreferencesDialog: (target) =>
+      openPreferencesDialog(target?.dataset?.page),
     openShortcutsDialog,
     reload: () => window.location.reload(),
     restoreBackup,

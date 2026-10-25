@@ -87,8 +87,11 @@ function toggleSidebar(button, value) {
   return !isCollapsed;
 }
 
-export function openPreferencesDialog() {
+export function openPreferencesDialog(page = 'appearance') {
   const dialog = document.getElementById('preferences-dialog');
+  const stack = dialog.querySelector('smb-stack');
+
+  stack.show(page);
   dialog.showModal();
 }
 
