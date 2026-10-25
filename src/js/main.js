@@ -48,6 +48,7 @@ import {
 } from './dialog.js';
 
 import {
+  clearRecentHistory,
   openPreferencesDialog,
   setAccentColor,
   setBackupReminder,
@@ -158,6 +159,7 @@ const actions = {
     addLabel,
     addScript,
     addVariable,
+    clearRecentHistory,
     copyScratchpad,
     copyScript,
     clearScratchpad,

@@ -26,6 +26,10 @@ import {
 } from './colors.js';
 
 import {
+  state,
+} from './state.js';
+
+import {
   t,
 } from './i18n.js';
 
@@ -215,4 +219,39 @@ export function toggleScratchpadSidebar(value) {
   const isOpen = toggleSidebar(button, value);
 
   userPreferences.sidebars.scratchpad = isOpen;
+}
+
+export function clearRecentHistory() {
+  const dialog = document.createElement('smb-alert-dialog');
+
+  dialog.heading = t('clearRecentHistoryHeading');
+  dialog.body = t('clearRecentHistoryBody');
+
+  dialog.addResponses([
+    {
+      id: 'cancel',
+      label: t('cancel'),
+      appearance: 'default',
+    },
+    {
+      id: 'clear',
+      label: t('clearHistory'),
+      appearance: 'destructive',
+    },
+  ]);
+
+  dialog.addEventListener('response', (event) => {
+    if (event.detail.response !== 'clear') return;
+
+    state.recentScripts = [];
+
+    document.dispatchEvent(new Event('recentScripts:changed'));
+
+    const toast = document.createElement('smb-toast');
+
+    toast.message = t('recentHistoryCleared');
+    toast.show('preferences-dialog-toast');
+  }, { once: true });
+
+  dialog.showModal();
 }

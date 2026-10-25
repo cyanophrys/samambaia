@@ -200,6 +200,21 @@
   "recentScriptsDescription": {
     "message": "Show scripts that were recently copied"
   },
+  "clearRecentHistoryEllipsis": {
+    "message": "Clear recent history…"
+  },
+  "clearRecentHistoryHeading": {
+    "message": "Clear recent history?"
+  },
+  "clearRecentHistoryBody": {
+    "message": "This will remove all recently copied scripts from your history. This action cannot be undone."
+  },
+  "clearHistory": {
+    "message": "Clear history"
+  },
+  "recentHistoryCleared": {
+    "message": "Recent history cleared"
+  },
   "backup": {
     "message": "Backup"
   },
