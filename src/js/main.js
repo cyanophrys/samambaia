@@ -53,6 +53,7 @@ import {
   setBackupReminder,
   setKeyboardShortcuts,
   setLargeText,
+  setRecentScripts,
   setTheme,
   setViewMode,
   toggleLabelsSidebar,
@@ -149,6 +150,7 @@ const actions = {
     setBackupReminder,
     setKeyboardShortcuts,
     setLargeText,
+    setRecentScripts,
     setTheme,
   },
 
@@ -249,6 +251,7 @@ async function init() {
     setAccentColor(userPreferences.accentColor);
     setBackupReminder(userPreferences.backupReminder);
     setLargeText(userPreferences.largeText);
+    setRecentScripts(userPreferences.recentScripts);
     setTheme(userPreferences.theme);
     setViewMode(userPreferences.viewMode);
 
@@ -315,6 +318,7 @@ function bindEvents() {
   });
 
   document.addEventListener('label:changed', renderScripts);
+  document.addEventListener('recentScripts:changed', filterScripts);
 
   ['data:changed', 'backup:completed'].forEach((event) => {
     document.addEventListener(event, () => {

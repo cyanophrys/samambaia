@@ -34,6 +34,7 @@ const DEFAULT_PREFERENCES = {
   backupReminder: true,
   keyboardShortcuts: true,
   largeText: false,
+  recentScripts: true,
   sidebars: {
     labels: true,
     scratchpad: false,
@@ -137,6 +138,17 @@ export function setLargeText(value, event) {
   userPreferences.largeText = isLargeTextEnabled;
   document.documentElement.setAttribute('data-large-text', isLargeTextEnabled);
   updatePreferenceControl('large-text', isLargeTextEnabled);
+}
+
+export function setRecentScripts(value, event) {
+  const isEnabled =
+    (typeof value === 'boolean' ? value : event?.target?.checked)
+    ?? DEFAULT_PREFERENCES.recentScripts;
+
+  userPreferences.recentScripts = isEnabled;
+  updatePreferenceControl('recent-scripts', isEnabled);
+
+  document.dispatchEvent(new Event('recentScripts:changed'));
 }
 
 export function setTheme(value) {

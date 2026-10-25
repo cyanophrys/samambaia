@@ -191,6 +191,15 @@
   "storage": {
     "message": "Storage"
   },
+  "history": {
+    "message": "History"
+  },
+  "recentScripts": {
+    "message": "Recent scripts"
+  },
+  "recentScriptsDescription": {
+    "message": "Show scripts that were recently copied"
+  },
   "backup": {
     "message": "Backup"
   },
@@ -269,6 +278,12 @@
   },
   "noScriptsDescription": {
     "message": "Add your first script to get started or restore an existing backup"
+  },
+  "recentOff": {
+    "message": "History is off"
+  },
+  "recentOffDescription": {
+    "message": "Turn it on in Preferences to see recently copied scripts"
   },
   "removeScriptFavorite": {
     "message": "Remove from favorites"

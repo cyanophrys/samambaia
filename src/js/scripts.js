@@ -59,6 +59,10 @@ import {
   state,
 } from './state.js';
 
+import {
+  userPreferences,
+} from './preferences.js';
+
 const MAX_RECENT_SCRIPTS = 30;
 const MAX_SCRIPT_NAME_LENGTH = 128;
 const MAX_SCRIPT_CONTENT_LENGTH = 5000;
@@ -457,6 +461,10 @@ export function filterScripts() {
       page = 'no-favorites';
       break;
 
+    case selectedLabel === 'recent' && !userPreferences.recentScripts:
+      page = 'recent-off';
+      break;
+
     case selectedLabel === 'recent' && labelScriptsCount === 0 && !searchAll:
       page = 'no-recent';
       break;
@@ -629,6 +637,8 @@ export function scrollScriptsArea(element) {
 }
 
 function addRecentScript(id) {
+  if (!userPreferences.recentScripts) return;
+
   const ids = state.recentScripts.filter(recentId => recentId !== id);
 
   ids.unshift(id);
