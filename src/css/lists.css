@@ -310,3 +310,14 @@
     input[value="yellow"] { --radio-color: var(--item-yellow); }
   }
 }
+
+.list-row.property-row {
+  user-select: text;
+
+  > div:not(.prefix, .suffix) {
+    > span:first-of-type {
+      font-size: var(--font-size-xs);
+      opacity: var(--dimmed-opacity);
+    }
+  }
+}
