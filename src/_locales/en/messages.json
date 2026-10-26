@@ -569,5 +569,36 @@
   },
   "toggleVariablesSidebar": {
     "message": "Toggle variables sidebar"
+  },
+
+  "about": {
+    "message": "About"
+  },
+  "credits": {
+    "message": "Credits"
+  },
+  "font": {
+    "message": "Font"
+  },
+  "gnuGpl3": {
+    "message": "GNU General Public License, version 3"
+  },
+  "icons": {
+    "message": "Icons"
+  },
+  "legalNotice": {
+    "message": "Licensed under the $1. This project comes without any warranty."
+  },
+  "privacyPolicy": {
+    "message": "Privacy policy"
+  },
+  "reportAnIssue": {
+    "message": "Report an issue"
+  },
+  "version": {
+    "message": "Version"
+  },
+  "website": {
+    "message": "Website"
   }
 }

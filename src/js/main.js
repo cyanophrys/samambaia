@@ -33,6 +33,7 @@ import {
 
 import {
   getManifestInfo,
+  openAboutDialog,
 } from './about.js';
 
 import {
@@ -174,6 +175,7 @@ const actions = {
     filterByLabel,
     moveScriptNext,
     moveScriptPrevious,
+    openAboutDialog,
     openPreferencesDialog: (target) =>
       openPreferencesDialog(target?.dataset?.page),
     openShortcutsDialog,
