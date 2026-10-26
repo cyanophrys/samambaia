@@ -16,6 +16,51 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {
+  t,
+} from './i18n.js';
+
+const ISSUES_URL = 'https://github.com/cyanophrys/samambaia/issues';
+const LICENSE_URL = 'https://www.gnu.org/licenses/gpl-3.0.html';
+const PRIVACY_POLICY_URL = 'https://github.com/cyanophrys/samambaia/blob/main/PRIVACY.md';
+
 export function getManifestInfo() {
   return chrome.runtime.getManifest();
+}
+
+export async function openAboutDialog() {
+  const dialog = document.getElementById('about-dialog');
+  const placeholder = dialog.querySelector('smb-placeholder');
+  const version = document.getElementById('about-version');
+  const homepage_url = document.getElementById('about-homepage');
+  const issues_url = document.getElementById('about-issues');
+  const privacy_url = document.getElementById('about-privacy');
+  const legalNotice = document.getElementById('about-legal-notice');
+
+  try {
+    const manifest = await getManifestInfo();
+
+    placeholder.heading = manifest.name;
+    placeholder.description = manifest.author;
+    version.textContent = manifest.version;
+    homepage_url.href = manifest.homepage_url;
+  } catch (error) {
+    console.error(error);
+  }
+
+  issues_url.href = ISSUES_URL;
+  privacy_url.href = PRIVACY_POLICY_URL;
+
+  const licenseName = t('gnuGpl3');
+  const [before, after] = t('legalNotice', licenseName).split(licenseName);
+  const license = document.createElement('a');
+
+  license.href = LICENSE_URL;
+  license.target = '_blank';
+  license.rel = 'noopener';
+  license.textContent = licenseName;
+
+  legalNotice.replaceChildren(before, license, after);
+
+  dialog.showModal();
 }
