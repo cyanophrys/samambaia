@@ -108,6 +108,9 @@
   "variables": {
     "message": "Variables"
   },
+  "viewMore": {
+    "message": "View more"
+  },
 
   "preferences": {
     "message": "Preferences"
