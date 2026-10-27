@@ -36,6 +36,7 @@ import {
 const DEFAULT_PREFERENCES = {
   accentColor: 'blue',
   backupReminder: true,
+  highContrast: false,
   keyboardShortcuts: true,
   largeText: false,
   recentScripts: true,
@@ -120,6 +121,19 @@ export function setBackupReminder(value, event) {
   updatePreferenceControl('backup-reminder', isEnabled);
 
   document.dispatchEvent(new Event('backupReminder:changed'));
+}
+
+export function setHighContrast(value, event) {
+  const root = document.documentElement;
+  const isHighContrastEnabled =
+    (typeof value === 'boolean' ? value : event?.target?.checked)
+    ?? DEFAULT_PREFERENCES.highContrast;
+
+  userPreferences.highContrast = isHighContrastEnabled;
+
+  root.setAttribute('data-high-contrast', isHighContrastEnabled);
+
+  updatePreferenceControl('high-contrast', isHighContrastEnabled);
 }
 
 export function setKeyboardShortcuts(value, event) {

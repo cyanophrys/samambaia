@@ -53,6 +53,7 @@ import {
   openPreferencesDialog,
   setAccentColor,
   setBackupReminder,
+  setHighContrast,
   setKeyboardShortcuts,
   setLargeText,
   setRecentScripts,
@@ -150,6 +151,7 @@ const actions = {
   change: {
     setAccentColor,
     setBackupReminder,
+    setHighContrast,
     setKeyboardShortcuts,
     setLargeText,
     setRecentScripts,
@@ -254,6 +256,7 @@ async function init() {
 
     setAccentColor(userPreferences.accentColor);
     setBackupReminder(userPreferences.backupReminder);
+    setHighContrast(userPreferences.highContrast);
     setLargeText(userPreferences.largeText);
     setRecentScripts(userPreferences.recentScripts);
     setTheme(userPreferences.theme);
