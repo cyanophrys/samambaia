@@ -47,6 +47,12 @@
   --item-teal: #6fbcae;
   --item-yellow: #e0bc63;
 
+  --badge-bg-color: color-mix(in oklab, var(--accent-color) 12%, transparent);
+  --badge-fg-color: light-dark(
+    oklch(from var(--accent-color) calc(l - 0.12) c h),
+    oklch(from var(--accent-color) calc(l + 0.25) c h)
+  );
+
   --dragging-outline-color: var(--accent-color);
   --focus-outline-color: var(--accent-color);
   --focus-outline-offset: 2px;
