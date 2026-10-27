@@ -21,11 +21,17 @@ const storage = chrome.storage;
 storage.local.get('userPreferences').then(({ userPreferences }) => {
   const root = document.documentElement;
   const theme = userPreferences?.theme ?? 'system';
+  const highContrast = userPreferences?.highContrast ?? 'system';
 
   root.dataset.theme =
     theme === 'system'
       ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
       : theme;
+
+  root.dataset.highContrast =
+    highContrast === 'system'
+      ? matchMedia('(prefers-contrast: more)').matches
+      : highContrast === 'enabled';
 
   if (userPreferences?.accentColor)
     root.dataset.accentColor = userPreferences.accentColor;
