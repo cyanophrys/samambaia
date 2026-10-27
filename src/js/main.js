@@ -53,6 +53,7 @@ import {
   openPreferencesDialog,
   setAccentColor,
   setBackupReminder,
+  setHighContrast,
   setKeyboardShortcuts,
   setLargeText,
   setRecentScripts,
@@ -150,6 +151,7 @@ const actions = {
   change: {
     setAccentColor,
     setBackupReminder,
+    setHighContrast,
     setKeyboardShortcuts,
     setLargeText,
     setRecentScripts,
@@ -254,6 +256,7 @@ async function init() {
 
     setAccentColor(userPreferences.accentColor);
     setBackupReminder(userPreferences.backupReminder);
+    setHighContrast(userPreferences.highContrast);
     setKeyboardShortcuts(userPreferences.keyboardShortcuts);
     setLargeText(userPreferences.largeText);
     setRecentScripts(userPreferences.recentScripts);
@@ -295,6 +298,7 @@ async function init() {
 
 function bindEvents() {
   const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+  const prefersHighContrast = window.matchMedia('(prefers-contrast: more)');
   const debouncedToggleBackupBanner = debounce(
     () => toggleBackupBanner(state.hasUnsavedChanges),
     300
@@ -302,6 +306,10 @@ function bindEvents() {
 
   prefersDarkMode.addEventListener('change', () => {
     if (userPreferences.theme === 'system') setTheme('system');
+  });
+
+  prefersHighContrast.addEventListener('change', () => {
+    if (userPreferences.highContrast === 'system') setHighContrast('system');
   });
 
   window.addEventListener('beforeunload', warnBeforeUnload);

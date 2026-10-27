@@ -303,7 +303,7 @@
             <header>
               <h2 data-i18n="interface"></h2>
             </header>
-            <div class="list-group">
+            <div class="list-group rows-separated">
               <label class="list-row activatable">
                 <input class="switch prefix" type="checkbox" role="switch" name="large-text" data-action="setLargeText">
                 <div>
@@ -311,6 +311,28 @@
                   <span data-i18n="largeTextDescription"></span>
                 </div>
               </label>
+              <details class="expandable-row">
+                <summary class="list-row activatable">
+                  <div>
+                    <span id="high-contrast-title" data-i18n="highContrast"></span>
+                    <span data-i18n="highContrastDescription"></span>
+                  </div>
+                </summary>
+                <div role="radiogroup" aria-labelledby="high-contrast-title">
+                  <label class="list-row activatable">
+                    <input class="radio prefix" type="radio" name="high-contrast" value="system" data-action="setHighContrast">
+                    <span data-i18n="systemDefault"></span>
+                  </label>
+                  <label class="list-row activatable">
+                    <input class="radio prefix" type="radio" name="high-contrast" value="enabled" data-action="setHighContrast">
+                    <span data-i18n="enabled"></span>
+                  </label>
+                  <label class="list-row activatable">
+                    <input class="radio prefix" type="radio" name="high-contrast" value="disabled" data-action="setHighContrast">
+                    <span data-i18n="disabled"></span>
+                  </label>
+                </div>
+              </details>
             </div>
           </section>
           <section class="section">

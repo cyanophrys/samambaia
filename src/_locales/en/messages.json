@@ -125,6 +125,12 @@
   "preferences": {
     "message": "Preferences"
   },
+  "disabled": {
+    "message": "Disabled"
+  },
+  "enabled": {
+    "message": "Enabled"
+  },
   "appearance": {
     "message": "Appearance"
   },
@@ -181,6 +187,12 @@
   },
   "interface": {
     "message": "Interface"
+  },
+  "highContrast": {
+    "message": "High contrast"
+  },
+  "highContrastDescription": {
+    "message": "Increases color contrast to make the interface easier to see"
   },
   "largeText": {
     "message": "Large text"
