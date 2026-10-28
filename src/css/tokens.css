@@ -105,6 +105,9 @@
   &[data-accent-color="yellow"] { --accent-color: var(--accent-yellow); }
 
   &[data-high-contrast="true"] {
+    --dimmed-opacity: 0.85;
+    --disabled-opacity: 0.65;
+
     --badge-bg-color: color-mix(in oklab, currentColor 18%, transparent);
     --badge-fg-color: var(--text-color);
 
