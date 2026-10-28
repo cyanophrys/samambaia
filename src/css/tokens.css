@@ -76,6 +76,8 @@
   --selected-hover-bg-color: color-mix(in oklab, var(--accent-color) 28%, transparent);
 
   --border-color: light-dark(rgb(0 0 0 / 18%), rgb(255 255 255 / 18%));
+  --border-hc: 1px solid var(--border-hc-color);
+  --border-hc-color: transparent;
   --dark-border-color: light-dark(rgb(0 0 0 / 30%), rgb(0 0 0 / 45%));
 
   --dialog-color: light-dark(#f6f6f7, #27272a);
@@ -101,6 +103,12 @@
   &[data-accent-color="slate"] { --accent-color: var(--accent-slate); }
   &[data-accent-color="teal"] { --accent-color: var(--accent-teal); }
   &[data-accent-color="yellow"] { --accent-color: var(--accent-yellow); }
+
+  &[data-high-contrast="true"] {
+    --border-color: var(--border-hc-color);
+    --border-hc-color: color-mix(in oklab, currentColor 45%, transparent);
+    --dark-border-color: var(--border-hc-color);
+  }
 
   &[data-large-text="true"] {
     --font-size-base: 18px;

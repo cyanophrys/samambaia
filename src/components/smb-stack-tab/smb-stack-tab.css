@@ -40,6 +40,7 @@
       place-items: center;
       padding: var(--spacing-2xs) var(--spacing-md);
       flex-shrink: 0;
+      border: var(--border-hc);
       border-radius: var(--radius-max);
       transition:
         opacity var(--transition-medium),

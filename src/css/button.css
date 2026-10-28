@@ -19,7 +19,7 @@
   display: grid;
   place-items: center;
   padding: var(--spacing-xs) var(--spacing-sm);
-  border: 0;
+  border: var(--border-hc);
   border-radius: var(--radius-md);
   background-color: color-mix(in oklab, currentColor var(--button-intensity), transparent);
   height: 32px;

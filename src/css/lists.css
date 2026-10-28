@@ -5,12 +5,20 @@
   flex-direction: column;
   border-radius: var(--radius-md);
 
+  &:not(.rows-separated) {
+    border: var(--border-hc);
+  }
+
   &.rows-separated {
     gap: var(--spacing-xs);
 
     .list-row {
-      border-block-end: 0;
+      border: var(--border-hc);
       border-radius: var(--radius-md);
+
+      :root[data-theme="dark"] & {
+        border-block-end-color: var(--border-hc-color);
+      }
     }
   }
 }
@@ -240,7 +248,7 @@
     inline-size: 24px;
     block-size: 24px;
     flex-shrink: 0;
-    border: 1px solid transparent;
+    border: var(--border-hc);
     border-radius: var(--radius-max);
     background-color: color-mix(
       in oklab,

@@ -43,7 +43,7 @@
   padding-block: calc(var(--spacing-xs) - 2px);
   padding-inline: var(--spacing-sm);
   background-color: transparent;
-  border: 0;
+  border: var(--border-hc);
   border-radius: var(--radius-sm);
   color: inherit;
   line-height: 1;

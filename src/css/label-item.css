@@ -17,7 +17,7 @@
   padding-block: var(--spacing-xs);
   padding-inline: var(--spacing-sm);
   block-size: 44px;
-  border: 0;
+  border: var(--border-hc);
   border-radius: var(--radius-md);
   background-color: transparent;
   color: inherit;
