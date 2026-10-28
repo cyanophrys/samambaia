@@ -53,6 +53,11 @@
     oklch(from var(--accent-color) calc(l + 0.25) c h)
   );
 
+  --border-color: light-dark(rgb(0 0 0 / 18%), rgb(255 255 255 / 18%));
+  --border-hc: 1px solid var(--border-hc-color);
+  --border-hc-color: transparent;
+  --dark-border-color: light-dark(rgb(0 0 0 / 30%), rgb(0 0 0 / 45%));
+
   --dragging-outline-color: var(--accent-color);
   --focus-outline-color: var(--accent-color);
   --focus-outline-offset: 2px;
@@ -74,11 +79,6 @@
     oklch(from var(--accent-color) calc(l + 0.3) c h)
   );
   --selected-hover-bg-color: color-mix(in oklab, var(--accent-color) 28%, transparent);
-
-  --border-color: light-dark(rgb(0 0 0 / 18%), rgb(255 255 255 / 18%));
-  --border-hc: 1px solid var(--border-hc-color);
-  --border-hc-color: transparent;
-  --dark-border-color: light-dark(rgb(0 0 0 / 30%), rgb(0 0 0 / 45%));
 
   --dialog-color: light-dark(#f6f6f7, #27272a);
   --error-color: light-dark(#c62828, #ef5350);
