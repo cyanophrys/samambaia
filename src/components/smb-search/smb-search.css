@@ -9,6 +9,7 @@ div {
   gap: var(--spacing-2xs);
   inline-size: 100%;
   block-size: 32px;
+  border: var(--border-hc);
   border-radius: var(--radius-max);
   background-color: color-mix(in oklab, currentColor 8%, transparent);
   padding-block: 0;
