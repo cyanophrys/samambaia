@@ -159,5 +159,10 @@
       mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M382-220 130-472l84-84 168 168 364-364 84 84-448 448Z'/%3E%3C/svg%3E");
       opacity: 1;
     }
+
+    :root[data-high-contrast="true"] &::after {
+      background-color: black;
+      opacity: var(--dimmed-opacity);
+    }
   }
 }
