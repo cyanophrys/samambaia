@@ -7,6 +7,7 @@
   place-items: center;
   flex-shrink: 0;
   color: inherit;
+  border: var(--border-hc);
   cursor: pointer;
 
   &:hover {
@@ -117,8 +118,8 @@
   &::after {
     content: "";
     position: absolute;
-    inset-block-start: 3px;
-    inset-inline-start: 3px;
+    inset-block-start: 2px;
+    inset-inline-start: 2px;
     inline-size: 18px;
     block-size: 18px;
     border-radius: var(--radius-max);

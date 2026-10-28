@@ -134,6 +134,7 @@
   margin: 0;
   padding-block: 0;
   padding-inline: var(--spacing-xs);
+  border: var(--border-hc);
   border-radius: var(--radius-2md);
   color: inherit;
   background: color-mix(in oklab, var(--accent-color) 18%, transparent);
@@ -190,6 +191,7 @@
   place-items: center;
   min-width: 28px;
   padding: calc(var(--spacing-xs) - 4px) var(--spacing-xs);
+  border: var(--border-hc);
   border-radius: var(--radius-sm);
   font: inherit;
   background-color: color-mix(in oklab, currentColor 10%, transparent);
@@ -220,6 +222,7 @@
   align-items: center;
   width: fit-content;
   padding: var(--spacing-xs) var(--spacing-md);
+  border: var(--border-hc);
   border-radius: var(--radius-max);
   background-color: var(--badge-bg-color);
   color: var(--badge-fg-color);
