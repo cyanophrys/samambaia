@@ -54,6 +54,10 @@
     padding-inline-end: var(--spacing-xs);
   }
 
+  :root[data-high-contrast="true"] &::before {
+    background-color: currentColor;
+  }
+
   &.compact {
     display: grid;
     place-items: center;
