@@ -176,6 +176,21 @@
   "textExpansionDescription": {
     "message": "Quickly insert a script as you type using an abbreviation"
   },
+  "textExpansionPrefix": {
+    "message": "Text expansion prefix"
+  },
+  "textExpansionPrefixDescription": {
+    "message": "Choose the character used as the prefix"
+  },
+  "textExpansionPrefixSemicolon": {
+    "message": "Semicolon (;)"
+  },
+  "textExpansionPrefixSlash": {
+    "message": "Slash (/)"
+  },
+  "textExpansionPrefixColon": {
+    "message": "Colon (:)"
+  },
   "accessibility": {
     "message": "Accessibility"
   },

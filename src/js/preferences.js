@@ -26,6 +26,10 @@ import {
 } from './colors.js';
 
 import {
+  TEXT_EXPANSION_PREFIXES,
+} from './config.js';
+
+import {
   state,
 } from './state.js';
 
@@ -47,6 +51,7 @@ const DEFAULT_PREFERENCES = {
   },
   textExpansion: {
     enabled: true,
+    prefix: TEXT_EXPANSION_PREFIXES.default,
   },
   theme: 'system',
   viewMode: 'grid',
@@ -179,6 +184,17 @@ export function setTextExpansion(value, event) {
 
   userPreferences.textExpansion.enabled = isEnabled;
   updatePreferenceControl('text-expansion', isEnabled);
+}
+
+export function setTextExpansionPrefix(value) {
+  const prefix = TEXT_EXPANSION_PREFIXES.options.includes(value)
+    ? value
+    : TEXT_EXPANSION_PREFIXES.default;
+
+  userPreferences.textExpansion.prefix = prefix;
+  updatePreferenceControl('text-expansion-prefix', prefix);
+
+  document.dispatchEvent(new Event('textExpansionPrefix:changed'));
 }
 
 export function setTheme(value) {
