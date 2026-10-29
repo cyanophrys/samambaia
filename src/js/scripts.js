@@ -169,6 +169,7 @@ export function createScriptElement(script) {
   item.dataset.itemColor = getColor(script.color);
 
   const title = item.querySelector('.title');
+  const abbreviation = item.querySelector('.abbreviation');
   const content = item.querySelector('.content');
   const menu = item.querySelector('.menu');
   const moreButton = item.querySelector('[aria-haspopup]');
@@ -183,6 +184,13 @@ export function createScriptElement(script) {
 
   title.id = `script-title-${script.id}`;
   title.textContent = script.name;
+
+  if (script.abbreviation) {
+    abbreviation.hidden = false;
+    abbreviation.textContent = `${userPreferences.textExpansion.prefix}${script.abbreviation}`;
+  } else {
+    abbreviation.remove();
+  }
 
   copyButton.dataset.target = script.id;
 
