@@ -170,6 +170,12 @@
   "yellow": {
     "message": "Yellow"
   },
+  "textExpansion": {
+    "message": "Text expansion"
+  },
+  "textExpansionDescription": {
+    "message": "Quickly insert a script as you type using an abbreviation"
+  },
   "accessibility": {
     "message": "Accessibility"
   },

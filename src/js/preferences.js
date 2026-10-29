@@ -45,6 +45,9 @@ const DEFAULT_PREFERENCES = {
     scratchpad: false,
     variables: true,
   },
+  textExpansion: {
+    enabled: true,
+  },
   theme: 'system',
   viewMode: 'grid',
 };
@@ -167,6 +170,15 @@ export function setRecentScripts(value, event) {
   updatePreferenceControl('recent-scripts', isEnabled);
 
   document.dispatchEvent(new Event('recentScripts:changed'));
+}
+
+export function setTextExpansion(value, event) {
+  const isEnabled =
+    (typeof value === 'boolean' ? value : event?.target?.checked)
+    ?? DEFAULT_PREFERENCES.textExpansion.enabled;
+
+  userPreferences.textExpansion.enabled = isEnabled;
+  updatePreferenceControl('text-expansion', isEnabled);
 }
 
 export function setTheme(value) {
