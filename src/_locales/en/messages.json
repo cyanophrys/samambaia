@@ -182,6 +182,15 @@
   "yellow": {
     "message": "Yellow"
   },
+  "textExpansion": {
+    "message": "Text expansion"
+  },
+  "textExpansionDescription": {
+    "message": "Quickly insert a script as you type using an abbreviation"
+  },
+  "textExpansionReloadHint": {
+    "message": "Reload open tabs to enable text expansion"
+  },
   "accessibility": {
     "message": "Accessibility"
   },
