@@ -16,7 +16,10 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+const EXPANDER_SCRIPT_ID = 'expander';
+
 let openingPromise;
+let expanderQueue = Promise.resolve();
 
 chrome.action.onClicked.addListener(async () => {
   if (openingPromise) return;
@@ -63,4 +66,45 @@ chrome.tabs.onRemoved.addListener(async (tabId) => {
   } catch (error) {
     console.error(error);
   }
+});
+
+function updateExpander() {
+  expanderQueue = expanderQueue.then(async () => {
+    try {
+      const { userPreferences } = await chrome.storage.local.get('userPreferences');
+      const isEnabled = userPreferences?.textExpansion?.enabled ?? true;
+      const registered = await chrome.scripting.getRegisteredContentScripts({
+        ids: [EXPANDER_SCRIPT_ID],
+      });
+
+      if (isEnabled && registered.length === 0) {
+        await chrome.scripting.registerContentScripts([{
+          id: EXPANDER_SCRIPT_ID,
+          matches: ['<all_urls>'],
+          js: ['js/expander.js'],
+          allFrames: true,
+          runAt: 'document_idle',
+          persistAcrossSessions: true,
+        }]);
+      } else if (!isEnabled && registered.length > 0) {
+        await chrome.scripting.unregisterContentScripts({
+          ids: [EXPANDER_SCRIPT_ID],
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  });
+}
+
+chrome.runtime.onInstalled.addListener(updateExpander);
+chrome.runtime.onStartup.addListener(updateExpander);
+
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area !== 'local' || !changes.userPreferences) return;
+
+  const wasEnabled = changes.userPreferences.oldValue?.textExpansion?.enabled ?? true;
+  const isEnabled = changes.userPreferences.newValue?.textExpansion?.enabled ?? true;
+
+  if (wasEnabled !== isEnabled) updateExpander();
 });

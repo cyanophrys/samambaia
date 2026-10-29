@@ -11,7 +11,11 @@
     "service_worker": "js/background.js"
   },
   "permissions": [
+    "scripting",
     "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
   ],
   "minimum_chrome_version": "129"
 }
