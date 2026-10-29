@@ -48,6 +48,10 @@ import {
 } from './colors.js';
 
 import {
+  INVALID_TOKEN_CHARS_PATTERN,
+} from './config.js';
+
+import {
   makeSortable,
 } from './dnd.js';
 
@@ -63,6 +67,7 @@ import {
   userPreferences,
 } from './preferences.js';
 
+const MAX_SCRIPT_ABBREVIATION_LENGTH = 32;
 const MAX_RECENT_SCRIPTS = 30;
 const MAX_SCRIPT_NAME_LENGTH = 128;
 const MAX_SCRIPT_CONTENT_LENGTH = 5000;
@@ -275,6 +280,7 @@ export async function editScript(element) {
   form.elements['id'].value = script.id;
   form.elements['name'].value = script.name;
   form.elements['content'].value = script.content;
+  form.elements['abbreviation'].value = script.abbreviation ?? '';
   form.elements['color'].value = getColor(script.color);
 
   dialog.heading = t('editScript');
@@ -292,6 +298,8 @@ export async function saveScript() {
   const id = form.elements['id'].value || undefined;
   const name = form.elements['name'].value.trim();
   const content = form.elements['content'].value;
+  const rawAbbreviation = form.elements['abbreviation'].value.trim();
+  const abbreviation = rawAbbreviation.replace(INVALID_TOKEN_CHARS_PATTERN, '');
   const color = getColor(form.elements['color'].value);
 
   if (
@@ -303,7 +311,37 @@ export async function saveScript() {
     return;
   }
 
-  const existingScript = id ? await getScript(Number(id)) : null;
+  if (
+    rawAbbreviation !== abbreviation ||
+    abbreviation.length > MAX_SCRIPT_ABBREVIATION_LENGTH
+  ) {
+    const toast = document.createElement('smb-toast');
+
+    toast.message = t('scriptAbbreviationInvalid');
+    toast.show('script-dialog-toast');
+    return;
+  }
+
+  const scripts = await getAllScripts();
+
+  if (abbreviation) {
+    const isDuplicate = scripts.some(existing =>
+      existing.abbreviation?.toLowerCase() === abbreviation.toLowerCase() &&
+      existing.id !== Number(id)
+    );
+
+    if (isDuplicate) {
+      const toast = document.createElement('smb-toast');
+
+      toast.message = t('scriptAbbreviationDuplicate');
+      toast.show('script-dialog-toast');
+      return;
+    }
+  }
+
+  const existingScript = id
+    ? scripts.find(existing => existing.id === Number(id))
+    : null;
   const order = existingScript?.order;
 
   const scriptData = {
@@ -312,6 +350,7 @@ export async function saveScript() {
     name,
     labels: getSelectedScriptLabels(),
     content,
+    abbreviation,
     color,
     order,
   };

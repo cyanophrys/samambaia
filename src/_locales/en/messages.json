@@ -345,6 +345,15 @@
   "removeScriptFavorite": {
     "message": "Remove from favorites"
   },
+  "scriptAbbreviation": {
+    "message": "Abbreviation (optional)"
+  },
+  "scriptAbbreviationDuplicate": {
+    "message": "A script with this abbreviation already exists"
+  },
+  "scriptAbbreviationInvalid": {
+    "message": "The abbreviation can only contain letters, numbers, \"_\" and \"-\""
+  },
   "scriptAdded": {
     "message": "Script \"$1\" added"
   },
