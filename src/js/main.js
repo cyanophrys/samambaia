@@ -59,6 +59,7 @@ import {
   setRecentScripts,
   setTextExpansion,
   setTextExpansionPrefix,
+  setTextExpansionTrigger,
   setTheme,
   setViewMode,
   toggleLabelsSidebar,
@@ -159,6 +160,7 @@ const actions = {
     setRecentScripts,
     setTextExpansion,
     setTextExpansionPrefix,
+    setTextExpansionTrigger,
     setTheme,
   },
 
@@ -265,6 +267,7 @@ async function init() {
     setRecentScripts(userPreferences.recentScripts);
     setTextExpansion(userPreferences.textExpansion.enabled);
     setTextExpansionPrefix(userPreferences.textExpansion.prefix);
+    setTextExpansionTrigger(userPreferences.textExpansion.trigger);
     setTheme(userPreferences.theme);
     setViewMode(userPreferences.viewMode);
 

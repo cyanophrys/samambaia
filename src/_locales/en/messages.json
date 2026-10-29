@@ -191,6 +191,21 @@
   "textExpansionPrefixColon": {
     "message": "Colon (:)"
   },
+  "textExpansionTrigger": {
+    "message": "Text expansion trigger"
+  },
+  "textExpansionTriggerDescription": {
+    "message": "Choose the key used to trigger text expansion"
+  },
+  "textExpansionTriggerSpace": {
+    "message": "Space"
+  },
+  "textExpansionTriggerTab": {
+    "message": "Tab"
+  },
+  "textExpansionTriggerEnter": {
+    "message": "Enter"
+  },
   "accessibility": {
     "message": "Accessibility"
   },

@@ -27,3 +27,12 @@ export const TEXT_EXPANSION_PREFIXES = {
     ':',
   ],
 };
+
+export const TEXT_EXPANSION_TRIGGERS = {
+  default: 'space',
+  options: [
+    'space',
+    'tab',
+    'enter',
+  ],
+};

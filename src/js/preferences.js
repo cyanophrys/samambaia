@@ -27,6 +27,7 @@ import {
 
 import {
   TEXT_EXPANSION_PREFIXES,
+  TEXT_EXPANSION_TRIGGERS,
 } from './config.js';
 
 import {
@@ -52,6 +53,7 @@ const DEFAULT_PREFERENCES = {
   textExpansion: {
     enabled: true,
     prefix: TEXT_EXPANSION_PREFIXES.default,
+    trigger: TEXT_EXPANSION_TRIGGERS.default,
   },
   theme: 'system',
   viewMode: 'grid',
@@ -195,6 +197,15 @@ export function setTextExpansionPrefix(value) {
   updatePreferenceControl('text-expansion-prefix', prefix);
 
   document.dispatchEvent(new Event('textExpansionPrefix:changed'));
+}
+
+export function setTextExpansionTrigger(value) {
+  const trigger = TEXT_EXPANSION_TRIGGERS.options.includes(value)
+    ? value
+    : TEXT_EXPANSION_TRIGGERS.default;
+
+  userPreferences.textExpansion.trigger = trigger;
+  updatePreferenceControl('text-expansion-trigger', trigger);
 }
 
 export function setTheme(value) {
