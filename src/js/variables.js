@@ -251,6 +251,7 @@ export async function saveVariable() {
   dialog.close();
 
   await renderVariables();
+  document.dispatchEvent(new Event('variable:changed'));
 
   const message = t(id ? 'variableEdited' : 'variableAdded', [name]);
   const toast = document.createElement('smb-toast');
@@ -288,6 +289,7 @@ export async function deleteVariable(element) {
     if (event.detail.response === 'delete') {
       await deleteVariableData(id);
       await renderVariables();
+      document.dispatchEvent(new Event('variable:changed'));
 
       const toast = document.createElement('smb-toast');
 
@@ -320,6 +322,7 @@ export function handleVariableValueInput(value, event) {
   debounceTimeout = setTimeout(async () => {
     try {
       await saveVariableData(variableData);
+      document.dispatchEvent(new Event('variable:changed'));
     } catch (error) {
       console.error(error);
     }
