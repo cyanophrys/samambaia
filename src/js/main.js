@@ -339,7 +339,10 @@ function bindEvents() {
     () => updateTextExpansionAbbreviations()
   );
 
-  document.addEventListener('label:changed', renderScripts);
+  ['label:changed', 'textExpansionPrefix:changed'].forEach((event) => {
+    document.addEventListener(event, renderScripts);
+  });
+
   document.addEventListener('recentScripts:changed', filterScripts);
 
   ['data:changed', 'backup:completed'].forEach((event) => {

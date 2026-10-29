@@ -42,6 +42,11 @@
         font-size: var(--font-size-base);
         overflow-wrap: anywhere;
       }
+
+      .abbreviation {
+        opacity: var(--dimmed-opacity);
+        font-weight: 600;
+      }
     }
 
     .button-group {
