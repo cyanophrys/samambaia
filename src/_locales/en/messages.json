@@ -191,6 +191,21 @@
   "textExpansionReloadHint": {
     "message": "Reload open tabs to enable text expansion"
   },
+  "textExpansionPrefix": {
+    "message": "Text expansion prefix"
+  },
+  "textExpansionPrefixDescription": {
+    "message": "Choose the character used as the prefix"
+  },
+  "textExpansionPrefixSemicolon": {
+    "message": "Semicolon (;)"
+  },
+  "textExpansionPrefixSlash": {
+    "message": "Slash (/)"
+  },
+  "textExpansionPrefixColon": {
+    "message": "Colon (:)"
+  },
   "accessibility": {
     "message": "Accessibility"
   },

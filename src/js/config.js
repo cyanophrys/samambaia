@@ -19,4 +19,13 @@
 export const NAME_TOKEN_PATTERN = /\{\{\s*([a-zA-Z0-9_-]+)\s*\}\}/g;
 export const INVALID_TOKEN_CHARS_PATTERN = /[^a-zA-Z0-9_-]/g;
 
+export const TEXT_EXPANSION_PREFIXES = {
+  default: ';',
+  options: [
+    ';',
+    '/',
+    ':',
+  ],
+};
+
 export const UNDO_DURATION = 10000
