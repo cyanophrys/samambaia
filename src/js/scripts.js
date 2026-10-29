@@ -31,7 +31,8 @@ import {
 } from './labels.js';
 
 import {
-  applyVariables
+  applyVariables,
+  getVariableValuesMap,
 } from './variables.js';
 
 import {
@@ -137,6 +138,23 @@ export function updateScriptMoveButtons(items = getVisibleScripts()) {
   });
 }
 
+export async function updateTextExpansionAbbreviations(scripts) {
+  const list = scripts ?? await getAllScripts();
+  const values = getVariableValuesMap();
+  const textExpansionAbbreviations = {};
+
+  for (const script of list) {
+    if (typeof script.abbreviation !== 'string' || !script.abbreviation) continue;
+
+    textExpansionAbbreviations[script.abbreviation.toLowerCase()] =
+      applyVariables(script.content, values);
+  }
+
+  chrome.storage.local.set({ textExpansionAbbreviations }).catch((error) => {
+    console.error(error);
+  });
+}
+
 export function createScriptElement(script) {
   const template = getScriptItemTemplate();
   const item = template.content.firstElementChild.cloneNode(true);
@@ -214,6 +232,8 @@ export async function renderScripts() {
   scripts.sort((a, b) =>
     (a.order ?? Infinity) - (b.order ?? Infinity) || a.id - b.id
   );
+
+  updateTextExpansionAbbreviations(scripts);
 
   const container = getScriptsContainer();
   container.replaceChildren();
