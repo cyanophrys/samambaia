@@ -97,6 +97,7 @@ import {
   searchAllScripts,
   toggleFavoriteScript,
   updateScriptMoveButtons,
+  updateTextExpansionAbbreviations,
 } from './scripts.js';
 
 import {
@@ -253,9 +254,9 @@ async function init() {
     applyShortcutDisplays();
 
     await initDB();
+    await renderVariables();
     await renderScripts();
     await renderLabels();
-    await renderVariables();
     await initScratchpad();
 
     initScriptsSortable();
@@ -332,6 +333,11 @@ function bindEvents() {
   document.addEventListener('keyboardShortcuts:changed', () => {
     applyAriaKeyshortcuts(userPreferences.keyboardShortcuts);
   });
+
+  document.addEventListener(
+    'variable:changed',
+    () => updateTextExpansionAbbreviations()
+  );
 
   document.addEventListener('label:changed', renderScripts);
   document.addEventListener('recentScripts:changed', filterScripts);
