@@ -138,6 +138,9 @@ function validateBackup(data) {
 
     if (script.labels !== undefined && !Array.isArray(script.labels))
       return false;
+
+    if (script.abbreviation !== undefined && typeof script.abbreviation !== 'string')
+      return false;
   }
 
   for (const variable of data.variables ?? []) {
