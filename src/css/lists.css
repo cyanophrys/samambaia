@@ -64,7 +64,7 @@
     }
   }
 
-  > div:not(.prefix, .suffix) {
+  > div:not(.prefix, .suffix, .menu) {
     display: flex;
     flex-direction: column;
 
