@@ -372,6 +372,9 @@
   "scriptEdited": {
     "message": "Script \"$1\" edited"
   },
+  "scriptNotes": {
+    "message": "Notes (optional)"
+  },
   "scriptRemovedFromFavorites": {
     "message": "Script \"$1\" removed from favorites"
   },

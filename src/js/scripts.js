@@ -71,6 +71,7 @@ import {
 const MAX_SCRIPT_ABBREVIATION_LENGTH = 32;
 const MAX_RECENT_SCRIPTS = 30;
 const MAX_SCRIPT_NAME_LENGTH = 128;
+const MAX_SCRIPT_NOTES_LENGTH = 1000;
 const MAX_SCRIPT_CONTENT_LENGTH = 5000;
 const RENDER_CHUNK_SIZE = 250;
 
@@ -166,6 +167,8 @@ export function createScriptElement(script) {
 
   const title = item.querySelector('.title');
   const abbreviation = item.querySelector('.abbreviation');
+  const notes = item.querySelector('.notes');
+  const notesContent = item.querySelector('.notes-content');
   const content = item.querySelector('.content');
   const menu = item.querySelector('.menu');
   const menuItems = menu.querySelectorAll('.menu-item');
@@ -196,7 +199,17 @@ export function createScriptElement(script) {
   content.dataset.target = script.id;
 
   item.setAttribute('aria-labelledby', title.id);
-  item.setAttribute('aria-describedby', content.id);
+
+  if (script.notes) {
+    notes.id = `script-notes-${script.id}`;
+    notes.hidden = false;
+    notesContent.textContent = script.notes;
+
+    item.setAttribute('aria-describedby', `${content.id} ${notes.id}`);
+  } else {
+    notes.remove();
+    item.setAttribute('aria-describedby', content.id);
+  }
 
   moreButton.setAttribute('popovertarget', popoverId);
   moreButton.style.anchorName = anchorName;
@@ -308,6 +321,7 @@ export async function editScript(element) {
   form.elements['id'].value = script.id;
   form.elements['name'].value = script.name;
   form.elements['content'].value = script.content;
+  form.elements['notes'].value = script.notes ?? '';
   form.elements['abbreviation'].value = script.abbreviation ?? '';
   form.elements['color'].value = getColor(script.color);
 
@@ -326,6 +340,7 @@ export async function saveScript() {
   const id = form.elements['id'].value || undefined;
   const name = form.elements['name'].value.trim();
   const content = form.elements['content'].value;
+  const notes = form.elements['notes'].value.trim();
   const rawAbbreviation = form.elements['abbreviation'].value.trim();
   const abbreviation = rawAbbreviation.replace(INVALID_TOKEN_CHARS_PATTERN, '');
   const color = getColor(form.elements['color'].value);
@@ -334,7 +349,8 @@ export async function saveScript() {
     !name ||
     !content ||
     name.length > MAX_SCRIPT_NAME_LENGTH ||
-    content.length > MAX_SCRIPT_CONTENT_LENGTH
+    content.length > MAX_SCRIPT_CONTENT_LENGTH ||
+    notes.length > MAX_SCRIPT_NOTES_LENGTH
   ) {
     return;
   }
@@ -378,6 +394,7 @@ export async function saveScript() {
     name,
     labels: getSelectedScriptLabels(),
     content,
+    notes,
     abbreviation,
     color,
     order,

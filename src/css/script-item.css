@@ -54,6 +54,29 @@
     }
   }
 
+  .notes {
+    display: flex;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm);
+    border: var(--border-hc);
+    border-radius: var(--radius-md);
+    background-color: color-mix(in oklab, currentColor 8%, transparent);
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    text-wrap: pretty;
+    user-select: text;
+
+    svg {
+      flex-shrink: 0;
+      opacity: var(--dimmed-opacity);
+    }
+
+    .notes-content {
+      white-space: pre-wrap;
+      text-wrap: pretty;
+    }
+  }
+
   .content {
     --content-bg: 10%;
     --content-bg-hover: 15%;
