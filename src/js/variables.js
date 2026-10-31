@@ -366,3 +366,13 @@ export async function togglePinVariable(target) {
 
   toast.show('main-toast');
 }
+
+export function clearVariable(element) {
+  const input = element.closest('.variable-item')?.querySelector('input');
+
+  if (!input) return;
+
+  input.value = '';
+  input.dispatchEvent(new Event('input', { bubbles: true }));
+  input.focus();
+}

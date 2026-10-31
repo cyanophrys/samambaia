@@ -115,6 +115,7 @@ import {
 
 import {
   addVariable,
+  clearVariable,
   deleteVariable,
   editVariable,
   handleVariableValueInput,
@@ -173,6 +174,7 @@ const actions = {
     copyScratchpad,
     copyScript,
     clearScratchpad,
+    clearVariable,
     deleteLabel,
     deleteScript,
     deleteVariable,
