@@ -19,6 +19,7 @@
 const tooltip = document.getElementById('tooltip');
 const SHOW_DELAY = 500;
 const HIDE_DELAY = 100;
+const TOOLTIP_TARGET_SELECTOR = '[data-tooltip]:not(:disabled)';
 
 let showTimer = 0;
 let hideTimer = 0;
@@ -30,8 +31,14 @@ const anchorNames = new WeakMap();
 
 function findTooltipTarget(event) {
   return event.composedPath().find(
-    (el) => el instanceof Element && el.matches('[data-tooltip]:not(:disabled)')
+    (el) => el instanceof Element && el.matches(TOOLTIP_TARGET_SELECTOR)
   );
+}
+
+function closestTooltipTarget(node) {
+  return node instanceof Element
+    ? node.closest(TOOLTIP_TARGET_SELECTOR)
+    : null;
 }
 
 function getAnchor(element) {
@@ -49,6 +56,18 @@ function getAnchor(element) {
   return anchor;
 }
 
+function getTooltipSource(element) {
+  const selector = element.dataset.tooltipSource;
+
+  return selector
+    ? element.querySelector(selector)
+    : element;
+}
+
+function isTruncated(element) {
+  return element.scrollWidth > element.clientWidth;
+}
+
 function show(element) {
   clearTimeout(showTimer);
 
@@ -58,11 +77,17 @@ function show(element) {
   }
 
   showTimer = setTimeout(() => {
+    const source = getTooltipSource(element);
+
+    if (!source) return;
+    if (element.dataset.tooltip === 'truncated' && !isTruncated(source)) return;
+
     const label = document.getElementById('tooltip-label');
     const shortcutElement = document.getElementById('tooltip-shortcut');
     const shortcut = element.dataset.shortcutText;
 
-    label.textContent = element.getAttribute('aria-label') ?? '';
+    label.textContent =
+      element.getAttribute('aria-label') ?? source.textContent.trim();
     shortcutElement.hidden = !shortcut;
     shortcutElement.textContent = shortcut ? `(${shortcut})` : '';
 
@@ -103,7 +128,7 @@ export function bindTooltipEvents() {
     const element = findTooltipTarget(event);
     if (!element) return;
 
-    if (element.contains(event.relatedTarget)) return;
+    if (closestTooltipTarget(event.relatedTarget) === element) return;
 
     show(element);
   });
@@ -112,7 +137,7 @@ export function bindTooltipEvents() {
     const element = findTooltipTarget(event);
     if (!element) return;
 
-    if (element.contains(event.relatedTarget)) return;
+    if (closestTooltipTarget(event.relatedTarget) === element) return;
 
     scheduleHide();
   });
