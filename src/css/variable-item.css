@@ -72,4 +72,45 @@
       display: block;
     }
   }
+
+  .clear-button {
+    display: none;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: inherit;
+    opacity: 0;
+    cursor: pointer;
+    transition:
+      opacity var(--transition-fast),
+      display var(--transition-fast) allow-discrete;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      opacity: var(--dimmed-opacity);
+      transition: opacity var(--transition-medium);
+    }
+
+    &:hover svg {
+      opacity: 1;
+    }
+
+    &:active svg {
+      opacity: var(--dimmed-opacity);
+    }
+  }
+
+  &:has(input:not(:placeholder-shown)) {
+    .clear-button {
+      display: grid;
+      opacity: 1;
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
 }
