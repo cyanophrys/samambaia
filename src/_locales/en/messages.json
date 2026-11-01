@@ -112,8 +112,8 @@
   "listView": {
     "message": "List view"
   },
-  "searchScripts": {
-    "message": "Search scripts"
+  "typeSlashToSearch": {
+    "message": "Type / to search"
   },
   "variables": {
     "message": "Variables"
@@ -614,6 +614,9 @@
   "search": {
     "message": "Search",
     "description": "Noun referring to a search"
+  },
+  "searchScripts": {
+    "message": "Search scripts"
   },
   "searchShortcuts": {
     "message": "Search shortcuts"
