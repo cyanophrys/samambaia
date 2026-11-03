@@ -6,6 +6,13 @@
   font-display: swap;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0s;
+    --transition-medium: 0s;
+  }
+}
+
 ::selection {
   background-color: color-mix(in oklab, var(--accent-color) 50%, transparent);
 }
