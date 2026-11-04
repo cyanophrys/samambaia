@@ -288,3 +288,16 @@ function getShortcutSelector(shortcut) {
     ? `${action}[data-target="${CSS.escape(shortcut.target)}"]`
     : action;
 }
+
+function createShortcutKeys(shortcut, className) {
+  return formatShortcut(shortcut).map((key) => {
+    const kbd = document.createElement('kbd');
+
+    if (className)
+      kbd.className = className;
+
+    kbd.textContent = key;
+
+    return kbd;
+  });
+}
