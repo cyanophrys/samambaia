@@ -243,6 +243,7 @@ function handleAction(event, actions) {
 
 async function init() {
   const pendingToast = sessionStorage.getItem('pendingToast');
+  const heading = document.getElementById('main-heading');
   const stack = document.getElementById('loading-stack');
   const placeholder = document.getElementById('loading-placeholder');
 
@@ -251,6 +252,7 @@ async function init() {
 
     document.documentElement.lang = getLocale();
     document.title = manifest.name;
+    heading.textContent = manifest.name;
 
     applyTranslations();
     applyShortcutDisplays();
