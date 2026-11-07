@@ -37,3 +37,11 @@ export function debounce(fn, delay) {
 
   return debounced;
 }
+
+export function normalizeQuery(query) {
+  return query
+    .normalize('NFD')
+    .replace(/\p{M}/gu, '')
+    .toLowerCase()
+    .trim();
+}
