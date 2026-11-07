@@ -280,3 +280,11 @@ export function formatShortcut(shortcut, { format = 'keys' } = {}) {
 
   return labels;
 }
+
+function getShortcutSelector(shortcut) {
+  const action = `[data-action="${CSS.escape(shortcut.action)}"]`;
+
+  return shortcut.target
+    ? `${action}[data-target="${CSS.escape(shortcut.target)}"]`
+    : action;
+}
